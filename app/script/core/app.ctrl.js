@@ -1,2 +1,3 @@
 angular.module('todoApp')
-.controller();
+.controller("appCtrl", function($scope){
+});
