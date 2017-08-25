@@ -1,0 +1,8 @@
+[
+	{"id": 0, "title": "Таск1", "listId": 0, "subtasks": []},
+	{"id": 1, "title": "Таск2", "listId": 0, "subtasks": []},
+	{"id": 2, "title": "Таск3", "listId": 1, "subtasks": []},
+	{"id": 3, "title": "Таск4", "listId": 1, "subtasks": []},
+	{"id": 4, "title": "Таск5", "listId": 1, "subtasks": []},
+	{"id": 5, "title": "Таск6", "listId": 1, "subtasks": []},
+]
