@@ -8,5 +8,5 @@ export default todoModule
 			.then(function success(response) {
 	                self.todo = response.data;
 	      	});
-})
+});
 
