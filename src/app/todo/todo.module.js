@@ -1,1 +1,1 @@
-export default angular.module('todoModule', []);
+export default angular.module('todoModule2', []);
