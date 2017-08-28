@@ -1,7 +1,11 @@
 import listModule from './list.module';
 
 export default listModule
-    .controller('listController', function AppController() {
+    .controller('listController', function listController($http) {
         let self = this;
-        self.helloList = "it's list controller";
+
+       	$http({method: 'GET', url: 'app-data/lists.json'})
+			.then(function success(response) {
+	                self.lists = response.data;
+	      	});
     });
