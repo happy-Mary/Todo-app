@@ -14,7 +14,12 @@
     <div id="wrapper">
         {{ctrl.hello}}
     </div>
-    <div ng-controller="listController as ctrl">{{ctrl.helloList}}</div>
+    <div ng-controller="listController as ctrl">
+        {{ctrl.helloList}}
+        <ul ng-repeat='list in ctrl.lists'>
+            <li>{{list.title}}</li>
+        </ul>
+    </div>
 </body>
 
 </html>
