@@ -1,1 +1,4 @@
-# Todo-app
+# ToDo App
+
+npm start
+npm test
