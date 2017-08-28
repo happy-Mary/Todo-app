@@ -44,7 +44,7 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar _angular = __webpack_require__(1);\n\nvar _angular2 = _interopRequireDefault(_angular);\n\n__webpack_require__(3);\n\n__webpack_require__(7);\n\nvar _app = __webpack_require__(9);\n\nvar _app2 = _interopRequireDefault(_app);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n__webpack_require__(12);\n__webpack_require__(13);\n\n// import data from './app-data/lists.json';\n// console.log(data);\n\n_angular2.default.module('todoModule', [_app2.default.name]);\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/main.module.js\n// module id = 0\n// module chunks = 0\n//# sourceURL=webpack:///./src/main.module.js?");
+	eval("'use strict';\n\nvar _angular = __webpack_require__(1);\n\nvar _angular2 = _interopRequireDefault(_angular);\n\n__webpack_require__(3);\n\n__webpack_require__(7);\n\nvar _app = __webpack_require__(9);\n\nvar _app2 = _interopRequireDefault(_app);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n__webpack_require__(11);\n__webpack_require__(12);\n\n// import data from './app-data/lists.json';\n// console.log(data);\n\n_angular2.default.module('todoModule', [_app2.default.name]);\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/main.module.js\n// module id = 0\n// module chunks = 0\n//# sourceURL=webpack:///./src/main.module.js?");
 
 /***/ }),
 /* 1 */
@@ -108,27 +108,27 @@
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	eval("module.exports = [{\"id\":0,\"title\":\"Работа\",\"listGroupId\":0,\"todoLists\":[0,1]},{\"id\":1,\"title\":\"Учеба\",\"listGroupId\":0,\"todoLists\":[2,3,4,5]},{\"id\":2,\"title\":\"Личное\",\"listGroupId\":0,\"todoLists\":[]}]\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app-data/lists.json\n// module id = 11\n// module chunks = 0\n//# sourceURL=webpack:///./src/app-data/lists.json?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _app = __webpack_require__(9);\n\nvar _app2 = _interopRequireDefault(_app);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _app2.default.controller('AppController', function AppController() {\n    var self = this;\n    self.hello = \"HELLO We are here\";\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app/app.controller.js\n// module id = 11\n// module chunks = 0\n//# sourceURL=webpack:///./src/app/app.controller.js?");
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _app = __webpack_require__(9);\n\nvar _app2 = _interopRequireDefault(_app);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _app2.default.controller('AppController', function AppController() {\n    var self = this;\n    self.hello = \"HELLO We are here\";\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app/app.controller.js\n// module id = 12\n// module chunks = 0\n//# sourceURL=webpack:///./src/app/app.controller.js?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _list = __webpack_require__(13);\n\nvar _list2 = _interopRequireDefault(_list);\n\nvar _lists = __webpack_require__(14);\n\nvar _lists2 = _interopRequireDefault(_lists);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _list2.default.controller('listController', function AppController() {\n    var self = this;\n    self.helloList = \"it's list controller\";\n    self.lists = _lists2.default;\n    console.log(_lists2.default);\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app/list/list.controller.js\n// module id = 12\n// module chunks = 0\n//# sourceURL=webpack:///./src/app/list/list.controller.js?");
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _list = __webpack_require__(14);\n\nvar _list2 = _interopRequireDefault(_list);\n\nvar _lists = __webpack_require__(11);\n\nvar _lists2 = _interopRequireDefault(_lists);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _list2.default.controller('listController', function AppController() {\n    var self = this;\n    self.helloList = \"it's list controller\";\n    self.lists = _lists2.default;\n    console.log(_lists2.default);\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app/list/list.controller.js\n// module id = 13\n// module chunks = 0\n//# sourceURL=webpack:///./src/app/list/list.controller.js?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = angular.module('listModule', []);\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app/list/list.module.js\n// module id = 13\n// module chunks = 0\n//# sourceURL=webpack:///./src/app/list/list.module.js?");
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = angular.module('listModule', []);\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app/list/list.module.js\n// module id = 14\n// module chunks = 0\n//# sourceURL=webpack:///./src/app/list/list.module.js?");
+	eval("module.exports = [{\"id\":0,\"title\":\"Работа\",\"listGroupId\":0,\"todoLists\":[0,1]},{\"id\":1,\"title\":\"Учеба\",\"listGroupId\":0,\"todoLists\":[2,3,4,5]},{\"id\":2,\"title\":\"Личное\",\"listGroupId\":0,\"todoLists\":[]}]\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/app-data/lists.json\n// module id = 14\n// module chunks = 0\n//# sourceURL=webpack:///./src/app-data/lists.json?");
 
 /***/ })
 /******/ ]);
