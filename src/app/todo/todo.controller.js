@@ -1,12 +1,12 @@
-import todoModule from './todo.module';
+import todoModule2 from './todo.module';
 
-export default todoModule
-	.controller('todoController', function todoController($http){
+export default todoModule2
+	.controller('todoController', function todoController(){
 		var self = this;
 
-		$http({method: 'GET', url: 'app-data/todo.json'})
+		/*$http({method: 'GET', url: 'app-data/todo.json'})
 			.then(function success(response) {
 	                self.todo = response.data;
-	      	});
+	      	}); */
 });
 
