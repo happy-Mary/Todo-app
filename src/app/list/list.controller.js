@@ -1,14 +1,14 @@
 import listModule from './list.module';
-
-//import data from '../../app-data/lists.json';
-
+import { URLS } from '../constants';
 
 export default listModule
     .controller('listController', function listController($http) {
         let self = this;
-
-       	$http({method: 'GET', url: 'app-data/lists.json'})
-			.then(function success(response) {
-	                self.lists = response.data;
-	      	});
+        $http({ method: 'GET', url: URLS.listURL })
+            .then(function successCallback(response) {
+                self.lists = response.data;
+            }, function errorCallback() {
+                console.log("request FAILED");
+                self.lists = require('../../app-data/lists.json');
+            });
     });
