@@ -5,6 +5,15 @@ import localStorageService from '../app.service';
 export default listModule
     .controller('listController', function listController($http, localStorageService) {
         let self = this;
+        // take id through $routeProvider
+        self.filterById = 0;
+
+        self.filterData = function(item) {
+            if(item.listGroupId === self.filterById){
+                return item;
+            }
+        }
+
 
         if(localStorageService.get('lists')){
             self.listGroups = localStorageService.get('lists');
