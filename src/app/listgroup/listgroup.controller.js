@@ -12,7 +12,7 @@ export default listGroupModule
              $http({ method: 'GET', url: URLS.listGroupURL })
                 .then(function successCallback(response) {
                     self.listGroups = response.data;
-                    self.listGroups = localStorageService.set('listGroups', self.listGroups);
+                    localStorageService.set('listGroups', self.listGroups);
                 }, function errorCallback() {
                     // console.log("request FAILED");
                     // self.listGroups = require('../../app-data/listGroups.json');
