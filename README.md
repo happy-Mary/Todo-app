@@ -9,20 +9,20 @@ npm test
 [branchname]/feature: changes
 
 ### Tasks:
-1. branch MariaChernyak (Masha Chernyak)
+1. branch MariaChernyak (Masha Chernyak) -ready
    - generate JSON and add url-links to constants.js
    - write service for LocalStorage
    
-2. branch listgroup-task (Masha Chernyak)
-   - component, controller, module, listgroup.sass (in listgroup folder)
+2. branch listgroup-task (Masha Chernyak) -ready
+
+3. branch lists-task (Masha Shklovskaya) -ready
+
+4. branch checkdata-task (Masha Chernyak)
    
-3. branch header-task (Masha Shklovskaya)
-   - component, controller, module, header.sass (in header folder)
+4. branch header-task (Masha Shklovskaya)
    
 4. branch router-task (Masha Shklovskaya)
    - app.config.js 
-   
-5. branch lists-task (Masha Chernyak)
 
 6. branch karma-task (Masha Shklovskaya)
 	
