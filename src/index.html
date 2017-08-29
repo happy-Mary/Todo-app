@@ -1,11 +1,11 @@
 <!Doctype html>
-<html ng-app="todoModule" lang="en">
+<html ng-app="appModule" lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>To do app</title>
-     <!-- <link rel='shortcut icon' type='image/x-icon' href='../src/img/icons/favicon.png'/>  -->
-     <!-- <link rel="shortcut icon" type="image/png" href="../src/img/icons/favicon.png"/>  -->
+    <!-- <link rel='shortcut icon' type='image/x-icon' href='../src/img/icons/favicon.png'/>  -->
+    <!-- <link rel="shortcut icon" type="image/png" href="../src/img/icons/favicon.png"/>  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
 </head>
@@ -14,6 +14,7 @@
     <div id="wrapper">
         {{ctrl.hello}}
     </div>
+<!-- 
     <ul ng-controller="listGroupController as listGroupController">
          <li ng-repeat="item in listGroupController.listGroups">{{item.name}}</li> 
     </ul>
@@ -22,7 +23,18 @@
     </ul>
     <ul ng-controller="todoController as todoController">
         <li ng-repeat="item in todoController.todo">{{item.title}}</li> 
-    </ul>
+    </ul> -->
+
+    <div ng-controller="listGroupController as listGroupCtrl">
+        First list group name: {{listGroupCtrl.listGroups[0].name}}
+    </div>
+    <div ng-controller="listController as listCtrl">
+        First list title: {{listCtrl.lists[0].title}}
+    </div>
+    <div ng-controller="todoController as todoCtrl">
+        First task title: {{todoCtrl.todo[0].title}}
+    </div>
+
 </body>
 
 </html>

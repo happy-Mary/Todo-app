@@ -1,3 +1,1 @@
-import ngStorage from 'ngstorage';
-
-export default angular.module('appModule', [ngStorage.name, 'todoModule2', 'listModule', 'listGroupModule']);
+export default angular.module('mainModule', ['listGroupModule', 'listModule', 'todoModule']);
