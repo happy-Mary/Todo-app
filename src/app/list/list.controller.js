@@ -11,7 +11,7 @@ export default listModule
             if(item.listGroupId === self.filterById){
                 return item;
             }
-        }
+        };
 
         $http({ method: 'GET', url: URLS.listURL })
             .then(function successCallback(response) {
