@@ -1,7 +1,7 @@
 import listModule from './list.module';
 
 export default listModule
-    .component('listComp',{
+    .component('listComp', {
         bindings: {
             listsTitle: '@'
         },
