@@ -12,3 +12,4 @@ export default listGroupModule
                 self.listGroups = require('../../app-data/listGroups.json');
             });
     });
+
