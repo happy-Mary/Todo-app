@@ -4,6 +4,14 @@ import { URLS } from '../constants';
 export default listModule
     .controller('listController', function listController($http) {
         let self = this;
+        // take id through $routeProvider
+        self.filterById = 0;
+
+        self.filterData = function(item) {
+            if(item.listGroupId === self.filterById){
+                return item;
+            }
+        }
 
         $http({ method: 'GET', url: URLS.listURL })
             .then(function successCallback(response) {
@@ -12,5 +20,4 @@ export default listModule
                 console.log("request FAILED");
                 self.lists = require('../../app-data/lists.json');
             });
-
     });
