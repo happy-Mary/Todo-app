@@ -4,7 +4,7 @@ export default listGroupModule
 	.controller('listGroupController', function listGroupController($http){
 		var self = this;
 
-		$http({method: 'GET', url: 'app-data/listGroups.json'})
+		$http({method: 'GET', url: 'https://api.myjson.com/bins/dx1e5'})
 			.then(function success(response) {
 	                self.listGroups = response.data;
 	      	});
