@@ -1,12 +1,14 @@
-import todoModule2 from './todo.module';
+import todoModule from './todo.module';
+import { URLS } from '../constants';
 
-export default todoModule2
-	.controller('todoController', function todoController($http){
-		var self = this;
-
-		$http({method: 'GET', url: 'https://api.myjson.com/bins/1cg6h9'})
-			.then(function success(response) {
-	                self.todo = response.data;
-	      	}); 
-});
-
+export default todoModule
+    .controller('todoController', function listController($http) {
+        let self = this;
+        $http({ method: 'GET', url: URLS.todoURL })
+            .then(function successCallback(response) {
+                self.todo = response.data;
+            }, function errorCallback() {
+                console.log("request FAILED");
+                self.todo = require('../../app-data/todo.json');
+            });
+    });
