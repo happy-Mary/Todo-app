@@ -35,7 +35,7 @@ module.exports = function makeWebpackConfig(options) {
         config.entry = {}
     } else {
         config.entry = {
-            app: './src/app.module.js'
+            app: './src/main.module.js'
         }
     }
 
@@ -128,6 +128,10 @@ module.exports = function makeWebpackConfig(options) {
         }, {
             test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             loader: "file-loader"
+        },
+        { 
+          test: /\.json$/,
+         loader: 'json'
         }]
     };
 
