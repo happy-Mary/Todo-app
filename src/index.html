@@ -14,6 +14,16 @@
     <div id="wrapper">
         {{ctrl.hello}}
     </div>
+<!-- 
+    <ul ng-controller="listGroupController as listGroupController">
+         <li ng-repeat="item in listGroupController.listGroups">{{item.name}}</li> 
+    </ul>
+    <ul ng-controller="listController as listController">
+         <li ng-repeat="item in listController.lists">{{item.title}}</li> 
+    </ul>
+    <ul ng-controller="todoController as todoController">
+        <li ng-repeat="item in todoController.todo">{{item.title}}</li> 
+    </ul> -->
 
     <div ng-controller="listGroupController as listGroupCtrl">
         First list group name: {{listGroupCtrl.listGroups[0].name}}
