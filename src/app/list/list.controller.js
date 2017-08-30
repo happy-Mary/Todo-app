@@ -7,6 +7,8 @@ export default listModule
     .controller('listController', function listController($http, localStorageService, listService) {
         let self = this;
         self.lists;
+        self.addActive = false;
+        self.newListTitle = '';
 
          // take id through $routeProvider
         let filterById = 0;
@@ -17,14 +19,25 @@ export default listModule
         };
 
         self.addList = function() {
-            listService.create(id);
+            self.addActive = true;
+        };
+
+        self.saveList = function() {
+            console.log(self.newListTitle);
+            listService.create(self.newListTitle);
+            // save to LS
+            self.addActive = false;
+            self.newListTitle = '';
         };
 
         self.deleteList = function(id){
             listService.delete(id);
             // update LS
         };
-        // /////////////////////////////////////////
+
+        self.rewriteList = function(id) {
+
+        };
         
         if(localStorageService.get('lists')){
             self.listGroups = localStorageService.get('lists');
