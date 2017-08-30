@@ -1,0 +1,6 @@
+<div class = 'todo'>
+    <h2>{{$ctrl.todoTitle}}</h2>
+    <ul ng-repeat='list in $ctrl.todo | filter: $ctrl.filterData'>
+        <li><a href='#'>{{list.title}}</a></li>
+    </ul>
+</div>
