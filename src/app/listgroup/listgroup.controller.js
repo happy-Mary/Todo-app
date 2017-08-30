@@ -14,7 +14,8 @@ export default listGroupModule
                     self.listGroups = response.data;
                     localStorageService.set('listGroups', self.listGroups);
 
-                }, function errorCallback() {
+                })
+                .catch(function errorCallback() {
                     // console.log("request FAILED");
                     // self.listGroups = require('../../app-data/listGroups.json');
                     self.listGroups =  [];
