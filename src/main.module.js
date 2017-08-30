@@ -4,6 +4,7 @@ import './sass/style.scss';
 
 import mainModule from './app/app.module';
 require('./app/app.controller');
+require('./app/app.service');
 require('./app/listgroup/listgroup.controller');
 require('./app/listgroup/listgroup.component');
 require('./app/list/list.controller');
