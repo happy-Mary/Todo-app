@@ -12,7 +12,7 @@ export default listModule
             if(item.listGroupId === self.filterById){
                 return item;
             }
-        }
+        };
 
 
         if(localStorageService.get('lists')){

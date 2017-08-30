@@ -5,6 +5,13 @@ import localStorageService from '../app.service';
 export default todoModule
     .controller('todoController', function listController($http, localStorageService) {
         let self = this;
+        self.filterById = 1;
+
+        self.filterData = function(item) {
+            if(item.listId === self.filterById){
+                return item;
+            }
+        };
 
         if(localStorageService.get('todo')){
             self.listGroups = localStorageService.get('todo');
@@ -22,4 +29,5 @@ export default todoModule
                 });
         }
               
+
     });
