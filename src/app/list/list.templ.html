@@ -1,6 +1,7 @@
 <div class = 'lists'>
     <h2>{{$ctrl.listsTitle}} here</h2>
+    <button ng-click='$ctrl.addList()'>Add list</button>
     <ul ng-repeat='list in $ctrl.lists | filter: $ctrl.filterData'>
-        <li><a href='#'>{{list.title}}</a></li>
+        <li><a href='#'>{{list.title}}</a><button ng-click='$ctrl.deleteList(list.id)'>delete list</button></li>
     </ul>
 </div>
