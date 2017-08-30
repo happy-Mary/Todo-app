@@ -15,21 +15,17 @@
         {{ctrl.hello}}
     </div>
 
-    <div class="lists">
-        <list-comp lists-title='Lists'></list-comp>
-    </div>
-
-    <div ng-controller="listController as listCtrl">
-        First list title: {{listCtrl.lists[0].title}}
-    </div>
-    <div ng-controller="todoController as todoCtrl">
-        First task title: {{todoCtrl.todo[0].title}}
-    </div>
-
     <div class="listgroup-container">
         <list-group-component></list-group-component>
     </div>
+    
+    <div class="lists">
+        <list-comp lists-title='Lists'></list-comp>
+    </div>
    
+    <div class="todo">
+        <todo-comp todo-title='What need to be done'></todo-comp>
+    </div>
 
 </body>
 
