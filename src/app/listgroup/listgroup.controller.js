@@ -13,7 +13,6 @@ export default listGroupModule
                 .then(function successCallback(response) {
                     self.listGroups = response.data;
                     localStorageService.set('listGroups', self.listGroups);
-
                 })
                 .catch(function errorCallback() {
                     // console.log("request FAILED");
