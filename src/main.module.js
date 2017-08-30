@@ -9,6 +9,7 @@ require('./app/listgroup/listgroup.component');
 require('./app/list/list.controller');
 require('./app/list/list.component');
 require('./app/todo/todo.controller');
+require('./app/todo/todo.component');
 
 
 /* this module goes to html ng-app */
