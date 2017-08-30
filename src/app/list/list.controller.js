@@ -23,7 +23,8 @@ export default listModule
 	            .then(function successCallback(response) {
 	                self.lists = response.data;
 	                localStorageService.set('lists', self.lists);
-	            }, function errorCallback() {
+                })
+                .catch(function errorCallback() {
 	                // console.log("request FAILED");
 	                // self.lists = require('../../app-data/lists.json');
 	                self.lists = [];
