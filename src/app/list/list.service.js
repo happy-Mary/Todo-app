@@ -5,7 +5,8 @@ export default listModule
     let data = [];
     
     function getLists(id) {
-        // to filter data on route
+        // to filter data on route ???
+        // to rewrite list
     }
 
     function setLists(obj) {
@@ -17,8 +18,9 @@ export default listModule
         data.splice(index, 1);
     }
 
-    function createList(){
-        console.log('creating new list');
+    function createList(title){
+        console.log(`new list TITLE: ${title}`);
+        // call constructor, save to data, return data
     }
 
     return {
