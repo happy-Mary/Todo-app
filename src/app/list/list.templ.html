@@ -1,6 +1,18 @@
 <div class = 'lists'>
-    <h2>{{$ctrl.listsTitle}} here</h2>
-    <ul ng-repeat='list in $ctrl.lists | filter: $ctrl.filterData'>
-        <li><a href='#'>{{list.title}}</a></li>
+    <h2>{{$ctrl.listsTitle}}</h2>
+    <button ng-click='$ctrl.addList()' ng-if='!$ctrl.addActive'>Add list</button>
+    <!-- make it as form with validation -->
+    <div ng-if='$ctrl.addActive'>
+        <input type="text" ng-model='$ctrl.newListTitle'>
+        <button ng-click='$ctrl.saveList()'>Save list</button>
+        <button ng-click='$ctrl.addActive=false'>Cancel</button>
+    </div>
+    
+    <ul>
+        <li ng-repeat='list in $ctrl.lists | filter: $ctrl.filterData'>
+            <a href='#'>{{list.title}}</a>
+            <button ng-click='$ctrl.deleteList(list.id)'>delete list</button>
+            <button ng-click='$ctrl.rewriteList(list.id)'>change list</button>
+        </li>
     </ul>
 </div>
