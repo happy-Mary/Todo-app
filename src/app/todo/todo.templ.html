@@ -1,8 +1,11 @@
 <div class = 'todo'>
     <h2>{{$ctrl.todoTitle}}</h2>
-    <button ng-click='$ctrl.addTask()' ng-if='!$ctrl.addActive'>Add task</button>
-    <div ng-if='$ctrl.addActive'>
-        <input type="text"><button ng-click='$ctrl.addActive=false'>Save task</button>
+    <button ng-click='$ctrl.openInput = true' ng-if='!$ctrl.openInput'>Add task</button>
+    <div ng-if='$ctrl.openInput'>
+        <input type="text" ng-model='$ctrl.newTitle' autofocus>
+        <button ng-click='$ctrl.saveTask()'>Save task</button>
+        <button ng-click='$ctrl.changeTask()'>Change task</button>
+        <button ng-click='$ctrl.openInput=false'>Cancel</button>
     </div>
     <ul>
         <li ng-repeat='task in $ctrl.todo | filter: $ctrl.filterData'>
