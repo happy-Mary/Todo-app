@@ -1,9 +1,10 @@
 import listGroupModule from './listgroup.module';
 import { URLS } from '../constants';
 import localStorageService from '../app.service';
+import listGroupService from './listgroup.service';
 
 export default listGroupModule
-    .controller('listGroupController', function listGroupController($http, localStorageService) {
+    .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
         var self = this;
         if(localStorageService.get('listGroups')){
             self.listGroups = localStorageService.get('listGroups');
@@ -20,6 +21,7 @@ export default listGroupModule
                     self.listGroups =  [];
                 });
         }
+        listGroupService.createListGroup('adsadad')
 
     });
 
