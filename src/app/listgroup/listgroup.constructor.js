@@ -1,5 +1,7 @@
+import generateId from '../module/generateId';
+
 export default function ListGroup(id, title){
 	this.title = title;
-	this.id = id;
+	this.id = generateId();
 	this.lists = [];
 }
