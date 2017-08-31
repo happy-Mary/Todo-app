@@ -1,9 +1,10 @@
 import generateId from '../module/generateId';
 
-export default function ToDo(title, listId) {
- 	this.id = generateId();
- 	this.title = title;
- 	this.listId = listId;
- 	this.subtasks = [];
- 	
- }
+export default class ToDo {
+	constructor(title, listId){
+		this.id = generateId();
+		this.title = title;
+		this.listId = listId;
+		this.subtasks = [];
+	}
+}
