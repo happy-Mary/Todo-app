@@ -11,7 +11,7 @@ require('./app/list/list.controller');
 require('./app/list/list.service');
 require('./app/list/list.component');
 require('./app/todo/todo.controller');
-require('./app/list/todo.service');
+require('./app/todo/todo.service');
 require('./app/todo/todo.component');
 
 
