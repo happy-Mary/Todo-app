@@ -1,0 +1,15 @@
+<div class = 'todo'>
+    <h2>{{$ctrl.todoTitle}}</h2>
+    <button ng-click='$ctrl.addTask()' ng-if='!$ctrl.addActive'>Add task</button>
+    <div ng-if='$ctrl.addActive'>
+        <input type="text"><button ng-click='$ctrl.addActive=false'>Save task</button>
+    </div>
+    <ul>
+        <li ng-repeat='task in $ctrl.todo | filter: $ctrl.filterData'>
+            <a href='#'>{{task.title}}</a>
+            <button ng-click='$ctrl.deleteTask(task.id)'>delete task</button>
+            <button ng-click='$ctrl.rewriteTask(task.id)'>change task</button>
+        </li>
+        
+    </ul>
+</div>
