@@ -17,6 +17,23 @@ export default todoModule
             }
         };
 
+        // if(localStorageService.get('todo')){
+        //     self.todo = localStorageService.get('todo');
+         
+        // }
+        // else {
+        //     $http({ method: 'GET', url: URLS.todoURL })
+        //     .then(function successCallback(response) {
+        //         self.todo = response.data;
+        //         localStorageService.set('todo', self.todo);
+          
+        //     })
+        //     .catch(function errorCallback() {
+        //         // self.todo = require('../../app-data/todo.json');
+        //         self.todo = [];
+        //     });
+        // }
+
         self.saveTask = function() {
             self.todo = todoService.create(self.newTitle, parentId);
             localStorageService.set('todo', self.todo);
@@ -62,5 +79,6 @@ export default todoModule
             }
     }     
     InitPage();   
+
 
     });
