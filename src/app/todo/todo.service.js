@@ -1,8 +1,8 @@
-import listModule from './list.module';
-import List from './list.constructor';
+import listModule from './todo.module';
+import ToDo from './todo.constructor';
 
 export default listModule
-.service('listService', function($filter){
+.service('todoService', function($filter){
     let data = [];
     let itemItem;
     
@@ -33,8 +33,7 @@ export default listModule
     }
 
     function createList(title, id){
-        console.log(`new list TITLE: ${title}`);
-        let list = new List(title, id);
+        let list = new ToDo(title, id);
         data.push(list);
         return data;
         // call constructor, save to data, return data

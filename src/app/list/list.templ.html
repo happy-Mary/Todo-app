@@ -1,11 +1,12 @@
 <div class = 'lists'>
     <h2>{{$ctrl.listsTitle}}</h2>
-    <button ng-click='$ctrl.addList()' ng-if='!$ctrl.addActive'>Add list</button>
+    <button ng-click='$ctrl.openInput = true' ng-if='!$ctrl.openInput'>Add list</button>
     <!-- make it as form with validation -->
-    <div ng-if='$ctrl.addActive'>
-        <input type="text" ng-model='$ctrl.newListTitle'>
+    <div ng-if='$ctrl.openInput'>
+        <input type="text" ng-model='$ctrl.newTitle'>
         <button ng-click='$ctrl.saveList()'>Save list</button>
-        <button ng-click='$ctrl.addActive=false'>Cancel</button>
+        <button ng-click='$ctrl.changeList()'>Change list</button>
+        <button ng-click='$ctrl.openInput=false'>Cancel</button>
     </div>
     
     <ul>
