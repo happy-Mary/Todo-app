@@ -39,17 +39,14 @@ export default listModule
             self.lists = listService.update(self.newTitle);
             localStorageService.set('lists', self.lists);
             self.openInput = false;
+            self.newTitle = '';
         };
         
 
         function InitPage(){
-            let data = localStorageService.get('lists');
-
-            if(data !== null) {
-                self.lists = data;
+            if(localStorageService.get('lists')) {
+                self.lists = localStorageService.get('lists');
                 listService.set(self.lists);
-                console.log('its in LS');
-                console.log(self.lists);
             } else {
                 $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
