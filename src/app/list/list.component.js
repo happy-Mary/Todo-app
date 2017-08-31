@@ -5,6 +5,7 @@ export default listModule
         bindings: {
             listsTitle: '@'
         },
-        template: require('./list.templ.html'),
-        controller: 'listController'
+        controller: 'listController',
+        template: require('./list.templ.html')
+        
     });
