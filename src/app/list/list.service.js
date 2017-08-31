@@ -4,17 +4,22 @@ import List from './list.constructor';
 export default listModule
 .service('listService', function($filter){
     let data = [];
-    let currItem;
+    let itemItem;
     
     function getLists(id) {
         // to filter data on route ???
-        // to rewrite list
-        currItem = $filter("filter")(data, {id:id});
+        // itemItem = $filter("filter")(data, {id:id});
+        data.forEach(function(item){
+            if(item.id == id){
+               console.log(item);
+               itemItem = item;
+            }
+        });
     }
 
     function updateList(title){
-        currItem.title = title;
-        console.log(data);
+        itemItem.title = title;
+        return data;
     }
 
     function setLists(obj) {
