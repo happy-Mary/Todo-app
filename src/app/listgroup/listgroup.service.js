@@ -15,19 +15,26 @@ export default listGroupModule
    		function getListGroup(id){
    			self.data.forEach(function(group){
    				if(group.id == id){
-   					console.log(group)
    					return group;
    				}
    			})
    		}
+
+   		function deleteListGroup(id) {
+	        var index = data.findIndex(group => group.id == id);
+	        self.data.splice(index, 1);
+   		}
+
 		function createListGroup(name){
-			var a = new ListGroup(name);
-			console.log(a.id);
+			var group = new ListGroup(name);
+			self.data.push(data);
 		}
+
 		return{
 			set: setListGroups,
 			get: getListGroups,
 			create: createListGroup,
-			getGroup: getListGroup
+			getGroup: getListGroup,
+			deleteGroup: deleteListGroup
 		}
 	});

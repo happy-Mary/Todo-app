@@ -6,6 +6,13 @@ import listGroupService from './listgroup.service';
 export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
         var self = this;
+        self.save = function(){
+            localStorageService.set('listGroups', self.listGroups);
+        }
+        self.deleteLisGroup = function(id){
+            listGroupService.deleteGroup();
+            self.save();
+        }
         if(localStorageService.get('listGroups')){
             self.listGroups = localStorageService.get('listGroups');
             listGroupService.set(self.listGroups);
@@ -15,7 +22,8 @@ export default listGroupModule
              $http({ method: 'GET', url: URLS.listGroupURL })
                 .then(function successCallback(response) {
                     self.listGroups = response.data;
-                    localStorageService.set('listGroups', self.listGroups);
+                    // localStorageService.set('listGroups', self.listGroups);
+                    self.save();
                     listGroupService.set(self.listGroups);
                     listGroupService.getGroup(0);
                 })
@@ -23,7 +31,7 @@ export default listGroupModule
                     // console.log("request FAILED");
                     // self.listGroups = require('../../app-data/listGroups.json');
                     self.listGroups =  [];
-                      // listGroupService.set(self.listGroups);
+                    self.save();
                 });
         }
         // listGroupService.set(self.listGroups);
