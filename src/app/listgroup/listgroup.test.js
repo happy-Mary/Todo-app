@@ -16,7 +16,9 @@ describe('listGroupModule', function(){
 
         it('exists and gets data from LS', function() {
             expect(ctrl).toBeDefined();
-            expect(servise.get('listGroups')).not.toBeNull();
+                it('exists and gets data from LS', function() {
+                    expect(servise.get('listGroups')).not.toBeNull();
+                });
         });   
        
         it("can get data from server", function(){
