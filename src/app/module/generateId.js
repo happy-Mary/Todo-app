@@ -1,4 +1,4 @@
-function gererateId(){
+export default function gererateId(){
 	function guid(){
 		return parseInt(Math.random()*100)%100;
 	} 
