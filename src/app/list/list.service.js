@@ -4,10 +4,17 @@ import List from './list.constructor';
 export default listModule
 .service('listService', function($filter){
     let data = [];
+    let currItem;
     
     function getLists(id) {
         // to filter data on route ???
         // to rewrite list
+        currItem = $filter("filter")(data, {id:id});
+    }
+
+    function updateList(title){
+        currItem.title = title;
+        console.log(data);
     }
 
     function setLists(obj) {
@@ -17,6 +24,7 @@ export default listModule
     function deleteList(id) {
         let index = data.findIndex(x => x.id==id);
         data.splice(index, 1);
+        return data;
     }
 
     function createList(title, id){
@@ -31,7 +39,8 @@ export default listModule
         set: setLists,
         get: getLists,
         delete: deleteList,
-        create: createList
+        create: createList,
+        update: updateList
     };
 
 });
