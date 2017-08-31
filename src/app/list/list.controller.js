@@ -7,27 +7,26 @@ export default listModule
     .controller('listController', function listController($http, localStorageService, listService) {
         let self = this;
         self.lists;
-        self.addActive = false;
-        self.newListTitle = '';
+        self.openInput = false;
+        self.newTitle = '';
 
          // take id through $routeProvider
-        let filterById = 0;
+        //  let parentId = $routeParams.id;
+        let parentId = 0;
         self.filterData = function(item) {
-            if(item.listGroupId === filterById){
+            if(item.listGroupId === parentId){
                 return item;
             }
         };
 
-        self.addList = function() {
-            self.addActive = true;
-        };
-
         self.saveList = function() {
-            console.log(self.newListTitle);
-            listService.create(self.newListTitle);
+            console.log(self.newTitle);
+            self.lists = listService.create(self.newTitle);
+            console.log(self.lists);
+            localStorageService.set('lists', self.lists);
             // save to LS
-            self.addActive = false;
-            self.newListTitle = '';
+            self.openInput = false;
+            self.newTitle = '';
         };
 
         self.deleteList = function(id){
