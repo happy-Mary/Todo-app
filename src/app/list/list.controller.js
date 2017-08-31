@@ -31,14 +31,14 @@ export default listModule
         };
 
         self.rewriteList = function(id) {
-            console.log(id);
             self.openInput = true;
             listService.get(id);
         };
 
         self.changeList = function(){
-            console.log(self.newTitle);
-            listService.update(self.newTitle);
+            self.lists = listService.update(self.newTitle);
+            localStorageService.set('lists', self.lists);
+            self.openInput = false;
         };
         
 
