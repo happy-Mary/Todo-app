@@ -6,7 +6,8 @@ export default mainModule
 		localStorage.setItem(key, JSON.stringify(data));
 	}
 	function get(key){
-		localStorage.getItem(key);
+		
+		return JSON.parse(localStorage.getItem(key));
 	}
 	return {
 		get: get,

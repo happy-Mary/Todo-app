@@ -40,7 +40,7 @@ export default listModule
         };
         
         if(localStorageService.get('lists')){
-            self.listGroups = localStorageService.get('lists');
+            self.lists = localStorageService.get('lists');
             listService.set(self.lists);
         }
         else{
