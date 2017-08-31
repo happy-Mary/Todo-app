@@ -7,6 +7,7 @@ require('./app/app.controller');
 require('./app/app.service');
 require('./app/listgroup/listgroup.controller');
 require('./app/listgroup/listgroup.component');
+require('./app/listgroup/listgroup.constructor');
 require('./app/list/list.controller');
 require('./app/list/list.service');
 require('./app/list/list.component');

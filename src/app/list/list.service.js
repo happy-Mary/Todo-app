@@ -1,4 +1,5 @@
 import listModule from './list.module';
+import List from './list.constructor';
 
 export default listModule
 .service('listService', function($filter){
@@ -18,8 +19,11 @@ export default listModule
         data.splice(index, 1);
     }
 
-    function createList(title){
+    function createList(title, id){
         console.log(`new list TITLE: ${title}`);
+        let list = new List(title, id);
+        data.push(list);
+        return data;
         // call constructor, save to data, return data
     }
 
