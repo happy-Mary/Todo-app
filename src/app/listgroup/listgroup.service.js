@@ -4,8 +4,8 @@ import ListGroup from './listgroup.constructor';
 export default listGroupModule
 	.service('listGroupService', function(){
 		function createListGroup(name){
-			var a = new ListGroup(2, name);
-			console.log(a.title);
+			var a = new ListGroup(name);
+			console.log(a.id);
 		}
 		return{
 			createListGroup: createListGroup
