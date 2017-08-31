@@ -8,20 +8,27 @@ export default listGroupModule
         var self = this;
         if(localStorageService.get('listGroups')){
             self.listGroups = localStorageService.get('listGroups');
+            listGroupService.set(self.listGroups);
+            listGroupService.getGroup(0);
         }
         else{
              $http({ method: 'GET', url: URLS.listGroupURL })
                 .then(function successCallback(response) {
                     self.listGroups = response.data;
                     localStorageService.set('listGroups', self.listGroups);
+                    listGroupService.set(self.listGroups);
+                    listGroupService.getGroup(0);
                 })
                 .catch(function errorCallback() {
                     // console.log("request FAILED");
                     // self.listGroups = require('../../app-data/listGroups.json');
                     self.listGroups =  [];
+                      // listGroupService.set(self.listGroups);
                 });
         }
-        listGroupService.createListGroup('adsadad')
+        // listGroupService.set(self.listGroups);
+        // listGroupService.create('adsadad');
+        // listGroupService.getGroup(0);
 
     });
 
