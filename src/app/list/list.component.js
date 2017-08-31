@@ -7,5 +7,4 @@ export default listModule
         },
         controller: 'listController',
         template: require('./list.templ.html')
-        
     });
