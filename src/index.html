@@ -11,7 +11,56 @@
 </head>
 
 <body ng-controller="AppController as ctrl">
-    <div id="wrapper">
+    <div class = 'container'>
+        <aside>
+            <div class="nav">
+                <button class='toggle-button'></button>
+                <input type="text">
+                <span class='toggle-search'></span>
+            </div>
+            <div class="folders">
+                <list-group-component></list-group-component>
+            </div>
+            <div class="create">
+                <a href="">Create list</a>
+                <a href="">Create folder</a>
+            </div>
+        </aside>
+        <header>
+            <h2>{{ctrl.headerTitle}}</h2> 
+            <button class = 'sort-button'></button>
+        </header>
+        <main>
+            <form action="">
+                <span class='newTask' ng-click="ctrl.focusAddTask()">
+                    <i  ng-if='!ctrl.taskFocused'></i>
+                    <i class="icon-checked" ng-if='ctrl.taskFocused'></i>
+                </span>
+                <input type="text" class='newTaskTitle' ng-focus="ctrl.taskFocused = true" ng-blur="ctrl.taskFocused = false">
+                <div class="marked-task">
+                    <input type="checkbox" name="newTask" id="addTask" class='marked-task' ng-model='ctrl.marked'>
+                    <label for="addTask"></label>
+                </div>
+                 
+                <!-- submit on enter -->
+            </form>
+            <!-- <ui-view></ui-view> -->
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>
+            <p>text</p>    
+        </main>         
+    </div>
+
+
+    <!-- <div id="wrapper">
         {{ctrl.hello}}
     </div>
 
@@ -25,7 +74,7 @@
   
     <div class="todo">
         <todo-comp todo-title='What need to be done'></todo-comp>
-    </div>
+    </div> -->
 
 </body>
 
