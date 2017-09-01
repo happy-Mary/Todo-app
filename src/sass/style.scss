@@ -1,7 +1,266 @@
-body {
+body, html {
     background-color: lightgray;
+    height: 100%;
+}
+body {
+    background-image: url('../img/background-site.jpg');
+    background-size: cover;
+}
+
+* {box-sizing: border-box;}
+
+h1, h2, h3, h4, h5, h6, p {margin: 0; padding: 0;}
+
+button,
+button:active,
+a,
+a:active,
+a:focus,
+a:hover,
+a:visited {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    color: black;
+}
+
+input,
+input:active,
+input:focus {
+    outline: none;
+    border: none;
 }
 
 ul {
     list-style-type: none;
+    -webkit-padding-start: 0px;
+    margin: 0;
 }
+
+.container {
+    width:100%; 
+    height: 100%;
+    overflow: hidden; 
+
+    aside {
+        background-color: #fff;
+        float: left;
+        width: 300px;
+        height:100%;
+        position: relative;
+
+        .tab-bar {
+            // border-top: 1px solid #778899;
+            font-weight: bold;
+            
+            li{
+                height: 40px;
+                border-bottom: 1px solid #778899;
+                a {
+                    display: block;
+                    line-height: 40px;
+                    padding-left: 45px;
+                    color: #696969;
+                }
+            }
+        } 
+
+        .listgroup { 
+            a {
+                background: url('../img/icons/folder.png') no-repeat 10px center;
+                text-transform: uppercase;
+                position: relative;
+                .listgroup-icon {
+                    display: block;
+                    height: 100%;
+                    width: 40px;
+                    position: absolute;
+                    right: 5px;
+                    top: 0;
+                    background: url('../img/icons/down-arrow.png') no-repeat center;
+                }
+            }
+
+
+            
+        }
+
+        .lists>li {
+            padding-left: 20px;
+        }
+
+        .lists a {
+            background-image: url('../img/icons/list.png');
+            font-size: .8rem;
+        }
+
+        .nav {
+            height: 40px;
+            background-color: #206676;
+
+            .toggle-button, .toggle-search {
+                width: 40px;
+                height: 100%;
+                display: block;
+                float: left;
+                cursor: pointer;
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .toggle-button {
+                background-image: url('../img/icons/menu-button.png');
+            }
+
+            .toggle-search {
+                background-image: url('../img/icons/magnifier-tool.png');
+            }
+
+            input:focus+.toggle-search {
+                background-image: url('../img/icons/cancel-music.png');
+            }
+
+            input,
+            input:active,
+            input:focus {
+                float: left;
+                width: 220px;
+                outline: none;
+                border: none;
+                background-color: transparent;
+                height: 90%;
+                margin: 0;
+                padding: 0 10px;
+                color: #fff;   
+            }
+
+            input:focus {
+                border-bottom: 1px solid #fff;
+            }
+        }
+
+        .folders {
+            overflow-y: auto;
+            height: -o-calc(100% - (40px + 80px));
+            height: -moz-calc(100% - (40px + 80px));
+            height: -webkit-calc(100% - (40px + 80px));
+            height: calc(100% - (40px + 80px));
+        }
+
+        .create {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff;
+            a {
+                color: #2F8AA3;
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                padding-left: 50px;
+                text-transform: uppercase;
+                border-top: 2px solid #2F8AA3;
+                background: url('../img/icons/add-nav.png') no-repeat 15px center;
+            }
+        }
+    }
+
+    header {
+        margin-left: 300px;
+        height: 40px;
+        background: #04819E;
+        h2 {
+            display: inline-block;
+            line-height: 40px;
+            color: #fff;
+            text-transform: uppercase;
+            padding: 0 10px;
+        }
+        .sort-button {
+            float: right;
+            width: 40px;
+            height: 100%;
+            cursor: pointer;
+            background-image: url('../img/icons/alphabetical-order.png');
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 10px;
+        }
+    }
+
+    main{
+        margin-left: 300px;
+        padding: 10px;
+        height: 100%;
+        overflow-y: auto;
+
+        form {
+            width: 100%;
+            height: 40px;
+            background-color: #38B2CE;
+            margin: 0 auto;
+            border-radius: 5px;
+            position: relative;
+
+            input{
+                width: 100%;
+                background-color: transparent;
+                color: #fff;
+                padding-right: 45px;
+                padding-left: 45px;
+                height: 90%;
+                border-radius: 5px;
+                font-size: 1.2rem;
+            }
+
+            .newTask {
+                display: block;
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+
+                i {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('../img/icons/add.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+                .icon-checked {
+                    // background: white;
+                    -ms-transform: rotate(45deg); /* IE 9 */
+                    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+                    transform: rotate(45deg);
+                }
+            }
+            .marked-task {
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                right: 0;
+                top: 0;
+            }
+
+            .marked-task>input {display: none;}
+            .marked-task>label {
+                display: block;
+                background-image: url('../img/icons/star.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                cursor: pointer;
+                height: 100%;
+            }
+            .marked-task input:checked+label {background-image: url('../img/icons/star-red.png');}
+
+        }
+    }
+
+    
+}
+
+
+
