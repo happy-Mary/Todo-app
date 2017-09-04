@@ -5,6 +5,7 @@ import './sass/listgroup.scss';
 import './sass/lists.scss';
 
 import mainModule from './app/app.module';
+require('./app/app.config');
 require('./app/app.controller');
 require('./app/app.service');
 require('./app/listgroup/listgroup.controller');
