@@ -15,11 +15,18 @@
         <aside>
             <div class="nav">
                 <button class='toggle-button'></button>
-                <input type="text">
+                 <!-- Filter todo in view -->
+                <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
             </div>
             <div class="folders">
+                <ul class='cpecial-items tab-bar'>
+                    <li class='marked'><a href="">избранное</a></li>    
+                </ul>        
+                
                 <list-group-component></list-group-component>
+                 <!-- Filter todo in view, remove filter-search it's an example -->
+                <list-comp filter-id = 'null' filter-search='ctrl.query'></list-comp>
             </div>
             <div class="create">
                 <a href="">Create list</a>
