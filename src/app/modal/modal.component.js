@@ -1,9 +1,10 @@
-import mainModule from '../module';
+import modalModule from './modal.module';
 
-export default mainModule
+export default modalModule
     .component('modal',{
         bindings: {
-            title: '@'
+            title: '@',
+            close: '&onClose'
         },
         template: require('./modal.templ.html'),
         controller: 'modalController'
