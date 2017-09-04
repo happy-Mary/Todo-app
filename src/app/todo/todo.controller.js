@@ -60,7 +60,7 @@ export default todoModule
         function getMarkedLists(){
             self.markedLists = [];
             let unicId = [];
-            for(var i =0; i<self.todo.length; i++) {
+            for(var i = 0; i<self.todo.length; i++) {
                 let id = self.todo[i].listId;
 
                 if(self.todo[i].marked===true && !unicId.includes(id)){
@@ -68,12 +68,7 @@ export default todoModule
                     self.markedLists.push(listService.get(id));
                 }
             }
-            console.log(unicId);
-            console.log(self.markedLists);
         }
-    InitPage();   
-    getMarkedLists();
-    
-
-
+        InitPage();   
+        getMarkedLists();
     });
