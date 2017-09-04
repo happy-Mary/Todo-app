@@ -1,6 +1,6 @@
 <ul class="listgroup tab-bar">
-	<li ng-repeat="item in $ctrl.listGroups">
-		<a href="">{{item.name}}<span class='listgroup-icon'></span></a>
-		<list-comp ng-if='item.lists.length > 0'></list-comp>
+	<li ng-repeat="item in $ctrl.listGroups" ng-class="{true: 'folder-close', false: ''}[$ctrl.folderClose]">
+		<a href="" ng-click='$ctrl.folderClose = !$ctrl.folderClose'>{{item.name}}<span class='listgroup-icon'></span></a>
+		<list-comp filter-id = 'item.id' ng-if='item.lists.length > 0'></list-comp>
 	</li>
 </ul>
