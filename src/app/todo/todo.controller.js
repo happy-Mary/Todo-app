@@ -2,38 +2,17 @@ import todoModule from './todo.module';
 import { URLS } from '../constants';
 import localStorageService from '../app.service';
 import todoService from './todo.service';
+import listService from '../list/list.service';
 
 export default todoModule
-    .controller('todoController', function todoController($http, localStorageService, todoService) {
+    .controller('todoController', function todoController($routeParams, $http, localStorageService, todoService, listService) {
         let self = this;
         self.todo;
-        self.openInput = false;
         self.newTitle = '';
-        let parentId = 1;
+        // from router
+        self.parentId = $routeParams.listid;
 
-        self.filterData = function(item) {
-            if(item.listId === parentId){
-                return item;
-            }
-        };
-
-        // if(localStorageService.get('todo')){
-        //     self.todo = localStorageService.get('todo');
-         
-        // }
-        // else {
-        //     $http({ method: 'GET', url: URLS.todoURL })
-        //     .then(function successCallback(response) {
-        //         self.todo = response.data;
-        //         localStorageService.set('todo', self.todo);
-          
-        //     })
-        //     .catch(function errorCallback() {
-        //         // self.todo = require('../../app-data/todo.json');
-        //         self.todo = [];
-        //     });
-        // }
-
+        // add marked ang change ading todo
         self.saveTask = function() {
             self.todo = todoService.create(self.newTitle, parentId);
             localStorageService.set('todo', self.todo);
@@ -72,13 +51,29 @@ export default todoModule
                     todoService.set(self.todo);
                 })
                 .catch(function errorCallback() {
-                    // self.todo = require('../../app-data/todo.json');
                     self.todo = [];
                     todoService.set(self.todo);
                 });
             }
-    }     
+        }   
+        
+        function getMarkedLists(){
+            self.markedLists = [];
+            let unicId = [];
+            for(var i =0; i<self.todo.length; i++) {
+                let id = self.todo[i].listId;
+
+                if(self.todo[i].marked===true && !unicId.includes(id)){
+                    unicId.push(id);
+                    self.markedLists.push(listService.get(id));
+                }
+            }
+            console.log(unicId);
+            console.log(self.markedLists);
+        }
     InitPage();   
+    getMarkedLists();
+    
 
 
     });
