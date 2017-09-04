@@ -1,5 +1,5 @@
-<ul class = 'lists'>
-        <li ng-repeat='list in $ctrl.lists | filter: $ctrl.filterData'>
+<ul class = 'lists tab-bar'>
+        <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId} | filter: $ctrl.filterSearch'>
             <a href='#'>{{list.title}}</a>
         </li>
     </ul>
