@@ -43,6 +43,8 @@ ul {
     height: 100%;
     overflow: hidden; 
 
+}
+
     aside {
         background-color: #fff;
         float: left;
@@ -51,48 +53,23 @@ ul {
         position: relative;
 
         .tab-bar {
-            // border-top: 1px solid #778899;
             font-weight: bold;
             
-            li{
-                height: 40px;
+            li {
+                min-height: 40px;
                 border-bottom: 1px solid #778899;
                 a {
                     display: block;
                     line-height: 40px;
                     padding-left: 45px;
                     color: #696969;
-                }
+                    text-transform: uppercase;
+                }        
             }
         } 
 
-        .listgroup { 
-            a {
-                background: url('../img/icons/folder.png') no-repeat 10px center;
-                text-transform: uppercase;
-                position: relative;
-                .listgroup-icon {
-                    display: block;
-                    height: 100%;
-                    width: 40px;
-                    position: absolute;
-                    right: 5px;
-                    top: 0;
-                    background: url('../img/icons/down-arrow.png') no-repeat center;
-                }
-            }
-
-
-            
-        }
-
-        .lists>li {
-            padding-left: 20px;
-        }
-
-        .lists a {
-            background-image: url('../img/icons/list.png');
-            font-size: .8rem;
+        .marked a{
+            background: url('../img/icons/bookmark-button.png') no-repeat 10px center;
         }
 
         .nav {
@@ -260,7 +237,7 @@ ul {
     }
 
     
-}
+
 
 
 
