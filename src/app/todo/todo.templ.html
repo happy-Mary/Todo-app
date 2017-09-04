@@ -1,13 +1,15 @@
 <section>
-<ul class = 'todo'>
-    <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId}'>
-        <a href='#'>{{task.title}}</a>
-    </li>
-</ul>
-<ul ng-if="$ctrl.parentId==='marked'">
-    <li ng-repeat='task in $ctrl.todo | filter: {"marked": true}'>
-        <a href='#'>{{task.title}}</a>
-        <a href='#'>ListId: {{task.listId}}</a>
-    </li>
-</ul>
+    <ul class = 'todo'>
+        <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId}'>
+            <a href='#'>{{task.title}}</a>
+        </li>
+    </ul>
+    <div class="marked"  ng-if="$ctrl.parentId==='marked'" ng-repeat='item in $ctrl.markedLists'>
+        <h3><a href='#!/lists/{{item.id}}'>{{item.title}}</a></h3>
+        <ul>
+            <li ng-repeat='task in $ctrl.todo | filter: {"marked": true} | filter: {"listId": item.id}'>
+                <a href='#'>{{task.title}}</a>
+            </li>
+        </ul>
+    </div>
 </section>
