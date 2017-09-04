@@ -1,1 +1,1 @@
-export default angular.module('mainModule', ['listGroupModule', 'listModule', 'todoModule']);
+export default angular.module('mainModule', ['listGroupModule', 'listModule', 'todoModule', 'modalModule']);

@@ -1,13 +1,14 @@
 import modalModule from './modal.module';
 
 export default modalModule
-    .controller('modalController', function modalController($http, localStorageService, listGroupService) {
+    .controller('modalController', function modalController() {
         var self = this;
+
         self.open =  false;
-        self.closeModal{
+        self.closeModal = function(){
         	self.open = false;
         }
-        self.openModal{
+        self.openModal = function(){
         	self.open = true;
         }
 

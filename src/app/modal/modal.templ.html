@@ -1,8 +1,11 @@
-<div class="modal-wrapper">
+<div class="modal-wrapper" ng-show="open">
 	<div class = "modal">
-		<h2>{{title}}</h2>
-		<div class="modal-content" ng-transclude>
-			
+		<h2>{{$ctrl.title}}</h2>
+		<div class="modal-content">
+			<input type="text" name="name" placeholder="List name">
+			<button class="save" type ="button">Save</button>
+			<button  type ="button">Cancel</button>
+
 		</div>
 	</div>
 </div>
