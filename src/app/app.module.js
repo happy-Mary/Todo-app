@@ -1,1 +1,3 @@
-export default angular.module('mainModule', ['listGroupModule', 'listModule', 'todoModule']);
+import ngRoute from 'angular-route';
+
+export default angular.module('mainModule', ['ngRoute', 'listGroupModule', 'listModule', 'todoModule']);

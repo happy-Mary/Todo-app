@@ -5,4 +5,10 @@ ul.lists>li {
 ul.lists a {
     background: url('../img/icons/list.png') no-repeat 10px center;
     font-size: .8rem;
+    span {
+        float: right;
+        margin: 0 10px;
+        font-size: 1.2rem;
+        opacity: .6;
+    }
 }
