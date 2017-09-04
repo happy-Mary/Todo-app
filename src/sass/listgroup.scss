@@ -1,0 +1,28 @@
+ul.listgroup { 
+        >li {
+            border-bottom: none;
+            background-color: rgba(204, 255, 255, .4);
+            .lists>li:last-child {border-bottom-width: 2px;}
+        }
+        li.folder-close {
+            border-bottom: 1px solid #778899;
+            background-color: #fff;
+            .listgroup-icon {transform: rotate(90deg);}
+            ul {display: none;}
+        }
+        
+         a {
+            background: url('../img/icons/folder.png') no-repeat 10px center;
+            text-transform: uppercase;
+            position: relative;
+            .listgroup-icon {
+                 display: block;
+                 height: 100%;
+                 width: 40px;
+                 position: absolute;
+                 right: 5px;
+                 top: 0;
+                 background: url('../img/icons/down-arrow.png') no-repeat center;
+                }
+            }
+}

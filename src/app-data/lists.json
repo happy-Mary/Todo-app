@@ -1,5 +1,7 @@
 [
 	{"id": 0, "title": "Работа", "listGroupId": 0, "todoLists": [0, 1]},
-	{"id": 1, "title": "Учеба", "listGroupId": 0, "todoLists": [2, 3, 4, 5]},
-	{"id": 2, "title": "Личное", "listGroupId": 0, "todoLists": []}
+    {"id": 1, "title": "Учеба", "listGroupId": 0, "todoLists": [2, 3, 4, 5]},
+    {"id": 2, "title": "Личное", "listGroupId": 0, "todoLists": []},
+    {"id": 3, "title": "Путешествия", "listGroupId": null, "todoLists": []},
+    {"id": 4, "title": "Просто список", "listGroupId": null, "todoLists": []}
 ]
