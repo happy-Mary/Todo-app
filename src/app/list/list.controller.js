@@ -12,6 +12,8 @@ export default listModule
         //  let parentId = $routeParams.id;
         let parentId = 0;
 
+        // console.log(self.testId);
+
         self.filterData = function(item) {
             if(item.listGroupId === parentId){
                 return item;
