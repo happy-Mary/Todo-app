@@ -4,6 +4,7 @@ import './sass/style.scss';
 import './sass/listgroup.scss';
 import './sass/lists.scss';
 
+
 import mainModule from './app/app.module';
 require('./app/app.config');
 require('./app/app.controller');
@@ -13,6 +14,9 @@ require('./app/listgroup/listgroup.component');
 require('./app/list/list.controller');
 require('./app/list/list.service');
 require('./app/list/list.component');
+// //////////////////////////////////
+require('./app/list/list.directive');
+// //////////////////////////////////
 require('./app/todo/todo.controller');
 require('./app/todo/todo.service');
 require('./app/todo/todo.component');

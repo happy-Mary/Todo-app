@@ -8,7 +8,8 @@ function config($locationProvider, $routeProvider) {
 
   $routeProvider.
     when('/lists/:listid', {
-      template: '<todo-comp></todo-comp>'
+      template: '<todo-comp></todo-comp>',
+      // controller: 'AppController'
     }).
     otherwise('lists/marked');
 }
