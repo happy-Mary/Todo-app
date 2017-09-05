@@ -9,16 +9,12 @@ export default listModule
         self.lists;
         self.openInput = false;
         self.newTitle = '';
-        //  let parentId = $routeParams.id;
-        let parentId = 0;
 
-        // console.log(self.testId);
+        // let t = document.querySelector('.folders');
+        // console.log(t);
 
-        self.filterData = function(item) {
-            if(item.listGroupId === parentId){
-                return item;
-            }
-        };
+
+
 
         self.saveList = function() {
             self.lists = listService.create(self.newTitle, parentId);
