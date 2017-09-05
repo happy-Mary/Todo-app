@@ -20,9 +20,9 @@
                 <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
             </div>
-            <div class="folders">
+            <div class="folders" ng-click='ctrl.changeActive($event)'>
                 <ul class='cpecial-items tab-bar'>
-                    <li class='marked' ng-click = 'ctrl.makeClick()'><a ng-href="#!/lists/marked">избранное {{ctrl.currRoute}}</a></li> 
+                    <li class='marked'><a ng-href="#!/lists/marked">избранное {{ctrl.currRoute}}</a></li> 
                 </ul>        
                 
                 <list-group-component></list-group-component>
