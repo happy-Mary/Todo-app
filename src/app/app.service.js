@@ -11,5 +11,5 @@ export default mainModule
 	return {
 		get: get,
 		set: set
-	}
+	};
 });

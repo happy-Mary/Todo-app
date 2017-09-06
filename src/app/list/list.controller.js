@@ -13,9 +13,6 @@ export default listModule
         // let t = document.querySelector('.folders');
         // console.log(t);
 
-
-
-
         self.saveList = function() {
             self.lists = listService.create(self.newTitle, parentId);
             localStorageService.set('lists', self.lists);
