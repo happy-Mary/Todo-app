@@ -1,6 +1,6 @@
 
 <ul class = 'lists tab-bar'>
-        <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId} | filter: $ctrl.filterSearch' toggle-menu>
+        <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId} | filter: $ctrl.filterSearch'>
             <a href='#!/lists/{{list.id}}'>{{list.title}} 
                 <span class='todocount' ng-if='list.todoLists.length>0'>{{list.todoLists.length}}</span>
             </a>
