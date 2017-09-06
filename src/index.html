@@ -22,7 +22,7 @@
             </div>
             <div class="folders" ng-click='ctrl.changeActive($event)'>
                 <ul class='cpecial-items tab-bar'>
-                    <li class='marked'><a ng-href="#!/lists/marked">избранное {{ctrl.currRoute}}</a></li> 
+                    <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li> 
                 </ul>        
                 
                 <list-group-component></list-group-component>
@@ -49,8 +49,6 @@
                     <input type="checkbox" name="newTask" id="addTask" class='marked-task' ng-model='ctrl.marked'>
                     <label for="addTask"></label>
                 </div>
-                 
-                <!-- submit on enter -->
             </form>
             <div ng-view></div>
         </main>         
