@@ -5,6 +5,6 @@ export default class List {
 		this.id = generateId();
 		this.title = title;
 		this.listGroupId = listGroupId || null;
-		this.todoLists = [];
+		// this.todoLists = [];
 	}
 }
