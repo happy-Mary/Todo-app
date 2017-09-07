@@ -11,14 +11,17 @@ export default listGroupModule
             var folder = angular.element(event.currentTarget);
             folder.parent().children().removeClass('active')
             folder.addClass('active');
-        }
+        };
+
         self.save = function(){
             localStorageService.set('listGroups', self.listGroups);
-        }
+        };
+
         self.deleteLisGroup = function(id){
             listGroupService.deleteGroup();
             self.save();
-        }
+        };
+        
         if(localStorageService.get('listGroups')){
             self.listGroups = localStorageService.get('listGroups');
             listGroupService.set(self.listGroups);
