@@ -2,6 +2,7 @@ import modalModule from './modal.module';
 
 export default modalModule
     .component('modal',{
+        transclude: true,
         bindings: {
             title: '@',
             modalId: '@'
