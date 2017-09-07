@@ -1,9 +1,9 @@
 import generateId from '../module/generateId';
 
 export default class ListGroup {
-	constructor(title){
+    constructor(title) {
 		this.title = title;
 		this.id = generateId();
-		this.lists = [];
+		// this.lists = [];
 	}
 }
