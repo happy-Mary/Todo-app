@@ -1,7 +1,7 @@
 const URLS = {
-    listGroupURL: 'https://api.myjson.com/bins/dx1e5',
-    listURL: 'https://api.myjson.com/bins/ql9up',
-    todoURL: 'https://api.myjson.com/bins/rscs1',
+    listGroupURL: 'https://api.myjson.com/bins/1ab7q1',
+    listURL: 'https://api.myjson.com/bins/1hgezd',
+    todoURL: 'https://api.myjson.com/bins/uw35l',
     subtaskURL: 'subtaskurl.json'
 };
 
