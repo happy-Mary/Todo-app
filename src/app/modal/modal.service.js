@@ -15,8 +15,15 @@ export default modalModule
         }
     }
 
+    function closeModal(){
+        for(var i = 0; i < controllers.length; i++){
+            controllers[i].open = false;
+        }
+    }
+
     return {
         set: setOptions,
-        open: openModal
+        open: openModal,
+        close: closeModal
     };
  });
