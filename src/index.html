@@ -24,14 +24,13 @@
                 <ul class='cpecial-items tab-bar'>
                     <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li> 
                 </ul>        
-                
-                <list-group-component></list-group-component>
+                <list-group-component data-state='edit'></list-group-component>
                  <!-- Filter todo in view, remove filter-search it's an example -->
                 <list-comp filter-id = 'null' filter-search='ctrl.query'></list-comp>
             </div>
             <div class="create">
-                <a href="">Create list</a>
-                <a href="">Create folder</a>
+                <a href=""  ng-click = 'ctrl.modal.open("2")'>Create list</a>
+                <a href="" ng-click = 'ctrl.modal.open("1")'>Create folder</a>
             </div>
         </aside>
         <header>
@@ -53,7 +52,20 @@
             <div ng-view></div>
         </main>         
     </div>
-    <modal title="Create new list"></modal>
+    
+    <modal modal-id='2' title="Create new list">
+        
+    </modal>
+    <modal modal-id='1' title="Create new folder">
+        
+    </modal>
+    <!-- <modal title="Edit folder">
+        
+    </modal>
+    <modal title="Edit list">
+        
+    </modal> -->
+    
 </body>
 
 </html>

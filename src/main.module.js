@@ -22,6 +22,5 @@ require('./app/modal/modal.controller');
 require('./app/modal/modal.component');
 
 
-
 /* this module goes to html ng-app */
 angular.module('appModule', [mainModule.name]);
