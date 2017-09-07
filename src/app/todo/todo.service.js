@@ -1,50 +1,54 @@
-import listModule from './todo.module';
+import todoModule from './todo.module';
 import ToDo from './todo.constructor';
 
-export default listModule
+export default todoModule
 .service('todoService', function($filter){
     let data = [];
     let itemItem;
     
-    function getLists(id) {
+    function get(){
+        return data;
+    }
+
+    function getTodo(id) {
         // to filter data on route ???
         // itemItem = $filter("filter")(data, {id:id});
         data.forEach(function(item){
             if(item.id == id){
-               console.log(item);
                itemItem = item;
             }
         });
     }
 
-    function updateList(title){
+    function updateTodo(title){
         itemItem.title = title;
         return data;
     }
 
-    function setLists(obj) {
+    function setTodo(obj) {
         data = obj;
     }
 
-    function deleteList(id) {
+    function deleteTodo(id) {
         let index = data.findIndex(x => x.id==id);
         data.splice(index, 1);
         return data;
     }
 
-    function createList(title, id){
-        let list = new ToDo(title, id);
-        data.push(list);
-        return data;
+    function createTodo(title, listId){
+        let todo = new ToDo(title, listId);
+        data.push(todo);
+        return todo;
         // call constructor, save to data, return data
     }
 
     return {
-        set: setLists,
-        get: getLists,
-        delete: deleteList,
-        create: createList,
-        update: updateList
+        set: setTodo,
+        get: get,
+        getTodo: getTodo,
+        delete: deleteTodo,
+        create: createTodo,
+        update: updateTodo
     };
 
 });
