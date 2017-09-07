@@ -178,7 +178,37 @@ ul {
         padding: 10px;
         height: 100%;
         overflow-y: auto;
+        .todo{
+            li{
+                padding: 5px 12px;
+                margin-top: 5px;
+                background-color: #eaf1f3;
+                border-radius: 2px;
+                
+                a{
+                    color: #696969;
+                }
 
+                .marked{
+                    float: right;
+                    width: 20px;
+                    height: 20px;
+                    background-image: url('../img/icons/star.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                    cursor: pointer;
+
+                    input{
+                        display: none;
+                    }
+                    &.active{
+                        background-image: url('../img/icons/star-red.png');
+                    }
+                }
+               
+            }
+        }
         form {
             width: 100%;
             height: 40px;
