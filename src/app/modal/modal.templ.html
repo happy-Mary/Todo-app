@@ -1,11 +1,12 @@
-<div class="modal-wrapper" ng-show="$ctrl.open">
+<div class="modal-wrapper" ng-if="$ctrl.modalOptions.open && $ctrl.modalOptions.id == $ctrl.modalId">
 	<div class = "modal">
 		<h2>{{$ctrl.title}}</h2>
-		<div class="modal-content">
+		<p>{{$ctrl.modalId}}</p>
+		<p>{{$ctrl.modalOptions.id}}</p>
+		<!-- <div class="modal-content">
 			<input type="text" name="name" placeholder="List name">
 			<button class="save" type ="button">Save</button>
 			<button  type ="button" ng-click="$ctrl.closeModal()">Cancel</button>
-
-		</div>
+		</div> -->
 	</div>
 </div>

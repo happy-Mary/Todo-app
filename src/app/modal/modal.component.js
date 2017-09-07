@@ -4,7 +4,8 @@ export default modalModule
     .component('modal',{
         bindings: {
             title: '@',
-            close: '&onClose'
+            modalId: '@'
+            // close: '&onClose'      
         },
         template: require('./modal.templ.html'),
         controller: 'modalController'
