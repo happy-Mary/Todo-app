@@ -10,7 +10,7 @@ export default listModule
         self.openInput = false;
         self.newTitle = '';
 
-        // let t = document.querySelector('.folders');
+        // let t = document.querySelector('aside');
         // console.log(t);
 
         self.saveList = function() {

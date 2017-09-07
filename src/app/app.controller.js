@@ -1,11 +1,14 @@
 import mainModule from './app.module';
 
 export default mainModule
-    .controller('AppController', function AppController() {
+    .controller('AppController', function AppController(modalService) {
         let self = this;
         self.headerTitle = 'current list title';
         self.marked = false;
         self.taskFocused = false;
+        // ////////////////////////////////////
+        self.modal = modalService;
+        // //////////////////////////////////
 
         self.focusAddTask = function() {
             (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
