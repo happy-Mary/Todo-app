@@ -8,42 +8,35 @@ export default mainModule
         let self = this;
         self.headerTitle = 'current list title';
         self.marked = false;
+        self.newTodoTitle = '';
         self.taskFocused = false;
-
+        self.abcd='ssa';
         
         self.focusAddTask = function(){
             (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
             (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         };
 
-        document.querySelector('main form').addEventListener('submit', function(event){
-            event.preventDefault();
-            document.querySelector('.newTaskTitle').blur();
-
-        });
-
         self.addToDo = function(){
-            // event.preventDefault();
-             var input = angular.element(document.querySelector('.newTaskTitle'));
-             var newTodo = input.val().trim();
-            
-             if(newTodo){
-                console.log(newTodo);
+            event.preventDefault();
+            var newTodo = self.newTodoTitle.trim();
+
+            if(newTodo){
                 var urlArray = $location.path().split('/');
                 var listId = urlArray[urlArray.length-1];
-                var todo = todoService.create(newTodo, listId);
+                console.log(self.marked)
+                todoService.create(newTodo, listId, self.marked);
                 localStorageService.set('todo', todoService.get());
-                listService.addTodo(listId, todo.id);
-                localStorageService.set('lists', listService.get());
-
-             }
-             input.val('');
+                self.marked = false;
+            }
+            self.newTodoTitle = '';
          }
            
         self.focusAddTask = function() {
             (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
             (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         };
+
 // ////////////////////////////////////////////////
         // changing menu item
         self.changeActive = function($event) {
