@@ -2,8 +2,8 @@
 body, html {
     background-color: lightgray;
     height: 100%;
-    font-family: 'Muli', sans-serif;
- }
+    font-family: 'Ubuntu', sans-serif;
+}
 body {
     background-image: url('../img/background-site.jpg');
     background-size: cover;
@@ -46,6 +46,8 @@ ul {
     overflow: hidden; 
 
 }
+
+.active-list {background-color: lightblue;}
 
     aside {
         background-color: #fff;
