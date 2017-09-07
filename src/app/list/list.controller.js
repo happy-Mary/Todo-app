@@ -4,14 +4,16 @@ import localStorageService from '../app.service';
 import listService from './list.service';
 
 export default listModule
-    .controller('listController', function listController($http, localStorageService, listService) {
+    .controller('listController', function listController($http, localStorageService, listService,  modalService) {
         let self = this;
         self.lists;
         self.openInput = false;
         self.newTitle = '';
 
-        // let t = document.querySelector('aside');
-        // console.log(t);
+        // ////////////////////////////////////
+        // service to open modal
+        self.modal = modalService;
+        // //////////////////////////////////
 
         self.saveList = function() {
             self.lists = listService.create(self.newTitle, parentId);
