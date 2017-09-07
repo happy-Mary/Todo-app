@@ -4,6 +4,7 @@ export default listModule
     .component('listComp', {
         bindings: {
             filterId: '<',
+            // remove to TODO-search router
             filterSearch: '<'
         },
         controller: 'listController',
