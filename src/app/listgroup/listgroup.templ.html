@@ -1,4 +1,5 @@
 <ul class="listgroup tab-bar">
+
 <!-- 	<li ng-repeat="item in $ctrl.listGroups" ng-click="$ctrl.open($event)" ng-class="{true: 'folder-close', false: ''}[$ctrl.folderClose]"> -->
 	<li ng-repeat="item in $ctrl.listGroups" ng-click="$ctrl.open($event)"  >
 		<a href="" ng-click='$ctrl.folderClose = !$ctrl.folderClose'>{{item.name}}<span class='listgroup-icon'></span></a>
