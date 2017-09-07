@@ -3,8 +3,9 @@ import ListGroup from './listgroup.constructor';
 
 export default listGroupModule
 	.service('listGroupService', function(){
-		this.data =[];
+		
 		var self = this;
+		self.data =[];
 
 		function setListGroups(data) {
       		self.data = data;
@@ -27,7 +28,7 @@ export default listGroupModule
 
 		function createListGroup(name){
 			var group = new ListGroup(name);
-			self.data.push(data);
+			self.data.push(group);
 		}
 
 		return{
