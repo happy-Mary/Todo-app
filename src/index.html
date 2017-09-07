@@ -8,6 +8,7 @@
     <!-- <link rel="shortcut icon" type="image/png" href="../src/img/icons/favicon.png"/>  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">    
 </head>
 
 <body ng-controller="AppController as ctrl">
@@ -19,9 +20,9 @@
                 <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
             </div>
-            <div class="folders">
+            <div class="folders" ng-click='ctrl.changeActive($event)'>
                 <ul class='cpecial-items tab-bar'>
-                    <li class='marked'><a href="">избранное</a></li>    
+                    <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li> 
                 </ul>        
                 
                 <list-group-component></list-group-component>
@@ -48,42 +49,11 @@
                     <input type="checkbox" name="newTask" id="addTask" class='marked-task' ng-model='ctrl.marked'>
                     <label for="addTask"></label>
                 </div>
-                 
-                <!-- submit on enter -->
             </form>
-            <!-- <ui-view></ui-view> -->
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>    
+            <div ng-view></div>
         </main>         
     </div>
-
-
-    <!-- <div id="wrapper">
-        {{ctrl.hello}}
-    </div>
-
-    <div class="listgroup-container">
-        <list-group-component group-title='Folders'></list-group-component>
-    </div>
-    
-    <div class="lists">
-        <list-comp lists-title='Lists'></list-comp>
-    </div>
-  
-    <div class="todo">
-        <todo-comp todo-title='What need to be done'></todo-comp>
-    </div> -->
-<modal title="Create new list"></modal>
-
+    <modal title="Create new list"></modal>
 </body>
 
 </html>
