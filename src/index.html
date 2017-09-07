@@ -39,18 +39,18 @@
             <button class = 'sort-button'></button>
         </header>
         <main>
-            <form action="">
+            <form action="" ng-submit="ctrl.addToDo($event)">
                 <span class='newTask' ng-click="ctrl.focusAddTask()">
                     <i  ng-if='!ctrl.taskFocused'></i>
                     <i class="icon-checked" ng-if='ctrl.taskFocused'></i>
                 </span>
-                <input type="text" class='newTaskTitle' ng-focus="ctrl.taskFocused = true" ng-blur="ctrl.taskFocused = false">
+                <input type="text" class='newTaskTitle' ng-focus="ctrl.taskFocused = true" ng-model="ctrl.newTodoTitle" ng-blur="ctrl.taskFocused = false">
                 <div class="marked-task">
                     <input type="checkbox" name="newTask" id="addTask" class='marked-task' ng-model='ctrl.marked'>
                     <label for="addTask"></label>
                 </div>
             </form>
-            <div ng-view></div>
+                <div ng-view></div>
         </main>         
     </div>
 </body>

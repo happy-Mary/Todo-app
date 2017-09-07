@@ -2,13 +2,15 @@
     <ul class = 'todo'>
         <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId}'>
             <a href='#'>{{task.title}}</a>
+            <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked"><input type="checkbox" ng-model='task.marked'></label>
         </li>
     </ul>
     <div class="marked"  ng-if="$ctrl.parentId==='marked'" ng-repeat='item in $ctrl.markedLists'>
         <h3><a href='#!/lists/{{item.id}}'>{{item.title}}</a></h3>
-        <ul>
+        <ul class = 'todo'>
             <li ng-repeat='task in $ctrl.todo | filter: {"marked": true} | filter: {"listId": item.id}'>
                 <a href='#'>{{task.title}}</a>
+                    <label class="marked"><input type="checkbox" ng-model='task.marked'></label>
             </li>
         </ul>
     </div>
