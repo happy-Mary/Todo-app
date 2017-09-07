@@ -1,14 +1,29 @@
 ul.listgroup { 
         >li {
+            /*
             border-bottom: none;
             background-color: rgba(204, 255, 255, .4);
+            */
             .lists>li:last-child {border-bottom-width: 2px;}
+
+             border-bottom: 1px solid #778899;
+            background-color: #fff;
+            .listgroup-icon {transform: rotate(90deg);}
+            ul {display: none;}
         }
-        li.folder-close {
+        /*li.folder-close {
             border-bottom: 1px solid #778899;
             background-color: #fff;
             .listgroup-icon {transform: rotate(90deg);}
             ul {display: none;}
+        }
+        */
+        li.active{
+            border-bottom: none;
+            background-color: rgba(204, 255, 255, .4);
+            ul{
+                display: block;
+            }
         }
         
          a {

@@ -6,8 +6,12 @@ import listGroupService from './listgroup.service';
 export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
         var self = this;
-        self.folderClose = true;
-
+        // self.folderClose = true;
+        self.open = function(event){
+            var folder = angular.element(event.currentTarget);
+            folder.parent().children().removeClass('active')
+            folder.addClass('active');
+        }
         self.save = function(){
             localStorageService.set('listGroups', self.listGroups);
         }
