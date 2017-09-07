@@ -37,6 +37,7 @@ export default todoModule
             self.newTitle = '';
         };
         
+        
 
         function InitPage(){
             if(localStorageService.get('todo')){
