@@ -3,7 +3,6 @@ import ListGroup from './listgroup.constructor';
 
 export default listGroupModule
 	.service('listGroupService', function(){
-		
 		var self = this;
 		self.data =[];
 
@@ -11,14 +10,15 @@ export default listGroupModule
       		self.data = data;
    		}
    		function getListGroups(){
-   			return data;
-   		}
+   			return self.data;
+		}
+		   
    		function getListGroup(id){
    			self.data.forEach(function(group){
    				if(group.id == id){
    					return group;
    				}
-   			})
+   			});
    		}
 
    		function deleteListGroup(id) {

@@ -20,10 +20,11 @@
                 <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
             </div>
-            <!--ng-click='ctrl.changeActive($event)'-->
             <div class="folders">
                 <ul class='cpecial-items tab-bar'>
-                    <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li>
+                    <li class='marked' ng-class="(ctrl.routeData.listid=='marked') ? 'active-list' : '' ">
+                        <a ng-href="#!/lists/marked">избранное</a>
+                    </li>
                 </ul>
 
                 <list-group-component></list-group-component>
@@ -56,10 +57,10 @@
     </div>
     
     <modal modal-id='2' title="Create new list">
-        this for adding list
+        <list-form state="create"></list-form>
     </modal>
     <modal modal-id='1' title="Create new folder">
-        <folder-form></folder-form>
+        <folder-form state="create"></folder-form>
     </modal>
     <modal modal-id='3' title="Edit list">
             
