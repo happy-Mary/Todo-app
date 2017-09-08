@@ -1,5 +1,5 @@
-<form class="modal-content" ng-submit='$ctrl.addFolder($ctrl.data.title)'>
-	<input type="text" name="name" placeholder="Folder name" ng-model='$ctrl.data.title'>
+<form class="modal-content" ng-submit='($ctrl.state==="create") ? $ctrl.addFolder($ctrl.data.title) : $ctrl.editFolder()'>
+	<input type="text" name="name" placeholder="Folder name" required autofocus ng-model='$ctrl.data.title'>
 	<button class="save" type ="submit">Save</button>
 	<button  type ="button" ng-click="$ctrl.modal.close()">Cancel</button>
 </form>

@@ -2,16 +2,23 @@ import listModule from './list.module';
 import List from './list.constructor';
 
 export default listModule
-.service('listService', function(){
+.factory('listService', function(){
     let self  = this;
-    let data = [];
+    self.data = [4, 6, 7];
     // let itemItem;
     function getLists(){
-        return data;
+        return self.data;
     }
+
+    function setLists(obj) {
+        self.data = obj;
+        console.log('lists was setted in SERVICE');
+        console.log(self.data);
+    }
+
     function getList(id) {
         var list;
-        data.forEach(function(item){
+        self.data.forEach(function(item){
             if(item.id == id){
                 list = item;
             }
@@ -19,29 +26,31 @@ export default listModule
         return list;
     }
 
+    function createList(title, id){
+        // console.log(`new list TITLE: ${title}`);
+        // console.log(self.data.length);
+        // console.log(self.data);
+        let list = new List(title, id);
+        self.data.push(list);
+        // console.log(self.data.length);
+        // console.log(self.data);
+       
+        // return self.data;
+    }
+
     function updateList(id, title){
         let itemItem = getLists(id)
         itemItem.title = title;
-        return data;
-    }
-
-    function setLists(obj) {
-        data = obj;
+        return self.data;
     }
 
     function deleteList(id) {
-        let index = data.findIndex(x => x.id==id);
-        data.splice(index, 1);
-        return data;
+        let index = self.data.findIndex(x => x.id==id);
+        self.data.splice(index, 1);
+        return self.data;
     }
 
-    function createList(title, id){
-        console.log(`new list TITLE: ${title}`);
-        let list = new List(title, id);
-        data.push(list);
-        return data;
-        // call constructor, save to data, return data
-    }
+    
     function addTodo(id, todoId){
         var list =  getList(id);
         if(list){
@@ -50,6 +59,7 @@ export default listModule
     }
 
     return {
+        // listsServ: self.data,
         set: setLists,
         get: getLists,
         getList: getList,

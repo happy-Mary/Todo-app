@@ -13,8 +13,8 @@ export default folderFormModule
         modalService.close();
     };
 
+    self.editFolder = function(){console.log('editing folder submit');};
+
     // change ng-submit on form
     // call localStorage service from listService
-
-    
 });

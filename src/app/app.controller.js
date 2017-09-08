@@ -2,9 +2,11 @@ import mainModule from './app.module';
 import todoService from './todo/todo.service';
 import listService from './list/list.service';
 import localStorageService from './app.service';
+///////////////////////////////////////
+import routeServicee from './route.service';
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, $location, listService, localStorageService, modalService) {
+    .controller('AppController', function AppController(todoService, $location, listService, localStorageService, modalService, routeService) {
 
         let self = this;
         self.headerTitle = 'current list title';
@@ -15,6 +17,10 @@ export default mainModule
         // ////////////////////////////////////
         // service to open modal
         self.modal = modalService;
+
+        // устанавливаем в главном контроллере объект для работы с роутинг-данными
+        self.routeData = {listid: null};
+        routeService.set(self.routeData);
         // //////////////////////////////////
 
         self.addToDo = function(){
@@ -37,16 +43,5 @@ export default mainModule
             (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         };
 
-        ///////////////////////////////////////////
-        // changing menu item
-        self.changeActive = function($event) {
-            let test = document.querySelector('.folders').querySelectorAll('li');
-            test.forEach(function(item) {
-                if (item.classList.contains('active-list')) {
-                    item.classList.remove('active-list');
-                }
-            });
-            $event.target.parentNode.classList.add('active-list');
-        };
     });
 
