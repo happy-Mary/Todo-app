@@ -1,8 +1,6 @@
 <ul class="listgroup tab-bar">
-
-
-    <li ng-repeat="item in $ctrl.listGroups">
-        <a href="" class='folder-item' ng-click='$ctrl.open($event)'>{{item.name}}
+    <li ng-repeat="item in $ctrl.listGroups" class='folder-close'>
+        <a href="" class='folder-item' ng-click='$ctrl.openFolder($event)'>{{item.name}}
 			<span class='listgroup-icon'></span>
 		</a>
         <list-comp filter-id='item.id'></list-comp>
