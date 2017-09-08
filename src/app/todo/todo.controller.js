@@ -1,13 +1,11 @@
 import todoModule from './todo.module';
-import { URLS } from '../constants';
-import localStorageService from '../app.service';
 import todoService from './todo.service';
 import listService from '../list/list.service';
 
 export default todoModule
-    .controller('todoController', function todoController($routeParams, $http, localStorageService, todoService, listService) {
+    .controller('todoController', function todoController($routeParams, todoService, listService) {
         let self = this;
-        self.todo;
+        self.todo = todoService.get();
         self.newTitle = '';
         // from router
         self.parentId = $routeParams.listid;
@@ -37,27 +35,6 @@ export default todoModule
             self.newTitle = '';
         };
         
-        
-
-        function InitPage(){
-            if(localStorageService.get('todo')){
-                self.todo = localStorageService.get('todo');
-                todoService.set(self.todo);
-            }
-            else {
-                $http({ method: 'GET', url: URLS.todoURL })
-                .then(function successCallback(response) {
-                    self.todo = response.data;
-                    localStorageService.set('todo', self.todo);
-                    todoService.set(self.todo);
-                })
-                .catch(function errorCallback() {
-                    self.todo = [];
-                    todoService.set(self.todo);
-                });
-            }
-        }   
-        
         function getMarkedLists(){
             self.markedLists = [];
             let unicId = [];
@@ -70,6 +47,5 @@ export default todoModule
                 }
             }
         }
-        InitPage();   
         getMarkedLists();
     });
