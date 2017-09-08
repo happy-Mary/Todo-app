@@ -8,25 +8,27 @@
     <!-- <link rel="shortcut icon" type="image/png" href="../src/img/icons/favicon.png"/>  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 
 <body ng-controller="AppController as ctrl">
-    <div class = 'container'>
+    <div class='container'>
         <aside>
             <div class="nav">
                 <button class='toggle-button'></button>
-                 <!-- Filter todo in view -->
+                <!-- Filter todo in view -->
                 <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
             </div>
-            <div class="folders" ng-click='ctrl.changeActive($event)'>
+            <!--ng-click='ctrl.changeActive($event)'-->
+            <div class="folders">
                 <ul class='cpecial-items tab-bar'>
-                    <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li> 
-                </ul>        
-                <list-group-component data-state='edit'></list-group-component>
-                 <!-- Filter todo in view, remove filter-search it's an example -->
-                <list-comp filter-id = 'null' filter-search='ctrl.query'></list-comp>
+                    <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li>
+                </ul>
+
+                <list-group-component></list-group-component>
+                <!-- Filter todo in view, remove filter-search it's an example -->
+                <list-comp filter-id='null' filter-search='ctrl.query'></list-comp>
             </div>
             <div class="create">
                 <a href=""  ng-click = 'ctrl.modal.open("2")'>Create list</a>
@@ -34,8 +36,8 @@
             </div>
         </aside>
         <header>
-            <h2>{{ctrl.headerTitle}}</h2> 
-            <button class = 'sort-button'></button>
+            <h2>{{ctrl.headerTitle}}</h2>
+            <button class='sort-button'></button>
         </header>
         <main>
             <form action="" ng-submit="ctrl.addToDo($event)">
@@ -49,8 +51,8 @@
                     <label for="addTask"></label>
                 </div>
             </form>
-                <div ng-view></div>
-        </main>         
+            <div ng-view></div>
+        </main>
     </div>
     
     <modal modal-id='2' title="Create new list">
