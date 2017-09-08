@@ -1,13 +1,33 @@
 import todoModule from './todo.module';
 import ToDo from './todo.constructor';
+import { URLS } from '../constants';
+import localStorageService from '../app.service';
 
 export default todoModule
-.service('todoService', function($filter){
+.service('todoService', function($filter, $http, localStorageService,){
     let data = [];
     let itemItem;
     
     function get(){
+        if(localStorageService.get('todo')){
+                data = localStorageService.get('todo');
+        }
+        else {
+            $http({ method: 'GET', url: URLS.todoURL })
+                .then(function successCallback(response) {
+                    data = response.data;
+                    save();
+                })
+                .catch(function errorCallback() {
+                    data = [];
+                    save();
+                });
+        }    
         return data;
+    }
+
+    function save(){
+        localStorageService.set('todo', data);
     }
 
     function getTodo(id) {
@@ -48,7 +68,8 @@ export default todoModule
         getTodo: getTodo,
         delete: deleteTodo,
         create: createTodo,
-        update: updateTodo
+        update: updateTodo,
+        save: save
     };
 
 });
