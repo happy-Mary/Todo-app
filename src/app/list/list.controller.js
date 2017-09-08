@@ -4,46 +4,59 @@ import localStorageService from '../app.service';
 import listService from './list.service';
 
 export default listModule
-    .controller('listController', function listController($http, localStorageService, listService,  modalService) {
+    .controller('listController', function listController($http, localStorageService, listService,  modalService,  routeService) {
         let self = this;
-        self.lists;
+        // self.lists;
         self.openInput = false;
         self.newTitle = '';
 
         // ////////////////////////////////////
-        // service to open modal
+        // service to open modal and getting routeParams
         self.modal = modalService;
+
+        self.routeData = routeService.get();
         // //////////////////////////////////
-
-        self.saveList = function() {
-            self.lists = listService.create(self.newTitle, parentId);
-            localStorageService.set('lists', self.lists);
-            self.openInput = false;
-            self.newTitle = '';
+        self.newList = function(title){
+            listService.create(title);
+            let serviceObj = listService.get();
+            console.log(serviceObj.length);
+            console.log(self.lists.length);
         };
+        // self.saveList = function() {
+        //     self.lists = listService.create(self.newTitle, parentId);
+        //     localStorageService.set('lists', self.lists);
+        //     self.openInput = false;
+        //     self.newTitle = '';
+        // };
 
-        self.deleteList = function(id){
-            self.lists = listService.delete(id);
-            localStorageService.set('lists', self.lists);
-        };
+        // self.deleteList = function(id){
+        //     self.lists = listService.delete(id);
+        //     localStorageService.set('lists', self.lists);
+        // };
 
-        self.rewriteList = function(id) {
-            self.openInput = true;
-            listService.get(id);
-        };
+        // self.rewriteList = function(id) {
+        //     self.openInput = true;
+        //     listService.get(id);
+        // };
 
-        self.changeList = function(){
-            self.lists = listService.update(self.newTitle);
-            localStorageService.set('lists', self.lists);
-            self.openInput = false;
-            self.newTitle = '';
-        };
+        // self.changeList = function(){
+        //     self.lists = listService.update(self.newTitle);
+        //     localStorageService.set('lists', self.lists);
+        //     self.openInput = false;
+        //     self.newTitle = '';
+        // };
         
 
         function InitPage(){
             if(localStorageService.get('lists')) {
-                self.lists = localStorageService.get('lists');
-                listService.set(self.lists);
+                // self.lists = localStorageService.get('lists');
+                // listService.set(self.lists);
+
+                let data = localStorageService.get('lists');
+                listService.set(data);
+        
+                self.lists = listService.get();
+                console.log('got service data');
             } else {
                 $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
