@@ -8,14 +8,10 @@ export default listFormModule
 
     self.data = {title: ''};
 
-    self.addList = function(title){
-        console.log(title);
+    self.addList = function(title) {
         listService.create(title);
         modalService.close();
     };
 
     self.editList = function(){console.log('editing list submit');};
-
-    // change ng-submit on form
-    // call localStorage service from listService
 });
