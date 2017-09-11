@@ -43,7 +43,7 @@ export default todoModule
 
                 if(self.todo[i].marked===true && !unicId.includes(id)){
                     unicId.push(id);
-                    self.markedLists.push(listService.get(id));
+                    // self.markedLists.push(listService.get(id));
                 }
             }
         }

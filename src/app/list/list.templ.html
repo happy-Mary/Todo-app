@@ -1,12 +1,12 @@
 
 <ul class = 'lists tab-bar'>
         <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId}'  ng-class="($ctrl.routeData.listid==list.id) ? 'active-list' : '' ">
-            <a href='#!/lists/{{list.id}}'>{{list.title}} {{$ctrl.lists.length}}
+            <a href='#!/lists/{{list.id}}'>{{list.title}}
                 <span class='todocount' ng-if='list.todoLists.length>0'>{{list.todoLists.length}}</span>
             </a>
             <div class="buttons">
-                <a ng-click='$ctrl.modal.open(3)'></a>
-                <a ng-click='$ctrl.newList("new")'></a>
+                <a ng-click='$ctrl.handleEdit(list)'></a>
+                <a ng-click=''></a>
             </div>
         </li>
     </ul>
