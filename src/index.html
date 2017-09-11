@@ -27,13 +27,14 @@
                     </li>
                 </ul>
 
-                <list-group-component></list-group-component>
+                <list-group-component
+                    onEdit="$ctrl.handleEdit(list)"></list-group-component>
                 <!-- Filter todo in view, remove filter-search it's an example -->
                 <list-comp filter-id='null' filter-search='ctrl.query'></list-comp>
             </div>
             <div class="create">
-                <a href=""  ng-click = 'ctrl.modal.open("2")'>Create list</a>
-                <a href="" ng-click = 'ctrl.modal.open("1")'>Create folder</a>
+                <a href=""  ng-click = 'ctrl.modal.open("add-list")'>Create list</a>
+                <a href="" ng-click = 'ctrl.modal.open("add-folder")'>Create folder</a>
             </div>
         </aside>
         <header>
@@ -56,14 +57,14 @@
         </main>
     </div>
     
-    <modal modal-id='2' title="Create new list">
+    <modal modal-id='add-list' title="Create new list">
         <list-form state="create"></list-form>
     </modal>
-    <modal modal-id='1' title="Create new folder">
+    <modal modal-id='add-folder' title="Create new folder">
         <folder-form state="create"></folder-form>
     </modal>
-    <modal modal-id='3' title="Edit list">
-            
+    <modal modal-id='edit-list' title="Edit list">
+        <list-form state="edit" data='$ctrl.activeList'></list-form>
     </modal>
     <!-- <modal title="Edit folder">
         

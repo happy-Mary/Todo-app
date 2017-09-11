@@ -8,5 +8,5 @@ export default modalModule
             modalId: '@' 
         },
         template: require('./modal.templ.html'),
-        controller: 'modalController'
+        controller: 'modalController',
     });
