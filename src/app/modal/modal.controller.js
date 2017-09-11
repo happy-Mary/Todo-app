@@ -12,14 +12,4 @@ export default modalModule
 
         modalService.set(self.modalOptions);
         
-
-
-        // self.closeModal = function(){
-        // 	self.open = false;
-        // 	console.log('sss');
-        // };
-        // self.openModal = function(){
-        // 	self.open = true;
-        // };
-
     });

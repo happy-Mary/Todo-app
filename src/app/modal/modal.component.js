@@ -5,8 +5,7 @@ export default modalModule
         transclude: true,
         bindings: {
             title: '@',
-            modalId: '@'
-            // close: '&onClose'      
+            modalId: '@' 
         },
         template: require('./modal.templ.html'),
         controller: 'modalController'
