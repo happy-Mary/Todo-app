@@ -6,21 +6,18 @@ import listService from './list.service';
 export default listModule
     .controller('listController', function listController($http, localStorageService, listService,  modalService,  routeService) {
         let self = this;
-        // self.lists;
+        self.lists;
         self.openInput = false;
         self.newTitle = '';
 
         // ////////////////////////////////////
         // service to open modal and getting routeParams
         self.modal = modalService;
-
         self.routeData = routeService.get();
         // //////////////////////////////////
         self.newList = function(title){
             listService.create(title);
             let serviceObj = listService.get();
-            console.log(serviceObj.length);
-            console.log(self.lists.length);
         };
         // self.saveList = function() {
         //     self.lists = listService.create(self.newTitle, parentId);
@@ -49,14 +46,8 @@ export default listModule
 
         function InitPage(){
             if(localStorageService.get('lists')) {
-                // self.lists = localStorageService.get('lists');
-                // listService.set(self.lists);
-
-                let data = localStorageService.get('lists');
-                listService.set(data);
-        
-                self.lists = listService.get();
-                console.log('got service data');
+                self.lists = localStorageService.get('lists');
+                listService.set(self.lists);
             } else {
                 $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
@@ -66,7 +57,6 @@ export default listModule
                 })
                 .catch(function errorCallback() {
                     console.log("request FAILED");
-                    // self.lists = require('../../app-data/lists.json');
                     self.lists = [];
                     localStorageService.set('lists', self.lists);
                     listService.set(self.lists);
