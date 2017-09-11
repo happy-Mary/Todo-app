@@ -1,8 +1,8 @@
-<div class="modal-wrapper" ng-if="$ctrl.modalOptions.open && $ctrl.modalOptions.id == $ctrl.modalId">
+<div class="modal-wrapper" ng-show="$ctrl.open">
 	<div class = "modal">
 		<h2>{{$ctrl.title}}</h2>
 		<div ng-transclude>
-
+			<!-- type of modal component here -->
 		</div>
 	</div>
 </div>

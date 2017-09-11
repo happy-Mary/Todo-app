@@ -17,6 +17,10 @@ export default listGroupModule
         self.deleteLisGroup = function(id){
             listGroupService.deleteGroup();
         };
+
+        self.handleEdit = function(list) {
+            self.onEdit(list);
+        }
         
     });
 

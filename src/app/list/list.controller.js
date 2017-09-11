@@ -13,16 +13,14 @@ export default listModule
         // service to open modal and getting routeParams
         self.modal = modalService;
         self.routeData = routeService.get();
-            
-
-        self.deleteList = function(id){
-            listService.delete(id);
-            // update LS
-        };
-
-        self.rewriteList = function(id) {
-
-        };
-
         
+        
+        self.newList = function(title) {
+            listService.create(title);
+            console.log(self.lists.length);
+        };
+
+        self.handleEdit = function(list) {
+            self.onEdit(list);
+        }
     });
