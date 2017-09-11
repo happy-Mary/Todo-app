@@ -4,7 +4,6 @@ import List from './list.constructor';
 export default listModule
 .factory('listService', function(){
     let self  = this;
-    self.data = [4, 6, 7];
     // let itemItem;
     function getLists(){
         return self.data;
@@ -27,14 +26,10 @@ export default listModule
     }
 
     function createList(title, id){
-        // console.log(`new list TITLE: ${title}`);
-        // console.log(self.data.length);
-        // console.log(self.data);
         let list = new List(title, id);
         self.data.push(list);
         // console.log(self.data.length);
         // console.log(self.data);
-       
         // return self.data;
     }
 
@@ -59,7 +54,6 @@ export default listModule
     }
 
     return {
-        // listsServ: self.data,
         set: setLists,
         get: getLists,
         getList: getList,
