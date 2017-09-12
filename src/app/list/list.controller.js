@@ -21,6 +21,15 @@ export default listModule
         };
 
         self.handleEdit = function(list) {
-            self.onEdit(list);
+            console.log('handle list');
+            console.log(list);
+            self.onEdit({item: list});         
         };
+
+        self.$onInit = function() { 
+            self.onEdit = self.onEdit; 
+          };
+
+
+          
     });

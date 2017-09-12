@@ -33,7 +33,7 @@ export default mainModule
                 var listId = urlArray[urlArray.length-1];
                 console.log(self.marked);
                 todoService.create(newTodo, listId, self.marked);
-                localStorageService.set('todo', todoService.get());
+                // localStorageService.set('todo', todoService.get());
                 self.marked = false;
             }
             self.newTodoTitle = '';
@@ -44,13 +44,7 @@ export default mainModule
             (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         };
 
-        // methods for callbacks
-        self.onEdit = function(item) {
-            if(item.type === 'list') {
-                self.activeList = list;
-                modalService.open('edit-list');
-            }
-        };
+        
         // /////////////////////
         self.activeList = null;
         self.activeFolder = null;
@@ -58,13 +52,13 @@ export default mainModule
         self.actions = {
             onEdit: function(item){
                 // editting item
-                if(item.type === 'list') {
+                // if(item.type === 'list') {
                     self.activeList = item;
                     modalService.open('edit-list');
-                } else if(item.type === 'folder'){
-                    self.activeFolder = item;
-                    modalService.open('edit-folder');
-                }
+                // } else if(item.type === 'folder'){
+                    // self.activeFolder = item;
+                    // modalService.open('edit-folder');
+                // }
             },
             // deleting item
             onDelete: function(item){
@@ -83,6 +77,7 @@ export default mainModule
 
             }
         };
+
 
         
 

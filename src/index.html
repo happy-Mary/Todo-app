@@ -21,16 +21,15 @@
                 <span class='toggle-search'></span>
             </div>
             <div class="folders">
-                <ul class='cpecial-items tab-bar'>
+                <ul class='special-items tab-bar'>
                     <li class='marked' ng-class="(ctrl.routeData.listid=='marked') ? 'active-list' : '' ">
                         <a ng-href="#!/lists/marked">избранное</a>
                     </li>
                 </ul>
 
-                <list-group-component
-                    onEdit="$ctrl.handleEdit(list)"></list-group-component>
+                <list-group-component on-edit="ctrl.actions.onEdit(item)"></list-group-component>
                 <!-- Filter todo in view, remove filter-search it's an example -->
-                <list-comp filter-id='null' filter-search='ctrl.query'  onEdit="$ctrl.handleEdit(list)"></list-comp>
+                <list-comp filter-id='null' filter-search='ctrl.query' on-edit='ctrl.actions.onEdit(item)'></list-comp>
             </div>
             <div class="create">
                 <a href=""  ng-click = 'ctrl.modal.open("add-list")'>Create list</a>
@@ -64,7 +63,7 @@
         <folder-form state="create"></folder-form>
     </modal>
     <modal modal-id='edit-list' title="Edit list">
-        <list-form state="edit" data='$ctrl.activeList'></list-form>
+        <list-form state="edit" edit-data='ctrl.activeList'></list-form>
     </modal>
     <!-- <modal title="Edit folder">
         
