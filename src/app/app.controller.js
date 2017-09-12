@@ -44,14 +44,47 @@ export default mainModule
             (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         };
 
-        self.onEdit = function(list) {
+        // methods for callbacks
+        self.onEdit = function(item) {
             if(item.type === 'list') {
                 self.activeList = list;
                 modalService.open('edit-list');
+            }
+        };
+        // /////////////////////
+        self.activeList = null;
+        self.activeFolder = null;
+
+        self.actions = {
+            onEdit: function(item){
+                // editting item
+                if(item.type === 'list') {
+                    self.activeList = item;
+                    modalService.open('edit-list');
+                } else if(item.type === 'folder'){
+                    self.activeFolder = item;
+                    modalService.open('edit-folder');
+                }
+            },
+            // deleting item
+            onDelete: function(item){
+                
+            },
+            // clicking on item
+            onActivate: function(){
+
+            },
+            // opening folder
+            onToggleExpand: function(){
+
+            },
+            // opening folder menu (custom right click)
+            onContextMenu: function(){
 
             }
+        };
 
-        }
+        
 
     });
 
