@@ -13,7 +13,7 @@ export default mainModule
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
-<<<<<<< HEAD
+
         // getting data for list and listgroups
         listGroupService.register();
         listService.register();
@@ -24,7 +24,7 @@ export default mainModule
         // устанавливаем в главном контроллере объект для работы с роутинг-данными
         self.routeData = {listid: null};
         routeService.set(self.routeData);
-=======
+
         self.abcd='ssa';
         self.focus = false;
         
@@ -32,7 +32,7 @@ export default mainModule
         //     (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
         //     (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         // };
->>>>>>> b10fd62cae206989565679c6eef960be21a0bdd1
+
 
         self.addToDo = function(){
             event.preventDefault();
