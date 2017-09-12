@@ -12,7 +12,6 @@ export default listFormModule
     };
 
     self.editList = function(title){
-        console.log('editing list submit');
         self.editData.title = title;
         listService.update();
         modalService.close();
@@ -25,7 +24,7 @@ export default listFormModule
 
     self.$onChanges = function(changesObj) { 
         let currListVal = changesObj.editData.currentValue;
-        if(currListVal !== undefined && currListVal !== null){
+        if(currListVal !== undefined && currListVal !== null) {
             self.editData = currListVal;
             // for changing title
             self.currData.title = currListVal.title;

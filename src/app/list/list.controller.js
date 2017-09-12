@@ -17,12 +17,9 @@ export default listModule
         
         self.newList = function(title) {
             listService.create(title);
-            console.log(self.lists.length);
         };
 
         self.handleEdit = function(list) {
-            console.log('handle list');
-            console.log(list);
             self.onEdit({item: list});         
         };
 
