@@ -273,10 +273,11 @@ ul {
     }
 
     
+    .folders a{
+        font-family: 'Permanent Marker', sans-serif;
+    }
 
+    main form:focus{
+        background: black;
 
-
-
-.folders a{
-    font-family: 'Permanent Marker', sans-serif;
-}
+    }
