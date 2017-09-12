@@ -7,7 +7,12 @@ function config($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
   $routeProvider
   .when('/lists/:listid', {
-      template: '<todo-comp></todo-comp>'
+      template: '<todo-comp></todo-comp>',
+      resolve: {
+        message: function($route, routeService) {
+          routeService.setlistid($route.current.params.listid);
+        }
+      }
     })
   .otherwise('lists/marked');
 }

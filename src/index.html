@@ -20,19 +20,20 @@
                 <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
             </div>
-            <!--ng-click='ctrl.changeActive($event)'-->
             <div class="folders">
-                <ul class='cpecial-items tab-bar'>
-                    <li class='marked'><a ng-href="#!/lists/marked">избранное</a></li>
+                <ul class='special-items tab-bar'>
+                    <li class='marked' ng-class="(ctrl.routeData.listid=='marked') ? 'active-list' : '' ">
+                        <a ng-href="#!/lists/marked">избранное</a>
+                    </li>
                 </ul>
 
-                <list-group-component></list-group-component>
+                <list-group-component on-edit="ctrl.actions.onEdit(item)"></list-group-component>
                 <!-- Filter todo in view, remove filter-search it's an example -->
-                <list-comp filter-id='null' filter-search='ctrl.query'></list-comp>
+                <list-comp filter-id='null' filter-search='ctrl.query' on-edit='ctrl.actions.onEdit(item)'></list-comp>
             </div>
             <div class="create">
-                <a href="">Create list</a>
-                <a href="">Create folder</a>
+                <a href=""  ng-click = 'ctrl.modal.open("add-list")'>Create list</a>
+                <a href="" ng-click = 'ctrl.modal.open("add-folder")'>Create folder</a>
             </div>
         </aside>
         <header>
@@ -54,6 +55,21 @@
             <div ng-view></div>
         </main>
     </div>
+    
+    <modal modal-id='add-list' title="Create new list">
+        <list-form state="create"></list-form>
+    </modal>
+    <modal modal-id='add-folder' title="Create new folder">
+        <folder-form state="create"></folder-form>
+    </modal>
+    <modal modal-id='edit-list' title="Edit list">
+        <list-form state="edit" edit-data='ctrl.activeList'></list-form>
+    </modal>
+    <!-- <modal title="Edit folder">
+        
+    </modal> -->
+    
+    
 </body>
 
 </html>
