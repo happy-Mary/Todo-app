@@ -37,21 +37,16 @@ export default mainModule
         //     (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
         //     (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
         // };
-            event.preventDefault();
             self.taskFocused = true;
             console.log(self.taskFocused)
-            console.log(event.currentTarget);
             document.querySelector(".newTaskTitle").focus();
         }
 
-        //по-нормальному не хочет работать, поэтому так
-        self.toggleFocus = function(event){
-            event.preventDefault();
+       self.toggleFocus = function(event){
             (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
-            console.log('a' + self.taskFocused)
-            // if(self.taskFocused){
-            //    self.focusAddTask(event);
-            // }
+            if(!self.taskFocused){
+               event.stopPropagation();
+            }
         }
 
 
