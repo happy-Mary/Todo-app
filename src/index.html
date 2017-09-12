@@ -30,7 +30,7 @@
                 <list-group-component
                     onEdit="$ctrl.handleEdit(list)"></list-group-component>
                 <!-- Filter todo in view, remove filter-search it's an example -->
-                <list-comp filter-id='null' filter-search='ctrl.query'></list-comp>
+                <list-comp filter-id='null' filter-search='ctrl.query'  onEdit="$ctrl.handleEdit(list)"></list-comp>
             </div>
             <div class="create">
                 <a href=""  ng-click = 'ctrl.modal.open("add-list")'>Create list</a>

@@ -22,5 +22,5 @@ export default listModule
 
         self.handleEdit = function(list) {
             self.onEdit(list);
-        }
+        };
     });
