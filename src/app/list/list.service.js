@@ -33,7 +33,6 @@ export default listModule
         return self.data;
     }
 
-
     function getList(id) {
         var list;
         self.data.forEach(function(item){
@@ -50,11 +49,8 @@ export default listModule
         save();
     }
 
-    function updateList(id, title){
-        let listItem = getLists(id);
-        listItem.title = title;
+    function updateList(){
         save();
-        return data;
     }
 
     function deleteList(id) {

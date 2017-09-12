@@ -1,5 +1,5 @@
-<form class="modal-content" ng-submit='($ctrl.state==="create") ? $ctrl.addList($ctrl.data.title) : $ctrl.editList()'>
-    <input type="text" name="name" placeholder="List name" required ng-model='$ctrl.data.title'>
+<form class="modal-content" ng-submit='($ctrl.state==="create") ? $ctrl.addList($ctrl.currData.title) : $ctrl.editList($ctrl.currData.title)'>
+    <input type="text" name="name" placeholder="List name" required ng-model='$ctrl.currData.title'>
     <button class="save" type ="submit">Save</button>
-    <button  type ="button" ng-click="$ctrl.modal.close()">Cancel</button>
+    <button  type ="button" ng-click="$ctrl.cancelChanges()">Cancel</button>
 </form>
