@@ -13,6 +13,7 @@ export default mainModule
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
+<<<<<<< HEAD
         // getting data for list and listgroups
         listGroupService.register();
         listService.register();
@@ -23,6 +24,15 @@ export default mainModule
         // устанавливаем в главном контроллере объект для работы с роутинг-данными
         self.routeData = {listid: null};
         routeService.set(self.routeData);
+=======
+        self.abcd='ssa';
+        self.focus = false;
+        
+        // self.focusAddTask = function(){
+        //     (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
+        //     (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
+        // };
+>>>>>>> b10fd62cae206989565679c6eef960be21a0bdd1
 
         self.addToDo = function(){
             event.preventDefault();
@@ -31,7 +41,7 @@ export default mainModule
             if(newTodo){
                 var urlArray = $location.path().split('/');
                 var listId = urlArray[urlArray.length-1];
-                console.log(self.marked);
+                // console.log(self.marked)
                 todoService.create(newTodo, listId, self.marked);
                 // localStorageService.set('todo', todoService.get());
                 self.marked = false;
@@ -39,10 +49,22 @@ export default mainModule
             self.newTodoTitle = '';
          };
            
-        self.focusAddTask = function() {
+        self.focusAddTask = function(event) {
+        //     (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
+        //     (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
+        // };
+            self.taskFocused = true;
+            console.log(self.taskFocused)
+            document.querySelector(".newTaskTitle").focus();
+        }
+
+       self.toggleFocus = function(event){
             (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
-            (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
-        };
+            if(!self.taskFocused){
+               event.stopPropagation();
+            }
+        }
+
 
         
         // /////////////////////
