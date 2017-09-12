@@ -7,40 +7,39 @@ export default listGroupModule
 	.service('listGroupService', function($http, localStorageService){
 		this.data =[];
 		var self = this;
+		self.data =[];
 
-		function setListGroups(data) {
-			self.data = data;
-			save();
-   		}
    		function save(){
    			localStorageService.set('listGroups', self.data);
-   		}
-   		function getListGroups(){
+		   }
+		   
+   		function registerListGroups(){
    			if(localStorageService.get('listGroups')){
           	  self.data = localStorageService.get('listGroups');
-          	  return self.data;
             }
 	        else{
 	             $http({ method: 'GET', url: URLS.listGroupURL })
 	                .then(function successCallback(response) {
 	                    self.data = response.data;
 	                    save();
-	                    return self.data;
-	                 
 	                })
 	                .catch(function errorCallback() {
 	                   self.data =  [];
 	                   save();
-	                   return self.data;
 	                });
 	        }
-	    }
+		}
+
+		function getListGroups(){
+			return self.data;
+		}
+		
    		function getListGroup(id){
    			self.data.forEach(function(group){
    				if(group.id == id){
    					return group;
    				}
-   			})
+   			});
    		}
 
    		function deleteListGroup(id) {
@@ -50,13 +49,20 @@ export default listGroupModule
    		}
 
 		function createListGroup(name){
-			var group = new ListGroup(name);
+			var data = new ListGroup(name);
 			self.data.push(data);
 			save();
 		}
 
+		// function setListGroups(data) {
+		// 	self.data = data;
+		// 	save();
+		//    }
+
+		// registerListGroups();
+
 		return{
-			set: setListGroups,
+			register: registerListGroups,
 			get: getListGroups,
 			create: createListGroup,
 			getGroup: getListGroup,
