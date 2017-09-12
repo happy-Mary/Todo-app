@@ -19,8 +19,6 @@ export default listGroupModule
         };
 
         self.handleEdit = function(item) {
-            console.log('listgroup');
-            console.log(item);
             self.onEdit({item: item});
         };
 
