@@ -60,6 +60,7 @@ export default mainModule
         self.actions = {
             // editting item
             onEdit: function(item) { 
+                console.log(item.type);
                 self.activeItem = item;
                 if(item.type === 'list') {
                     modalService.open('edit-list');

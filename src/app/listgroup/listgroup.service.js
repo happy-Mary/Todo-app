@@ -33,6 +33,10 @@ export default listGroupModule
 		function getListGroups(){
 			return self.data;
 		}
+
+		function updateListGroup(){
+			save();
+		}
 		
    		function getListGroup(id){
    			self.data.forEach(function(group){
@@ -43,7 +47,7 @@ export default listGroupModule
    		}
 
    		function deleteListGroup(id) {
-	        var index = data.findIndex(group => group.id == id);
+	        var index = self.data.findIndex(group => group.id == id);
 	        self.data.splice(index, 1);
 	        save();
    		}
@@ -63,8 +67,11 @@ export default listGroupModule
 			register: registerListGroups,
 			get: getListGroups,
 			create: createListGroup,
+			update: updateListGroup,
+			delete: deleteListGroup,
+			// /////
 			getGroup: getListGroup,
-			deleteGroup: deleteListGroup,
+			
 			save: save
 		};
 	});
