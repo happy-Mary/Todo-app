@@ -4,6 +4,6 @@ export default class ListGroup {
     constructor(title) {
 		this.name = title;
 		this.id = generateId();
-		// this.lists = [];
+		this.type = 'folder';
 	}
 }

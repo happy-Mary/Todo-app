@@ -22,6 +22,11 @@ export default listFormModule
         modalService.close();
     };
 
+    self.deleteList = function() {
+        listService.delete(self.editData.id);
+        modalService.close();
+    };
+
     self.$onChanges = function(changesObj) { 
         let currListVal = changesObj.editData.currentValue;
         if(currListVal !== undefined && currListVal !== null) {
