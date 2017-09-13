@@ -3,7 +3,11 @@ import listModule from './list.module';
 export default listModule
     .component('listComp', {
         bindings: {
-            listsTitle: '@'
+            filterId: '<',
+            // remove to TODO-search router
+            filterSearch: '<',
+            onEdit: '&',
+            onDelete: '&'
         },
         controller: 'listController',
         template: require('./list.templ.html')

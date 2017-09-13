@@ -1,50 +1,75 @@
-import listModule from './todo.module';
+import todoModule from './todo.module';
 import ToDo from './todo.constructor';
+import { URLS } from '../constants';
+import localStorageService from '../app.service';
 
-export default listModule
-.service('todoService', function($filter){
+export default todoModule
+.service('todoService', function($filter, $http, localStorageService,){
     let data = [];
     let itemItem;
     
-    function getLists(id) {
+    function get(){
+        if(localStorageService.get('todo')){
+                data = localStorageService.get('todo');
+        }
+        else {
+            $http({ method: 'GET', url: URLS.todoURL })
+                .then(function successCallback(response) {
+                    data = response.data;
+                    save();
+                })
+                .catch(function errorCallback() {
+                    data = [];
+                    save();
+                });
+        }    
+        return data;
+    }
+
+    function save(){
+        localStorageService.set('todo', data);
+    }
+
+    function getTodo(id) {
         // to filter data on route ???
         // itemItem = $filter("filter")(data, {id:id});
         data.forEach(function(item){
             if(item.id == id){
-               console.log(item);
                itemItem = item;
             }
         });
     }
 
-    function updateList(title){
+    function updateTodo(title){
         itemItem.title = title;
         return data;
     }
 
-    function setLists(obj) {
+    function setTodo(obj) {
         data = obj;
     }
 
-    function deleteList(id) {
+    function deleteTodo(id) {
         let index = data.findIndex(x => x.id==id);
         data.splice(index, 1);
         return data;
     }
 
-    function createList(title, id){
-        let list = new ToDo(title, id);
-        data.push(list);
-        return data;
+    function createTodo(title, listId, marked){
+        let todo = new ToDo(title, listId, marked);
+        data.push(todo);
+        return todo;
         // call constructor, save to data, return data
     }
 
     return {
-        set: setLists,
-        get: getLists,
-        delete: deleteList,
-        create: createList,
-        update: updateList
+        set: setTodo,
+        get: get,
+        getTodo: getTodo,
+        delete: deleteTodo,
+        create: createTodo,
+        update: updateTodo,
+        save: save
     };
 
 });

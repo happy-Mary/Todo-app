@@ -1,8 +1,9 @@
 const URLS = {
-    listGroupURL: 'https://api.myjson.com/bins/dx1e5',
-    listURL: 'https://api.myjson.com/bins/eigzx',
-    todoURL: 'https://api.myjson.com/bins/1cg6h9',
+    listGroupURL: 'https://api.myjson.com/bins/14czlx',
+    listURL: 'https://api.myjson.com/bins/1hgix1',
+    todoURL: 'https://api.myjson.com/bins/izizp',
     subtaskURL: 'subtaskurl.json'
 };
 
 export { URLS };
+
