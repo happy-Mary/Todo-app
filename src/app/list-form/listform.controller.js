@@ -34,6 +34,6 @@ export default listFormModule
             // for changing title
             self.currData.title = currListVal.title;
         }
-        
     };
+    
 });
