@@ -22,14 +22,13 @@ export default mainModule
         self.modal = modalService;
 
         // устанавливаем в главном контроллере объект для работы с роутинг-данными
+        // after ui-router change it and remove the RouteService
         self.routeData = {listid: null};
         routeService.set(self.routeData);
 
-        
         // focusing input for adding todo
         self.focusAddTask = function(event) {
             self.taskFocused = true;
-            console.log(self.taskFocused)
             document.querySelector(".newTaskTitle").focus();
         };
 
@@ -56,23 +55,26 @@ export default mainModule
          };
  
         // functions for manipulating list, folders, ?todo? data
-        self.activeList = null;
-        self.activeFolder = null;
+        self.activeItem = null;
 
         self.actions = {
-            onEdit: function(item){
-                // editting item 
+            // editting item
+            onEdit: function(item) { 
+                self.activeItem = item;
                 if(item.type === 'list') {
-                    self.activeList = item;
                     modalService.open('edit-list');
                 } else if(item.type === 'folder'){
-                    self.activeFolder = item;
                     modalService.open('edit-folder');
                 }
             },
             // deleting item
-            onDelete: function(item){
-                
+            onDelete: function(item) {
+                self.activeItem = item;
+                 if(item.type === 'list') {
+                    modalService.open('delete-list');
+                } else if(item.type === 'folder'){
+                    modalService.open('delete-folder');
+                }
             },
             // clicking on item
             onActivate: function(){
