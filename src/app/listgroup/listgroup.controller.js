@@ -22,8 +22,13 @@ export default listGroupModule
             self.onEdit({item: item});
         };
 
+        self.handleDelete = function(item) {
+            self.onDelete({item: item});
+        };
+
         self.$onInit = function() { 
-            self.onEdit = self.onEdit; 
+            self.onEdit = self.onEdit;
+            self.onDelete = self.onDelete; 
         };
         
     });
