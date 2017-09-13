@@ -5,6 +5,8 @@ export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
         var self = this;
         self.listGroups = listGroupService.get();
+
+        self.editMenuActive = false;
         
         self.openFolder = function(event) {
             let folderLink = angular.element(event.currentTarget);
@@ -19,11 +21,25 @@ export default listGroupModule
         };
 
         self.handleEdit = function(item) {
+            self.editMenuActive = false;
             self.onEdit({item: item});
         };
 
         self.handleDelete = function(item) {
+            self.editMenuActive = false;
             self.onDelete({item: item});
+        };
+
+        self.clickM = function(){
+            console.log('clicked item');
+        };
+
+        self.toggleMenuEdit = function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            // let menuEditLink = angular.element(event.currentTarget);
+            // console.log(menuEditLink.parent().find('.edit-folder-menu'));
+            self.editMenuActive = !self.editMenuActive;
         };
 
         self.$onInit = function() { 

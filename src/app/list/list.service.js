@@ -71,6 +71,7 @@ export default listModule
         create: createList,
         delete: deleteList,
         get: getLists,
+        // // //
         getList: getList,
         save: save    
     };
