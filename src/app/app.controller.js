@@ -6,7 +6,7 @@ import localStorageService from './app.service';
 import routeServicee from './route.service';
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, $location, listGroupService, listService, localStorageService, modalService, routeService) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, routeService) {
 
         let self = this;
         self.headerTitle = 'current list title';
@@ -25,62 +25,50 @@ export default mainModule
         self.routeData = {listid: null};
         routeService.set(self.routeData);
 
-        self.abcd='ssa';
-        self.focus = false;
         
-        // self.focusAddTask = function(){
-        //     (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
-        //     (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
-        // };
-
-
-        self.addToDo = function(){
-            event.preventDefault();
-            var newTodo = self.newTodoTitle.trim();
-
-            if(newTodo){
-                var urlArray = $location.path().split('/');
-                var listId = urlArray[urlArray.length-1];
-                // console.log(self.marked)
-                todoService.create(newTodo, listId, self.marked);
-                // localStorageService.set('todo', todoService.get());
-                self.marked = false;
-            }
-            self.newTodoTitle = '';
-         };
-           
+        // focusing input for adding todo
         self.focusAddTask = function(event) {
-        //     (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
-        //     (self.taskFocused) ? document.querySelector(".newTaskTitle").focus() : document.querySelector(".newTaskTitle").blur();
-        // };
             self.taskFocused = true;
             console.log(self.taskFocused)
             document.querySelector(".newTaskTitle").focus();
-        }
+        };
 
        self.toggleFocus = function(event){
             (self.taskFocused) ? self.taskFocused = false : self.taskFocused = true;
             if(!self.taskFocused){
                event.stopPropagation();
             }
-        }
+        };
 
+        // adding todo
+        self.addToDo = function(){
+            event.preventDefault();
+            var newTodo = self.newTodoTitle.trim();
 
-        
-        // /////////////////////
+            if(newTodo){
+                let routeData = routeService.get();
+                let listId = routeData.listid;
+                todoService.create(newTodo, listId, self.marked);
+                // localStorageService.set('todo', todoService.get());
+                self.marked = false;
+            }
+            self.newTodoTitle = '';
+         };
+ 
+        // functions for manipulating list, folders, ?todo? data
         self.activeList = null;
         self.activeFolder = null;
 
         self.actions = {
             onEdit: function(item){
-                // editting item
-                // if(item.type === 'list') {
+                // editting item 
+                if(item.type === 'list') {
                     self.activeList = item;
                     modalService.open('edit-list');
-                // } else if(item.type === 'folder'){
-                    // self.activeFolder = item;
-                    // modalService.open('edit-folder');
-                // }
+                } else if(item.type === 'folder'){
+                    self.activeFolder = item;
+                    modalService.open('edit-folder');
+                }
             },
             // deleting item
             onDelete: function(item){
