@@ -1,22 +1,16 @@
 import todoModule from './todo.module';
-import { URLS } from '../constants';
-import localStorageService from '../app.service';
 import todoService from './todo.service';
+import listService from '../list/list.service';
 
 export default todoModule
-    .controller('todoController', function todoController($http, localStorageService, todoService) {
+    .controller('todoController', function todoController($routeParams, todoService, listService) {
         let self = this;
-        self.todo;
-        self.openInput = false;
+        self.todo = todoService.get();
         self.newTitle = '';
-        let parentId = 1;
+        // from router
+        self.parentId = $routeParams.listid;
 
-        self.filterData = function(item) {
-            if(item.listId === parentId){
-                return item;
-            }
-        };
-
+        // add marked ang change ading todo
         self.saveTask = function() {
             self.todo = todoService.create(self.newTitle, parentId);
             localStorageService.set('todo', self.todo);
@@ -41,26 +35,17 @@ export default todoModule
             self.newTitle = '';
         };
         
+        function getMarkedLists(){
+            self.markedLists = [];
+            let unicId = [];
+            for(var i = 0; i<self.todo.length; i++) {
+                let id = self.todo[i].listId;
 
-        function InitPage(){
-            if(localStorageService.get('todo')){
-                self.todo = localStorageService.get('todo');
-                todoService.set(self.todo);
+                if(self.todo[i].marked===true && !unicId.includes(id)){
+                    unicId.push(id);
+                    // self.markedLists.push(listService.get(id));
+                }
             }
-            else {
-                $http({ method: 'GET', url: URLS.todoURL })
-                .then(function successCallback(response) {
-                    self.todo = response.data;
-                    localStorageService.set('todo', self.todo);
-                    todoService.set(self.todo);
-                })
-                .catch(function errorCallback() {
-                    // self.todo = require('../../app-data/todo.json');
-                    self.todo = [];
-                    todoService.set(self.todo);
-                });
-            }
-    }     
-    InitPage();   
-
+        }
+        getMarkedLists();
     });

@@ -1,0 +1,14 @@
+<section class = 'form-folder'>
+		<form class="modal-content editing"
+			 ng-submit='($ctrl.state==="create") ? $ctrl.addFolder($ctrl.currData.title) : $ctrl.editFolder($ctrl.currData.title)'
+			 ng-show='$ctrl.state !== "delete"'>
+			<input type="text" name="name" placeholder="Folder name" required ng-model='$ctrl.currData.title'>
+			<button class="save" type ="submit">Save</button>
+			<button  type ="button" ng-click="$ctrl.cancelChanges()">Cancel</button>
+		</form>
+		<div ng-show='$ctrl.state === "delete"' class='deleting'>
+			<p>Are you sure? <span>{{$ctrl.editData.name}}</span> will be ungrouped.</p>
+			<button  class="save" ng-click="$ctrl.deleteFolder()">delete</button>
+			<button ng-click="$ctrl.cancelChanges()">cancel</button>
+		</div>                                       
+	</section>

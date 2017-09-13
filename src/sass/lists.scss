@@ -1,0 +1,41 @@
+ul.lists {
+    >li {
+        padding-left: 20px;
+        position: relative;
+    }
+    a {
+        background: url('../img/icons/list.png') no-repeat 10px center;
+        font-size: .8rem;
+        .todocount {
+            float: right;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            opacity: .6;
+        }       
+    }
+    div.buttons {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-block;
+        margin:  0 5px;
+        display: none;
+        a {
+            padding: 0;
+            display: inline-block;
+            height: 40px;
+            width: 30px;
+            text-align: center;
+            background-position: center;
+            opacity: .5;
+            &:hover {opacity: 1;}
+           &:first-child {background-image: url('../img/icons/edit.png')};
+           &:last-child {background-image: url('../img/icons/rubbish.png')};
+        }
+    }
+    // .active-list {background-color: lightblue;}
+    .active-list .buttons {display: block;}
+    .active-list>a {padding-right: 65px;}
+
+}
+

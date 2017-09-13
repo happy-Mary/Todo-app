@@ -1,52 +1,79 @@
 import listModule from './list.module';
 import List from './list.constructor';
+import { URLS } from '../constants';
+import localStorageService from '../app.service';
 
 export default listModule
-.service('listService', function($filter){
-    let data = [];
-    let itemItem;
-    
-    function getLists(id) {
-        // to filter data on route ???
-        // itemItem = $filter("filter")(data, {id:id});
-        data.forEach(function(item){
+.service('listService', function($http, localStorageService){
+    let self  = this;
+    self.data;
+
+    // ? change to let save = , remove from return
+    function save(){
+        localStorageService.set('lists', self.data);
+    }
+
+    function registerLists(){
+       if(localStorageService.get('lists')){
+            self.data = localStorageService.get('lists');
+        }
+        else{
+            $http({ method: 'GET', url: URLS.listURL })
+                .then(function successCallback(response) {
+                    self.data = response.data;
+                    save();
+                })
+                .catch(function errorCallback() {
+                    self.data =  [];
+                    save();
+                });
+        }
+    }
+
+    function getLists(){
+        return self.data;
+    }
+
+    function getList(id) {
+        var list;
+        self.data.forEach(function(item){
             if(item.id == id){
-               console.log(item);
-               itemItem = item;
+                list = item;
             }
         });
-    }
-
-    function updateList(title){
-        itemItem.title = title;
-        return data;
-    }
-
-    function setLists(obj) {
-        data = obj;
-    }
-
-    function deleteList(id) {
-        let index = data.findIndex(x => x.id==id);
-        data.splice(index, 1);
-        return data;
+        return list;
     }
 
     function createList(title, id){
-        console.log(`new list TITLE: ${title}`);
         let list = new List(title, id);
-        data.push(list);
-        return data;
-        // call constructor, save to data, return data
+        self.data.push(list);
+        save();
     }
 
-    return {
-        set: setLists,
-        get: getLists,
-        delete: deleteList,
-        create: createList,
-        update: updateList
-    };
+    function updateList(){
+        save();
+    }
 
+    function deleteList(id) {
+        let index = self.data.findIndex(x => x.id==id);
+        self.data.splice(index, 1);
+        save();
+    }
+
+     // function setLists(obj) {
+    //     self.data = obj;
+    //     save();
+    // }
+
+    return {
+        register: registerLists,
+        update: updateList,
+        create: createList,
+        delete: deleteList,
+        get: getLists,
+        // // //
+        getList: getList,
+        save: save    
+    };
 });
 
