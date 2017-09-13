@@ -27,9 +27,12 @@
                     </li>
                 </ul>
 
-                <list-group-component on-edit="ctrl.actions.onEdit(item)"></list-group-component>
+                <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete = "ctrl.actions.onDelete(item)"></list-group-component>
                 <!-- Filter todo in view, remove filter-search it's an example -->
-                <list-comp filter-id='null' filter-search='ctrl.query' on-edit='ctrl.actions.onEdit(item)'></list-comp>
+                <list-comp filter-id='null' filter-search='ctrl.query' 
+                           on-edit = 'ctrl.actions.onEdit(item)'
+                           on-delete = 'ctrl.actions.onDelete(item)'>
+                </list-comp>
             </div>
             <div class="create">
                 <a href=""  ng-click = 'ctrl.modal.open("add-list")'>Create list</a>
@@ -56,20 +59,27 @@
         </main>
     </div>
     
-    <modal modal-id='add-list' title="Create new list">
-        <list-form state="create"></list-form>
-    </modal>
-    <modal modal-id='add-folder' title="Create new folder">
-        <folder-form state="create"></folder-form>
-    </modal>
-    <modal modal-id='edit-list' title="Edit list">
-        <list-form state="edit" edit-data='ctrl.activeList'></list-form>
-    </modal>
-    <!-- <modal title="Edit folder">
+    <section class="modals">
+        <modal modal-id='add-list' title="Create new list">
+            <list-form state="create"></list-form>
+        </modal>
+        <modal modal-id='add-folder' title="Create new folder">
+            <folder-form state="create"></folder-form>
+        </modal>
+        <modal modal-id='edit-list' title="Edit list">
+            <list-form state="edit" edit-data='ctrl.activeItem'></list-form>
+        </modal>
+        <!-- <modal title="Edit folder">
+            <folder-form state="create"></folder-form>
+        </modal> -->
+        <modal modal-id='delete-list' title='Delete list'>
+            <list-form state="delete" edit-data='ctrl.activeItem'></list-form>
+        </modal>
+        <!-- <modal modal-id='delete-folder' title="Delete folder">
+            <folder-form state="delete"></folder-form>
+        </modal> -->
+    </section>
         
-    </modal> -->
-    
-    
 </body>
 
 </html>
