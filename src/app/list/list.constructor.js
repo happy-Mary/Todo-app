@@ -4,7 +4,7 @@ export default class List {
 	constructor(title, listGroupId){
 		this.id = generateId();
 		this.title = title;
-		this.listGroupId = listGroupId;
-		this.todoLists = [];
+		this.listGroupId = listGroupId || null;
+		this.type = 'list';
 	}
 }

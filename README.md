@@ -13,21 +13,21 @@ npm test
    - generate JSON and add url-links to constants.js
    - write service for LocalStorage
    
-2. branch listgroup-task (Masha Chernyak) -in progress
+2. listgroup-task (Masha Chernyak) -in progress
 
-3. branch lists-task (Masha Shklovskaya) -ready
+3. lists-task (Masha Shklovskaya) -ready
 
-4. branch checkdata-task (Masha Chernyak) -ready
+4. checkdata-task (Masha Chernyak) -ready
    
-5. branch todo-task (Masha Shklovskaya) -ready
+5. todo-task (Masha Chernyak) -in progress
 
-6. branch listService-task (Masha Shklovskaya) -in progress 
+6. listService-task (Masha Shklovskaya) -in progress 
 
-8. branch karma-task (Masha Shklovskaya) -in progress
+8. karma-task (Masha Shklovskaya) -in progress
 
-9. branch header-task (Masha Shklovskaya)
+9. header-task (Masha Shklovskaya) -ready
    
-10. branch router-task (Masha Shklovskaya)
+10. router-task (Masha Shklovskaya)
    - app.config.js 
 	
 
