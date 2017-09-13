@@ -57,16 +57,14 @@ export default listGroupModule
 		// function setListGroups(data) {
 		// 	self.data = data;
 		// 	save();
-		//    }
+		// }
 
-		// registerListGroups();
-
-		return{
+		return {
 			register: registerListGroups,
 			get: getListGroups,
 			create: createListGroup,
 			getGroup: getListGroup,
 			deleteGroup: deleteListGroup,
 			save: save
-		}
+		};
 	});

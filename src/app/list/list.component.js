@@ -6,7 +6,8 @@ export default listModule
             filterId: '<',
             // remove to TODO-search router
             filterSearch: '<',
-            onEdit: '&'
+            onEdit: '&',
+            onDelete: '&'
         },
         controller: 'listController',
         template: require('./list.templ.html')

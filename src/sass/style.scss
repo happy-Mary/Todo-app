@@ -34,6 +34,20 @@ input:focus {
     border: none;
 }
 
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: 2px solid green;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 ul {
     list-style-type: none;
     -webkit-padding-start: 0px;
@@ -270,14 +284,4 @@ ul {
             .marked-task input:checked+label {background-image: url('../img/icons/star-red.png');}
 
         }
-    }
-
-    
-    .folders a{
-        font-family: 'Permanent Marker', sans-serif;
-    }
-
-    main form:focus{
-        background: black;
-
     }

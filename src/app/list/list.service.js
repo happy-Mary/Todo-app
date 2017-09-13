@@ -8,6 +8,7 @@ export default listModule
     let self  = this;
     self.data;
 
+    // ? change to let save = , remove from return
     function save(){
         localStorageService.set('lists', self.data);
     }
@@ -57,7 +58,6 @@ export default listModule
         let index = self.data.findIndex(x => x.id==id);
         self.data.splice(index, 1);
         save();
-        return self.data;
     }
 
      // function setLists(obj) {
@@ -65,16 +65,13 @@ export default listModule
     //     save();
     // }
 
-  
-    // registerLists();
-
     return {
         register: registerLists,
+        update: updateList,
+        create: createList,
+        delete: deleteList,
         get: getLists,
         getList: getList,
-        delete: deleteList,
-        create: createList,
-        update: updateList,
         save: save    
     };
 });
