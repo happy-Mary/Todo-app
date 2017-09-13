@@ -6,7 +6,7 @@
         </a>
         <ul class = 'edit-folder-menu' ng-show='$ctrl.editMenuActive'>
             <li ng-click='$ctrl.handleEdit(folder)'>Edit</li>
-            <li ng-click='$ctrl.handleDelete(folder)'>Ungroup</li>
+            <li ng-click='$ctrl.handleDelete(folder)'>Ungroup folder</li>
         </ul>
         <list-comp filter-id='folder.id' on-edit="$ctrl.handleEdit(item)"  on-delete="$ctrl.handleDelete(item)"></list-comp>
     </li>
