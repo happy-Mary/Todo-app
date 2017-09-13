@@ -3,7 +3,6 @@
         <a href="" class='folder-item' ng-click='$ctrl.openFolder($event)'>{{item.name}}
 			<span class='listgroup-icon'></span>
 		</a>
-        <list-comp filter-id='item.id' on-edit="$ctrl.handleEdit(item)"></list-comp>
-        <!-- <list-comp filter-id='item.id' on-edit="$ctrl.onEdit(item)"></list-comp> -->
+        <list-comp filter-id='item.id' on-edit="$ctrl.handleEdit(item)"  on-delete="$ctrl.handleDelete(item)"></list-comp>
     </li>
 </ul>
