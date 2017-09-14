@@ -32,13 +32,6 @@ export default listModule
             self.onDelete = self.onDelete;
         };
 
-        self.$onChanges = function(changesObj) { 
-            console.log(changesObj);
-            
-        };
-
         
-
-
           
     });
