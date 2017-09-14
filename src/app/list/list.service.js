@@ -60,6 +60,13 @@ export default listModule
         save();
     }
 
+    function changeParentFolder(currId, newId){
+        self.data.forEach(function(list){
+            if (list.listGroupId === currId) list.listGroupId = newId;
+        });
+        save();
+    }
+
      // function setLists(obj) {
     //     self.data = obj;
     //     save();
@@ -71,6 +78,7 @@ export default listModule
         create: createList,
         delete: deleteList,
         get: getLists,
+        changeParentFolder: changeParentFolder,
         // // //
         getList: getList,
         save: save    

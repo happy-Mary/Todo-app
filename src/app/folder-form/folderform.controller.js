@@ -26,11 +26,7 @@ export default folderFormModule
 
     self.deleteFolder = function() {
         listGroupService.delete(self.editData.id);
-        // change lists id to null
-        let lists = listService.get();
-        lists.forEach(function(list){
-            if (list.listGroupId === self.editData.id) list.listGroupId = null;
-        });
+        listService.changeParentFolder(self.editData.id, null);
         modalService.close();
     };
 
