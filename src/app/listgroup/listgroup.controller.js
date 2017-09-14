@@ -37,8 +37,9 @@ export default listGroupModule
         self.toggleMenuEdit = function(event){
             event.preventDefault();
             event.stopPropagation();
-            // let menuEditLink = angular.element(event.currentTarget);
-            // console.log(menuEditLink.parent().find('.edit-folder-menu'));
+            // change showing sub-menu
+            let menuEditLink = angular.element(event.currentTarget);
+            console.log(menuEditLink.parent().find('.edit-folder-menu'));
             self.editMenuActive = !self.editMenuActive;
         };
 
