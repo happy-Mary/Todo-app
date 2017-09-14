@@ -13,9 +13,9 @@
 
 <body ng-controller="AppController as ctrl">
     <div class='container'>
-        <aside>
+        <aside ng-class='{"sidebar-close" : !ctrl.sidebarOpen, "": ctrl.sidebarOpen}'>
             <div class="nav">
-                <button class='toggle-button'></button>
+                <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
                 <!-- Filter todo in view -->
                 <input type="text" ng-model='ctrl.query'>
                 <span class='toggle-search'></span>
@@ -23,7 +23,7 @@
             <div class="folders">
                 <ul class='special-items tab-bar'>
                     <li class='marked' ng-class="(ctrl.routeData.listid=='marked') ? 'active-list' : '' ">
-                        <a ng-href="#!/lists/marked">избранное</a>
+                        <a ng-href="#!/lists/marked"><span>избранное</span></a>
                     </li>
                 </ul>
 
@@ -35,8 +35,8 @@
                 </list-comp>
             </div>
             <div class="create">
-                <a href=""  ng-click = 'ctrl.modal.open("add-list")'>Create list</a>
-                <a href="" ng-click = 'ctrl.modal.open("add-folder")'>Create folder</a>
+                <a href=""  ng-click = 'ctrl.modal.open("add-list")'><span>Create list</span></a>
+                <a href="" ng-click = 'ctrl.modal.open("add-folder")'><span>Create folder</span></a>
             </div>
         </aside>
         <header>

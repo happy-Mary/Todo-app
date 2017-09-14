@@ -69,13 +69,26 @@ ul {
         width: 300px;
         height:100%;
         position: relative;
+        &.sidebar-close {
+            width: 50px;
+        }
+        &.sidebar-close+header {margin-left: 50px;}
+        &.sidebar-close ~ main {margin-left: 50px;}
+
+        &.sidebar-close {
+            .nav>input,
+            .nav>span,
+            .listgroup,
+            .lists,
+            .marked span,
+            .create span {display: none;}
+             
+        }
 
         .tab-bar {
             font-weight: bold;
-            
+            &>li {min-height: 40px;}
             li {
-                // min-height: 40px;
-               
                 border-bottom: 1px solid #778899;
                 a {
                     display: block;
@@ -83,12 +96,14 @@ ul {
                     padding-left: 45px;
                     color: #696969;
                     text-transform: uppercase;
+                 
                 }        
             }
         } 
 
         .marked a{
             background: url('../img/icons/bookmark-button.png') no-repeat 10px center;
+            height: 40px;
         }
 
         .nav {
@@ -107,6 +122,7 @@ ul {
             }
             .toggle-button {
                 background-image: url('../img/icons/menu-button.png');
+                width: 50px;
             }
 
             .toggle-search {
@@ -121,7 +137,7 @@ ul {
             input:active,
             input:focus {
                 float: left;
-                width: 220px;
+                width: 210px;
                 outline: none;
                 border: none;
                 background-color: transparent;
@@ -138,6 +154,7 @@ ul {
 
         .folders {
             overflow-y: auto;
+            overflow-x: hidden;
             height: -o-calc(100% - (40px + 80px));
             height: -moz-calc(100% - (40px + 80px));
             height: -webkit-calc(100% - (40px + 80px));
@@ -188,12 +205,12 @@ ul {
         }
     }
 
-    main{
+    main {
         margin-left: 300px;
         padding: 10px;
         height: 100%;
         overflow-y: auto;
-        .todo{
+        .todo {
             li{
                 padding: 5px 12px;
                 margin-top: 5px;
@@ -204,7 +221,7 @@ ul {
                     color: #696969;
                 }
 
-                .marked{
+                .marked {
                     float: right;
                     width: 20px;
                     height: 20px;
