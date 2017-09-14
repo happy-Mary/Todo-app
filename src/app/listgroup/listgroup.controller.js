@@ -5,8 +5,6 @@ export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
         var self = this;
         self.listGroups = listGroupService.get();
-
-        self.editMenuActive = false;
         
         self.openFolder = function(event) {
             let folderLink = angular.element(event.currentTarget);
@@ -21,27 +19,33 @@ export default listGroupModule
         };
 
         self.handleEdit = function(item) {
-            self.editMenuActive = false;
             self.onEdit({item: item});
         };
 
         self.handleDelete = function(item) {
-            self.editMenuActive = false;
             self.onDelete({item: item});
-        };
-
-        self.clickM = function(){
-            console.log('clicked item');
         };
 
         self.toggleMenuEdit = function(event){
             event.preventDefault();
             event.stopPropagation();
-            // change showing sub-menu
-            let menuEditLink = angular.element(event.currentTarget);
-            console.log(menuEditLink.parent().find('.edit-folder-menu'));
+            let menuEditButton = angular.element(event.currentTarget);
+            let currMenu = menuEditButton.parent().next();
+            let currMenuStatus = currMenu.hasClass('submenu-open');
+            removeSubmenu();
+            (!currMenuStatus) ? currMenu.addClass('submenu-open') : '';
             self.editMenuActive = !self.editMenuActive;
         };
+
+        let mainCont = angular.element(document.querySelector('.container'));
+        mainCont.on('click', function(){
+            removeSubmenu();
+        });
+
+        function removeSubmenu(){
+            let allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
+            allOpenedMenus.removeClass('submenu-open');
+        }
 
         self.$onInit = function() { 
             self.onEdit = self.onEdit;

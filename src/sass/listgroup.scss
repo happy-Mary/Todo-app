@@ -47,7 +47,7 @@ ul.listgroup {
     }
     .edit-folder-menu {
         position: absolute;
-        bottom: -10px;
+        top: 35px;
         right: 5px;
         width: 100px;
         z-index: 1000;
@@ -57,6 +57,11 @@ ul.listgroup {
         border-top: 1px solid grey;
         border-right: 1px solid grey;
         border-left: 1px solid grey;
+        display: none;
+        
+        &.submenu-open{
+            display: block;
+        }
         li{
             height: 30px;
             line-height: 30px;
