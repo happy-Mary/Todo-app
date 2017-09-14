@@ -13,6 +13,7 @@ export default mainModule
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
+        self.sidebarOpen = true;
 
         // getting data for list and listgroups
         listGroupService.register();
@@ -60,7 +61,6 @@ export default mainModule
         self.actions = {
             // editting item
             onEdit: function(item) { 
-                console.log(item.type);
                 self.activeItem = item;
                 if(item.type === 'list') {
                     modalService.open('edit-list');
@@ -85,7 +85,7 @@ export default mainModule
             onToggleExpand: function(){
 
             },
-            // opening folder menu (custom right click)
+            // opening folder menu (on custom right click)
             onContextMenu: function(){
 
             }
