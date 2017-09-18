@@ -18,7 +18,6 @@ export default mainModule
         // getting data for list and listgroups ???
         listGroupService.register();
         listService.register();
-        console.log('controller loaded');
 
         self.currListId = $stateParams.listid;
       
@@ -30,7 +29,6 @@ export default mainModule
             } else {
                 self.headerTitle = 'избранное';
             }
-           
         });
 
         // service to open modal
