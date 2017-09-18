@@ -11,7 +11,7 @@ export default listModule
         self.newListTitle = '';
      
         self.modal = modalService;
-        
+
         self.newList = function(title) {
             listService.create(title);
         };
