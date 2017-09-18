@@ -20,8 +20,10 @@ export default listModule
         else{
             $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
+                    // setLists(response.data);
                     self.data = response.data;
                     save();
+                    console.log('got data from server');
                 })
                 .catch(function errorCallback() {
                     self.data =  [];
@@ -67,10 +69,10 @@ export default listModule
         save();
     }
 
-     // function setLists(obj) {
-    //     self.data = obj;
-    //     save();
-    // }
+     function setLists(obj) {
+        self.data = obj;
+        save();
+    }
 
     return {
         register: registerLists,
@@ -79,8 +81,8 @@ export default listModule
         delete: deleteList,
         get: getLists,
         changeParentFolder: changeParentFolder,
-        // // //
         getList: getList,
+        // // //
         save: save    
     };
 });
