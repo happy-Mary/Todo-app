@@ -6,7 +6,7 @@ import localStorageService from './app.service';
 import routeServicee from './route.service';
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, routeService) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions) {
 
         let self = this;
         self.headerTitle = 'current list title';
@@ -15,17 +15,26 @@ export default mainModule
         self.taskFocused = false;
         self.sidebarOpen = true;
 
-        // getting data for list and listgroups
+        // getting data for list and listgroups ???
         listGroupService.register();
         listService.register();
+        console.log('controller loaded');
+
+        self.currListId = $stateParams.listid;
+      
+        $transitions.onSuccess({ to: 'lists.**' }, function(trans) {
+            let id = $stateParams.listid;
+            if(id !== 'marked'){
+                let list = listService.getList(id);
+                self.headerTitle = list.title;
+            } else {
+                self.headerTitle = 'избранное';
+            }
+           
+        });
 
         // service to open modal
         self.modal = modalService;
-
-        // устанавливаем в главном контроллере объект для работы с роутинг-данными
-        // after ui-router change it and remove the RouteService
-        self.routeData = {listid: null};
-        routeService.set(self.routeData);
 
         // focusing input for adding todo
         self.focusAddTask = function(event) {
@@ -46,11 +55,8 @@ export default mainModule
             var newTodo = self.newTodoTitle.trim();
 
             if(newTodo){
-                let routeData = routeService.get();
-                let listId = routeData.listid;
-                todoService.create(newTodo, listId, self.marked);
-                // localStorageService.set('todo', todoService.get());
-                self.marked = false;
+                let listId = $stateParams.listid;
+                todoService.create(newTodo, listId);
             }
             self.newTodoTitle = '';
          };
@@ -92,7 +98,7 @@ export default mainModule
         };
 
 
-        
+       
 
     });
 

@@ -13,52 +13,7 @@
 </head>
 
 <body ng-controller="AppController as ctrl">
-    <div class='container'>
-        <aside ng-class='{"sidebar-close" : !ctrl.sidebarOpen, "": ctrl.sidebarOpen}'>
-            <div class="nav">
-                <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
-                <!-- Filter todo in view -->
-                <input type="text" ng-model='ctrl.query'>
-                <span class='toggle-search'></span>
-            </div>
-            <div class="folders">
-                <ul class='special-items tab-bar'>
-                    <li class='marked' ng-class="(ctrl.routeData.listid=='marked') ? 'active-list' : '' ">
-                        <a ng-href="/lists/marked"><span>избранное</span></a>
-                    </li>
-                </ul>
-
-                <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete = "ctrl.actions.onDelete(item)"></list-group-component>
-                <!-- Filter todo in view, remove filter-search it's an example -->
-                <list-comp filter-id='null' filter-search='ctrl.query' 
-                           on-edit = 'ctrl.actions.onEdit(item)'
-                           on-delete = 'ctrl.actions.onDelete(item)'>
-                </list-comp>
-            </div>
-            <div class="create">
-                <a href=""  ng-click = 'ctrl.modal.open("add-list")'><span>Create list</span></a>
-                <a href="" ng-click = 'ctrl.modal.open("add-folder")'><span>Create folder</span></a>
-            </div>
-        </aside>
-        <header>
-            <h2>{{ctrl.headerTitle}}</h2>
-            <button class='sort-button'></button>
-        </header>
-        <main>
-            <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)'>
-                <span class='newTask' ng-click = 'ctrl.toggleFocus($event)'>
-                    <i  ng-if='!ctrl.taskFocused'></i>
-                    <i class="icon-checked" ng-if='ctrl.taskFocused'></i>
-                </span>
-                <input type="text" class='newTaskTitle' ng-model="ctrl.newTodoTitle">
-                <div class="marked-task">
-                    <input type="checkbox" name="newTask" id="addTask" class='marked-task' ng-model='ctrl.marked'>
-                    <label for="addTask"></label>
-                </div>
-            </form>
-            <div ng-view></div>
-        </main>
-    </div>
+    <ui-view></ui-view>
     
     <section class="modals">
         <modal modal-id='add-list' title="Create new list">

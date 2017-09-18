@@ -3,17 +3,14 @@ import listService from './list.service';
 
 export default listModule
 
-    .controller('listController', function listController(listService,  modalService, routeService){ 
+    .controller('listController', function listController(listService,  modalService){ 
    
         let self = this;
         self.lists = listService.get();
+        
         self.newListTitle = '';
-
-        // ////////////////////////////////////
-        // service to open modal and getting routeParams
+     
         self.modal = modalService;
-        // delete after UI-ROUTER
-        self.routeData = routeService.get();
         
         self.newList = function(title) {
             listService.create(title);
@@ -30,8 +27,5 @@ export default listModule
         self.$onInit = function() { 
             self.onEdit = self.onEdit; 
             self.onDelete = self.onDelete;
-        };
-
-        
-          
+        };     
     });
