@@ -5,7 +5,6 @@ import localStorageService from '../app.service';
 
 export default listGroupModule
 	.service('listGroupService', function($http, localStorageService){
-		this.data =[];
 		var self = this;
 		self.data =[];
 
@@ -18,16 +17,17 @@ export default listGroupModule
           	  self.data = localStorageService.get('listGroups');
             }
 	        else{
-	             $http({ method: 'GET', url: URLS.listGroupURL })
+	            return $http({ method: 'GET', url: URLS.listGroupURL })
 	                .then(function successCallback(response) {
 	                    self.data = response.data;
-	                    save();
+						save();
+						return self.data;
 	                })
 	                .catch(function errorCallback() {
 	                   self.data =  [];
 	                   save();
 	                });
-	        }
+	            }
 		}
 
 		function getListGroups(){
