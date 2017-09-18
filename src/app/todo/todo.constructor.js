@@ -6,8 +6,6 @@ export default class ToDo {
 		this.title = title;
 		this.listId = listId;
 		this.completed = false;
-		// this.subtasks = [];
-		// add marked value
 		this.marked = marked || false;
 	}
 }

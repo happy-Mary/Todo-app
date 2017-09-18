@@ -50,15 +50,14 @@ select:-webkit-autofill:focus {
 
 ul {
     list-style-type: none;
-    -webkit-padding-start: 0px;
     margin: 0;
+    padding: 0px;
 }
 
 .container {
     width:100%; 
     height: 100%;
     overflow: hidden; 
-
 }
 
 .active-list {background-color: lightblue;}
@@ -81,8 +80,7 @@ ul {
             .listgroup,
             .lists,
             .marked span,
-            .create span {display: none;}
-             
+            .create span {display: none;}     
         }
 
         .tab-bar {
