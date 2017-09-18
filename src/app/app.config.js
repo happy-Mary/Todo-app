@@ -1,37 +1,26 @@
 // // ng-route
 import mainModule from './app.module';
+import todoTemplate from './todo.html';
 
 export default mainModule
-// .config(['$locationProvider', '$routeProvider',
-// function config($locationProvider, $routeProvider) {
-//   // $locationProvider.hashPrefix('!');
-//   $locationProvider.html5Mode(true);
-//   $routeProvider
-//   .when('/lists/:listid', {
-//       template: '<todo-comp></todo-comp>',
-//       resolve: {
-//         message: function($route, routeService) {
-//           routeService.setlistid($route.current.params.listid);
-//         }
-//       }
-//     })
-//   .otherwise('lists/marked');
-// }
-// ]);
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     function config($locationProvider, $stateProvider, $urlRouterProvider) {
-        // $locationProvider.hashPrefix('!');
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.otherwise("/state1");
-        // $stateProvider
-        // .when('/lists/:listid', {
-        //     template: '<todo-comp></todo-comp>',
-        //     resolve: {
-        //         message: function($route, routeService) {
-        //             routeService.setlistid($route.current.params.listid);
-        //         }
-        //     }
-        // })
-        // .otherwise('lists/marked');
+        $urlRouterProvider.otherwise("/lists");
+        $stateProvider
+            .state('lists',{
+                url: '/lists',
+                template: todoTemplate,
+                resolve: {
+                    messages: function(listGroupService) {
+                      return listGroupService.register();
+                    }
+                  }
+               
+            })
+            .state('lists.todo', {
+                url: '/:listid',
+                template: '<todo-comp></todo-comp>'
+        });
     }
 ]);

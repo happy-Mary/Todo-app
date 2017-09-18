@@ -4,7 +4,7 @@ import { URLS } from '../constants';
 import localStorageService from '../app.service';
 
 export default todoModule
-.service('todoService', function($filter, $http, localStorageService,){
+.service('todoService', function($filter, $http, localStorageService){
     let data = [];
     let itemItem;
     
@@ -24,15 +24,13 @@ export default todoModule
                 });
         }    
         return data;
-    }
+    };
 
-    function save(){
+    function save() {
         localStorageService.set('todo', data);
     }
 
     function getTodo(id) {
-        // to filter data on route ???
-        // itemItem = $filter("filter")(data, {id:id});
         data.forEach(function(item){
             if(item.id == id){
                itemItem = item;
@@ -58,7 +56,9 @@ export default todoModule
     function createTodo(title, listId, marked){
         let todo = new ToDo(title, listId, marked);
         data.push(todo);
-        return todo;
+        // return todo;
+        console.log(todo);
+        save();
         // call constructor, save to data, return data
     }
 
