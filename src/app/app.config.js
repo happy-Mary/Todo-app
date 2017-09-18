@@ -10,13 +10,7 @@ export default mainModule
         $stateProvider
             .state('lists',{
                 url: '/lists',
-                template: todoTemplate,
-                resolve: {
-                    messages: function(listGroupService) {
-                      return listGroupService.register();
-                    }
-                  }
-               
+                template: todoTemplate
             })
             .state('lists.todo', {
                 url: '/:listid',
