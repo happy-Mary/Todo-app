@@ -2,38 +2,30 @@ import listModule from './list.module';
 import listService from './list.service';
 
 export default listModule
-    .controller('listController', function listController(listService) {
+
+    .controller('listController', function listController(listService,  modalService){ 
+   
         let self = this;
         self.lists = listService.get();
-        self.addActive = false;
+        
         self.newListTitle = '';
-
-         // take id through $routeProvider
-        let filterById = 0;
-        self.filterData = function(item) {
-            if(item.listGroupId === filterById){
-                return item;
-            }
+     
+        self.modal = modalService;
+        
+        self.newList = function(title) {
+            listService.create(title);
         };
 
-        self.addList = function() {
-            self.addActive = true;
+        self.handleEdit = function(list) {
+            self.onEdit({item: list});         
         };
 
-        self.saveList = function() {
-            console.log(self.newListTitle);
-            listService.create(self.newListTitle);
-            // save to LS
-            self.addActive = false;
-            self.newListTitle = '';
+        self.handleDelete = function(list) {
+            self.onDelete({item: list});         
         };
 
-        self.deleteList = function(id){
-            listService.delete(id);
-            // update LS
-        };
-
-        self.rewriteList = function(id) {
-
-        };
+        self.$onInit = function() { 
+            self.onEdit = self.onEdit; 
+            self.onDelete = self.onDelete;
+        };     
     });

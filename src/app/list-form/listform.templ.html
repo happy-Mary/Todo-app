@@ -1,0 +1,14 @@
+<section class = 'form-list'>
+    <form class="modal-content editing"
+         ng-submit='($ctrl.state==="create") ? $ctrl.addList($ctrl.currData.title) : $ctrl.editList($ctrl.currData.title)'
+         ng-show='$ctrl.state !== "delete"'>
+        <input type="text" name="name" placeholder="List name" required ng-model='$ctrl.currData.title'>
+        <button class="save" type ="submit">Save</button>
+        <button  type ="button" ng-click="$ctrl.cancelChanges()">Cancel</button>
+    </form>
+    <div ng-show='$ctrl.state === "delete"' class='deleting'>
+        <p>Are you sure? <span>{{$ctrl.editData.title}}</span> will be deleted forever</p>
+        <button  class="save" ng-click="$ctrl.deleteList()">delete</button>
+        <button ng-click="$ctrl.cancelChanges()">cancel</button>
+    </div>                                       
+</section>

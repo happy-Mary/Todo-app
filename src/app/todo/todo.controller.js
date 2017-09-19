@@ -3,12 +3,12 @@ import todoService from './todo.service';
 import listService from '../list/list.service';
 
 export default todoModule
-    .controller('todoController', function todoController($routeParams, todoService, listService) {
+    .controller('todoController', function todoController($stateParams, todoService, listService) {
         let self = this;
         self.todo = todoService.get();
         self.newTitle = '';
         // from router
-        self.parentId = $routeParams.listid;
+        self.parentId = $stateParams.listid;
 
         // add marked ang change ading todo
         self.saveTask = function() {
@@ -43,7 +43,7 @@ export default todoModule
 
                 if(self.todo[i].marked===true && !unicId.includes(id)){
                     unicId.push(id);
-                    self.markedLists.push(listService.get(id));
+                    // self.markedLists.push(listService.get(id));
                 }
             }
         }

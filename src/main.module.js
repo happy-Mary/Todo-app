@@ -3,6 +3,7 @@ import 'normalize.css';
 import './sass/style.scss';
 import './sass/listgroup.scss';
 import './sass/lists.scss';
+import './sass/modal.scss';
 
 
 import mainModule from './app/app.module';
@@ -17,6 +18,8 @@ require('./app/list/list.component');
 require('./app/todo/todo.controller');
 require('./app/todo/todo.service');
 require('./app/todo/todo.component');
+require('./app/modal/modal.controller');
+require('./app/modal/modal.component');
 
 
 /* this module goes to html ng-app */
