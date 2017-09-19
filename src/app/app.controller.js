@@ -6,7 +6,7 @@ import localStorageService from './app.service';
 import routeServicee from './route.service';
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state) {
 
         let self = this;
         self.headerTitle = 'current list title';
@@ -21,8 +21,6 @@ export default mainModule
 
         self.currListId = $stateParams.listid;
 
-        
-      
         $transitions.onSuccess({ to: 'lists.**' }, function(trans) {
             let id = $stateParams.listid;
             if(id !== 'marked'){
@@ -31,11 +29,19 @@ export default mainModule
             } else {
                 self.headerTitle = 'избранное';
             }
-
-           
         });
 
-       
+        angular.element(document).ready(function(event){
+            let activeList = angular.element(document.getElementsByClassName('active-list')[0]);
+            let targetEl = activeList.parent().parent().parent();
+            if(targetEl.hasClass('folder-close')){
+                targetEl.removeClass('folder-close');
+            }
+        });
+
+        self.goToSearch = function(){
+            $state.go('filter.search', {param: self.searchItem });
+        };
 
         // service to open modal
         self.modal = modalService;

@@ -3,7 +3,7 @@ import listService from './list.service';
 
 export default listModule
 
-    .controller('listController', function listController(listService,  modalService, $transitions){ 
+    .controller('listController', function listController(listService,  modalService, listGroupService) { 
    
         let self = this;
         self.lists = listService.get();
@@ -28,7 +28,5 @@ export default listModule
             self.onEdit = self.onEdit; 
             self.onDelete = self.onDelete;
         };     
-
         
-
     });
