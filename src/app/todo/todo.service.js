@@ -61,7 +61,16 @@ export default todoModule
         return todo;
         // call constructor, save to data, return data
     }
-
+    function getTodoFromList(listId){
+        var todo = data.filter(function(todo){
+            if(todo.listId == listId){
+                return true;
+            }
+            else{
+                return false;
+            }
+        })
+    }
     return {
         set: setTodo,
         get: get,
