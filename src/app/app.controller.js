@@ -20,6 +20,8 @@ export default mainModule
         listService.register();
 
         self.currListId = $stateParams.listid;
+
+        
       
         $transitions.onSuccess({ to: 'lists.**' }, function(trans) {
             let id = $stateParams.listid;
@@ -29,7 +31,11 @@ export default mainModule
             } else {
                 self.headerTitle = 'избранное';
             }
+
+           
         });
+
+       
 
         // service to open modal
         self.modal = modalService;
