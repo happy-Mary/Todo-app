@@ -1,9 +1,10 @@
 import listModule from './list.module';
 import listService from './list.service';
+import todoService from '../todo/todo.service';
 
 export default listModule
 
-    .controller('listController', function listController(listService,  modalService){ 
+    .controller('listController', function listController(listService,  modalService, todoService){ 
    
         let self = this;
         self.lists = listService.get();
@@ -28,4 +29,7 @@ export default listModule
             self.onEdit = self.onEdit; 
             self.onDelete = self.onDelete;
         };     
+        self.getCountTodo = function(id){
+            return todoService.getCountTodo(id);
+        }
     });
