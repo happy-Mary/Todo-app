@@ -2,7 +2,11 @@
 <ul class = 'lists tab-bar'>
         <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId}  track by $index' ui-sref-active='active-list'>
             <a ui-sref='lists.todo({listid: list.id})'>{{list.title}}
-                <span class='todocount' ng-if='list.todoLists.length>0'>{{list.todoLists.length}}</span>
+               <!--  <span class='todocount' ng-if='$ctrl.getTodo(list.id).length'>
+                {{$ctrl.getTodo(list.id).length}}</span> -->
+                 <span class='todocount' ng-if='$ctrl.getCountTodo(list.id)'>
+                    {{$ctrl.getCountTodo(list.id)}}
+                </span>
             </a>
             <div class="buttons">
                 <a ng-click='$ctrl.handleEdit(list)'></a>

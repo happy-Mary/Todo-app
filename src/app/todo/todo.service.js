@@ -61,7 +61,17 @@ export default todoModule
         save();
         // call constructor, save to data, return data
     }
-
+    function getCountTodoInList(listId){
+        var todo = data.filter(function(todo){
+            if(todo.listId == listId){
+                return true;
+            }
+            else{
+                return false;
+            }
+        })
+        return todo.length;
+    }
     return {
         set: setTodo,
         get: get,
@@ -69,7 +79,8 @@ export default todoModule
         delete: deleteTodo,
         create: createTodo,
         update: updateTodo,
-        save: save
+        save: save,
+        getCountTodo: getCountTodoInList
     };
 
 });
