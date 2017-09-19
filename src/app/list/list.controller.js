@@ -4,7 +4,7 @@ import todoService from '../todo/todo.service';
 
 export default listModule
 
-    .controller('listController', function listController(listService,  modalService, todoService){ 
+    .controller('listController', function listController(listService,  modalService, todoService) { 
    
         let self = this;
         self.lists = listService.get();
@@ -12,7 +12,7 @@ export default listModule
         self.newListTitle = '';
      
         self.modal = modalService;
-        
+
         self.newList = function(title) {
             listService.create(title);
         };
