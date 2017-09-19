@@ -1,9 +1,13 @@
 <ul class="listgroup tab-bar">
-
-    <li ng-repeat="item in $ctrl.listGroups">
-        <a href="" class='folder-item' ng-click='$ctrl.open($event)'>{{item.name}}
-			<span class='listgroup-icon'></span>
-		</a>
-        <list-comp filter-id='item.id'></list-comp>
+    <li ng-repeat="folder in $ctrl.listGroups track by $index" class='folder-close'>
+        <a href="" class='folder-item' ng-click='$ctrl.openFolder($event)'>{{folder.name}}
+            <span class='menu-folder-icon' ng-click="$ctrl.toggleMenuEdit($event)"></span>
+            <span class='listgroup-icon'></span>     
+        </a>
+        <ul class = 'edit-folder-menu'>
+            <li ng-click='$ctrl.handleEdit(folder)'>Edit</li>
+            <li ng-click='$ctrl.handleDelete(folder)'>Ungroup folder</li>
+        </ul>
+        <list-comp filter-id='folder.id' on-edit="$ctrl.handleEdit(item)"  on-delete="$ctrl.handleDelete(item)"></list-comp>
     </li>
 </ul>
