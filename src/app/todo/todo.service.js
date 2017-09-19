@@ -56,10 +56,7 @@ export default todoModule
     function createTodo(title, listId, marked){
         let todo = new ToDo(title, listId, marked);
         data.push(todo);
-        // return todo;
-        console.log(todo);
         save();
-        // call constructor, save to data, return data
     }
 
     return {
