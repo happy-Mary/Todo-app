@@ -8,10 +8,11 @@
             </label>
         </li>
     </ul>
-    <div class="marked"  ng-if="$ctrl.parentId==='marked'"  ng-repeat='list in $ctrl.lists'>
-        <h3><a ui-sref='lists.todo({listid: list.id})'>{{list.title}}</a></h3>
+    <div class="marked-view"  ng-if="$ctrl.parentId==='marked'"  ng-repeat='list in $ctrl.lists'>
+        <h3><a ui-sref='lists.todo({listid: list.id})' ng-show='filtered.length > 0'>{{list.title}}</a></h3>
         <ul class = 'todo'>
-            <li ng-repeat='task in $ctrl.todo | filter: {"marked": true} | filter: {"listId": list.id}'>
+            <li ng-repeat='task in filtered = ($ctrl.todo | filter: {"marked": true} | filter: {"listId": list.id})'>
+                <p>{{task.length}}</p>
                 <label class="completed"><input type="checkbox" ng-model='task.completed'></label>
                 <a href='#'>{{task.title}}</a>
                 <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
