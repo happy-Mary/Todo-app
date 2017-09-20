@@ -31,12 +31,18 @@ export default mainModule
             }
         });
 
+        // ??????????????????
+        let sortMenuEl = null;
+        // ??????????????????
         angular.element(document).ready(function(event){
             let activeList = angular.element(document.getElementsByClassName('active-list')[0]);
             let targetEl = activeList.parent().parent().parent();
             if(targetEl.hasClass('folder-close')){
                 targetEl.removeClass('folder-close');
             }
+            // ??????????????????
+            sortMenuEl = angular.element(document.querySelector('.sort-menu'));
+            // ??????????????????
         });
 
         self.goToSearch = function(){
@@ -106,6 +112,80 @@ export default mainModule
             }
         };
 
+        // ////////////////////////////////
+        // SORTING TODOS
+        // ////////////////////////////////
+       
+
+        self.toggleSortMenu = function(){
+            console.log(sortMenuEl);
+            sortMenuEl.toggleClass('sort-open');
+        };
         
+        self.sorting = {
+            byTitle: function(){
+
+            },
+
+            byMarked: function() {
+
+            },
+
+            byDate: function() {
+
+            }
+        };
+
+        self.customSort = function(parameter) {
+            var parameter = parameter;
+            
+            let tasks = todoService.get();
+
+            let typeSort = typeof(tasks[0][parameter]);
+
+            tasks.sort(function(a, b) {
+                var nameA, nameB;
+                if(typeSort == 'string'){
+                    nameA=a[parameter].toLowerCase(), nameB=b[parameter].toLowerCase();
+                } else {
+                    nameA= -a[parameter], nameB= -b[parameter];
+                }
+                return (nameA > nameB) ? 1 : (nameA < nameB) ? -1 : 0;
+            });
+        };
+
+   
+        // localStorageService.set('dates', []);
+        function makeDate(){
+            var dates = localStorageService.get('dates');
+            // var date = Date.parse(new Date());
+            var date = new Date();
+            dates.push(date);
+            localStorageService.set('dates', dates);
+        }
+        // makeDate();
+        function showDates(){
+            var dates = localStorageService.get('dates');
+            // var dates =  ["2017-07-20T13:19:09.806Z", "2017-09-20T13:19:19.486Z", "2016-09-20T14:12:57.895Z", "2017-02-20T14:14:14.955Z", "2015-03-10T14:15:25.194Z", "2019-09-20T14:19:33.831Z", "2021-09-20T14:19:36.174Z"]
+    
+            angular.forEach(dates, function(date, index){
+                dates[index] = new Date(date);
+            });
+
+            console.log('sorted');
+            dates.sort(function (date1, date2) {
+                var date1 = new Date(date1);
+                var date2 = new Date(date2);
+                if (date1 > date2) return -1;
+                if (date1 < date2) return 1;
+                return 0;
+              });
+              angular.forEach(dates, function(date){
+                console.log(date);
+            });
+        }
+
+        showDates();
+ 
     });
 
