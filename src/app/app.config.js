@@ -15,6 +15,15 @@ export default mainModule
             .state('lists.todo', {
                 url: '/:listid',
                 template: '<todo-comp></todo-comp>'
-        });
+            })
+            .state('filter', {
+                url: '/filter',
+                template: todoTemplate
+            })
+            .state('filter.search', {
+                url: '/?param',
+                // template: '<todo-comp filter-search = ctrl.searchItem></todo-comp>'
+                template: '<p>{{ctrl.searchItem}}</p>'
+            });
     }
 ]);
