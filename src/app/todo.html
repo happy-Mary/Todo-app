@@ -15,8 +15,7 @@
             </ul>
 
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete = "ctrl.actions.onDelete(item)"></list-group-component>
-            <!-- Filter todo in view, remove filter-search it's an example -->
-            <list-comp filter-id='null' filter-search='ctrl.query' 
+            <list-comp filter-id='null' 
                        on-edit = 'ctrl.actions.onEdit(item)'
                        on-delete = 'ctrl.actions.onDelete(item)'>
             </list-comp>
@@ -28,7 +27,15 @@
     </aside>
     <header>
         <h2>{{ctrl.headerTitle}}</h2>
-        <button class='sort-button'></button>
+        <!-- ///////////////////////////////////////////////////////////// -->
+        <button class='sort-button' ng-disabled="ctrl.currListId == 'marked'"  ng-click="ctrl.toggleSortMenu()"></button>
+        <!-- ///////////////////////////////////////////////////////////// -->
+        <ul class="sort-menu sort-open">
+            <li>Sort Alphabetical</li>
+            <li>Sort by Marked</li>
+            <li>Sort by Date</li>
+        </ul>
+        <!-- ///////////////////////////////////////////////////////////// -->
     </header>
     <main>
         <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide = 'ctrl.currListId == "marked"'>
