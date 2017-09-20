@@ -8,7 +8,7 @@ export default todoModule
     let data = [];
     let itemItem;
     
-    function get(){
+    function register() {
         if(localStorageService.get('todo')){
                 data = localStorageService.get('todo');
         }
@@ -24,7 +24,11 @@ export default todoModule
                 });
         }    
         return data;
-    };
+    }
+
+    function get() {
+        return data;
+    }
 
     function save() {
         localStorageService.set('todo', data);
@@ -38,9 +42,10 @@ export default todoModule
         });
     }
 
-    function updateTodo(title){
-        itemItem.title = title;
-        return data;
+    function updateTodo(){
+        // itemItem.title = title;
+        // return data;
+        save();
     }
 
     function setTodo(obj) {
@@ -58,6 +63,7 @@ export default todoModule
         data.push(todo);
         save();
     }
+
     function getCountTodoInList(listId){
         var todo = data.filter(function(todo){
             if(todo.listId == listId){
@@ -66,12 +72,16 @@ export default todoModule
             else{
                 return false;
             }
-        })
+        });
         return todo.length;
     }
+
+    register();
+
     return {
         set: setTodo,
         get: get,
+        register: register,
         getTodo: getTodo,
         delete: deleteTodo,
         create: createTodo,
