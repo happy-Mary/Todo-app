@@ -65,7 +65,6 @@ export default todoModule
         // return todo;
         console.log(todo);
         save();
-        // call constructor, save to data, return data
     }
     function getCountTodoInList(listId){
         var todo = self.data.filter(function(todo){
