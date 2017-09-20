@@ -12,15 +12,16 @@ export default listModule
     function save(){
         localStorageService.set('lists', self.data);
     }
-
+    
     function registerLists(){
-       if(localStorageService.get('lists')){
-            self.data = localStorageService.get('lists');
-        }
-        else{
-            $http({ method: 'GET', url: URLS.listURL })
+        localStorageService.get('lists').then(function successCallback(response){
+            self.data = response;
+            console.log(self.data);
+            save();
+        })
+        .catch(function(){
+             $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
-                    // setLists(response.data);
                     self.data = response.data;
                     save();
                     console.log('got data from server');
@@ -29,8 +30,8 @@ export default listModule
                     self.data =  [];
                     save();
                 });
-        }
-    }
+        })
+    }            
 
     function getLists(){
         return self.data;
