@@ -18,6 +18,7 @@ export default mainModule
         // getting data for list and listgroups ???
         listGroupService.register();
         listService.register();
+        todoService.register();
 
         self.currListId = $stateParams.listid;
       

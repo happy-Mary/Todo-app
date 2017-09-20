@@ -12,23 +12,25 @@ export default listGroupModule
    			localStorageService.set('listGroups', self.data);
 		   }
 		   
-   		function registerListGroups(){
-   			if(localStorageService.get('listGroups')){
-          	  self.data = localStorageService.get('listGroups');
-            }
-	        else{
-	            return $http({ method: 'GET', url: URLS.listGroupURL })
+	   	function registerListGroups(){
+	        localStorageService.get('listGroups').then(function successCallback(response){
+	            self.data = response;
+	            console.log(self.data);
+	            save();
+	        })
+	        .catch(function(){
+	             $http({ method: 'GET', url: URLS.listGroupURL })
 	                .then(function successCallback(response) {
 	                    self.data = response.data;
-						save();
-						return self.data;
+	                    save();
+	                    console.log('got data from server');
 	                })
 	                .catch(function errorCallback() {
-	                   self.data =  [];
-	                   save();
+	                    self.data =  [];
+	                    save();
 	                });
-	            }
-		}
+	        })
+	    }  
 
 		function getListGroups(){
 			return self.data;
