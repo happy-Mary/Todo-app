@@ -5,33 +5,39 @@ import localStorageService from '../app.service';
 
 export default todoModule
 .service('todoService', function($filter, $http, localStorageService){
-    let data = [];
     let itemItem;
+    let self = this;
+    self.data = [];
     
     function get(){
-        if(localStorageService.get('todo')){
-                data = localStorageService.get('todo');
-        }
-        else {
-            $http({ method: 'GET', url: URLS.todoURL })
-                .then(function successCallback(response) {
-                    data = response.data;
-                    save();
-                })
-                .catch(function errorCallback() {
-                    data = [];
-                    save();
-                });
-        }    
-        return data;
+        return self.data;
     };
 
     function save() {
-        localStorageService.set('todo', data);
+        localStorageService.set('todo', self.data);
     }
 
+    function registerTodo(){
+        localStorageService.get('todo').then(function successCallback(response){
+            self.data = response;
+            console.log(self.data);
+            save();
+        })
+        .catch(function(){
+             $http({ method: 'GET', url: URLS.todoURL })
+                .then(function successCallback(response) {
+                    self.data = response.data;
+                    save();
+                    console.log('got data from server');
+                })
+                .catch(function errorCallback() {
+                    self.data =  [];
+                    save();
+                });
+        })
+    }            
     function getTodo(id) {
-        data.forEach(function(item){
+        self.data.forEach(function(item){
             if(item.id == id){
                itemItem = item;
             }
@@ -40,26 +46,28 @@ export default todoModule
 
     function updateTodo(title){
         itemItem.title = title;
-        return data;
+        return self.data;
     }
 
     function setTodo(obj) {
-        data = obj;
+        self.data = obj;
     }
 
     function deleteTodo(id) {
         let index = data.findIndex(x => x.id==id);
-        data.splice(index, 1);
-        return data;
+        self.data.splice(index, 1);
+        return self.data;
     }
 
     function createTodo(title, listId, marked){
         let todo = new ToDo(title, listId, marked);
-        data.push(todo);
+        self.data.push(todo);
+        // return todo;
+        console.log(todo);
         save();
     }
     function getCountTodoInList(listId){
-        var todo = data.filter(function(todo){
+        var todo = self.data.filter(function(todo){
             if(todo.listId == listId){
                 return true;
             }
@@ -70,6 +78,7 @@ export default todoModule
         return todo.length;
     }
     return {
+        register: registerTodo,
         set: setTodo,
         get: get,
         getTodo: getTodo,
