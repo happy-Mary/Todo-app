@@ -22,9 +22,9 @@ export default mainModule
         self.currListId = $stateParams.listid;
 
         $transitions.onSuccess({ to: 'lists.**' }, function(trans) {
-            let id = $stateParams.listid;
-            if(id !== 'marked'){
-                let list = listService.getList(id);
+            self.currListId = $stateParams.listid;
+            if(self.currListId !== 'marked'){
+                let list = listService.getList(self.currListId);
                 self.headerTitle = list.title;
             } else {
                 self.headerTitle = 'избранное';
@@ -63,10 +63,9 @@ export default mainModule
         self.addToDo = function(){
             event.preventDefault();
             var newTodo = self.newTodoTitle.trim();
-
             if(newTodo){
                 let listId = $stateParams.listid;
-                todoService.create(newTodo, listId);
+                todoService.create(newTodo, listId, self.marked);
             }
             self.newTodoTitle = '';
          };

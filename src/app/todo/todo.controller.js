@@ -16,7 +16,6 @@ export default todoModule
         };
 
         self.lists = listService.get();
-        console.log(self.lists);
 
-
+        
     });

@@ -31,7 +31,7 @@
         <button class='sort-button'></button>
     </header>
     <main>
-        <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)'>
+        <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide = 'ctrl.currListId == "marked"'>
             <span class='newTask' ng-click = 'ctrl.toggleFocus($event)'>
                 <i  ng-if='!ctrl.taskFocused'></i>
                 <i class="icon-checked" ng-if='ctrl.taskFocused'></i>
