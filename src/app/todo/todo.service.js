@@ -16,7 +16,25 @@ export default todoModule
     function save() {
         localStorageService.set('todo', self.data);
     }
- 
+
+    function registerTodo(){
+        localStorageService.get('todo').then(function successCallback(response){
+            self.data.push(...response);
+            save();
+        })
+        .catch(function(){
+             $http({ method: 'GET', url: URLS.todoURL })
+                .then(function successCallback(response) {
+                    self.data.push(...response.data);
+                    save();
+                    console.log('got data from server');
+                })
+                .catch(function errorCallback() {
+                    self.data =  [];
+                    save();
+                });
+        })
+    }            
     function getTodo(id) {
         self.data.forEach(function(item){
             if(item.id == id){
