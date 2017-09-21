@@ -6,7 +6,7 @@ export default mainModule
     .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     function config($locationProvider, $stateProvider, $urlRouterProvider) {
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.otherwise("/lists");
+        $urlRouterProvider.otherwise("/lists/marked");
         $stateProvider
             .state('lists',{
                 url: '/lists',
