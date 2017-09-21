@@ -4,7 +4,7 @@
             <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
             <!-- Filter todo in view -->
             <!-- <input type="text" ng-model='ctrl.query'> -->
-            <input type="text" ui-sref='filter' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
+            <input type="text" ui-sref='lists.filter' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
             <span class='toggle-search'></span>
         </div>
         <div class="folders">
@@ -30,10 +30,10 @@
         <!-- ///////////////////////////////////////////////////////////// -->
         <button class='sort-button' ng-disabled="ctrl.currListId == 'marked'"  ng-click="ctrl.toggleSortMenu()"></button>
         <!-- ///////////////////////////////////////////////////////////// -->
-        <ul class="sort-menu sort-open">
-            <li>Sort Alphabetical</li>
-            <li>Sort by Marked</li>
-            <li>Sort by Date</li>
+        <ul class="sort-menu">
+            <li ng-click='ctrl.sorting.byTitle()'>Sort Alphabetical</li>
+            <li ng-click='ctrl.sorting.byMarked()'>Sort by Marked</li>
+            <li  ng-click='ctrl.sorting.byDate()'>Sort by Date</li>
         </ul>
         <!-- ///////////////////////////////////////////////////////////// -->
     </header>

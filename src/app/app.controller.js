@@ -6,7 +6,7 @@ import localStorageService from './app.service';
 import routeServicee from './route.service';
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state, $timeout) {
 
         let self = this;
         self.headerTitle = 'current list title';
@@ -14,43 +14,56 @@ export default mainModule
         self.newTodoTitle = '';
         self.taskFocused = false;
         self.sidebarOpen = true;
+        self.currListId = $stateParams.listid;
+
+        let sortMenuEl = null;
+
+        // service to open modal
+        self.modal = modalService;
 
         // getting data for list and listgroups ???
         listGroupService.register();
         listService.register();
 
-        self.currListId = $stateParams.listid;
+        angular.element(document).ready(function(event){
+            // open folder if list active on first load
+             let activeList = angular.element(document.getElementsByClassName('active-list')[0]);
+             let targetEl = activeList.parent().parent().parent();
+             if(targetEl.hasClass('folder-close')){
+                 targetEl.removeClass('folder-close');
+             }
+             // clouse sort menu if mousleave/show if returns
+             let timeoutSortID;
+             sortMenuEl = angular.element(document.querySelector('.sort-menu'));
+             sortMenuEl.on('mouseleave', function() {
 
+                timeoutSortID = $timeout(function(){
+                    sortMenuEl.removeClass('sort-open');
+                }, 3000);
+              });
+
+              sortMenuEl.on('mouseenter', function(){            
+                  $timeout.cancel(timeoutSortID);
+              });
+         });
+
+        // change main title on route
         $transitions.onSuccess({ to: 'lists.**' }, function(trans) {
             self.currListId = $stateParams.listid;
+           
             if(self.currListId !== 'marked'){
                 let list = listService.getList(self.currListId);
                 self.headerTitle = list.title;
+             
             } else {
                 self.headerTitle = 'избранное';
             }
         });
 
-        // ??????????????????
-        let sortMenuEl = null;
-        // ??????????????????
-        angular.element(document).ready(function(event){
-            let activeList = angular.element(document.getElementsByClassName('active-list')[0]);
-            let targetEl = activeList.parent().parent().parent();
-            if(targetEl.hasClass('folder-close')){
-                targetEl.removeClass('folder-close');
-            }
-            // ??????????????????
-            sortMenuEl = angular.element(document.querySelector('.sort-menu'));
-            // ??????????????????
-        });
-
+        // redirect to search while typing
         self.goToSearch = function(){
-            $state.go('filter.search', {param: self.searchItem });
+            $state.go('lists.filter.search', {param: self.searchItem });
         };
-
-        // service to open modal
-        self.modal = modalService;
 
         // focusing input for adding todo
         self.focusAddTask = function(event) {
@@ -115,77 +128,40 @@ export default mainModule
         // ////////////////////////////////
         // SORTING TODOS
         // ////////////////////////////////
-       
-
         self.toggleSortMenu = function(){
-            console.log(sortMenuEl);
             sortMenuEl.toggleClass('sort-open');
         };
         
+        let tasks = todoService.get();
+
         self.sorting = {
             byTitle: function(){
-
+                    tasks.sort(function(a, b) {
+                    let valueA=a.title.toLowerCase(), valueB=b.title.toLowerCase();
+                    sortMenuEl.removeClass('sort-open');
+                    return (valueA > valueB) ? 1 : (valueA < valueB) ? -1 : 0;
+                });
             },
 
             byMarked: function() {
-
+                    tasks.sort(function(a, b) {
+                    let valueA = -a.marked, valueB= -b.marked;
+                    sortMenuEl.removeClass('sort-open');
+                    return (valueA > valueB) ? 1 : (valueA < valueB) ? -1 : 0;
+                });
             },
-
             byDate: function() {
-
+                tasks.sort(function(a, b) {
+                    let valueA = new Date(a.date), valueB= new Date(b.date);
+                    sortMenuEl.removeClass('sort-open');
+                    return (valueA > valueB) ? -1 : (valueA < valueB) ? 1 : 0;
+                });
+                angular.forEach(tasks, function(task){
+                    console.log(task.date);
+                });
             }
         };
 
-        self.customSort = function(parameter) {
-            var parameter = parameter;
-            
-            let tasks = todoService.get();
 
-            let typeSort = typeof(tasks[0][parameter]);
-
-            tasks.sort(function(a, b) {
-                var nameA, nameB;
-                if(typeSort == 'string'){
-                    nameA=a[parameter].toLowerCase(), nameB=b[parameter].toLowerCase();
-                } else {
-                    nameA= -a[parameter], nameB= -b[parameter];
-                }
-                return (nameA > nameB) ? 1 : (nameA < nameB) ? -1 : 0;
-            });
-        };
-
-   
-        // localStorageService.set('dates', []);
-        function makeDate(){
-            var dates = localStorageService.get('dates');
-            // var date = Date.parse(new Date());
-            var date = new Date();
-            dates.push(date);
-            localStorageService.set('dates', dates);
-        }
-        // makeDate();
-        function showDates(){
-            var dates = localStorageService.get('dates');
-            // var dates =  ["2017-07-20T13:19:09.806Z", "2017-09-20T13:19:19.486Z", "2016-09-20T14:12:57.895Z", "2017-02-20T14:14:14.955Z", "2015-03-10T14:15:25.194Z", "2019-09-20T14:19:33.831Z", "2021-09-20T14:19:36.174Z"]
-    
-            angular.forEach(dates, function(date, index){
-                dates[index] = new Date(date);
-            });
-
-            console.log('sorted');
-            dates.sort(function (date1, date2) {
-                var date1 = new Date(date1);
-                var date2 = new Date(date2);
-                if (date1 > date2) return -1;
-                if (date1 < date2) return 1;
-                return 0;
-              });
-              angular.forEach(dates, function(date){
-                console.log(date);
-            });
-        }
-
-        showDates();
- 
     });
 
