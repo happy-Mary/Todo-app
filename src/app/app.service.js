@@ -1,10 +1,10 @@
 import mainModule from './app.module';
 
 export default mainModule
-.service('localStorageService', function(){
+.service('localStorageService', function($timeout){
 	function set(key, data){
 		let promise = new Promise(function(resolve, reject){
-			setTimeout(function(){
+			$timeout(function(){
 				localStorage.setItem(key, JSON.stringify(data));
 				resolve();
 			}, 1000);
@@ -13,7 +13,7 @@ export default mainModule
 	}
 	function get(key){
 		let promise = new Promise(function(resolve, reject){
-			setTimeout(function(){
+			$timeout(function(){
 				let resault = JSON.parse(localStorage.getItem(key));
 				if(resault){
 					resolve(resault);
@@ -25,7 +25,6 @@ export default mainModule
 			}, 1000);
 		});
 		return promise;
-
 	}
 	// function set(key, data){
 		
