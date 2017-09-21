@@ -8,7 +8,7 @@ export default todoModule
     let itemItem;
     let self = this;
     self.data = [];
-    
+
     function get(){
         return self.data;
     };
@@ -16,26 +16,7 @@ export default todoModule
     function save() {
         localStorageService.set('todo', self.data);
     }
-
-    function registerTodo(){
-        localStorageService.get('todo').then(function successCallback(response){
-            self.data = response;
-            console.log(self.data);
-            save();
-        })
-        .catch(function(){
-             $http({ method: 'GET', url: URLS.todoURL })
-                .then(function successCallback(response) {
-                    self.data = response.data;
-                    save();
-                    console.log('got data from server');
-                })
-                .catch(function errorCallback() {
-                    self.data =  [];
-                    save();
-                });
-        })
-    }            
+ 
     function getTodo(id) {
         self.data.forEach(function(item){
             if(item.id == id){
@@ -44,9 +25,10 @@ export default todoModule
         });
     }
 
-    function updateTodo(title){
-        itemItem.title = title;
-        return self.data;
+    function updateTodo(){
+        // itemItem.title = title;
+        // return data;
+        save();
     }
 
     function setTodo(obj) {
@@ -66,6 +48,7 @@ export default todoModule
         console.log(todo);
         save();
     }
+
     function getCountTodoInList(listId){
         var todo = self.data.filter(function(todo){
             if(todo.listId == listId){
@@ -74,13 +57,17 @@ export default todoModule
             else{
                 return false;
             }
-        })
+        });
         return todo.length;
     }
+
+    register();
+
     return {
         register: registerTodo,
         set: setTodo,
         get: get,
+        register: register,
         getTodo: getTodo,
         delete: deleteTodo,
         create: createTodo,

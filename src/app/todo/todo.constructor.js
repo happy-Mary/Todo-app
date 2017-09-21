@@ -7,6 +7,8 @@ export default class ToDo {
 		this.listId = listId;
 		this.completed = false;
 		this.marked = marked || false;
+		this.date = new Date();
+		this.dueDate = "";
 	}
 }
 

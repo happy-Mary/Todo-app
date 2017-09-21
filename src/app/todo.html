@@ -4,7 +4,7 @@
             <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
             <!-- Filter todo in view -->
             <!-- <input type="text" ng-model='ctrl.query'> -->
-            <input type="text" ui-sref='filter' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
+            <input type="text" ui-sref='lists.filter' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
             <span class='toggle-search'></span>
         </div>
         <div class="folders">
@@ -15,8 +15,7 @@
             </ul>
 
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete = "ctrl.actions.onDelete(item)"></list-group-component>
-            <!-- Filter todo in view, remove filter-search it's an example -->
-            <list-comp filter-id='null' filter-search='ctrl.query' 
+            <list-comp filter-id='null' 
                        on-edit = 'ctrl.actions.onEdit(item)'
                        on-delete = 'ctrl.actions.onDelete(item)'>
             </list-comp>
@@ -28,10 +27,18 @@
     </aside>
     <header>
         <h2>{{ctrl.headerTitle}}</h2>
-        <button class='sort-button'></button>
+        <!-- ///////////////////////////////////////////////////////////// -->
+        <button class='sort-button' ng-disabled="ctrl.currListId == 'marked'"  ng-click="ctrl.toggleSortMenu()"></button>
+        <!-- ///////////////////////////////////////////////////////////// -->
+        <ul class="sort-menu">
+            <li ng-click='ctrl.sorting.byTitle()'>Sort Alphabetical</li>
+            <li ng-click='ctrl.sorting.byMarked()'>Sort by Marked</li>
+            <li  ng-click='ctrl.sorting.byDate()'>Sort by Date</li>
+        </ul>
+        <!-- ///////////////////////////////////////////////////////////// -->
     </header>
     <main>
-        <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)'>
+        <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide = 'ctrl.currListId == "marked"'>
             <span class='newTask' ng-click = 'ctrl.toggleFocus($event)'>
                 <i  ng-if='!ctrl.taskFocused'></i>
                 <i class="icon-checked" ng-if='ctrl.taskFocused'></i>

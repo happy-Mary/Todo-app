@@ -2,7 +2,7 @@
   "env": {
 	"browser": true
   },
-  "extends": ["standard"],
+  "extends": ["airbnb/base"],
   "parser": "babel-eslint",
   "rules": {
 	"eol-last": 0,
