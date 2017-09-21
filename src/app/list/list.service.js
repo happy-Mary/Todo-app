@@ -6,7 +6,7 @@ import localStorageService from '../app.service';
 export default listModule
 .service('listService', function($http, localStorageService){
     let self  = this;
-    self.data;
+    self.data = [];
 
     // ? change to let save = , remove from return
     function save(){
@@ -15,14 +15,13 @@ export default listModule
     
     function registerLists(){
         localStorageService.get('lists').then(function successCallback(response){
-            self.data = response;
-            console.log(self.data);
+            self.data.push(...response);
             save();
         })
         .catch(function(){
              $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
-                    self.data = response.data;
+                    self.data.push(...response.data);
                     save();
                     console.log('got data from server');
                 })
@@ -34,7 +33,7 @@ export default listModule
     }            
 
     function getLists(){
-        return self.data;
+       return self.data;
     }
 
     function getList(id) {
