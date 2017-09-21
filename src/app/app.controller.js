@@ -54,8 +54,10 @@ export default mainModule
            
             if(self.currListId !== 'marked'){
                 let list = listService.getList(self.currListId);
-                self.headerTitle = list.title;
-             
+
+                // CHANGE AFTER RESOLVING GETTING DATA
+                self.headerTitle = (list !== undefined) ? list.title : 'default title';
+                // self.headerTitle = list.title;
             } else {
                 self.headerTitle = 'избранное';
             }
@@ -134,6 +136,7 @@ export default mainModule
         };
         
         let tasks = todoService.get();
+        console.log(tasks);
 
         self.sorting = {
             byTitle: function(){
