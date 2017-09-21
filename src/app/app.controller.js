@@ -156,9 +156,12 @@ export default mainModule
                     sortMenuEl.removeClass('sort-open');
                     return (valueA > valueB) ? -1 : (valueA < valueB) ? 1 : 0;
                 });
+
+                // testing dates sorting (remove after tests)
                 angular.forEach(tasks, function(task){
                     console.log(task.date);
                 });
+                /////////////////////////////////
             }
         };
 

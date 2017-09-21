@@ -16,15 +16,15 @@ export default mainModule
                 url: '/:listid',
                 template: '<todo-comp></todo-comp>'
             })
-            .state('lists.filter', {
-                url: '/filter',
-                // template: todoTemplate
-                template: '<todo-comp filter-search = ctrl.searchItem></todo-comp>'
-            })
-            .state('lists.filter.search', {
-                url: '/?param',
-                // template: '<todo-comp filter-search = ctrl.searchItem></todo-comp>'
-                template: '<p>{{ctrl.searchItem}}</p>'
-            });
+            // .state('lists.filter', {
+            //     url: '/filter',
+            //     // template: todoTemplate
+            //     template: '<todo-comp filter-search = ctrl.searchItem></todo-comp>'
+            // })
+            // .state('lists.filter.search', {
+            //     url: '/?param',
+            //     // template: '<todo-comp filter-search = ctrl.searchItem></todo-comp>'
+            //     template: '<p>{{ctrl.searchItem}}</p>'
+            // });
     }
 ]);
