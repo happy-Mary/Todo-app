@@ -79,13 +79,11 @@ export default todoModule
         return todo.length;
     }
 
-    register();
 
     return {
         register: registerTodo,
         set: setTodo,
         get: get,
-        register: register,
         getTodo: getTodo,
         delete: deleteTodo,
         create: createTodo,
