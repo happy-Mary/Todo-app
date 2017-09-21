@@ -6,22 +6,29 @@ import localStorageService from '../app.service';
 export default listGroupModule
 	.service('listGroupService', function($http, localStorageService){
 		var self = this;
-		self.data =[];
+		self.data = [];
 
    		function save(){
    			localStorageService.set('listGroups', self.data);
-		   }
+		}
 		   
 	   	function registerListGroups(){
 	        localStorageService.get('listGroups').then(function successCallback(response){
-	            self.data = response;
+	            // self.data = response;
+	            response.forEach(function(item){
+	            	self.data.push(item);
+	            })
+	            console.log('self')
 	            console.log(self.data);
 	            save();
 	        })
 	        .catch(function(){
 	             $http({ method: 'GET', url: URLS.listGroupURL })
 	                .then(function successCallback(response) {
-	                    self.data = response.data;
+	                    // self.data = response.data;
+	                    response.data.forEach(function(item){
+			            	self.data.push(item);
+			            })
 	                    save();
 	                    console.log('got data from server');
 	                })
@@ -58,7 +65,7 @@ export default listGroupModule
 			var data = new ListGroup(name);
 			self.data.push(data);
 			save();
-		}
+					}
 
 		// function setListGroups(data) {
 		// 	self.data = data;
@@ -68,6 +75,7 @@ export default listGroupModule
 		return {
 			register: registerListGroups,
 			get: getListGroups,
+			data: self.data,
 			create: createListGroup,
 			update: updateListGroup,
 			delete: deleteListGroup,
