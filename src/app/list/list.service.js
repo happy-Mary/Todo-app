@@ -15,20 +15,13 @@ export default listModule
     
     function registerLists(){
         localStorageService.get('lists').then(function successCallback(response){
-            // self.data = response;
-            response.forEach(function(item){
-                    self.data.push(item);
-            })
-            console.log(self.data);
+            self.data.push(...response);
             save();
         })
         .catch(function(){
              $http({ method: 'GET', url: URLS.listURL })
                 .then(function successCallback(response) {
-                    // self.data = response.data;
-                    response.data.forEach(function(item){
-                        self.data.push(item);
-                    })
+                    self.data.push(...response.data);
                     save();
                     console.log('got data from server');
                 })
