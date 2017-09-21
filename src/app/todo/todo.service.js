@@ -19,14 +19,20 @@ export default todoModule
 
     function registerTodo(){
         localStorageService.get('todo').then(function successCallback(response){
-            self.data = response;
+            // self.data = response;
+            response.forEach(function(item){
+                self.data.push(item);
+            })
             console.log(self.data);
             save();
         })
         .catch(function(){
              $http({ method: 'GET', url: URLS.todoURL })
                 .then(function successCallback(response) {
-                    self.data = response.data;
+                    // self.data = response.data;
+                    response.data.forEach(function(item){
+                        self.data.push(item);
+                    })
                     save();
                     console.log('got data from server');
                 })
