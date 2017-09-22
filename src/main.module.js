@@ -3,6 +3,7 @@ import 'normalize.css';
 import './sass/style.scss';
 import './sass/listgroup.scss';
 import './sass/lists.scss';
+import './sass/todo.scss';
 import './sass/modal.scss';
 
 

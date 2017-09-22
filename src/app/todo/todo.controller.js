@@ -7,15 +7,16 @@ export default todoModule
         let self = this;
         self.todo = todoService.get();
         self.newTitle = '';
+        self.completedShown = true;
         // from router
         self.parentId = $stateParams.listid;
 
 
-        self.changeMarked = function(){
+        self.changeMarked = function() {
             todoService.update();
         };
 
         self.lists = listService.get();
 
-        
+
     });
