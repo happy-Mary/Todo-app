@@ -7,11 +7,11 @@
                 <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeMarked()'>
             </label>
         </li>
-        <button class="completed-btn" ng-click="$ctrl.completedShown = !$ctrl.completedShown">
+        <button class="completed-btn" ng-click="$ctrl.completedShown = !$ctrl.completedShown" ng-if="$ctrl.parentId !== 'marked'">
             show copmleted tasks
         </button>
     </ul>
-    <div class="marked-view" ng-if="$ctrl.parentId==='marked'" ng-repeat='list in $ctrl.lists'>
+    <div class="marked-view" ng-if="$ctrl.parentId === 'marked'" ng-repeat='list in $ctrl.lists'>
         <h3><a ui-sref='lists.todo({listid: list.id})' ng-show='filtered.length > 0'>{{list.title}}</a></h3>
         <ul class='todo'>
             <li ng-repeat='task in filtered = ($ctrl.todo | filter: {"marked": true} | filter: {"listId": list.id})'>
