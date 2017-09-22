@@ -4,76 +4,72 @@ import { URLS } from '../constants';
 import localStorageService from '../app.service';
 
 export default listGroupModule
-	.service('listGroupService', function($http, localStorageService){
-		var self = this;
-		self.data = [];
+    .service('listGroupService', function listGroupService($http, localStorageService) {
+        const self = this;
+        self.data = [];
 
-   		function save(){
-   			localStorageService.set('listGroups', self.data);
-		}
-		   
-	   	function registerListGroups(){
-	        localStorageService.get('listGroups').then(function successCallback(response){
-	         	self.data.push(...response);
-	            save();
-	        })
-	        .catch(function(){
-	             $http({ method: 'GET', url: URLS.listGroupURL })
-	                .then(function successCallback(response) {
-	                   self.data.push(...response.data);
-	                   save();
-	                   console.log('got data from server');
-	                })
-	                .catch(function errorCallback() {
-	                    self.data =  [];
-	                    save();
-	                });
-	        })
-	    }  
+        function save() {
+            localStorageService.set('listGroups', self.data);
+        }
 
-		function getListGroups(){
-			return self.data;
-		}
+        function registerListGroups() {
+            localStorageService.get('listGroups').then((response) => {
+                    self.data.push(...response);
+                    save();
+                })
+                .catch(() => {
+                    $http({ method: 'GET', url: URLS.listGroupURL })
+                        .then((response) => {
+                            self.data.push(...response.data);
+                            save();
+                        })
+                        .catch(() => {
+                            self.data = [];
+                            save();
+                        });
+                });
+        }
 
-		function updateListGroup(){
-			save();
-		}
-		
-   		function getListGroup(id){
-   			self.data.forEach(function(group){
-   				if(group.id == id){
-   					return group;
-   				}
-   			});
-   		}
+        function getListGroups() {
+            return self.data;
+        }
 
-   		function deleteListGroup(id) {
-	        var index = self.data.findIndex(group => group.id == id);
-	        self.data.splice(index, 1);
-	        save();
-   		}
+        function updateListGroup() {
+            save();
+        }
 
-		function createListGroup(name){
-			var data = new ListGroup(name);
-			self.data.push(data);
-			save();
-					}
+        function getListGroup(id) {
+            self.data.forEach((group) => {
+                if (group.id == id) return group;
+            });
+        }
 
-		// function setListGroups(data) {
-		// 	self.data = data;
-		// 	save();
-		// }
+        function deleteListGroup(id) {
+            const index = self.data.findIndex(group => group.id == id);
+            self.data.splice(index, 1);
+            save();
+        }
 
-		return {
-			register: registerListGroups,
-			get: getListGroups,
-			data: self.data,
-			create: createListGroup,
-			update: updateListGroup,
-			delete: deleteListGroup,
-			// /////
-			getGroup: getListGroup,
-			
-			save: save
-		};
-	});
+        function createListGroup(name) {
+            let data = new ListGroup(name);
+            self.data.push(data);
+            save();
+        }
+
+        // function setListGroups(data) {
+        // 	self.data = data;
+        // 	save();
+        // }
+
+        return {
+            register: registerListGroups,
+            get: getListGroups,
+            data: self.data,
+            create: createListGroup,
+            update: updateListGroup,
+            delete: deleteListGroup,
+            // /////
+            getGroup: getListGroup,
+            save: save
+        }
+    });
