@@ -6,6 +6,7 @@
     "parser": "babel-eslint",
     "rules": {
         "linebreak-style": 0,
+        "comma-dangle": [0, "never"],
         "eol-last": 0,
         "eqeqeq": 0,
         "indent": 0,

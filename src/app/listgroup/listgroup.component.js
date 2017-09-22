@@ -1,12 +1,13 @@
 import listGroupModule from './listgroup.module';
+import listGroupTemplate from './listgroup.templ.html';
 
 export default listGroupModule
-    .component('listGroupComponent',{
+    .component('listGroupComponent', {
         bindings: {
             // state: '@'
             onEdit: '&',
             onDelete: '&'
         },
-        template: require('./listgroup.templ.html'),
+        template: listGroupTemplate,
         controller: 'listGroupController'
     });

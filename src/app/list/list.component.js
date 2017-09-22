@@ -1,4 +1,5 @@
 import listModule from './list.module';
+import listTemplate from './list.templ.html';
 
 export default listModule
     .component('listComp', {
@@ -8,5 +9,5 @@ export default listModule
             onDelete: '&'
         },
         controller: 'listController',
-        template: require('./list.templ.html')
+        template: listTemplate
     });
