@@ -1,16 +1,12 @@
 import listModule from './list.module';
-import listService from './list.service';
-import todoService from '../todo/todo.service';
 
 export default listModule
-
-    .controller('listController', function listController(listService,  modalService, todoService) { 
-   
-        let self = this;
+    .controller('listController', function listController(listService, modalService, todoService) {
+        const self = this;
         self.lists = listService.get();
-        
+
         self.newListTitle = '';
-     
+
         self.modal = modalService;
 
         self.newList = function(title) {
@@ -18,18 +14,19 @@ export default listModule
         };
 
         self.handleEdit = function(list) {
-            self.onEdit({item: list});         
+            self.onEdit({ item: list });
         };
 
         self.handleDelete = function(list) {
-            self.onDelete({item: list});         
+            self.onDelete({ item: list });
         };
 
-        self.$onInit = function() { 
-            self.onEdit = self.onEdit; 
+        self.$onInit = function() {
+            self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
-        };     
-        self.getCountTodo = function(id){
+        };
+
+        self.getCountTodo = function(id) {
             return todoService.getCountTodo(id);
         }
     });
