@@ -14,7 +14,8 @@ export default listGroupModule
             const folderLink = angular.element(event.currentTarget);
             if (folderLink.hasClass('folder-item')) {
                 const folderItem = folderLink.parent();
-                (folderItem.hasClass('folder-close')) ? folderItem.removeClass('folder-close'): folderItem.addClass('folder-close');
+                if (folderItem.hasClass('folder-close')) folderItem.removeClass('folder-close')
+                else folderItem.addClass('folder-close')
             }
         };
 
@@ -33,7 +34,7 @@ export default listGroupModule
             const currMenu = menuEditButton.parent().next();
             const currMenuStatus = currMenu.hasClass('submenu-open');
             removeSubmenu();
-            (!currMenuStatus) ? currMenu.addClass('submenu-open'): '';
+            if (!currMenuStatus) currMenu.addClass('submenu-open');
             self.editMenuActive = !self.editMenuActive;
         };
 

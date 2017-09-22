@@ -14,7 +14,8 @@ export default modalModule
             for (let i = 0; i < modalIds.length; i++) {
                 const key = modalIds[i];
                 //  send obj to controller
-                (modalIds[i] == id) ? self.controllers[key].show(): self.controllers[key].hide();
+                if (modalIds[i] == id) self.controllers[key].show();
+                else self.controllers[key].hide();
             }
         }
 

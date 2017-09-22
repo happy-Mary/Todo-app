@@ -39,7 +39,9 @@ export default listGroupModule
 
         function getListGroup(id) {
             self.data.forEach((group) => {
-                if (group.id == id) return group;
+                let currgroup;
+                if (group.id == id) currgroup = group;
+                return currgroup;
             });
         }
 
