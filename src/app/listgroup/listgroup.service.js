@@ -1,7 +1,6 @@
 import listGroupModule from './listgroup.module';
 import ListGroup from './listgroup.constructor';
 import { URLS } from '../constants';
-import localStorageService from '../app.service';
 
 export default listGroupModule
     .service('listGroupService', function listGroupService($http, localStorageService) {
@@ -40,7 +39,9 @@ export default listGroupModule
 
         function getListGroup(id) {
             self.data.forEach((group) => {
-                if (group.id == id) return group;
+                let currgroup;
+                if (group.id == id) currgroup = group;
+                return currgroup;
             });
         }
 
@@ -51,15 +52,10 @@ export default listGroupModule
         }
 
         function createListGroup(name) {
-            let data = new ListGroup(name);
+            const data = new ListGroup(name);
             self.data.push(data);
             save();
         }
-
-        // function setListGroups(data) {
-        // 	self.data = data;
-        // 	save();
-        // }
 
         return {
             register: registerListGroups,
@@ -68,8 +64,6 @@ export default listGroupModule
             create: createListGroup,
             update: updateListGroup,
             delete: deleteListGroup,
-            // /////
             getGroup: getListGroup,
-            save: save
         }
     });

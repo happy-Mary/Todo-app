@@ -1,12 +1,13 @@
 import modalModule from './modal.module';
+import modalTemplate from './modal.templ.html';
 
 export default modalModule
-    .component('modal',{
+    .component('modal', {
         transclude: true,
         bindings: {
             title: '@',
-            modalId: '@' 
+            modalId: '@'
         },
-        template: require('./modal.templ.html'),
+        template: modalTemplate,
         controller: 'modalController',
     });

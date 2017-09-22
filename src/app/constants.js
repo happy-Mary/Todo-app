@@ -6,7 +6,3 @@ const URLS = {
 };
 
 export { URLS };
-
-
-
-
