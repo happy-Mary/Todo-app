@@ -66,16 +66,18 @@ export default todoModule
             save();
         }
 
-        function getCountTodoInList(listId) {
-            var todo = self.data.filter(function(todo) {
-                if (todo.listId == listId) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            return todo.length;
-        }
+    function getCountTodoInList(listId){
+        var todo = self.data.filter(function(todo){
+            if(todo.listId == listId && !todo.completed){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+        return todo.length;
+    }
+
 
 
         return {
