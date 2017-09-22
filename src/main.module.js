@@ -6,8 +6,8 @@ import './sass/lists.scss';
 import './sass/todo.scss';
 import './sass/modal.scss';
 
-
 import mainModule from './app/app.module';
+
 require('./app/app.config');
 require('./app/app.controller');
 require('./app/app.service');

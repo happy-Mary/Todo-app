@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Muli');
+@import "var.scss";
 body,
 html {
     background-color: lightgray;
@@ -126,7 +126,7 @@ aside {
     }
     .nav {
         height: 40px;
-        background-color: #206676;
+        background-color: $darkblue;
         .toggle-button,
         .toggle-search {
             width: 40px;
@@ -179,13 +179,13 @@ aside {
         width: 100%;
         background-color: #fff;
         a {
-            color: #2F8AA3;
+            color: $blue;
             display: block;
             height: 40px;
             line-height: 40px;
             padding-left: 50px;
             text-transform: uppercase;
-            border-top: 2px solid #2F8AA3;
+            border-top: 2px solid $blue;
             background: url('../img/icons/add-nav.png') no-repeat 15px center;
         }
     }
@@ -194,7 +194,7 @@ aside {
 header {
     margin-left: 300px;
     height: 40px;
-    background: #04819E;
+    background: $blue-header;
     position: relative;
     h2 {
         display: inline-block;
@@ -224,7 +224,7 @@ header {
         bottom: -100px;
         right: 10px;
         z-index: 1000;
-        background-color: #206676;
+        background-color: $darkblue;
         padding: 5px;
         display: none;
         &.sort-open {
@@ -238,7 +238,7 @@ header {
             text-align: center;
             color: #fff;
             &:hover {
-                background-color: #04819E;
+                background-color: $blue-header;
             }
         }
     }
@@ -249,37 +249,10 @@ main {
     padding: 10px;
     height: 100%;
     overflow-y: auto;
-    // .todo {
-    //     li{
-    //         padding: 5px 12px;
-    //         margin-top: 5px;
-    //         background-color: #eaf1f3;
-    //         border-radius: 2px;
-    //         a{
-    //             color: #696969;
-    //         }
-    //         .marked {
-    //             float: right;
-    //             width: 20px;
-    //             height: 20px;
-    //             background-image: url('../img/icons/star.png');
-    //             background-repeat: no-repeat;
-    //             background-position: center;
-    //             background-size: contain;
-    //             cursor: pointer;
-    //             input{
-    //                 display: none;
-    //             }
-    //             &.active{
-    //                 background-image: url('../img/icons/star-red.png');
-    //             }
-    //         }
-    //     }
-    // }
     form {
         width: 100%;
         height: 40px;
-        background-color: #38B2CE;
+        background-color: $blue-main;
         margin: 0 auto;
         border-radius: 5px;
         position: relative;
