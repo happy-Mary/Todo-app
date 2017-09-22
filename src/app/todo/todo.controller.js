@@ -12,7 +12,7 @@ export default todoModule
         self.parentId = $stateParams.listid;
 
 
-        self.changeMarked = function() {
+        self.changeTodo = function() {
             todoService.update();
         };
 
