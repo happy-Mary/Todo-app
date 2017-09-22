@@ -1,7 +1,6 @@
 import mainModule from './app.module';
-import modalService from './modal/modal.service';
-// import listService from './list/list.service';
-// import localStorageService from './app.service';
+
+require('./modal/modal.service');
 
 export default mainModule
     .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state, $timeout) {
