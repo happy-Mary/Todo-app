@@ -69,7 +69,7 @@ export default todoModule
 
     function getCountTodoInList(listId){
         var todo = self.data.filter(function(todo){
-            if(todo.listId == listId){
+            if(todo.listId == listId && !todo.completed){
                 return true;
             }
             else{
