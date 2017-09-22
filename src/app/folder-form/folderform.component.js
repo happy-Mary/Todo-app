@@ -1,11 +1,12 @@
 import folderFormModule from './folderform.module';
+import folderformTemplate from './folderform.templ.html';
 
 export default folderFormModule
-    .component('folderForm',{
+    .component('folderForm', {
         bindings: {
             state: '@',
             editData: '<'
         },
-        template: require('./folderform.templ.html'),
+        template: folderformTemplate,
         controller: 'folderFormController'
     });

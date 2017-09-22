@@ -1,58 +1,49 @@
 import listGroupModule from './listgroup.module';
-import listGroupService from './listgroup.service';
 
 export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
-        var self = this;
+        const self = this;
+
+        function removeSubmenu() {
+            const allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
+            allOpenedMenus.removeClass('submenu-open');
+        }
+
         self.listGroups = listGroupService.get();
         self.openFolder = function(event) {
-        let folderLink = angular.element(event.currentTarget);
+            const folderLink = angular.element(event.currentTarget);
             if (folderLink.hasClass('folder-item')) {
-                let folderItem = folderLink.parent();
+                const folderItem = folderLink.parent();
                 (folderItem.hasClass('folder-close')) ? folderItem.removeClass('folder-close'): folderItem.addClass('folder-close');
             }
         };
 
-        self.deleteLisGroup = function(id){
-            listGroupService.deleteGroup();
+        self.handleEdit = function(itemCurr) {
+            self.onEdit({ item: itemCurr });
         };
 
-        self.handleEdit = function(item) {
-            self.onEdit({item: item});
+        self.handleDelete = function(itemCurr) {
+            self.onDelete({ item: itemCurr });
         };
 
-        self.handleDelete = function(item) {
-            self.onDelete({item: item});
-        };
-
-        self.toggleMenuEdit = function(event){
+        self.toggleMenuEdit = function(event) {
             event.preventDefault();
             event.stopPropagation();
-            let menuEditButton = angular.element(event.currentTarget);
-            let currMenu = menuEditButton.parent().next();
-            let currMenuStatus = currMenu.hasClass('submenu-open');
+            const menuEditButton = angular.element(event.currentTarget);
+            const currMenu = menuEditButton.parent().next();
+            const currMenuStatus = currMenu.hasClass('submenu-open');
             removeSubmenu();
-            (!currMenuStatus) ? currMenu.addClass('submenu-open') : '';
+            (!currMenuStatus) ? currMenu.addClass('submenu-open'): '';
             self.editMenuActive = !self.editMenuActive;
         };
 
-        let mainCont = angular.element(document.querySelector('.container'));
-        mainCont.on('click', function(){
+        const mainCont = angular.element(document.querySelector('.container'));
+        mainCont.on('click', () => {
             removeSubmenu();
         });
 
-        function removeSubmenu(){
-            let allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
-            allOpenedMenus.removeClass('submenu-open');
-        }
-
-        self.$onInit = function() { 
+        self.$onInit = function() {
             self.onEdit = self.onEdit;
-            self.onDelete = self.onDelete; 
+            self.onDelete = self.onDelete;
         };
-        
     });
-
-      
-
-
