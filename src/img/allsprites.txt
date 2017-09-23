@@ -30,3 +30,38 @@
 <div class='sprite bookmark-button'></div>
 <div class='sprite list'></div>
 <div class='sprite rubbish'></div>
+
+SASS EXTEND
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @extend .message;
+  border-color: green;
+}
+
+.error {
+  @extend .message;
+  border-color: red;
+}
+
+.warning {
+  @extend .message;
+  border-color: yellow;
+}
+
+SASS SYNTAX
+
+$icon-width: 24px;
+$icon-height: 24px;
+$icons: image-url('toolbar.png');
+
+.media-icon {
+  background-image: $icons;
+  background-position: -($icon-width * 5) -($icon-height * 1);
+  width: $icon-width;
+  height: $icon-height;
+}
