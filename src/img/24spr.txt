@@ -1,0 +1,36 @@
+.sprite { background: url('sprite.png') no-repeat top left; width: 24px; height: 24px;  } 
+.sprite.add-nav { background-position: 0 0; } 
+.sprite.add { background-position: 0 -34px; } 
+.sprite.cancel-music { background-position: 0 -68px; } 
+.sprite.button-squares { background-position: 0 -102px; } 
+.sprite.down-arrow { background-position: 0 -136px; } 
+.sprite.magnifier-tool { background-position: 0 -170px; } 
+.sprite.alphabetical-order { background-position: 0 -204px; } 
+.sprite.edit { background-position: 0 -238px; } 
+.sprite.folder { background-position: 0 -272px; } 
+.sprite.bookmark-button { background-position: 0 -306px; } 
+.sprite.list { background-position: 0 -340px; } 
+.sprite.rubbish { background-position: 0 -374px; } 
+
+<div class='sprite add-nav'></div>
+<div class='sprite add'></div>
+<div class='sprite cancel-music'></div>
+<div class='sprite button-squares'></div>
+<div class='sprite down-arrow'></div>
+<div class='sprite magnifier-tool'></div>
+<div class='sprite alphabetical-order'></div>
+<div class='sprite edit'></div>
+<div class='sprite folder'></div>
+<div class='sprite bookmark-button'></div>
+<div class='sprite list'></div>
+<div class='sprite rubbish'></div>
+
+32 SPRITES
+.sprite { background: url('sprite.png') no-repeat top left; width: 32px; height: 32px;  } 
+.sprite.menu-button { background-position: 0 0; } 
+.sprite.star { background-position: 0 -42px; } 
+.sprite.star-red { background-position: 0 -84px; } 
+
+<div class='sprite menu-button'></div>
+<div class='sprite star'></div>
+<div class='sprite star-red'></div>
