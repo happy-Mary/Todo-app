@@ -1,6 +1,7 @@
 import listGroupModule from './listgroup.module';
 import ListGroup from './listgroup.constructor';
-import { URLS } from '../constants';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default listGroupModule
     .service('listGroupService', function listGroupService($http, localStorageService) {
