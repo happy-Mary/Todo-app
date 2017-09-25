@@ -138,7 +138,6 @@ export default mainModule
                     const valueA = a.title.toLowerCase();
                     const valueB = b.title.toLowerCase();
                     sortMenuEl.removeClass('sort-open');
-                    // return (valueA > valueB) ? 1 : (valueA < valueB) ? -1 : 0;
 
                     if (valueA > valueB) return 1;
                     else if (valueA < valueB) return -1;
@@ -169,12 +168,10 @@ export default mainModule
                 });
 
                 // testing dates sorting (remove after tests)
-                angular.forEach(tasks, (task) => {
-                    console.log(task.date);
-                });
-                /////////////////////////////////
+                // angular.forEach(tasks, (task) => {
+                // console.log(task.date);
+                // });
             }
         };
-
 
     });

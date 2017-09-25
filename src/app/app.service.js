@@ -1,7 +1,7 @@
 import mainModule from './app.module';
 
 export default mainModule
-    .service('localStorageService', function localStorageService($timeout) {
+    .service('localStorageService', ['$timeout', function localStorageService($timeout) {
         function setData(key, data) {
             const promise = new Promise((resolve) => {
                 $timeout(() => {
@@ -31,4 +31,4 @@ export default mainModule
             get: getData,
             set: setData
         };
-    });
+    }]);
