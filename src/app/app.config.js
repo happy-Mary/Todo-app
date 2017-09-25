@@ -10,7 +10,8 @@ export default mainModule
         $stateProvider
             .state('lists',{
                 url: '/lists',
-                template: todoTemplate
+                template: todoTemplate,
+                abstract: true
             })
             .state('lists.todo', {
                 url: '/:listid',
