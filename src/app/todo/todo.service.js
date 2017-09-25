@@ -1,6 +1,7 @@
 import todoModule from './todo.module';
 import ToDo from './todo.constructor';
-import { URLS } from '../constants';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default todoModule
     .service('todoService', function todoService($filter, $http, localStorageService) {
@@ -64,9 +65,10 @@ export default todoModule
         }
 
         function getCountTodoInList(listId) {
-            const todo = self.data.filter((item) => {
+            function getTodoInList(item) {
                 return (item.listId == listId && !item.completed);
-            });
+            }
+            const todo = self.data.filter(getTodoInList);
             return todo.length;
         }
 

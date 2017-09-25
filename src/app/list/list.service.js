@@ -1,9 +1,10 @@
 import listModule from './list.module';
 import List from './list.constructor';
-import { URLS } from '../constants';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default listModule
-    .service('listService', function($http, localStorageService) {
+    .service('listService', function listService($http, localStorageService) {
         const self = this;
         self.data = [];
 

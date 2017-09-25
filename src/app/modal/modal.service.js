@@ -11,7 +11,7 @@ export default modalModule
 
         function openModal(id) {
             const modalIds = Object.keys(self.controllers);
-            for (let i = 0; i < modalIds.length; i++) {
+            for (let i = 0; i < modalIds.length; i += 1) {
                 const key = modalIds[i];
                 //  send obj to controller
                 if (modalIds[i] == id) self.controllers[key].show();
@@ -20,11 +20,10 @@ export default modalModule
         }
 
         function closeModal() {
-            if (self.controllers) {
-                for (const key in self.controllers) {
-                    self.controllers[key].hide();
-                }
-            }
+            const keys = Object.keys(self.controllers);
+            angular.forEach(keys, (key) => {
+                self.controllers[key].hide();
+            });
         }
 
         return {
