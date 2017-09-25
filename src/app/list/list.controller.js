@@ -9,24 +9,25 @@ export default listModule
 
         self.modal = modalService;
 
-        self.newList = function(title) {
+        self.newList = (title) => {
             listService.create(title);
         };
 
-        self.handleEdit = function(list) {
+        self.handleEdit = (list) => {
             self.onEdit({ item: list });
         };
 
-        self.handleDelete = function(list) {
+        self.handleDelete = (list) => {
             self.onDelete({ item: list });
         };
 
-        self.$onInit = function() {
+        self.$onInit = () => {
             self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
         };
 
-        self.getCountTodo = function(id) {
-            return todoService.getCountTodo(id);
-        }
+        self.getCountTodo = (id) => {
+            const countTodo = todoService.getCountTodo(id);
+            return countTodo;
+        };
     });

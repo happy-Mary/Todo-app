@@ -1,6 +1,7 @@
 <section>
     <ul class='todo'>
-        <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId}   track by $index' ng-if="!task.completed">
+        <!-- <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId} track by $index' ng-if="!task.completed"> -->
+        <li ng-repeat='task in $ctrl.todo | filter: ($ctrl.hasListId ? {"listId": $ctrl.parentId} : {"title": $ctrl.searchParam}) track by $index' ng-if="!task.completed">
             <label class="completed"><input type="checkbox" ng-model='task.completed' ng-change='$ctrl.changeTodo()'></label>
             <a href='#'>{{task.title}}</a>
             <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
@@ -30,7 +31,9 @@
         <h3>Completed tasks:</h3>
         <ul class='todo'>
             <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId} track by $index' ng-if="task.completed">
-                <label class="completed"><input type="checkbox" ng-model='task.completed'></label>
+                <label class="completed">
+                    <input type="checkbox" ng-model='task.completed'  ng-change='$ctrl.changeTodo()'>
+                </label>
                 <a href='#'>{{task.title}}</a>
                 <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
                     <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeMarked()'>
