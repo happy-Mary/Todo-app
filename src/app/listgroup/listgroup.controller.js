@@ -10,7 +10,7 @@ export default listGroupModule
         }
 
         self.listGroups = listGroupService.get();
-        self.openFolder = function(event) {
+        self.openFolder = (event) => {
             const folderLink = angular.element(event.currentTarget);
             if (folderLink.hasClass('folder-item')) {
                 const folderItem = folderLink.parent();
@@ -19,15 +19,15 @@ export default listGroupModule
             }
         };
 
-        self.handleEdit = function(itemCurr) {
+        self.handleEdit = (itemCurr) => {
             self.onEdit({ item: itemCurr });
         };
 
-        self.handleDelete = function(itemCurr) {
+        self.handleDelete = (itemCurr) => {
             self.onDelete({ item: itemCurr });
         };
 
-        self.toggleMenuEdit = function(event) {
+        self.toggleMenuEdit = (event) => {
             event.preventDefault();
             event.stopPropagation();
             const menuEditButton = angular.element(event.currentTarget);
@@ -43,7 +43,7 @@ export default listGroupModule
             removeSubmenu();
         });
 
-        self.$onInit = function() {
+        self.$onInit = () => {
             self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
         };

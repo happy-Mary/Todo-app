@@ -6,16 +6,16 @@ export default modalModule
         self.open = false;
         self.id = undefined;
 
-        self.$onInit = function() {
+        self.$onInit = () => {
             self.id = self.modalId;
             modalService.register(self.id, self);
         };
 
-        self.show = function() {
+        self.show = () => {
             self.open = true;
         };
 
-        self.hide = function() {
+        self.hide = () => {
             self.open = false;
         };
     });

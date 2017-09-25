@@ -4,7 +4,6 @@ require('./modal/modal.service');
 
 export default mainModule
     .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state, $timeout) {
-
         const self = this;
         self.headerTitle = 'current list title';
         self.marked = false;
@@ -58,18 +57,17 @@ export default mainModule
         });
 
         // redirect to search while typing
-        self.goToSearch = function() {
-            $state.go('lists.filter.search', { param: self.searchItem });
+        self.goToSearch = () => {
+            $state.go('lists.filter', { search: self.searchItem });
         };
 
         // focusing input for adding todo
-        self.focusAddTask = function() {
+        self.focusAddTask = () => {
             self.taskFocused = true;
             document.querySelector(".newTaskTitle").focus();
         };
 
-        self.toggleFocus = function(event) {
-            // (self.taskFocused) ? self.taskFocused = false: self.taskFocused = true;
+        self.toggleFocus = (event) => {
             self.taskFocused = !self.taskFocused;
             if (!self.taskFocused) {
                 event.stopPropagation();
@@ -77,7 +75,7 @@ export default mainModule
         };
 
         // adding todo
-        self.addToDo = function() {
+        self.addToDo = () => {
             event.preventDefault();
             const newTodo = self.newTodoTitle.trim();
             if (newTodo) {
@@ -126,7 +124,7 @@ export default mainModule
         // ////////////////////////////////
         // SORTING TODOS
         // ////////////////////////////////
-        self.toggleSortMenu = function() {
+        self.toggleSortMenu = () => {
             sortMenuEl.toggleClass('sort-open');
         };
 
