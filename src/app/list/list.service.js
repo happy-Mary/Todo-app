@@ -1,89 +1,80 @@
 import listModule from './list.module';
 import List from './list.constructor';
-import { URLS } from '../constants';
-import localStorageService from '../app.service';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default listModule
-.service('listService', function($http, localStorageService){
-    let self  = this;
-    self.data = [];
+    .service('listService', function listService($http, localStorageService) {
+        const self = this;
+        self.data = [];
 
-    // ? change to let save = , remove from return
-    function save(){
-        localStorageService.set('lists', self.data);
-    }
-    
-    function registerLists(){
-        localStorageService.get('lists').then(function successCallback(response){
-            self.data.push(...response);
-            save();
-        })
-        .catch(function(){
-             $http({ method: 'GET', url: URLS.listURL })
-                .then(function successCallback(response) {
-                    self.data.push(...response.data);
+        function save() {
+            localStorageService.set('lists', self.data);
+        }
+
+        function registerLists() {
+            localStorageService.get('lists').then((response) => {
+                    self.data.push(...response);
                     save();
-                    console.log('got data from server');
                 })
-                .catch(function errorCallback() {
-                    self.data =  [];
-                    save();
+                .catch(() => {
+                    $http({ method: 'GET', url: URLS.listURL })
+                        .then((response) => {
+                            self.data.push(...response.data);
+                            save();
+                        })
+                        .catch(() => {
+                            self.data = [];
+                            save();
+                        });
                 });
-        })
-    }            
+        }
 
-    function getLists(){
-       return self.data;
-    }
+        function getLists() {
+            return self.data;
+        }
 
-    function getList(id) {
-        var list;
-        self.data.forEach(function(item){
-            if(item.id == id){
-                list = item;
-            }
-        });
-        return list;
-    }
+        function getOnlyList(id) {
+            angular.forEach(self.data, (item) => {
+                let list;
+                if (item.id == id) {
+                    list = item;
+                }
+                return list;
+            });
+        }
 
-    function createList(title, id){
-        let list = new List(title, id);
-        self.data.push(list);
-        save();
-    }
+        function createList(title, id) {
+            const list = new List(title, id);
+            self.data.push(list);
+            save();
+        }
 
-    function updateList(){
-        save();
-    }
+        function updateList() {
+            save();
+        }
 
-    function deleteList(id) {
-        let index = self.data.findIndex(x => x.id==id);
-        self.data.splice(index, 1);
-        save();
-    }
+        function deleteList(id) {
+            const index = self.data.findIndex(x => x.id == id);
+            self.data.splice(index, 1);
+            save();
+        }
 
-    function changeParentFolder(currId, newId){
-        self.data.forEach(function(list){
-            if (list.listGroupId === currId) list.listGroupId = newId;
-        });
-        save();
-    }
+        function changeParent(currId, newId) {
+            angular.forEach(self.data, (item) => {
+                const list = item;
+                if (list.listGroupId === currId) list.listGroupId = newId;
+            });
+            save();
+        }
 
-     function setLists(obj) {
-        self.data = obj;
-        save();
-    }
-
-    return {
-        register: registerLists,
-        update: updateList,
-        create: createList,
-        delete: deleteList,
-        get: getLists,
-        changeParentFolder: changeParentFolder,
-        getList: getList,
-        // // //
-        save: save    
-    };
-});
-
+        return {
+            register: registerLists,
+            update: updateList,
+            create: createList,
+            delete: deleteList,
+            get: getLists,
+            changeParentFolder: changeParent,
+            getList: getOnlyList,
+        };
+    });

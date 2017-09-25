@@ -8,7 +8,7 @@ export default mainModule
         $locationProvider.html5Mode(true);
         $urlRouterProvider.otherwise("/lists/marked");
         $stateProvider
-            .state('lists',{
+            .state('lists', {
                 url: '/lists',
                 template: todoTemplate,
                 abstract: true

@@ -1,0 +1,49 @@
+@import "var.scss";
+.todo {
+    li {
+        padding: 5px 12px;
+        margin-top: 5px;
+        background-color: #eaf1f3;
+        border-radius: 2px;
+        a {
+            color: #696969;
+        }
+        .marked {
+            float: right;
+            width: 20px;
+            height: 20px;
+            background-image: url('../img/icons/star.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            cursor: pointer;
+            input {
+                display: none;
+            }
+            &.active {
+                background-image: url('../img/icons/star-red.png');
+            }
+        }
+    }
+    .completed-btn {
+        margin: 10px 0;
+        padding: 5px 10px;
+        background-color: lightblue;
+        text-transform: uppercase;
+        &:active {
+            background-color: $blue;
+        }
+    }
+}
+
+.todo-completed {
+    h3 {
+        margin: 5px 15px;
+    }
+    li {
+        opacity: .7;
+        a {
+            text-decoration: line-through;
+        }
+    }
+}

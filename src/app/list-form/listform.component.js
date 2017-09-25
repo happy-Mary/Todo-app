@@ -1,4 +1,5 @@
 import listFormModule from './listform.module';
+import listFormTemplate from './listform.templ.html';
 
 export default listFormModule
     .component('listForm', {
@@ -6,6 +7,6 @@ export default listFormModule
             state: '@',
             editData: '<'
         },
-        template: require('./listform.templ.html'),
+        template: listFormTemplate,
         controller: 'listFormController'
     });

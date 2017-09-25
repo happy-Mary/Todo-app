@@ -5,8 +5,6 @@ const URLS = {
     todoURL: 'https://api.myjson.com/bins/13xsm9'
 };
 
-export { URLS };
+export default URLS;
 
-
-
-
+// export { URLS };
