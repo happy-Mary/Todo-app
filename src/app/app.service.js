@@ -1,44 +1,34 @@
 import mainModule from './app.module';
 
 export default mainModule
-.service('localStorageService', function($timeout){
-	function set(key, data){
-		let promise = new Promise(function(resolve, reject){
-			$timeout(function(){
-				localStorage.setItem(key, JSON.stringify(data));
-				resolve();
-			}, 1000);
-		});
-		return promise;
-	}
-	function get(key){
-		let promise = new Promise(function(resolve, reject){
-			$timeout(function(){
-				let resault = JSON.parse(localStorage.getItem(key));
-				if(resault){
-					resolve(resault);
-				}
-				else{
-					reject('Error');
-				}
-				
-			}, 1000);
-		});
-		return promise;
-	}
-	// function set(key, data){
-		
-	// 			localStorage.setItem(key, JSON.stringify(data));
+    .service('localStorageService', ['$timeout', function localStorageService($timeout) {
+        function setData(key, data) {
+            const promise = new Promise((resolve) => {
+                $timeout(() => {
+                    localStorage.setItem(key, JSON.stringify(data));
+                    resolve();
+                }, 1000);
+            });
+            return promise;
+        }
 
-	// }
-	// function get(key){
-		
-	// 			let resault = JSON.parse(localStorage.getItem(key));
-	// 		return resault;
+        function getData(key) {
+            const promise = new Promise((resolve, reject) => {
+                $timeout(() => {
+                    const result = JSON.parse(localStorage.getItem(key));
+                    if (result) {
+                        resolve(result);
+                    } else {
+                        reject('Error');
+                    }
 
-	// }
-	return {
-		get: get,
-		set: set
-	};
-});
+                }, 1000);
+            });
+            return promise;
+        }
+
+        return {
+            get: getData,
+            set: setData
+        };
+    }]);
