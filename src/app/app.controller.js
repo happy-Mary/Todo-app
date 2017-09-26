@@ -6,12 +6,13 @@ export default mainModule
     .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state, $timeout) {
         const self = this;
         self.headerTitle = 'current list title';
+
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
         self.sidebarOpen = true;
         self.currListId = $stateParams.listid;
-
+        // self.headerTitle = listService.getList(self.currListId).title;
         let sortMenuEl = null;
 
         // service to open modal
@@ -19,7 +20,7 @@ export default mainModule
 
         // getting data for list and listgroups ???
         listGroupService.register();
-        listService.register();
+        // listService.register();
         todoService.register();
 
         angular.element(document).ready(() => {
@@ -45,11 +46,13 @@ export default mainModule
         // change main title on route
         $transitions.onSuccess({ to: 'lists.**' }, () => {
             self.currListId = $stateParams.listid;
+            console.log(self.currListId);
 
             if (self.currListId !== 'marked') {
                 const list = listService.getList(self.currListId);
                 // CHANGE AFTER RESOLVING GETTING DATA
-                self.headerTitle = (list !== undefined) ? list.title : 'default title';
+                // self.headerTitle = (list !== undefined) ? list.title : 'default title';
+                self.headerTitle = list.title;
                 // self.headerTitle = list.title;
             } else {
                 self.headerTitle = 'избранное';
