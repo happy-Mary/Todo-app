@@ -21,7 +21,12 @@ export default mainModule
             })
             .state('lists.todo', {
                 url: '/:listid',
-                template: '<todo-comp></todo-comp>'
+                template: '<todo-comp></todo-comp>',
+                resolve: {
+                    vvv: function($stateParams) {
+                        console.log($stateParams);
+                    }
+                }
             })
             .state('lists.filter', {
                 // url: '/filter/:listid',
