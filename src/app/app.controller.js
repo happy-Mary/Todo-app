@@ -10,17 +10,31 @@ export default mainModule
         self.newTodoTitle = '';
         self.taskFocused = false;
         self.sidebarOpen = true;
-        self.currListId = $stateParams.listid;
-        self.headerTitle = listService.getList(self.currListId).title;
-
         let sortMenuEl = null;
+        // self.currListId = $stateParams.listid;
+        self.currListId = $state.params.listid;
 
         // service to open modal
         self.modal = modalService;
 
-        // getting data for list and listgroups ???
+        // method to get main list title
+        function getMainTitle() {
+            if ($state.params.listid) {
+                if (self.currListId !== 'marked') {
+                    const list = listService.getList(self.currListId);
+                    self.headerTitle = list.title;
+                } else {
+                    self.headerTitle = 'избранное';
+                }
+            } else if ($state.params.search !== undefined) {
+                self.headerTitle = 'search';
+            }
+        }
+
+        getMainTitle();
+
+        // getting data for list and listgroups
         listGroupService.register();
-        listService.register();
         todoService.register();
 
         angular.element(document).ready(() => {
@@ -45,16 +59,9 @@ export default mainModule
 
         // change main title on route
         $transitions.onSuccess({ to: 'lists.**' }, () => {
-            self.currListId = $stateParams.listid;
-            console.log($stateParams);
-            if (self.currListId !== 'marked') {
-                const list = listService.getList(self.currListId);
-                // CHANGE AFTER RESOLVING GETTING DATA
-                self.headerTitle = (list !== undefined) ? list.title : 'default title';
-                // self.headerTitle = list.title;
-            } else {
-                self.headerTitle = 'избранное';
-            }
+            // self.currListId = $stateParams.listid;
+            self.currListId = $state.params.listid;
+            getMainTitle();
         });
 
         // redirect to search while typing
@@ -80,7 +87,7 @@ export default mainModule
             event.preventDefault();
             const newTodo = self.newTodoTitle.trim();
             if (newTodo) {
-                const listId = $stateParams.listid;
+                const listId = self.currListId;
                 todoService.create(newTodo, listId, self.marked);
             }
             self.newTodoTitle = '';
@@ -125,11 +132,10 @@ export default mainModule
         // ////////////////////////////////
         // SORTING TODOS
         // ////////////////////////////////
+        const tasks = todoService.get();
         self.toggleSortMenu = () => {
             sortMenuEl.toggleClass('sort-open');
         };
-
-        const tasks = todoService.get();
 
         self.sorting = {
             byTitle() {
