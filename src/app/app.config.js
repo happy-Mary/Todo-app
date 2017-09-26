@@ -14,29 +14,19 @@ export default mainModule
                 abstract: true,
                 controller: 'AppController as ctrl',
                 resolve: {
-                    data: function(listService) {
+                    data: function getData(listService) {
                         return listService.register();
                     }
                 }
             })
             .state('lists.todo', {
                 url: '/:listid',
-                template: '<todo-comp></todo-comp>',
-                resolve: {
-                    vvv: function($stateParams) {
-                        console.log($stateParams);
-                    }
-                }
+                template: '<todo-comp></todo-comp>'
             })
             .state('lists.filter', {
                 // url: '/filter/:listid',
                 url: '/filter/:search',
                 template: '<todo-comp></todo-comp>'
             })
-            // .state('lists.filter.search', {
-            //     url: '/?param',
-            //     // template: '<todo-comp filter-search = ctrl.searchItem></todo-comp>'
-            //     template: '<p>{{ctrl.searchItem}}</p>'
-            // });
     }
 ]);
