@@ -45,7 +45,6 @@ export default mainModule
         // change main title on route
         $transitions.onSuccess({ to: 'lists.**' }, () => {
             self.currListId = $stateParams.listid;
-
             if (self.currListId !== 'marked') {
                 const list = listService.getList(self.currListId);
                 // CHANGE AFTER RESOLVING GETTING DATA
