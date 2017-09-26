@@ -13,7 +13,8 @@ export default listModule
         }
 
         function registerLists() {
-            localStorageService.get('lists').then((response) => {
+            self.data = [];
+            return localStorageService.get('lists').then((response) => {
                     self.data.push(...response);
                     save();
                 })
@@ -35,13 +36,13 @@ export default listModule
         }
 
         function getOnlyList(id) {
+            let list;
             angular.forEach(self.data, (item) => {
-                let list;
                 if (item.id == id) {
                     list = item;
                 }
-                return list;
             });
+            return list;
         }
 
         function createList(title, id) {
