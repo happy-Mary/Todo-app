@@ -11,7 +11,13 @@ export default mainModule
             .state('lists', {
                 url: '/lists',
                 template: todoTemplate,
-                abstract: true
+                abstract: true,
+                controller: 'AppController as ctrl',
+                resolve: {
+                    data: function(listService) {
+                        return listService.register();
+                    }
+                }
             })
             .state('lists.todo', {
                 url: '/:listid',
