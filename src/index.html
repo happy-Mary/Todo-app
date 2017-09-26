@@ -12,31 +12,9 @@
     <base href=""/>
 </head>
 
-<!-- <body ng-controller="AppController as ctrl"> -->
+<!-- CHANGE MAIN CTRL -->
 <body>
-    <ui-view></ui-view>
-      
-    <section class="modals">
-        <modal modal-id='add-list' title="Create new list">
-            <list-form state="create"></list-form>
-        </modal>
-        <modal modal-id='add-folder' title="Create new folder">
-            <folder-form state="create"></folder-form>
-        </modal>
-        <modal modal-id='edit-list' title="Edit list">
-            <list-form state="edit" edit-data='ctrl.activeItem'></list-form>
-        </modal>
-        <modal modal-id='edit-folder' title="Edit folder">
-            <folder-form state="edit" edit-data='ctrl.activeItem'></folder-form>
-        </modal>
-        <modal modal-id='delete-list' title='Delete list'>
-            <list-form state="delete" edit-data='ctrl.activeItem'></list-form>
-        </modal>
-        <modal modal-id='delete-folder' title="Delete folder">
-            <folder-form state="delete" edit-data='ctrl.activeItem'></folder-form>
-        </modal>
-    </section>
-        
+    <ui-view></ui-view>    
 </body>
 
 </html>
