@@ -11,6 +11,7 @@ export default folderFormModule
         self.addFolder = (title) => {
             listGroupService.create(title);
             modalService.close();
+            self.currData.title = "";
         };
 
         self.editFolder = (title) => {
