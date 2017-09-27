@@ -22,7 +22,11 @@ export default mainModule
             if ($state.params.listid) {
                 if (self.currListId !== 'marked') {
                     const list = listService.getList(self.currListId);
-                    self.headerTitle = list.title;
+                    if (list) {
+                        self.headerTitle = list.title
+                    } else {
+                        $state.go('lists.todo', { listid: 'marked' });
+                    }
                 } else {
                     self.headerTitle = 'избранное';
                 }
