@@ -3,15 +3,14 @@ import mainModule from './app.module';
 require('./modal/modal.service');
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $stateParams, $transitions, $state, $timeout) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
         // self.headerTitle = 'current list title';
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
         self.sidebarOpen = true;
-        let sortMenuEl = null;
-        // self.currListId = $stateParams.listid;
+        let sortMenuEl = null;;
         self.currListId = $state.params.listid;
 
         // service to open modal
@@ -38,7 +37,6 @@ export default mainModule
         getMainTitle();
 
         // getting data for list and listgroups
-        listGroupService.register();
         todoService.register();
 
         angular.element(document).ready(() => {
@@ -63,7 +61,6 @@ export default mainModule
 
         // change main title on route
         $transitions.onSuccess({ to: 'lists.**' }, () => {
-            // self.currListId = $stateParams.listid;
             self.currListId = $state.params.listid;
             getMainTitle();
         });
