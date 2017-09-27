@@ -9,6 +9,7 @@ export default listFormModule
         self.addList = (title) => {
             listService.create(title);
             modalService.close();
+            self.currData.title = "";
         };
 
         self.editList = (title) => {
