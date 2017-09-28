@@ -27,9 +27,8 @@ export default mainModule
                     template: '<todo-comp></todo-comp>'
                 })
                 .state('lists.filter', {
-                    // url: '/filter/:listid',
                     url: '/filter/:search',
                     template: '<todo-comp></todo-comp>'
-                })
+                });
         }
     ]);
