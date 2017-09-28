@@ -1,4 +1,5 @@
 import listGroupModule from './listgroup.module';
+import '../../sass/listgroup.scss';
 
 export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {

@@ -1,4 +1,5 @@
 import listModule from './list.module';
+import '../../sass/lists.scss';
 
 export default listModule
     .controller('listController', function listController(listService, modalService, todoService) {

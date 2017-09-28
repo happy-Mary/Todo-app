@@ -1,4 +1,5 @@
 import todoModule from './todo.module';
+import '../../sass/todo.scss';
 
 export default todoModule
     .controller('todoController', function todoController($stateParams, $state, todoService, listService) {
@@ -7,8 +8,6 @@ export default todoModule
         self.newTitle = '';
         self.completedShown = false;
         // from router
-        // console.log($state.includes("lists.todo"));
-
         self.hasListId = $state.includes("lists.todo");
         self.parentId = $stateParams.listid;
         self.searchParam = $stateParams.search;
