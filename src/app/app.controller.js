@@ -138,18 +138,26 @@ export default mainModule
                 }
                 return allow;
             },
-            // giving draggableObj from directive from transferData
-            // giving droppableObj from directive from object
-            checkDropAllow(dragObj, dropObj) {
+            verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
-                if ((dragObj.type === 'list' && dropObj.type === 'folder') || (dragObj.type === 'todo' && dropObj.type === 'list')) {
+                if (dragObj.type === 'list' && dropObj === null){
                     allow = true;
                 } else {
                     allow = false;
                 }
                 return allow;
+            },
+            handleObjDrop(dragObj, dropObj) {
+                // console.log(dropObj);
+                // console.log(dropObj.type);
+                if (dragObj.type === 'list' && dropObj.type === 'folder') {
+                    // call listService to change folderId
+                } else if (dragObj.type === 'todo' && dropObj.type === 'list') {
+                    // call todoService to change listId
+                } else if (dragObj.type === 'list' && dropObj === null) { 
+                    // call listService to change folderId with NULL
+                }
             }
-            // + functions to manipulate with data on drag and drop
         };
 
         // ////////////////////////////////

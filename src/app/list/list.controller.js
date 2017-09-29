@@ -31,4 +31,15 @@ export default listModule
             const countTodo = todoService.getCountTodo(id);
             return countTodo;
         };
+
+        self.verifyDragList = (obj) => {
+            let allow;
+            if (obj.type === 'list') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
     });
