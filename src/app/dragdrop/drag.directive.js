@@ -1,6 +1,6 @@
 import dragDropModule from './dragdrop.module';
 
-export default dragDropModule.directive('dragDir', function dragDir() {
+export default dragDropModule.directive('dragDir', [function dragDir() {
     return {
         restrict: 'A',
         scope: {
@@ -8,22 +8,23 @@ export default dragDropModule.directive('dragDir', function dragDir() {
             dragObj: '='
         },
         link: (scope, elem) => {
-            scope.letDrag = scope.verifyDragAllowed({obj: scope.dragObj});
+            const letDrag = scope.verifyDragAllowed({ obj: scope.dragObj });
 
             function handleDragStart(ev) {
                 ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
             }
 
-            function handleDragEnd() {
-                let element = angular.element(document.querySelectorAll('.dragover'));
-                // console.log(element);
-                // delete class .dragover through find();
+            function handleDragEnd(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                const dropElement = angular.element(document.querySelectorAll('.drag-over'));
+                dropElement.removeClass('drag-over');
             }
 
-            if (scope.letDrag) {
+            if (letDrag) {
                 elem.on('dragstart', handleDragStart);
                 elem.on('dragend', handleDragEnd);
             }
         }
     };
-});
+}]);

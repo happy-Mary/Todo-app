@@ -140,23 +140,15 @@ export default mainModule
             },
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
-                if (dragObj.type === 'list' && dropObj === null){
+                if (dragObj.type === 'list' && dropObj === null) {
                     allow = true;
                 } else {
                     allow = false;
                 }
                 return allow;
             },
-            handleObjDrop(dragObj, dropObj) {
-                // console.log(dropObj);
-                // console.log(dropObj.type);
-                if (dragObj.type === 'list' && dropObj.type === 'folder') {
-                    // call listService to change folderId
-                } else if (dragObj.type === 'todo' && dropObj.type === 'list') {
-                    // call todoService to change listId
-                } else if (dragObj.type === 'list' && dropObj === null) { 
-                    // call listService to change folderId with NULL
-                }
+            handleEmptyFolderDrop(dragObj, dropObj) {
+                listService.changeParentFolder(dragObj.listGroupId, dropObj, dragObj.id);
             }
         };
 
