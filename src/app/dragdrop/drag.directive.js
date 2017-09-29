@@ -4,12 +4,25 @@ export default dragDropModule.directive('dragDir', function dragDir() {
     return {
         restrict: 'A',
         scope: {
-            'verifyDragAllowed': '&verifyDrag'
+            verifyDragAllowed: '&',
+            dragObj: '='
         },
         link: (scope, elem) => {
-            scope.letDrag = verifyDragAllowed();
+            scope.letDrag = scope.verifyDragAllowed({obj: scope.dragObj});
+
+            function handleDragStart(ev) {
+                ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
+            }
+
+            function handleDragEnd() {
+                let element = angular.element(document.querySelectorAll('.dragover'));
+                // console.log(element);
+                // delete class .dragover through find();
+            }
+
             if (scope.letDrag) {
-                elem.addEventListener();
+                elem.on('dragstart', handleDragStart);
+                elem.on('dragend', handleDragEnd);
             }
         }
     };
