@@ -62,7 +62,7 @@ export default listModule
         }
 
         function changeParent(currFolderId, newFolderId, listId) {
-            if (!listId) {
+            if (listId === undefined) {
                 angular.forEach(self.data, (item) => {
                     const list = item;
                     if (list.listGroupId === currFolderId) list.listGroupId = newFolderId;

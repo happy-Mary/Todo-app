@@ -52,10 +52,6 @@ export default listGroupModule
 
         self.verifyFolderDrop = (dragObj, dropObj) => {
             let allow;
-            // console.log('dragObj.type');
-            // console.log(dragObj.type);
-            // console.log('dropObj.type');
-            // console.log(dropObj.type);
             if (dragObj.type === 'list' && dropObj.type === 'folder') {
                 allow = true;
             } else {
