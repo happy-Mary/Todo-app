@@ -10,7 +10,7 @@ export default mainModule
         self.newTodoTitle = '';
         self.taskFocused = false;
         self.sidebarOpen = true;
-        let sortMenuEl = null;;
+        let sortMenuEl = null;
         self.currListId = $state.params.listid;
 
         // service to open modal
@@ -127,6 +127,28 @@ export default mainModule
             // opening folder menu (on custom right click)
             onContextMenu() {
 
+            },
+            // check if element could be draggable
+            checkDragAllow(obj) {
+                let allow;
+                if (obj.type === 'todo' || obj.type === 'list') {
+                    allow = true;
+                } else {
+                    allow = false;
+                }
+                return allow;
+            },
+            verifyEmptyFolderDrop(dragObj, dropObj) {
+                let allow;
+                if (dragObj.type === 'list' && dropObj === null) {
+                    allow = true;
+                } else {
+                    allow = false;
+                }
+                return allow;
+            },
+            handleEmptyFolderDrop(dragObj, dropObj) {
+                listService.changeParentFolder(dragObj.listGroupId, dropObj, dragObj.id);
             }
         };
 

@@ -5,8 +5,8 @@ export default class ToDo {
         this.id = generateId();
         this.title = title;
         this.listId = listId;
-        this.completed = false;
         this.marked = marked || false;
+        this.completed = false;
         this.date = new Date();
         this.dueDate = "";
     }
