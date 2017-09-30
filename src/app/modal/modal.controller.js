@@ -1,4 +1,5 @@
 import modalModule from './modal.module';
+import '../../sass/modal.scss';
 
 export default modalModule
     .controller('modalController', function modalController(modalService) {

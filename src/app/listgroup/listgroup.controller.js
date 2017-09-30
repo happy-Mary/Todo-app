@@ -1,8 +1,10 @@
 import listGroupModule from './listgroup.module';
+import '../../sass/listgroup.scss';
 
 export default listGroupModule
-    .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
+    .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService, listService) {
         const self = this;
+        self.name = "Anna";
 
         function removeSubmenu() {
             const allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
@@ -46,5 +48,19 @@ export default listGroupModule
         self.$onInit = () => {
             self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
+        };
+
+        self.verifyFolderDrop = (dragObj, dropObj) => {
+            let allow;
+            if (dragObj.type === 'list' && dropObj.type === 'folder') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
+        self.handleDrop = (dragObj, dropObj) => {
+            listService.changeParentFolder(dragObj.listGroupId, dropObj.id, dragObj.id);
         };
     });

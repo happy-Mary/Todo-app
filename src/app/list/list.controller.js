@@ -1,4 +1,5 @@
 import listModule from './list.module';
+import '../../sass/lists.scss';
 
 export default listModule
     .controller('listController', function listController(listService, modalService, todoService) {
@@ -30,4 +31,15 @@ export default listModule
             const countTodo = todoService.getCountTodo(id);
             return countTodo;
         };
+
+        self.verifyDragList = (obj) => {
+            let allow;
+            if (obj.type === 'list') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
     });
