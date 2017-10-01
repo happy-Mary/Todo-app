@@ -6,6 +6,8 @@ require('./listgroup/listgroup.component');
 require('./list/list.controller');
 require('./list/list.service');
 require('./list/list.component');
+require('./list/dragenter.directive');
+
 require('./todo/todo.controller');
 require('./todo/todo.service');
 require('./todo/todo.component');
