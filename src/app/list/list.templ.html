@@ -1,6 +1,6 @@
 <ul class='lists tab-bar'>
     <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId}  track by $index' ui-sref-active='active-list' drag-dir drag-obj='list' verify-drag-allowed='$ctrl.verifyDragList(obj)' drop-obj='list' verify-drop='$ctrl.verifyListDrop(dragObj, dropObj)'
-        ng-mousedown='$ctrl.testDrag($event)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)' dragenter-dir>
+        ng-mousedown='$ctrl.testDrag($event)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'>
         <a ui-sref='lists.todo({listid: list.id})'>{{list.title}}
              <span class='todocount' ng-if='$ctrl.getCountTodo(list.id)'>
                 {{$ctrl.getCountTodo(list.id)}}

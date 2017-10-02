@@ -56,11 +56,4 @@ export default listModule
             todoService.changeParentList(dropObj.id, dragObj.id);
         };
 
-
-        self.testDrag = (ev) => {
-            let tr = angular.element(ev.currentTarget);
-            // console.log(tr);
-            // tr.attr('drag-dir', '');
-        }
-
     });

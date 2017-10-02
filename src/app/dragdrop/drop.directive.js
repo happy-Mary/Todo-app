@@ -1,5 +1,6 @@
 import dragDropModule from './dragdrop.module';
-import dragService from './drag.service';
+// import dragService from './drag.service';
+// import dragDir from './drag.directive';
 
 export default dragDropModule.directive('dropDir', ['dragService', function dropDir(dragService) {
     return {
@@ -26,11 +27,7 @@ export default dragDropModule.directive('dropDir', ['dragService', function drop
                 ev.preventDefault();
                 ev.stopPropagation();
                 elem.removeClass('drag-over');
-                // dragData = ev.dataTransfer.getData('dragData');
-                // changed dataTransfer to service
                 if (dragData && letDrop) {
-                    // dragData = angular.fromJson(dragData);
-                    // const letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
                     scope.executeDrop({ dragObj: dragData, dropObj: scope.dropObj });
                 }
             }
