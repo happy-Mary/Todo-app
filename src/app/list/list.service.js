@@ -61,11 +61,18 @@ export default listModule
             save();
         }
 
-        function changeParent(currId, newId) {
-            angular.forEach(self.data, (item) => {
-                const list = item;
-                if (list.listGroupId === currId) list.listGroupId = newId;
-            });
+        function changeParent(currFolderId, newFolderId, listId) {
+            if (listId === undefined) {
+                angular.forEach(self.data, (item) => {
+                    const list = item;
+                    if (list.listGroupId === currFolderId) list.listGroupId = newFolderId;
+                });
+            } else {
+                angular.forEach(self.data, (item) => {
+                    const list = item;
+                    if (list.id === listId) list.listGroupId = newFolderId;
+                });
+            }
             save();
         }
 

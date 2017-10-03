@@ -1,11 +1,12 @@
 @import "var.scss";
+@import "dragdrop.scss";
+
 body,
 html {
     background-color: lightgray;
     height: 100%;
     font-family: 'Ubuntu', sans-serif;
 }
-
 body {
     background-image: url('../img/background-site.jpg');
     background-size: cover;

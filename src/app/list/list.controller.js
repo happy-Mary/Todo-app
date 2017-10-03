@@ -1,4 +1,5 @@
 import listModule from './list.module';
+import '../../sass/lists.scss';
 
 export default listModule
     .controller('listController', function listController(listService, modalService, todoService) {
@@ -30,4 +31,29 @@ export default listModule
             const countTodo = todoService.getCountTodo(id);
             return countTodo;
         };
+
+        self.verifyDragList = (obj) => {
+            let allow;
+            if (obj.type === 'list') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
+        self.verifyListDrop = (dragObj, dropObj) => {
+            let allow;
+            if (dragObj.type === 'todo' && dropObj.type === 'list') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
+        self.handleDrop = (dragObj, dropObj) => {
+            todoService.changeParentList(dropObj.id, dragObj.id);
+        };
+
     });
