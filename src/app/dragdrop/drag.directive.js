@@ -10,9 +10,12 @@ export default dragDropModule.directive('dragDir', ['dragService', function drag
             dragObj: '='
         },
         link: (scope, elem) => {
+            elem.children().attr('draggable', 'false');
+        
             const letDrag = scope.verifyDragAllowed({ obj: scope.dragObj });
 
             function handleDragStart(ev) {
+                ev.stopPropagation();
                 ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
                 dragService.set(scope.dragObj);
             }

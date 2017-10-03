@@ -1,3 +1,17 @@
 ul.listgroup li.drag-over {
     background-color: lightgreen!important;
 }
+
+ul.lists li.drag-over {
+    background-color: lightgreen!important;
+}
+
+ul.listgroup li>a.drag-over {
+    border-bottom: 3px solid green;
+}
+
+
+
+ul.listgroup a.drag-over {
+    background-color: lightgreen!important;
+}

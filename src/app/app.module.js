@@ -13,6 +13,7 @@ require('./modal/modal.controller');
 require('./modal/modal.component');
 require('./dragdrop/drag.directive');
 require('./dragdrop/drop.directive');
+// require('./dragdrop/dragdrop.directive');
 
 export default angular.module('mainModule', [
     'ui.router',
