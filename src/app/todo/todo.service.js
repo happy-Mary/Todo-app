@@ -1,76 +1,94 @@
 import todoModule from './todo.module';
 import ToDo from './todo.constructor';
-import { URLS } from '../constants';
-import localStorageService from '../app.service';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default todoModule
-.service('todoService', function($filter, $http, localStorageService,){
-    let data = [];
-    let itemItem;
-    
-    function get(){
-        if(localStorageService.get('todo')){
-                data = localStorageService.get('todo');
+    .service('todoService', function todoService($filter, $http, localStorageService) {
+        const self = this;
+        self.data = [];
+
+        function getData() {
+            return self.data;
         }
-        else {
-            $http({ method: 'GET', url: URLS.todoURL })
-                .then(function successCallback(response) {
-                    data = response.data;
+
+        function save() {
+            localStorageService.set('todo', self.data);
+        }
+
+        function registerTodo() {
+            localStorageService.get('todo').then((response) => {
+                    self.data.push(...response);
                     save();
                 })
-                .catch(function errorCallback() {
-                    data = [];
-                    save();
+                .catch(() => {
+                    $http({ method: 'GET', url: URLS.todoURL })
+                        .then((response) => {
+                            self.data.push(...response.data);
+                            save();
+                        })
+                        .catch(() => {
+                            self.data = [];
+                            save();
+                        });
                 });
-        }    
-        return data;
-    }
+        }
 
-    function save(){
-        localStorageService.set('todo', data);
-    }
+        function getOneTodo(id) {
+            let currItem;
+            angular.forEach(self.data, (item) => {
+                if (item.id == id) {
+                    currItem = item;
+                }
+                return currItem;
+            });
+        }
 
-    function getTodo(id) {
-        // to filter data on route ???
-        // itemItem = $filter("filter")(data, {id:id});
-        data.forEach(function(item){
-            if(item.id == id){
-               itemItem = item;
+        function updateTodo() {
+            save();
+        }
+
+        function setTodo(obj) {
+            self.data = obj;
+        }
+
+        function deleteTodo(id) {
+            const index = self.data.findIndex(x => x.id == id);
+            self.data.splice(index, 1);
+            return self.data;
+        }
+
+        function createTodo(title, listId, marked) {
+            const todo = new ToDo(title, listId, marked);
+            self.data.push(todo);
+            save();
+        }
+
+        function getCountTodoInList(listId) {
+            function getTodoInList(item) {
+                return (item.listId == listId && !item.completed);
             }
-        });
-    }
+            const todo = self.data.filter(getTodoInList);
+            return todo.length;
+        }
 
-    function updateTodo(title){
-        itemItem.title = title;
-        return data;
-    }
+        function changeParent(newListId, taskId) {
+            angular.forEach(self.data, (item) => {
+                const task = item;
+                if (task.id === taskId) task.listId = newListId;
+            });
+            save();
+        }
 
-    function setTodo(obj) {
-        data = obj;
-    }
-
-    function deleteTodo(id) {
-        let index = data.findIndex(x => x.id==id);
-        data.splice(index, 1);
-        return data;
-    }
-
-    function createTodo(title, listId, marked){
-        let todo = new ToDo(title, listId, marked);
-        data.push(todo);
-        return todo;
-        // call constructor, save to data, return data
-    }
-
-    return {
-        set: setTodo,
-        get: get,
-        getTodo: getTodo,
-        delete: deleteTodo,
-        create: createTodo,
-        update: updateTodo,
-        save: save
-    };
-
-});
-
+        return {
+            register: registerTodo,
+            set: setTodo,
+            get: getData,
+            getTodo: getOneTodo,
+            delete: deleteTodo,
+            create: createTodo,
+            update: updateTodo,
+            getCountTodo: getCountTodoInList,
+            changeParentList: changeParent,
+        };
+    });

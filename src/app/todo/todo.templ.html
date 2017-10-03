@@ -1,18 +1,42 @@
 <section>
-    <ul class = 'todo'>
-        <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId}' ng-if="!task.completed">
-          <label class="completed"><input type="checkbox" ng-model='task.completed'></label>
+    <ul class='todo'>
+        <li ng-repeat='task in $ctrl.todo | filter: ($ctrl.hasListId ? {"listId": $ctrl.parentId} : {"title": $ctrl.searchParam}) track by $index' ng-if="!task.completed" draggable='true' drag-dir drag-obj='task' verify-drag-allowed='$ctrl.verifyDragTask(obj)'>
+            <label class="completed"><input type="checkbox" ng-model='task.completed' ng-change='$ctrl.changeTodo()'></label>
             <a href='#'>{{task.title}}</a>
-            <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked"><input type="checkbox" ng-model='task.marked'></label>
+            <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
+                <input type="checkbox" ng-model='task.marked' ng-change='$ctrl.changeTodo()'>
+            </label>
         </li>
+        <button class="completed-btn" ng-click="$ctrl.completedShown = !$ctrl.completedShown" ng-if="$ctrl.parentId !== 'marked'">
+            show copmleted tasks
+        </button>
     </ul>
-    <div class="marked"  ng-if="$ctrl.parentId==='marked'" ng-repeat='item in $ctrl.markedLists'>
-        <h3><a href='#!/lists/{{item.id}}'>{{item.title}}</a></h3>
-        <ul class = 'todo'>
-            <li ng-repeat='task in $ctrl.todo | filter: {"marked": true} | filter: {"listId": item.id} | filter: {"completed": true}'>
-                <label class="completed"><input type="checkbox" ng-model='task.completed'></label>
+    <div class="marked-view" ng-if="$ctrl.parentId === 'marked'" ng-repeat='list in $ctrl.lists'>
+        <h3><a ui-sref='lists.todo({listid: list.id})' ng-show='filtered.length > 0'>{{list.title}}</a></h3>
+        <ul class='todo'>
+            <li ng-repeat='task in filtered = ($ctrl.todo | filter: {"marked": true} | filter: {"listId": list.id} | filter: {"completed" : false}) track by $index'>
+                <p>{{task.length}}</p>
+                <label class="completed">
+                    <input type="checkbox" ng-model='task.completed' ng-change='$ctrl.changeTodo()'>
+                </label>
                 <a href='#'>{{task.title}}</a>
-                <label class="marked"><input type="checkbox" ng-model='task.marked'></label>
+                <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
+                    <input type="checkbox" ng-model='task.marked' ng-change='$ctrl.changeTodo()'>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div class='todo-completed' ng-if="$ctrl.completedShown && $ctrl.parentId !=='marked'">
+        <h3>Completed tasks:</h3>
+        <ul class='todo'>
+            <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId} track by $index' ng-if="task.completed">
+                <label class="completed">
+                    <input type="checkbox" ng-model='task.completed'  ng-change='$ctrl.changeTodo()'>
+                </label>
+                <a href='#'>{{task.title}}</a>
+                <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
+                    <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeMarked()'>
+                </label>
             </li>
         </ul>
     </div>

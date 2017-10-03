@@ -1,31 +1,66 @@
 import listGroupModule from './listgroup.module';
-import listGroupService from './listgroup.service';
+import '../../sass/listgroup.scss';
 
 export default listGroupModule
-    .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService) {
-        var self = this;
+    .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService, listService) {
+        const self = this;
+        self.name = "Anna";
+
+        function removeSubmenu() {
+            const allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
+            allOpenedMenus.removeClass('submenu-open');
+        }
+
         self.listGroups = listGroupService.get();
-  
-        self.deleteLisGroup = function(id){
-            listGroupService.deleteGroup();
-        }
-                
-        self.folderClose = true;
-        self.open = function(event) {
-
-            let folderLink = angular.element(event.currentTarget);
-
+        self.openFolder = (event) => {
+            const folderLink = angular.element(event.currentTarget);
             if (folderLink.hasClass('folder-item')) {
-                console.log('We need this link');
-                console.log(folderLink);
-                let folderItem = folderLink.parent();
-                (folderItem.hasClass('folder-close')) ? folderItem.removeClass('folder-close'): folderItem.addClass('folder-close');
+                const folderItem = folderLink.parent();
+                if (folderItem.hasClass('folder-close')) folderItem.removeClass('folder-close')
+                else folderItem.addClass('folder-close')
             }
-        }
-        self.deleteLisGroup = function(id) {
-            listGroupService.deleteGroup();
-            self.save();
-        }
-      
-    });
+        };
 
+        self.handleEdit = (itemCurr) => {
+            self.onEdit({ item: itemCurr });
+        };
+
+        self.handleDelete = (itemCurr) => {
+            self.onDelete({ item: itemCurr });
+        };
+
+        self.toggleMenuEdit = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const menuEditButton = angular.element(event.currentTarget);
+            const currMenu = menuEditButton.parent().next();
+            const currMenuStatus = currMenu.hasClass('submenu-open');
+            removeSubmenu();
+            if (!currMenuStatus) currMenu.addClass('submenu-open');
+            self.editMenuActive = !self.editMenuActive;
+        };
+
+        const mainCont = angular.element(document.querySelector('.container'));
+        mainCont.on('click', () => {
+            removeSubmenu();
+        });
+
+        self.$onInit = () => {
+            self.onEdit = self.onEdit;
+            self.onDelete = self.onDelete;
+        };
+
+        self.verifyFolderDrop = (dragObj, dropObj) => {
+            let allow;
+            if (dragObj.type === 'list' && dropObj.type === 'folder') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
+        self.handleDrop = (dragObj, dropObj) => {
+            listService.changeParentFolder(dragObj.listGroupId, dropObj.id, dragObj.id);
+        };
+    });

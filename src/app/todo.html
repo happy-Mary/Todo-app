@@ -1,0 +1,68 @@
+<div class='container'>
+    <aside ng-class='{"sidebar-close" : !ctrl.sidebarOpen, "": ctrl.sidebarOpen}'>
+        <div class="nav">
+            <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
+            <!-- Filter todo in view -->
+            <input type="text" ui-sref='lists.filter({search: ""})' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
+            <span class='toggle-search'></span>
+        </div>
+        <div class="folders" drop-dir drop-obj='null' verify-drop='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
+            <ul class='special-items tab-bar'>
+                <li class='marked' ui-sref-active='active-list'>
+                    <a ui-sref="lists.todo({listid: 'marked'})"><span>избранное</span></a>
+                </li>
+            </ul>
+            <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)"></list-group-component>
+            <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)'>
+            </list-comp>
+        </div>
+        <div class="create">
+            <a href="" ng-click='ctrl.modal.open("add-list")'><span>Create list</span></a>
+            <a href="" ng-click='ctrl.modal.open("add-folder")'><span>Create folder</span></a>
+        </div>
+    </aside>
+    <header>
+        <h2>{{ctrl.headerTitle}}</h2>
+        <button class='sort-button' ng-disabled="ctrl.currListId == 'marked'" ng-click="ctrl.toggleSortMenu()"></button>
+        <ul class="sort-menu">
+            <li ng-click='ctrl.sorting.byTitle()'>Sort Alphabetical</li>
+            <li ng-click='ctrl.sorting.byMarked()'>Sort by Marked</li>
+            <li ng-click='ctrl.sorting.byDate()'>Sort by Date</li>
+        </ul>
+    </header>
+    <main>
+        <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide='ctrl.currListId == "marked"'>
+            <span class='newTask' ng-click='ctrl.toggleFocus($event)'>
+                <i  ng-if='!ctrl.taskFocused'></i>
+                <i class="icon-checked" ng-if='ctrl.taskFocused'></i>
+            </span>
+            <input type="text" class='newTaskTitle' ng-model="ctrl.newTodoTitle">
+            <div class="marked-task">
+                <input type="checkbox" name="newTask" id="addTask" class='marked-task' ng-model='ctrl.marked'>
+                <label for="addTask"></label>
+            </div>
+        </form>
+        <ui-view></ui-view>
+    </main>
+    <!-- MODAL WINDOWS -->
+    <section class="modals">
+        <modal modal-id='add-list' title="Create new list">
+            <list-form state="create"></list-form>
+        </modal>
+        <modal modal-id='add-folder' title="Create new folder">
+            <folder-form state="create"></folder-form>
+        </modal>
+        <modal modal-id='edit-list' title="Edit list">
+            <list-form state="edit" edit-data='ctrl.activeItem'></list-form>
+        </modal>
+        <modal modal-id='edit-folder' title="Edit folder">
+            <folder-form state="edit" edit-data='ctrl.activeItem'></folder-form>
+        </modal>
+        <modal modal-id='delete-list' title='Delete list'>
+            <list-form state="delete" edit-data='ctrl.activeItem'></list-form>
+        </modal>
+        <modal modal-id='delete-folder' title="Delete folder">
+            <folder-form state="delete" edit-data='ctrl.activeItem'></folder-form>
+        </modal>
+    </section>
+</div>

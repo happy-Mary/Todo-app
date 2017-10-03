@@ -1,12 +1,13 @@
 import listModule from './list.module';
+import listTemplate from './list.templ.html';
 
 export default listModule
     .component('listComp', {
         bindings: {
             filterId: '<',
-            // remove to TODO-search router
-            filterSearch: '<'
+            onEdit: '&',
+            onDelete: '&'
         },
         controller: 'listController',
-        template: require('./list.templ.html')
+        template: listTemplate
     });

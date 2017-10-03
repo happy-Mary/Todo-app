@@ -1,89 +1,88 @@
 import listModule from './list.module';
 import List from './list.constructor';
-import { URLS } from '../constants';
-import localStorageService from '../app.service';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default listModule
-.service('listService', function($http, localStorageService){
-    let self  = this;
-    let data = [];
-    // let itemItem;
-    function getLists(){
-        return data;
-    }
-    function save(){
-           localStorageService.set('lists', data);
-    }
+    .service('listService', function listService($http, localStorageService) {
+        const self = this;
+        self.data = [];
 
-    function getLists(){
-        console.log('11212')
-       if(localStorageService.get('lists')){
-            data = localStorageService.get('lists');
-            return data;
+        function save() {
+            localStorageService.set('lists', self.data);
         }
-        else{
-            $http({ method: 'GET', url: URLS.listURL })
-                .then(function successCallback(response) {
-                    data = response.data;
+
+        function registerLists() {
+            self.data = [];
+            return localStorageService.get('lists').then((response) => {
+                    self.data.push(...response);
                     save();
-                    return data;
-                     
                 })
-                .catch(function errorCallback() {
-                    data =  [];
-                    save();
-                    return data;
+                .catch(() => {
+                    $http({ method: 'GET', url: URLS.listURL })
+                        .then((response) => {
+                            self.data.push(...response.data);
+                            save();
+                        })
+                        .catch(() => {
+                            self.data = [];
+                            save();
+                        });
                 });
         }
-    }
 
+        function getLists() {
+            return self.data;
+        }
 
-    function getList(id) {
-        var list;
-        data.forEach(function(item){
-            if(item.id == id){
-                list = item;
+        function getOnlyList(id) {
+            let list;
+            angular.forEach(self.data, (item) => {
+                if (item.id == id) {
+                    list = item;
+                }
+            });
+            return list;
+        }
+
+        function createList(title, id) {
+            const list = new List(title, id);
+            self.data.push(list);
+            save();
+        }
+
+        function updateList() {
+            save();
+        }
+
+        function deleteList(id) {
+            const index = self.data.findIndex(x => x.id == id);
+            self.data.splice(index, 1);
+            save();
+        }
+
+        function changeParent(currFolderId, newFolderId, listId) {
+            if (listId === undefined) {
+                angular.forEach(self.data, (item) => {
+                    const list = item;
+                    if (list.listGroupId === currFolderId) list.listGroupId = newFolderId;
+                });
+            } else {
+                angular.forEach(self.data, (item) => {
+                    const list = item;
+                    if (list.id === listId) list.listGroupId = newFolderId;
+                });
             }
-        });
-        return list;
-    }
+            save();
+        }
 
-    function updateList(id, title){
-        let itemItem = getLists(id)
-        itemItem.title = title;
-        save();
-        return data;
-    }
-
-    function setLists(obj) {
-        data = obj;
-        save();
-    }
-
-    function deleteList(id) {
-        let index = data.findIndex(x => x.id==id);
-        data.splice(index, 1);
-        save();
-        return data;
-    }
-
-    function createList(title, id){
-        console.log(`new list TITLE: ${title}`);
-        let list = new List(title, id);
-        data.push(list);
-        save();
-        return data;
-        // call constructor, save to data, return data
-    }
-  
-    return {
-        set: setLists,
-        get: getLists,
-        getList: getList,
-        delete: deleteList,
-        create: createList,
-        update: updateList,
-        save: save    
-    };
-});
-
+        return {
+            register: registerLists,
+            update: updateList,
+            create: createList,
+            delete: deleteList,
+            get: getLists,
+            changeParentFolder: changeParent,
+            getList: getOnlyList,
+        };
+    });

@@ -1,7 +1,11 @@
 import todoModule from './todo.module';
+import todoTemplate from './todo.templ.html';
 
 export default todoModule
     .component('todoComp', {
-        template: require('./todo.templ.html'),
+        bindings: {
+            filterSearch: '=',
+        },
+        template: todoTemplate,
         controller: 'todoController'
     });

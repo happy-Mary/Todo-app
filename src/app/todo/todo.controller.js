@@ -1,51 +1,30 @@
 import todoModule from './todo.module';
-import todoService from './todo.service';
-import listService from '../list/list.service';
+import '../../sass/todo.scss';
 
 export default todoModule
-    .controller('todoController', function todoController($routeParams, todoService, listService) {
-        let self = this;
+    .controller('todoController', function todoController($stateParams, $state, todoService, listService) {
+        const self = this;
         self.todo = todoService.get();
         self.newTitle = '';
+        self.completedShown = false;
         // from router
-        self.parentId = $routeParams.listid;
+        self.hasListId = $state.includes("lists.todo");
+        self.parentId = $stateParams.listid;
+        self.searchParam = $stateParams.search;
 
-        // add marked ang change ading todo
-        self.saveTask = function() {
-            self.todo = todoService.create(self.newTitle, parentId);
-            localStorageService.set('todo', self.todo);
-            self.openInput = false;
-            self.newTitle = '';
+        self.changeTodo = () => {
+            todoService.update();
         };
 
-        self.deleteTask = function(id){
-            self.todo = todoService.delete(id);
-            localStorageService.set('todo', self.todo);
-        };
+        self.lists = listService.get();
 
-        self.rewriteTask = function(id) {
-            self.openInput = true;
-            todoService.get(id);
-        };
-
-        self.changeTask = function(){
-            self.todo = todoService.update(self.newTitle);
-            localStorageService.set('todo', self.todo);
-            self.openInput = false;
-            self.newTitle = '';
-        };
-        
-        function getMarkedLists(){
-            self.markedLists = [];
-            let unicId = [];
-            for(var i = 0; i<self.todo.length; i++) {
-                let id = self.todo[i].listId;
-
-                if(self.todo[i].marked===true && !unicId.includes(id)){
-                    unicId.push(id);
-                    self.markedLists.push(listService.get(id));
-                }
+        self.verifyDragTask = (obj) => {
+            let allow;
+            if (obj.type === 'todo') {
+                allow = true;
+            } else {
+                allow = false;
             }
-        }
-        getMarkedLists();
+            return allow;
+        };
     });
