@@ -1,6 +1,8 @@
 import dragDropModule from './dragdrop.module';
+// import dragService from './drag.service';
+// import dragDir from './drag.directive';
 
-export default dragDropModule.directive('dropDir', [function dropDir() {
+export default dragDropModule.directive('dropDir', ['dragService', function dropDir(dragService) {
     return {
         restrict: 'A',
         scope: {
@@ -9,24 +11,24 @@ export default dragDropModule.directive('dropDir', [function dropDir() {
             executeDrop: '&'
         },
         link: (scope, elem) => {
-            let dragData = null;
-            // scope.letDrop = scope.verifyDropAllowed({dragObj: dragData, dropObj: scope.dropObj});
-            // console.log(scope.letDrop);
+            let dragData;
+            let letDrop = false;
+
             function handleDragOver(ev) {
                 ev.preventDefault();
-                elem.addClass('drag-over');
+                dragData = dragService.get();
+                if (dragData) {
+                    letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
+                    if (letDrop) elem.addClass('drag-over');
+                }
             }
 
             function handleDrop(ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
-                dragData = ev.dataTransfer.getData('dragData');
-                if (dragData) {
-                    dragData = angular.fromJson(dragData);
-                    const letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
-                    if (letDrop) {
-                        scope.executeDrop({ dragObj: dragData, dropObj: scope.dropObj });
-                    }
+                elem.removeClass('drag-over');
+                if (dragData && letDrop) {
+                    scope.executeDrop({ dragObj: dragData, dropObj: scope.dropObj });
                 }
             }
 

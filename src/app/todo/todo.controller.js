@@ -17,4 +17,14 @@ export default todoModule
         };
 
         self.lists = listService.get();
+
+        self.verifyDragTask = (obj) => {
+            let allow;
+            if (obj.type === 'todo') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
     });

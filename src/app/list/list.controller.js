@@ -42,4 +42,18 @@ export default listModule
             return allow;
         };
 
+        self.verifyListDrop = (dragObj, dropObj) => {
+            let allow;
+            if (dragObj.type === 'todo' && dropObj.type === 'list') {
+                allow = true;
+            } else {
+                allow = false;
+            }
+            return allow;
+        };
+
+        self.handleDrop = (dragObj, dropObj) => {
+            todoService.changeParentList(dropObj.id, dragObj.id);
+        };
+
     });

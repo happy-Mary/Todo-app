@@ -1,4 +1,3 @@
-// // ng-route
 import mainModule from './app.module';
 import todoTemplate from './todo.html';
 

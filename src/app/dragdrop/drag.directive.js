@@ -1,6 +1,8 @@
 import dragDropModule from './dragdrop.module';
 
-export default dragDropModule.directive('dragDir', [function dragDir() {
+require('./drag.service');
+
+export default dragDropModule.directive('dragDir', ['dragService', function dragDir(dragService) {
     return {
         restrict: 'A',
         scope: {
@@ -12,6 +14,7 @@ export default dragDropModule.directive('dragDir', [function dragDir() {
 
             function handleDragStart(ev) {
                 ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
+                dragService.set(scope.dragObj);
             }
 
             function handleDragEnd(ev) {

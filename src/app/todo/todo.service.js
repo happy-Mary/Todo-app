@@ -72,6 +72,14 @@ export default todoModule
             return todo.length;
         }
 
+        function changeParent(newListId, taskId) {
+            angular.forEach(self.data, (item) => {
+                const task = item;
+                if (task.id === taskId) task.listId = newListId;
+            });
+            save();
+        }
+
         return {
             register: registerTodo,
             set: setTodo,
@@ -80,6 +88,7 @@ export default todoModule
             delete: deleteTodo,
             create: createTodo,
             update: updateTodo,
-            getCountTodo: getCountTodoInList
+            getCountTodo: getCountTodoInList,
+            changeParentList: changeParent,
         };
     });
