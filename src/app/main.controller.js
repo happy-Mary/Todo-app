@@ -1,25 +1,21 @@
 import mainModule from './app.module';
 
-export default mainModule	
-	.controller('mainController', function($transitions, $state, usSpinnerService){
-		let self = this;
-		 self.hideSpinner = function(){
+export default mainModule
+    .controller('mainController', function mainController($transitions, $state, usSpinnerService) {
+        const self = this;
+        self.hideSpinner = function hideSpinner() {
             usSpinnerService.stop();
-
-        }
-        self.showSpinner = function(){
+        };
+        self.showSpinner = function showSpinner() {
             usSpinnerService.spin();
-        }
-  
-        $transitions.onSuccess({  }, () => {
-         	self.hideSpinner();
+        };
+        $transitions.onSuccess({}, () => {
+            self.hideSpinner();
         });
-        $transitions.onStart({ }, () => {
+        $transitions.onStart({}, () => {
             self.showSpinner();
-           
         });
-        $transitions.onError({ }, () => {
+        $transitions.onError({}, () => {
             console.error('transition has been rejected');
         });
-
-	})
+    });
