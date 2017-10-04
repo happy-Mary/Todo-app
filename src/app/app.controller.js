@@ -131,16 +131,6 @@ export default mainModule
             onContextMenu() {
 
             },
-            // check if element could be draggable
-            checkDragAllow(obj) {
-                let allow;
-                if (obj.type === 'todo' || obj.type === 'list') {
-                    allow = true;
-                } else {
-                    allow = false;
-                }
-                return allow;
-            },
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
                 if (dragObj.type === 'list' && dropObj === null) {
