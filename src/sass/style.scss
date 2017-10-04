@@ -48,7 +48,6 @@ input:focus {
     border: none;
 }
 
-
 /* Change Autocomplete styles in Chrome*/
 
 input:-webkit-autofill,
@@ -174,6 +173,7 @@ aside {
         height: -webkit-calc(100% - (40px + 80px));
         height: calc(100% - (40px + 80px));
     }
+    .empty-folder {min-height: 150px;}
     .create {
         position: absolute;
         bottom: 0;

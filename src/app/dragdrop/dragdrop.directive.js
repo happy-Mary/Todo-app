@@ -13,27 +13,23 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
             executeDrop: '&'
         },
         link: (scope, elem) => {
-        
+            // DRAGGING
             let letDrag;
-            
-            if (scope.verifyDragAllowed && scope.dragObj) {
-                // elem.attr('draggable', 'true');
-                // elem.children().attr('draggable', 'false');
-                letDrag = scope.verifyDragAllowed({ obj: scope.dragObj });
-                // console.log(elem.parent());
-                // console.log(letDrag);
-            } else {
-                // elem.attr('draggable', 'false');
-                // elem.children().attr('draggable', 'false');
-                // console.log(elem.parent());
-                // console.log("this obj can't be DRAGGABLE");
+
+            function setDraggableAttributes() {
+                if (scope.verifyDragAllowed && scope.dragObj) {
+                    elem.attr('draggable', 'true');
+                    elem.children().attr('draggable', 'false');
+                    letDrag = scope.verifyDragAllowed({ obj: scope.dragObj });
+                } else {
+                    elem.attr('draggable', 'false');
+                    elem.children().attr('draggable', 'false');
+                }
             }
-            
-            function handleDragStart(ev) {
-                ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
+
+            function handleDragStart() {
+                // ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
                 dragService.set(scope.dragObj);
-                // console.log("Saving drag data: ");
-                // console.log(scope.dragObj);
             }
 
             function handleDragEnd(ev) {
@@ -43,38 +39,24 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
                 dropElement.removeClass('drag-over');
             }
 
-            if (letDrag) {
-                elem.on('dragstart', handleDragStart);
-                elem.on('dragend', handleDragEnd);
-            }
-
             // DROPPING
             let dragData;
             let letDrop = false;
 
             function handleDragOver(ev) {
                 ev.preventDefault();
-                ev.stopPropagation();
-                console.log(this);
-
                 dragData = dragService.get();
-                console.log('drag data');
-                console.log(dragData.type);
-                console.log('drop data');
-                console.log(scope.dropObj);
-                
-                if (dragData && scope.verifyDrop) {
-                    letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
-                    // console.log(letDrop);
-                    if (letDrop) elem.addClass('drag-over');
-                } else {
-                    console.log("this obj can't be DROPPABLE");
+                if (dragData) {
+                    const check = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
+                    if (check) {
+                        letDrop = check;
+                        elem.addClass('drag-over');
+                    }
                 }
             }
 
             function handleDrop(ev) {
                 ev.preventDefault();
-                ev.stopPropagation();
                 elem.removeClass('drag-over');
                 if (dragData && letDrop) {
                     scope.executeDrop({ dragObj: dragData, dropObj: scope.dropObj });
@@ -84,15 +66,19 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
             function handleDragLeave(ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
-                elem.removeClass('drag-over');
+                const dropElement = angular.element(document.querySelectorAll('.drag-over'));
+                dropElement.removeClass('drag-over');
             }
 
+            setDraggableAttributes();
+
+            if (letDrag) {
+                elem.on('dragstart', handleDragStart);
+                elem.on('dragend', handleDragEnd);
+            }
             elem.on('dragover', handleDragOver);
-            // if (letDrop) {
-                elem.on('drop', handleDrop);
-                elem.on('dragleave', handleDragLeave);
-            // }
-            
+            elem.on('drop', handleDrop);
+            elem.on('dragleave', handleDragLeave);
         }
     };
 }]);

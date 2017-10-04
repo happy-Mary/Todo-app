@@ -6,12 +6,6 @@ ul.lists li.drag-over {
     background-color: lightgreen!important;
 }
 
-ul.listgroup li>a.drag-over {
-    border-bottom: 3px solid green;
-}
-
-
-
-ul.listgroup a.drag-over {
-    background-color: lightgreen!important;
+.empty-folder.drag-over {
+    border: .5px dashed gray;
 }
