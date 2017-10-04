@@ -1,5 +1,6 @@
 <ul class="listgroup tab-bar">
-    <li ng-repeat="folder in $ctrl.listGroups track by $index" class='folder-close' drop-dir drop-obj='folder' verify-drop='$ctrl.verifyFolderDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'>
+     <li ng-repeat="folder in $ctrl.listGroups track by $index" class='folder-close' 
+      dragdrop-dir drop-obj='folder' verify-drop='$ctrl.verifyFolderDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'>
         <a href="" class='folder-item' ng-click='$ctrl.openFolder($event)'>{{folder.name}}
             <span class='menu-folder-icon' ng-click="$ctrl.toggleMenuEdit($event)"></span>
             <span class='listgroup-icon'></span>     

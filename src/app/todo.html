@@ -6,15 +6,18 @@
             <input type="text" ui-sref='lists.filter({search: ""})' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
             <span class='toggle-search'></span>
         </div>
-        <div class="folders" drop-dir drop-obj='null' verify-drop='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
+        <div class="folders">                      
             <ul class='special-items tab-bar'>
                 <li class='marked' ui-sref-active='active-list'>
                     <a ui-sref="lists.todo({listid: 'marked'})"><span>избранное</span></a>
                 </li>
             </ul>
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)"></list-group-component>
-            <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)'>
-            </list-comp>
+            <div class="empty-folder"
+                dragdrop-dir drop-obj='null' verify-drop='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
+                <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)'></list-comp>
+                </list-comp>
+            </div>           
         </div>
         <div class="create">
             <a href="" ng-click='ctrl.modal.open("add-list")'><span>Create list</span></a>
