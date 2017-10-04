@@ -5,6 +5,7 @@ require('./modal/modal.service');
 export default mainModule
     .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
+       
         // self.headerTitle = 'current list title';
         self.marked = false;
         self.newTodoTitle = '';
@@ -63,8 +64,11 @@ export default mainModule
         $transitions.onSuccess({ to: 'lists.**' }, () => {
             self.currListId = $state.params.listid;
             getMainTitle();
+            // self.hideSpinner();
         });
-
+        // $transitions.onStart({ to: 'lists.**'}, () => {
+        //     self.showSpinner();
+        // });
         // redirect to search while typing
         self.goToSearch = () => {
             $state.go('lists.filter', { search: self.searchItem });
