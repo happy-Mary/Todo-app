@@ -41,10 +41,12 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
 
             // DROPPING
             let dragData;
+            // let letDrop = false;
 
             function handleDragOver(ev) {
                 ev.preventDefault();
                 dragData = dragService.get();
+                
                 if (dragData) {
                     const letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
                     if (letDrop) {
