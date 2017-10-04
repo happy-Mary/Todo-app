@@ -173,7 +173,7 @@ aside {
         height: -webkit-calc(100% - (40px + 80px));
         height: calc(100% - (40px + 80px));
     }
-    .empty-folder {min-height: 150px;}
+    .empty-folder {min-height: 150px; padding-bottom: 30px;}
     .create {
         position: absolute;
         bottom: 0;
