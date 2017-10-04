@@ -28,8 +28,8 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
             }
 
             function handleDragStart() {
-                // ev.dataTransfer.setData('dragData', angular.toJson(scope.dragObj));
                 dragService.set(scope.dragObj);
+                return false;
             }
 
             function handleDragEnd(ev) {
@@ -41,15 +41,13 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
 
             // DROPPING
             let dragData;
-            let letDrop = false;
 
             function handleDragOver(ev) {
                 ev.preventDefault();
                 dragData = dragService.get();
                 if (dragData) {
-                    const check = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
-                    if (check) {
-                        letDrop = check;
+                    const letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
+                    if (letDrop) {
                         elem.addClass('drag-over');
                     }
                 }
@@ -58,6 +56,7 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
             function handleDrop(ev) {
                 ev.preventDefault();
                 elem.removeClass('drag-over');
+                const letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
                 if (dragData && letDrop) {
                     scope.executeDrop({ dragObj: dragData, dropObj: scope.dropObj });
                 }
