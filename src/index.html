@@ -14,8 +14,9 @@
 
 <!-- CHANGE MAIN CTRL (Do we need main controller?) -->
 
-<body>
+<body ng-controller="mainController as ctrl">
     <ui-view></ui-view>
+    <span us-spinner="{radius:10, width:3, length: 7}"></span>
 </body>
 
 </html>

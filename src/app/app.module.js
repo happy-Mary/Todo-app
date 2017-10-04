@@ -1,5 +1,5 @@
 require('@uirouter/angularjs');
-
+require('angular-spinner');
 require('./listgroup/listgroup.controller');
 require('./listgroup/listgroup.service');
 require('./listgroup/listgroup.component');
@@ -15,6 +15,7 @@ require('./dragdrop/dragdrop.directive');
 
 export default angular.module('mainModule', [
     'ui.router',
+    'angularSpinner',
     'listGroupModule',
     'listModule',
     'todoModule',
