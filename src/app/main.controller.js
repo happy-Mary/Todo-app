@@ -16,6 +16,8 @@ export default mainModule
             self.showSpinner();
         });
         $transitions.onError({}, () => {
+            usSpinnerService.stop();
+            // show user error message, remove console message
             console.error('transition has been rejected');
         });
     });
