@@ -46,7 +46,10 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
                 ev.preventDefault();
                 dragData = dragService.get();
                 if (dragData) {
-                    const letDrop = scope.verifyDrop({ dragObj: dragData, dropObj: scope.dropObj });
+                    const letDrop = scope.verifyDrop({
+                        dragObj: dragData,
+                        dropObj: scope.dropObj
+                    });
                     if (letDrop) {
                         elem.addClass('drag-over');
                     }
