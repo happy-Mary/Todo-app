@@ -1,13 +1,11 @@
-'use strict';
-
 // Modules
-var webpack = require('webpack'),
-    autoprefixer = require('autoprefixer'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    path = require('path'),
-    modRewrite = require('connect-modrewrite'),
-    BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const modRewrite = require('connect-modrewrite');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = function makeWebpackConfig(options) {
     /**
@@ -15,15 +13,15 @@ module.exports = function makeWebpackConfig(options) {
      * BUILD is for generating minified builds
      * TEST is for generating test builds
      */
-    var BUILD = !!options.BUILD;
-    var TEST = !!options.TEST;
+    const BUILD = !!options.BUILD;
+    const TEST = !!options.TEST;
 
     /**
      * Config
      * Reference: http://webpack.github.io/docs/configuration.html
      * This is the object where all configuration gets set
      */
-    var config = {};
+    const config = {};
 
     /**
      * Entry
@@ -50,7 +48,7 @@ module.exports = function makeWebpackConfig(options) {
     } else {
         config.output = {
             // Absolute output directory
-            path: __dirname + '/dist',
+            path: path.resolve(__dirname, '/dist'),
 
             // Output path from the view of the page
             // Uses webpack-dev-server in development
@@ -157,7 +155,7 @@ module.exports = function makeWebpackConfig(options) {
         //
         // Reference: https://github.com/postcss/postcss-loader
         // Postprocess your css with PostCSS plugins
-        var cssLoader = {
+        const cssLoader = {
             test: /\.css$/,
             // Reference: https://github.com/webpack/extract-text-webpack-plugin
             // Extract css files in production builds
@@ -171,7 +169,7 @@ module.exports = function makeWebpackConfig(options) {
         // Reference: https://github.com/jtangelder/sass-loader
         // Allow loading inline sass through js
         //
-        var sassLoader = {
+        const sassLoader = {
             test: /\.scss$/,
             loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?sourceMap&sourceMapContents&includePaths[]=' + encodeURIComponent(path.resolve(process.cwd(), "node_modules")))
         };
@@ -185,7 +183,7 @@ module.exports = function makeWebpackConfig(options) {
         // Skip loading styles in test mode
         // Reference: https://github.com/webpack/null-loader
         // Return an empty module
-        var nullLoader = {
+        const nullLoader = {
             test: /\.css$|\.scss$/,
             // Reference: https://github.com/webpack/style-loader
             // Use style-loader in development for hot-loading
