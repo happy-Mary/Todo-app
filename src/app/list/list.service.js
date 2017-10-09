@@ -76,6 +76,14 @@ export default listModule
             save();
         }
 
+        function getCountListsInFolder(folderId) {
+            function getListsInFolder(item) {
+                return (item.listGroupId == folderId);
+            }
+            const lists = self.data.filter(getListsInFolder);
+            return lists.length;
+        }
+
         return {
             register: registerLists,
             update: updateList,
@@ -84,5 +92,6 @@ export default listModule
             get: getLists,
             changeParentFolder: changeParent,
             getList: getOnlyList,
+            getCountLists: getCountListsInFolder
         };
     });
