@@ -12,6 +12,7 @@
             show copmleted tasks
         </button>
     </ul>
+    <!-- marked tasks -->
     <div class="marked-view" ng-if="$ctrl.parentId === 'marked'" ng-repeat='list in $ctrl.lists'>
         <h3><a ui-sref='lists.todo({listid: list.id})' ng-show='filtered.length > 0'>{{list.title}}</a></h3>
         <ul class='todo'>
@@ -27,6 +28,7 @@
             </li>
         </ul>
     </div>
+    <!-- completed tasks -->
     <div class='todo-completed' ng-if="$ctrl.completedShown && $ctrl.parentId !=='marked'">
         <h3>Completed tasks:</h3>
         <ul class='todo'>

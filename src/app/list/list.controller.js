@@ -27,10 +27,7 @@ export default listModule
             self.onDelete = self.onDelete;
         };
 
-        self.getCountTodo = (id) => {
-            const countTodo = todoService.getCountTodo(id);
-            return countTodo;
-        };
+        self.getCountTodo = todoService.getCountTodo;
 
         self.verifyDragList = (obj) => {
             let allow;

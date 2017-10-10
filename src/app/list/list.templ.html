@@ -1,7 +1,7 @@
 <ul class='lists tab-bar'>
     <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId}  track by $index' ui-sref-active='active-list' 
     dragdrop-dir drag-obj='list' verify-drag-allowed='$ctrl.verifyDragList(obj)' 
-    drop-obj='list' verify-drop='$ctrl.verifyListDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'
+    drop-obj='list' verify-drop-allowed='$ctrl.verifyListDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'
     draggable = 'true'>
 
         <a ui-sref='lists.todo({listid: list.id})' draggable = 'false'>

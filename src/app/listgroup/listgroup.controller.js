@@ -63,4 +63,7 @@ export default listGroupModule
         self.handleDrop = (dragObj, dropObj) => {
             listService.changeParentFolder(dragObj.listGroupId, dropObj.id, dragObj.id);
         };
+
+        self.getCountLists = listService.getCountLists;
+
     });
