@@ -1,5 +1,8 @@
 import todosideModule from './todoside.module';
+import todosideTemplate from './todoside.templ.html';
 
 export default todosideModule.component('todosideComp', {
-    bindings: {}
+    bindings: {},
+    template: todosideTemplate,
+    controller: 'todosideController'
 });
