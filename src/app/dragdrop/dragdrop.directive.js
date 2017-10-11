@@ -21,7 +21,6 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
                 if (scope.verifyDragAllowed && scope.dragObj) {
                     elem.attr('draggable', 'true');
                     elem.children().attr('draggable', 'false');
-                    // letDrag = scope.verifyDragAllowed({ obj: scope.dragObj });
                 } else {
                     elem.attr('draggable', 'false');
                     elem.children().attr('draggable', 'false');
@@ -32,9 +31,6 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
                 letDrag = scope.verifyDragAllowed({ obj: scope.dragObj });
                 if (letDrag) {
                     dragService.set(scope.dragObj);
-                    // dragData = scope.dragObj;
-                    // console.log('set DATA');
-                    // console.log(dragData);
                 }
                 return false;
             }
@@ -50,15 +46,11 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
             function handleDragOver(ev) {
                 ev.preventDefault();
                 dragData = dragService.get();
-                // console.log('dragData OVER');
-                // console.log(dragData);
                 if (dragData) {
-                    const letDrop = scope.verifyDropAllowed({
-                        dragObj: dragData,
-                        dropObj: scope.dropObj
-                    });
+                    const letDrop = scope.verifyDropAllowed({ dragObj: dragData, dropObj: scope.dropObj });
                     if (letDrop) {
                         elem.addClass('drag-over');
+                        console.log('hello');
                     }
                 }
             }
