@@ -1,8 +1,5 @@
 <section>
     <ul class='todo'>
-         <!-- <li ng-repeat='task in $ctrl.todo | filter: ($ctrl.hasListId ? {"listId": $ctrl.parentId} : {"title": $ctrl.searchParam}) track by $index' 
-            ng-if="!task.completed"
-            dragdrop-dir drag-obj='task' verify-drag-allowed='$ctrl.verifyDragTask(obj)'> -->
             <li ng-repeat='task in $ctrl.todo | filter: ($ctrl.hasListId ? {"title": $ctrl.searchParam} : {"listId": $ctrl.parentId} ) track by $index' 
             ng-if="!task.completed"
             dragdrop-dir drag-obj='task' verify-drag-allowed='$ctrl.verifyDragTask(obj)'>

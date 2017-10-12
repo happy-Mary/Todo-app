@@ -72,7 +72,6 @@ export default mainModule
         // self.searchItem = '';
 
         self.goToSearch = () => {
-            // $state.go('filter', { search: self.searchItem }, { notify: false });
             $state.go('filter', { search: self.searchItem }, { notify: false });
         };
 
@@ -190,12 +189,6 @@ export default mainModule
                     else if (valueA < valueB) return 1;
                     return 0;
                 });
-
-                // testing dates sorting (remove after tests)
-                // angular.forEach(tasks, (task) => {
-                // console.log(task.date);
-                // });
             }
         };
-
     });

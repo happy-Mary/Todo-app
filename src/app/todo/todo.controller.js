@@ -15,7 +15,7 @@ export default todoModule
         $transitions.onSuccess({ to: 'filter' }, () => {
             self.searchParam = $stateParams.search;
             self.hasListId = $state.includes("filter");
-            console.log(self.hasListId);
+            // console.log(self.hasListId);
         });
 
         self.changeTodo = () => {
