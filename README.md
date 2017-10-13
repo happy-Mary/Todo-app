@@ -9,25 +9,20 @@ npm test
 [branchname]/feature: changes
 
 ### Tasks:
-1. branch MariaChernyak (Masha Chernyak) -ready
-   - generate JSON and add url-links to constants.js
-   - write service for LocalStorage
+1. branch MariaChernyak (Masha Chernyak) 
    
-2. listgroup-task (Masha Chernyak) -in progress
+2. contextmenu-task (Masha Chernyak) -in progress
 
-3. lists-task (Masha Shklovskaya) -ready
+3. todoside-task (Masha Shklovskaya) -in progress
 
-4. checkdata-task (Masha Chernyak) -ready
+4. search-task (Masha Chernyak)
    
-5. todo-task (Masha Chernyak) -in progress
+5. filtertodo-task (Masha Chernyak) -in progress
 
-6. listService-task (Masha Shklovskaya) -in progress 
+6. karma-task (Masha Shklovskaya) -in progress
 
-8. karma-task (Masha Shklovskaya) -in progress
+7. webpack-task 
+    - eslint-config
+    - prettier  
 
-9. header-task (Masha Shklovskaya) -ready
-   
-10. router-task (Masha Shklovskaya)
-   - app.config.js 
-	
 
