@@ -12,7 +12,7 @@
                     <a ui-sref="lists.todo({listid: 'marked'})"><span>избранное</span></a>
                 </li>
             </ul>
-            <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)"></list-group-component>
+            <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)" on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-group-component>
             <div class="empty-folder"
                 dragdrop-dir drop-obj='null' verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
                 <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)'></list-comp>

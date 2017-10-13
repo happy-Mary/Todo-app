@@ -48,6 +48,7 @@ export default listGroupModule
         self.$onInit = () => {
             self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
+            self.onContextMenu = self.onContextMenu;
         };
 
         self.verifyFolderDrop = (dragObj, dropObj) => {
@@ -65,5 +66,9 @@ export default listGroupModule
         };
 
         self.getCountLists = listService.getCountLists;
+        self.openContextMenu = (event, item) => {
+            // console.log(item);
+           self.onContextMenu({event: event, item: item});
+        };
 
     });

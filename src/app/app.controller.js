@@ -128,8 +128,12 @@ export default mainModule
 
             },
             // opening folder menu (on custom right click)
-            onContextMenu() {
-
+            onContextMenu(event, item) {
+                angular.element(document.querySelector('context')).addClass('active');
+                console.log( event);
+                console.log( item);
+               
+                // console.log(arguments);
             },
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;

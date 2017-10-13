@@ -17,6 +17,13 @@
 <body ng-controller="mainController as ctrl">
     <ui-view></ui-view>
     <span us-spinner="{radius:10, width:3, length: 7}"></span>
+    <context>
+    <!--     <li ng-click="ctrl.handle()">121</li>
+        <li ng-click="ctrl.handle2($event)">222</li> -->
+        <menu-item text="aaaa" ng-click="ctrl.handle2($event)"></menu-item>
+        <menu-item text="bbb" ng-click="ctrl.handle2($event)"></menu-item>
+        <menu-item text="accc" ng-click="ctrl.handle2($event)"></menu-item>
+    </context>
 </body>
 
 </html>
