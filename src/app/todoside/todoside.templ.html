@@ -1,21 +1,34 @@
 <aside class = 'todo-aside'>
     <ul>
         <li class = 'task'>
-            <label class="completed">
-                <input type="checkbox" ng-model='task.completed'  ng-change='$ctrl.changeTodo()'>
-            </label>
-            <a href='#'>{{task.title}}Current task</a>
-            <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
-                <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeMarked()'>
+            <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
+            <label for = 'task-completed'></label>
+            <span contenteditable="true" ng-blur = '$ctrl.changeTodoTitle($event)' ng-keypress = '$ctrl.handleEnterTitle($event)'>{{$ctrl.task.title}}</span>
+            <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
+                <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
             </label>
         </li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <div class="todoaside-footer">
+        <li class = 'duedate'>
+            <input type = 'text' placeholder='Set due date'>     
+        </li>
+        <li class = 'reminder'>
+            <input type = 'text' placeholder='Remind me'>  
+        </li>
+        <li class = 'subtask'>
+            Add subtask
+            <ul class="subtasks">
+                <li ng-repeat='subtask in $ctrl.subtasks'></li>
+            </ul>
+        </li>
+        <li class = 'note'>
 
+        </li>
+        <li class = 'file'>
+            <!-- <input type="file"> -->
+        </li>
+    </ul>
+    
+    <div class="todoaside-footer">
+        <button ng-click='$ctrl.redirectToParent()'>change</button>
     </div>
 </aside>

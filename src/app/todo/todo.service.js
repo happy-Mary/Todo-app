@@ -44,8 +44,8 @@ export default todoModule
                 if (item.id == id) {
                     currItem = item;
                 }
-                return currItem;
             });
+            return currItem;
         }
 
         function updateTodo() {

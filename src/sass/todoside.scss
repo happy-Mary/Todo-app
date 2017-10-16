@@ -10,36 +10,74 @@
         min-height: 40px;
         border-bottom: 1px solid $lightgray;
         color: $gray;
-    }
-}
-
-
-li.task {
-    background-color: #fff;
-    height: 40px;
-    input[type=checkbox] {
-        margin: 10px 5px;
-        height: 20px;
-    }
-    a {
-        color: #696969;
         line-height: 40px;
-        text-transform: uppercase;
     }
-    .marked {
-        float: right;
-        width: 50px;
+
+    // li task
+    li.task {
+        background-color: #fff;
         height: 40px;
-        background-image: url('../img/icons/border-star.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 30px;
-        cursor: pointer;
-        input {
+        input[type=checkbox]+label {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-image: url('../img/icons/check-box-empty.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 20px;
+            float: left;
+        }
+        input[type=checkbox] {
             display: none;
         }
-        &.active {
-            background-image: url('../img/icons/star-red.png');
+        
+        input[type=checkbox]:checked+label {
+            background-image: url('../img/icons/check-box.png');
+        }
+        
+        span[contenteditable] {
+            color: #696969;
+            line-height: 40px;
+            text-transform: uppercase;
+            height: 100%;
+            display: inline-block;
+            width: 200px;
+            outline: none;
+        }
+        .marked {
+            float: right;
+            width: 50px;
+            height: 40px;
+            background-image: url('../img/icons/border-star.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 25px;
+            cursor: pointer;
+            input {
+                display: none;
+            }
+            &.active {
+                background-image: url('../img/icons/star-red.png');
+            }
         }
     }
+    // for all li, except first
+    li:not(.task) {
+        padding-left: 40px;
+        input {
+            height: 40px;
+            line-height: 40px;
+        }
+    }
+    // 
+    .subtasks {display: none;}
 }
+
+
+
+
+
+
+
+
+// 4F5F6B
