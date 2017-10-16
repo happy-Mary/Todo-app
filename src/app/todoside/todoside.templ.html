@@ -1,3 +1,21 @@
 <aside class = 'todo-aside'>
+    <ul>
+        <li class = 'task'>
+            <label class="completed">
+                <input type="checkbox" ng-model='task.completed'  ng-change='$ctrl.changeTodo()'>
+            </label>
+            <a href='#'>{{task.title}}Current task</a>
+            <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
+                <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeMarked()'>
+            </label>
+        </li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="todoaside-footer">
 
+    </div>
 </aside>

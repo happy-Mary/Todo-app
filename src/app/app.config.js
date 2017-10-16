@@ -13,11 +13,11 @@ export default mainModule
                     // abstract: true,
                     controller: 'AppController as ctrl',
                     resolve: {
-                        dataFolders: function getData(listGroupService) {
-                            return listGroupService.register();
-                        },
                         dataLists: function getData(listService) {
                             return listService.register();
+                        },
+                        dataFolders: function getData(listGroupService) {
+                            return listGroupService.register();
                         },
                         dataTasks: function getData(todoService) {
                             return todoService.register();
@@ -35,6 +35,10 @@ export default mainModule
                       }
                     },
                     reloadOnSearch: false
+                })
+                .state('lists.todo', {
+                    url: '/todo/:todoid',
+                    template: '<todoside-comp></todoside-comp>'
                 });
         }
     ]);

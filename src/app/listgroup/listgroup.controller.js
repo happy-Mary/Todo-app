@@ -11,7 +11,6 @@ export default listGroupModule
         }
 
         self.listGroups = listGroupService.get();
-        console.log(self.listGroups);
 
         self.openFolder = (event) => {
             const folderLink = angular.element(event.currentTarget);

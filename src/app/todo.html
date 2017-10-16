@@ -41,6 +41,8 @@
             <li ng-click='ctrl.sorting.byDate()'>Sort by Date</li>
         </ul>
     </header>
+    <!-- nested view for sidebar -->
+    <ui-view></ui-view>
     <main>
         <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide='ctrl.currListId == "marked"'>
             <span class='newTask' ng-click='ctrl.toggleFocus($event)'>
@@ -53,11 +55,8 @@
                 <label for="addTask"></label>
             </div>
         </form>
-        <!-- change to todo comp -->
-        <!-- <ui-view></ui-view> -->
         <todo-comp></todo-comp>
     </main>
-    <!-- nested view for sidebar -->
     
     <!-- MODAL WINDOWS -->
     <section class="modals">

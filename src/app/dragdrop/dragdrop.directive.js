@@ -53,7 +53,6 @@ export default dragDropModule.directive('dragdropDir', ['dragService', function 
                     });
                     if (letDrop) {
                         elem.addClass('drag-over');
-                        console.log('hello');
                     }
                 }
             }

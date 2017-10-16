@@ -3,12 +3,10 @@
             <li ng-repeat='task in $ctrl.todo | filter: ($ctrl.hasListId ? {"title": $ctrl.searchParam} : {"listId": $ctrl.parentId} ) track by $index' 
             ng-if="!task.completed"
             dragdrop-dir drag-obj='task' verify-drag-allowed='$ctrl.verifyDragTask(obj)'>
-            <!-- <li ng-repeat='task in $ctrl.todo | filter: (!$ctrl.searchState ? {"title" $ctrl.searchParam} : {"listId": $ctrl.parentId}) track by $index' 
-            ng-if="!task.completed"
-            dragdrop-dir drag-obj='task' verify-drag-allowed='$ctrl.verifyDragTask(obj)'> -->
 
             <label class="completed"><input type="checkbox" ng-model='task.completed' ng-change='$ctrl.changeTodo()'></label>
-            <a href='#'>{{task.title}}</a>
+            <!-- UI_SREF FOR SIDEBAR -->
+            <a ui-sref='lists.todo({todoid: task.id})'>{{task.title}}</a>
             <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
                 <input type="checkbox" ng-model='task.marked' ng-change='$ctrl.changeTodo()'>
             </label>
@@ -26,7 +24,7 @@
                 <label class="completed">
                     <input type="checkbox" ng-model='task.completed' ng-change='$ctrl.changeTodo()'>
                 </label>
-                <a href='#'>{{task.title}}</a>
+                <a ui-sref='lists.todo({todoid: task.id})'>{{task.title}}</a>
                 <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
                     <input type="checkbox" ng-model='task.marked' ng-change='$ctrl.changeTodo()'>
                 </label>
@@ -41,7 +39,7 @@
                 <label class="completed">
                     <input type="checkbox" ng-model='task.completed'  ng-change='$ctrl.changeTodo()'>
                 </label>
-                <a href='#'>{{task.title}}</a>
+                <a ui-sref='lists.todo({todoid: task.id})'>{{task.title}}</a>
                 <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
                     <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeMarked()'>
                 </label>
