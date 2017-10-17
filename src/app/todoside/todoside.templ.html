@@ -20,15 +20,21 @@
                 <li ng-repeat='subtask in $ctrl.subtasks'></li>
             </ul>
         </li>
-        <li class = 'note'>
-
+        <li class = 'note note-active'>
+            <span ng-if = '!$ctrl.addNoteActive' ng-click='$ctrl.addNoteActive = true'>Add a note</span>
+            <textarea  ng-if = '$ctrl.addNoteActive'
+                placeholder="Add note..."
+                id="" cols="25" rows="" autofocus
+                ng-model="$ctrl.task.note"
+                ng-keydown='$ctrl.handleNotePrint($event)'
+                ng-blur='$ctrl.changeTodoNote()'></textarea>
         </li>
         <li class = 'file'>
-            <!-- <input type="file"> -->
+            <input type="file" id = 'add-file' ng-model = '$ctrl.task.file' ng-change='$ctrl.handleFile($event)'>
+            <label for="add-file">Add a file</label>
         </li>
     </ul>
-    
     <div class="todoaside-footer">
-        <button ng-click='$ctrl.redirectToParent()'>change</button>
+        <button ng-click='$ctrl.redirectToParent()'></button>
     </div>
 </aside>

@@ -43,7 +43,10 @@ a:visited {
 
 input,
 input:active,
-input:focus {
+input:focus,
+textarea,
+textarea:active,
+textarea:focus {
     outline: none;
     border: none;
 }
