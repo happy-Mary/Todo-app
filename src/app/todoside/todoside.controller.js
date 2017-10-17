@@ -45,7 +45,7 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     self.handleFile = () => {
         // const fileList = this.files;
         // console.log(fileList);
-        console.log(self.task.file);
+        console.log(self.task.files);
     }
 
     self.redirectToParent = () => {

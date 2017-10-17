@@ -30,7 +30,7 @@
                 ng-blur='$ctrl.changeTodoNote()'></textarea>
         </li>
         <li class = 'file'>
-            <input type="file" id = 'add-file' ng-model = '$ctrl.task.file' ng-change='$ctrl.handleFile($event)'>
+            <input type="file" id = 'add-file' ng-model = '$ctrl.task.file' file-input>
             <label for="add-file">Add a file</label>
         </li>
     </ul>
