@@ -6,6 +6,7 @@ export default contextMenuModule
     	transclude: true,
         bindings: {
             data: '=',
+            menuId: '@'
         },
         template: contextMenuTemplate,
         controller: 'contextMenuController'

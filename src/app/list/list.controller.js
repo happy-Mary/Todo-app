@@ -25,6 +25,7 @@ export default listModule
         self.$onInit = () => {
             self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
+            self.onContextMenu = self.onContextMenu;
         };
 
         self.getCountTodo = todoService.getCountTodo;
@@ -52,5 +53,10 @@ export default listModule
         self.handleDrop = (dragObj, dropObj) => {
             todoService.changeParentList(dropObj.id, dragObj.id);
         };
+
+        self.openContextMenu = (event, item) => {
+            self.onContextMenu({event: event, item: item});
+        };
+    
 
     });

@@ -20,15 +20,4 @@ export default mainModule
             // show user error message, remove console message
             console.error('transition has been rejected');
         });
-
-        //TABS delete
-        self.handle = function(){
-            console.log('sasasasa');
-            // var a = contextMenuService.get();
-            // console.log(a);
-        };
-        self.handle2 = function(event){
-            console.log(event);
-        }
-
     });

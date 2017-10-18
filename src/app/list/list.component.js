@@ -6,7 +6,8 @@ export default listModule
         bindings: {
             filterId: '<',
             onEdit: '&',
-            onDelete: '&'
+            onDelete: '&',
+            onContextMenu: '&'
         },
         controller: 'listController',
         template: listTemplate

@@ -15,7 +15,7 @@
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)" on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-group-component>
             <div class="empty-folder"
                 dragdrop-dir drop-obj='null' verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
-                <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)'></list-comp>
+                <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)' on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-comp>
                 </list-comp>
             </div>           
         </div>
@@ -69,3 +69,9 @@
         </modal>
     </section>
 </div>
+<context menu-id="folder">
+    <menu-item text="Редактировать" ng-click="ctrl.actions.onEdit()"></menu-item>
+    <menu-item text="Удалить" ng-click="ctrl.actions.onDelete()"></menu-item>
+<!--     <menu-item text="bbb" ng-click="ctrl.handle2($event)"></menu-item>
+    <menu-item text="accc" ng-click="ctrl.handle2($event)"></menu-item> -->
+</context>

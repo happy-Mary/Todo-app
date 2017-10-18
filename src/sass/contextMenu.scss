@@ -15,3 +15,13 @@
 context.active .context-menu{
 	display: block;
 }
+.dropdown-menu{
+	border: 1px solid black;
+	background: white;
+	padding: 5px 0;
+	min-width: 150px;
+}
+.dropdown-menu li{
+	padding: 5px;
+	cursor: pointer;
+}

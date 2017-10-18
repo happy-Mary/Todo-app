@@ -2,7 +2,7 @@
     <li ng-repeat='list in $ctrl.lists | filter: {"listGroupId":$ctrl.filterId}  track by $index' ui-sref-active='active-list' 
     dragdrop-dir drag-obj='list' verify-drag-allowed='$ctrl.verifyDragList(obj)' 
     drop-obj='list' verify-drop-allowed='$ctrl.verifyListDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'
-    draggable = 'true'>
+    draggable = 'true' ng-right-click="$ctrl.openContextMenu($event, list)">
 
         <a ui-sref='lists.todo({listid: list.id})' draggable = 'false'>
             {{list.title}}

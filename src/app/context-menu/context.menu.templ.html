@@ -5,4 +5,6 @@
 	</li>
 </ul>
  -->
- <ul class="context-menu" ng-transclude></ul>
+<!--  <ul style="top: {{$ctrl.topCoordinate}}px; left: {{$ctrl.leftCoordinate}}px" class="context-menu"><li>1 {{$ctrl.topCoordinate}}</li></ul>
+ -->
+  <ul style="top: {{$ctrl.coordinate.y}}px; left: {{$ctrl.coordinate.x}}px" class="context-menu" ng-transclude><li></ul>

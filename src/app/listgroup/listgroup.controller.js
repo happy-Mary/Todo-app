@@ -4,8 +4,7 @@ import '../../sass/listgroup.scss';
 export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService, listService) {
         const self = this;
-        self.name = "Anna";
-
+       
         function removeSubmenu() {
             const allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
             allOpenedMenus.removeClass('submenu-open');
@@ -27,6 +26,10 @@ export default listGroupModule
 
         self.handleDelete = (itemCurr) => {
             self.onDelete({ item: itemCurr });
+        };
+
+        self.handleContextMenu = (event, item) => {
+            self.onContextMenu({ event: event, item: item});
         };
 
         self.toggleMenuEdit = (event) => {
@@ -66,9 +69,11 @@ export default listGroupModule
         };
 
         self.getCountLists = listService.getCountLists;
+
         self.openContextMenu = (event, item) => {
-            // console.log(item);
            self.onContextMenu({event: event, item: item});
         };
+    
+        
 
     });

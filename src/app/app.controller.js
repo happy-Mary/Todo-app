@@ -3,7 +3,7 @@ import mainModule from './app.module';
 require('./modal/modal.service');
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $transitions, $state, $timeout) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, contextMenuService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
        // self.headerTitle = 'current list title';
         self.marked = false;
@@ -103,19 +103,29 @@ export default mainModule
         self.actions = {
             // editting item
             onEdit(item) {
-                self.activeItem = item;
-                if (item.type === 'list') {
+                if(item){
+                    self.activeItem = item;
+                }
+                else{
+                    self.activeItem = contextMenuService.getItem();
+                }
+                if (self.activeItem.type === 'list') {
                     modalService.open('edit-list');
-                } else if (item.type === 'folder') {
+                } else if (self.activeItem.type === 'folder') {
                     modalService.open('edit-folder');
                 }
             },
             // deleting item
             onDelete(item) {
-                self.activeItem = item;
-                if (item.type === 'list') {
+                if(item){
+                    self.activeItem = item;
+                }
+                else{
+                    self.activeItem = contextMenuService.getItem();
+                }
+                if (self.activeItem.type === 'list') {
                     modalService.open('delete-list');
-                } else if (item.type === 'folder') {
+                } else if (self.activeItem.type === 'folder') {
                     modalService.open('delete-folder');
                 }
             },
@@ -129,11 +139,9 @@ export default mainModule
             },
             // opening folder menu (on custom right click)
             onContextMenu(event, item) {
+                event.stopPropagation();
                 angular.element(document.querySelector('context')).addClass('active');
-                console.log( event);
-                console.log( item);
-               
-                // console.log(arguments);
+                contextMenuService.set(event, item);
             },
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
