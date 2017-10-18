@@ -42,14 +42,20 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         }
     }
 
-    self.handleFile = () => {
-        // const fileList = this.files;
-        // console.log(fileList);
-        console.log(self.task.files);
+    self.handleSaveFiles = () => {
+
     }
 
     self.redirectToParent = () => {
         $state.go('^');
+    }
+
+    self.checkFileSupport = () => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            console.log('Great success! All the File APIs are supported.');
+        } else {
+            console.log('The File APIs are not fully supported in this browser.');
+        }
     }
 
 }]);

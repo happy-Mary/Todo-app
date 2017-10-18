@@ -2,26 +2,39 @@ import mainModule from './app.module';
 
 export default mainModule.directive('fileInput', [function fileDir() {
     return {
-        scope: true,
+        scope: {
+            handleFile: '&'
+        },
         restrict: 'A',
-        require: "ngModel",
-        link: function postLink(scope, elem, attrs, ngModel) {
-          elem.on("change", function(e) {
-            const files = elem[0].files;
-            // console.log(files);
-            // ngModel.$setViewValue(files);
-            const reader = new FileReader();
-            // console.log(reader);
+        link: function postLink(scope, elem, attrs) {
+            elem.on("change", (e) => {
+                const files = elem[0].files;
+                const filesArr = [];
 
-            reader.onload = function(event) {
-                const theUrl = event.target.result;
-                console.log(theUrl);
-                // $('').html("<img src='" + the_url + "' />");
-            }
-            let r = reader.readAsDataURL(e.target.files[0]);
-            // console.log(r);
+                angular.forEach(files, (file) => {
+                    const name = file.name;
+                    const size = file.size;
+                    const date = file.lastModifiedDate;
+                    // console.log(name);
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = (event) => {
+                            console.log(date);
+                            const theUrl = event.target.result;
+                            console.log(theUrl);
+                            filesArr.push(theUrl);
+                            console.log(filesArr);
+                        }
+                        // reader.readAsDataURL(file);
+                })
 
-          })
+            })
         }
-      }
+    }
 }]);
+
+
+/* <script>
+    if (typeof Promise !== "function")
+        document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.min.js"><\/script>');
+</script> */
