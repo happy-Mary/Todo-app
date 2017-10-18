@@ -9,24 +9,24 @@ export default mainModule.directive('fileInput', [function fileDir() {
         link: function postLink(scope, elem, attrs) {
             elem.on("change", (e) => {
                 const files = elem[0].files;
-                const filesArr = [];
+                scope.handleFile({ data: files });
 
-                angular.forEach(files, (file) => {
-                    const name = file.name;
-                    const size = file.size;
-                    const date = file.lastModifiedDate;
-                    // console.log(name);
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = (event) => {
-                            console.log(date);
-                            const theUrl = event.target.result;
-                            console.log(theUrl);
-                            filesArr.push(theUrl);
-                            console.log(filesArr);
-                        }
-                        // reader.readAsDataURL(file);
-                })
+                // angular.forEach(files, (file) => {
+                //     const name = file.name;
+                //     const size = file.size;
+                //     const date = file.lastModifiedDate;
+                //     // console.log(name);
+                //     const reader = new FileReader();
+                //     reader.readAsDataURL(file);
+                //     reader.onload = (event) => {
+                //             console.log(date);
+                //             const theUrl = event.target.result;
+                //             console.log(theUrl);
+                //             filesArr.push(theUrl);
+                //             console.log(filesArr);
+                //         }
+                //         // reader.readAsDataURL(file);
+                // })
 
             })
         }

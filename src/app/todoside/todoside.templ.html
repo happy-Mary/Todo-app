@@ -25,8 +25,8 @@
             <textarea ng-if='$ctrl.addNoteActive' placeholder="Add note..." id="" cols="25" rows="" autofocus ng-model="$ctrl.task.note" ng-keydown='$ctrl.handleNotePrint($event)' ng-blur='$ctrl.changeTodoNote()'></textarea>
         </li>
         <li class='file'>
-            <input type="file" id='add-file' multiple file-input>
-            <label for="add-file" ng-click="$ctrl.checkFileSupport()">Add a file</label>
+            <input type="file" id='add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>
+            <label for="add-file">Add a file</label>
         </li>
     </ul>
 

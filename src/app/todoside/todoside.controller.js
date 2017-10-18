@@ -1,5 +1,8 @@
 import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
+import Subtask from './subtask.constructor';
+// import { URLS } from '../constants';
+import URLS from '../constants';
 
 export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', function todosideController($state, $timeout, todoService) {
     const self = this;
@@ -42,20 +45,27 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         }
     }
 
-    self.handleSaveFiles = () => {
-
-    }
-
     self.redirectToParent = () => {
         $state.go('^');
     }
 
-    self.checkFileSupport = () => {
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            console.log('Great success! All the File APIs are supported.');
-        } else {
-            console.log('The File APIs are not fully supported in this browser.');
-        }
-    }
+    self.handleFiles = (data) => {
+        const files = data;
 
+        angular.forEach(files, (file) => {
+            const name = file.name;
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const theUrl = event.target.result;
+                // console.log(theUrl);
+                self.task.files.push(theUrl);
+                todoService.update();
+            }
+        })
+    }
 }]);
+
+// do we need it on form with files ???
+// action="upload-page.php" enctype="multipart/form-data"
