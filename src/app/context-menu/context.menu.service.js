@@ -5,6 +5,7 @@ export default contextMenuModule
         const self = this;
         self.selectedItem;
         self.coordinate = {};
+        self.menu =[];
 
         self.setItem = function(event, item){
             self.selectedItem = item;
@@ -17,7 +18,6 @@ export default contextMenuModule
         self.getCoordinate = () => {
            return self.coordinate;
         }
-
         return {
             getItem: self.getItem,
             set: self.setItem,
