@@ -4,9 +4,13 @@ import Subtask from './subtask.constructor';
 // import { URLS } from '../constants';
 import URLS from '../constants';
 
-export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', function todosideController($state, $timeout, todoService) {
+export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', 'subtaskService', function todosideController($state, $timeout, todoService, subtaskService) {
     const self = this;
-    self.task = todoService.getTodo($state.params.todoid);
+    self.currTaskId = $state.params.todoid;
+    self.task = todoService.getTodo(self.currTaskId);
+    // self.subtasks = subtaskService.getSubtasks(currTaskId);
+    self.subtasks = subtaskService.get();
+    self.subtaskTitle = "";
 
     if (self.task.note) {
         self.addNoteActive = true;
@@ -22,7 +26,13 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         todoService.update();
     }
 
-    self.handleEnterTitle = (event) => {
+    self.addSubtask = () => {
+        // не обновляется....
+        subtaskService.create(self.subtaskTitle, self.currTaskId);
+        self.subtaskTitle = "";
+    }
+
+    self.handleEnter = (event) => {
         if (event.keyCode === 13) {
             event.preventDefault();
             event.target.blur();

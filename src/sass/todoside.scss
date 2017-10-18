@@ -1,22 +1,19 @@
 @import "var.scss";
-
 aside.todo-aside {
     background-color: #fff;
     width: 300px;
-    // height: -o-calc(100% - ($headerHeight));
-    // height: -moz-calc(100% - ($headerHeight));
-    // height: -webkit-calc(100% - ($headerHeight));
+    height: -o-calc(100% - #{$headerHeight});
+    height: -moz-calc(100% - #{$headerHeight});
+    height: -webkit-calc(100% - #{$headerHeight});
     height: calc(100% - #{$headerHeight});
     float: right;
     position: relative;
-
     li {
         min-height: 40px;
         border-bottom: 1px solid $lightgray;
         color: $gray;
         line-height: 40px;
     }
-
     // li task
     li.task {
         background-color: #fff;
@@ -34,11 +31,9 @@ aside.todo-aside {
         input[type=checkbox] {
             display: none;
         }
-        
         input[type=checkbox]:checked+label {
             background-image: url('../img/icons/check-box.png');
         }
-        
         span[contenteditable] {
             color: #696969;
             line-height: 40px;
@@ -76,16 +71,25 @@ aside.todo-aside {
             height: 40px;
             line-height: 40px;
         }
-        &.duedate {background-image: url('../img/icons/calendar.png');}
-        &.reminder {background-image: url('../img/icons/set-alarm.png');}
-        &.subtask {background-image: url('../img/icons/plus-symbol.png');}
-        &.note {background-image: url('../img/icons/pencil.png');}
-        &.file {background-image: url('../img/icons/attachment.png');}
+        &.duedate {
+            background-image: url('../img/icons/calendar.png');
+        }
+        &.reminder {
+            background-image: url('../img/icons/set-alarm.png');
+        }
+        &.subtask {
+            background-image: url('../img/icons/plus-symbol.png');
+            background-position-y: 10px;
+        }
+        &.note {
+            background-image: url('../img/icons/pencil.png');
+        }
+        &.file {
+            background-image: url('../img/icons/attachment.png');
+        }
     }
-
     li.note.note-active {
         background-position-y: 10px;
-
         textarea {
             padding: 10px 0;
             overflow: hidden;
@@ -93,9 +97,7 @@ aside.todo-aside {
             font-style: italic;
         }
     }
-    
-    .subtasks {display: none;}
-
+    // .subtasks {display: none;}
     .todoaside-footer {
         position: absolute;
         bottom: 0px;
@@ -109,15 +111,10 @@ aside.todo-aside {
             background-size: 20px;
         }
     }
-
-    input[type='file'] {display: none;}
+    input[type='file'] {
+        display: none;
+    }
 }
 
-
 // 
-
-
-
-
-
 // 4F5F6B

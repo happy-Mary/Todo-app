@@ -29,16 +29,21 @@ export default mainModule
                     template: todoTemplate,
                     controller: 'AppController as ctrl',
                     params: {
-                      search: {
-                        // value: '',
-                        // squash: true
-                      }
+                        search: {
+                            // value: '',
+                            // squash: true
+                        }
                     },
                     reloadOnSearch: false
                 })
                 .state('lists.todo', {
                     url: '/todo/:todoid',
-                    template: '<todoside-comp></todoside-comp>'
+                    template: '<todoside-comp></todoside-comp>',
+                    resolve: {
+                        subtaskData: function getData(subtaskService) {
+                            return subtaskService.register();
+                        }
+                    }
                 });
         }
     ]);
