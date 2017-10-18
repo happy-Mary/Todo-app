@@ -67,8 +67,7 @@ aside.todo-aside {
         background-repeat: no-repeat;
         background-position: 10px center;
         background-size: 20px;
-        input {
-            height: 40px;
+        input:not([type="checkbox"]) {
             line-height: 40px;
         }
         &.duedate {
@@ -97,7 +96,12 @@ aside.todo-aside {
             font-style: italic;
         }
     }
-    // .subtasks {display: none;}
+    .subtasks li {
+        height: 30px;
+        border: none;
+        font-size: .8rem;
+        padding: 0;
+    }
     .todoaside-footer {
         position: absolute;
         bottom: 0px;

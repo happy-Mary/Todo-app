@@ -1,14 +1,10 @@
 import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
-import Subtask from './subtask.constructor';
-// import { URLS } from '../constants';
-import URLS from '../constants';
 
 export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', 'subtaskService', function todosideController($state, $timeout, todoService, subtaskService) {
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
-    // self.subtasks = subtaskService.getSubtasks(currTaskId);
     self.subtasks = subtaskService.get();
     self.subtaskTitle = "";
 
@@ -19,17 +15,17 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     }
 
     self.changeTodo = todoService.update;
+    self.changeSubtask = subtaskService.update;
+
+    self.addSubtask = () => {
+        subtaskService.create(self.subtaskTitle, self.currTaskId);
+        self.subtaskTitle = "";
+    }
 
     self.changeTodoTitle = (event) => {
         const currEl = angular.element(event.target);
         self.task.title = currEl.html();
         todoService.update();
-    }
-
-    self.addSubtask = () => {
-        // не обновляется....
-        subtaskService.create(self.subtaskTitle, self.currTaskId);
-        self.subtaskTitle = "";
     }
 
     self.handleEnter = (event) => {

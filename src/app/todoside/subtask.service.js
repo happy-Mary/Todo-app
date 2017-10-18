@@ -38,16 +38,6 @@ export default todosideModule
                 .catch(() => getDataFromSerever());
         }
 
-        function getSubtasksInTodo(todoId) {
-            const currItem = [];
-            angular.forEach(self.data, (item) => {
-                if (item.taskId == todoId) {
-                    currItem.push(item);
-                }
-            });
-            return currItem;
-        }
-
         function updateSubtask() {
             save();
         }
@@ -56,13 +46,13 @@ export default todosideModule
             self.data = obj;
         }
 
-        function deleteTodo(id) {
+        function deleteSubtask(id) {
             const index = self.data.findIndex(x => x.id == id);
             self.data.splice(index, 1);
             return self.data;
         }
 
-        function createTodo(title, todoId) {
+        function createSubtask(title, todoId) {
             const subtask = new Subtask(title, todoId);
             self.data.push(subtask);
             save();
@@ -72,9 +62,8 @@ export default todosideModule
             register: registerSubtasks,
             set: setTodo,
             get: getData,
-            getSubtasks: getSubtasksInTodo,
-            delete: deleteTodo,
-            create: createTodo,
+            delete: deleteSubtask,
+            create: createSubtask,
             update: updateSubtask,
         };
     });
