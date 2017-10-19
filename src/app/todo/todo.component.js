@@ -4,7 +4,8 @@ import todoTemplate from './todo.templ.html';
 export default todoModule
     .component('todoComp', {
         bindings: {
-            filterSearch: '='
+            filterSearch: '=',
+            onContextMenu: '&'
         },
         template: todoTemplate,
         controller: 'todoController'

@@ -149,7 +149,7 @@ export default mainModule
                         contextMenuService.setState('list', true);
                         break;
                     case 'todo':
-                        contextMenuService.setState('list', true);
+                        contextMenuService.setState('todo', true);
                         break;
                 }                           
             },
