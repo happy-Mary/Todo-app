@@ -12,23 +12,25 @@ export default listModule
             localStorageService.set('lists', self.data);
         }
 
+        function getDataFromSerever() {
+            return $http({ method: 'GET', url: URLS.listURL })
+            .then((response) => {
+                self.data.push(...response.data);
+                save();
+            })
+            .catch(() => {
+                self.data = [];
+                save();
+            });
+        }
+
         function registerLists() {
             self.data = [];
             return localStorageService.get('lists').then((response) => {
                     self.data.push(...response);
                     save();
                 })
-                .catch(() => {
-                    $http({ method: 'GET', url: URLS.listURL })
-                        .then((response) => {
-                            self.data.push(...response.data);
-                            save();
-                        })
-                        .catch(() => {
-                            self.data = [];
-                            save();
-                        });
-                });
+                .catch(() => getDataFromSerever());
         }
 
         function getLists() {

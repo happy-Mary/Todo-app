@@ -12,6 +12,9 @@ require('./todo/todo.component');
 require('./modal/modal.controller');
 require('./modal/modal.component');
 require('./dragdrop/dragdrop.directive');
+require('./todoside/todoside.controller');
+require('./todoside/todoside.component');
+require('./todoside/subtask.service');
 
 export default angular.module('mainModule', [
     'ui.router',
@@ -20,5 +23,6 @@ export default angular.module('mainModule', [
     'listModule',
     'todoModule',
     'modalModule',
-    'dragDropModule'
+    'dragDropModule',
+    'todosideModule'
 ]);
