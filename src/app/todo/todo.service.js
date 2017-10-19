@@ -59,7 +59,7 @@ export default todoModule
         function deleteTodo(id) {
             const index = self.data.findIndex(x => x.id == id);
             self.data.splice(index, 1);
-            return self.data;
+            save();
         }
 
         function createTodo(title, listId, marked) {
