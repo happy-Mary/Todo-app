@@ -63,11 +63,8 @@ export default mainModule
         $transitions.onSuccess({ to: 'lists.**' }, () => {
             self.currListId = $state.params.listid;
             getMainTitle();
-            // self.hideSpinner();
         });
-        // $transitions.onStart({ to: 'lists.**'}, () => {
-        //     self.showSpinner();
-        // });
+     
         // redirect to search while typing
         self.goToSearch = () => {
             $state.go('lists.filter', { search: self.searchItem });
@@ -140,8 +137,18 @@ export default mainModule
             // opening folder menu (on custom right click)
             onContextMenu(event, item) {
                 event.stopPropagation();
-                angular.element(document.querySelector('context')).addClass('active');
                 contextMenuService.set(event, item);
+                switch(item.type){
+                    case 'folder': 
+                        contextMenuService.setState('folder', true);
+                        break;
+                    case 'list':
+                        contextMenuService.setState('list', true);
+                        break;
+                    case 'todo':
+                        contextMenuService.setState('list', true);
+                        break;
+                }                           
             },
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
