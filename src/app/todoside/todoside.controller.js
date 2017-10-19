@@ -22,6 +22,10 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         self.subtaskTitle = "";
     }
 
+    self.deleteSubtask = (subtask) => {
+        subtaskService.delete(subtask.id)
+    }
+
     self.changeTodoTitle = (event) => {
         const currEl = angular.element(event.target);
         self.task.title = currEl.html();
@@ -59,13 +63,11 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         const files = data;
 
         angular.forEach(files, (file) => {
-            const name = file.name;
-
+            // const name = file.name;
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = (event) => {
                 const theUrl = event.target.result;
-                // console.log(theUrl);
                 self.task.files.push(theUrl);
                 todoService.update();
             }
@@ -73,5 +75,5 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     }
 }]);
 
-// do we need it on form with files ???
+// do we need it on form with files for server ???
 // action="upload-page.php" enctype="multipart/form-data"

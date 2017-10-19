@@ -49,7 +49,7 @@ export default todosideModule
         function deleteSubtask(id) {
             const index = self.data.findIndex(x => x.id == id);
             self.data.splice(index, 1);
-            return self.data;
+            save();
         }
 
         function createSubtask(title, todoId) {

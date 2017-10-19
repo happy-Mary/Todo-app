@@ -19,6 +19,7 @@
             <ul class="subtasks">
                 <li ng-repeat='subtask in $ctrl.subtasks | filter: {"taskId" : $ctrl.currTaskId}'>
                     <input type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'> {{subtask.title}}
+                    <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask)"></span>
                 </li>
             </ul>
         </li>
@@ -31,6 +32,11 @@
             <label for="add-file">Add a file</label>
         </li>
     </ul>
+
+    <!-- testing images loader -->
+    <div class="task-files">
+        <img ng-repeat='file in $ctrl.task.files track by $index' ng-src="{{file}}" alt="">
+    </div>       
 
     <div class="todoaside-footer">
         <button ng-click='$ctrl.redirectToParent()'></button>
