@@ -3,13 +3,21 @@
         <div class="nav">
             <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
             <!-- Filter todo in view -->
-            <input type="text" ui-sref='lists.filter({search: ""})' ui-sref-opt='{events: ["focus"]}' ng-change='ctrl.goToSearch()' ng-model='ctrl.searchItem'>
+            <!-- <input type="text" 
+                ui-sref='filter({search: ctrl.searchItem})'
+                ui-sref-opt='{events: ["focus"]}' 
+                ng-change='ctrl.goToSearch(event)' 
+                ng-model='ctrl.searchItem'> -->
+                
+                <input type="text" 
+                ng-change='ctrl.goToSearch()' 
+                ng-model='ctrl.searchItem'>
             <span class='toggle-search'></span>
         </div>
         <div class="folders">                      
             <ul class='special-items tab-bar'>
                 <li class='marked' ui-sref-active='active-list'>
-                    <a ui-sref="lists.todo({listid: 'marked'})"><span>избранное</span></a>
+                    <a ui-sref="lists({listid: 'marked'})"><span>избранное</span></a>
                 </li>
             </ul>
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)" on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-group-component>
@@ -33,6 +41,8 @@
             <li ng-click='ctrl.sorting.byDate()'>Sort by Date</li>
         </ul>
     </header>
+    <!-- nested view for sidebar -->
+    <ui-view></ui-view>
     <main>
         <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide='ctrl.currListId == "marked"'>
             <span class='newTask' ng-click='ctrl.toggleFocus($event)'>
@@ -45,8 +55,9 @@
                 <label for="addTask"></label>
             </div>
         </form>
-        <ui-view></ui-view>
+        <todo-comp></todo-comp>
     </main>
+    
     <!-- MODAL WINDOWS -->
     <section class="modals">
         <modal modal-id='add-list' title="Create new list">

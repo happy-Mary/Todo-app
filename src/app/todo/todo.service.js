@@ -16,22 +16,26 @@ export default todoModule
             localStorageService.set('todo', self.data);
         }
 
+        function getDataFromSerever() {
+            return $http({ method: 'GET', url: URLS.todoURL })
+            .then((response) => {
+                self.data = [];
+                self.data.push(...response.data);
+                save();
+            })
+            .catch(() => {
+                self.data = [];
+                save();
+            });
+        }
+
         function registerTodo() {
-            localStorageService.get('todo').then((response) => {
+            return localStorageService.get('todo').then((response) => {
+                    self.data = [];
                     self.data.push(...response);
                     save();
                 })
-                .catch(() => {
-                    $http({ method: 'GET', url: URLS.todoURL })
-                        .then((response) => {
-                            self.data.push(...response.data);
-                            save();
-                        })
-                        .catch(() => {
-                            self.data = [];
-                            save();
-                        });
-                });
+                .catch(() => getDataFromSerever());
         }
 
         function getOneTodo(id) {
@@ -40,8 +44,8 @@ export default todoModule
                 if (item.id == id) {
                     currItem = item;
                 }
-                return currItem;
             });
+            return currItem;
         }
 
         function updateTodo() {
@@ -55,7 +59,7 @@ export default todoModule
         function deleteTodo(id) {
             const index = self.data.findIndex(x => x.id == id);
             self.data.splice(index, 1);
-            return self.data;
+            save();
         }
 
         function createTodo(title, listId, marked) {

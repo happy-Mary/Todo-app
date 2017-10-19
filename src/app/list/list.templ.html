@@ -4,7 +4,8 @@
     drop-obj='list' verify-drop-allowed='$ctrl.verifyListDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'
     draggable = 'true' ng-right-click="$ctrl.openContextMenu($event, list)">
 
-        <a ui-sref='lists.todo({listid: list.id})' draggable = 'false'>
+        <a ui-sref='lists({listid: list.id})' draggable = 'false'>
+
             {{list.title}}
              <span class='todocount' ng-if='$ctrl.getCountTodo(list.id)'>
                 {{$ctrl.getCountTodo(list.id)}}

@@ -8,26 +8,42 @@ export default mainModule
             $urlRouterProvider.otherwise("/lists/marked");
             $stateProvider
                 .state('lists', {
-                    url: '/lists',
+                    url: '/lists/:listid',
                     template: todoTemplate,
-                    abstract: true,
+                    // abstract: true,
                     controller: 'AppController as ctrl',
                     resolve: {
+                        dataLists: function getData(listService) {
+                            return listService.register();
+                        },
                         dataFolders: function getData(listGroupService) {
                             return listGroupService.register();
                         },
-                        dataLists: function getData(listService) {
-                            return listService.register();
+                        dataTasks: function getData(todoService) {
+                            return todoService.register();
                         }
                     }
                 })
-                .state('lists.todo', {
-                    url: '/:listid',
-                    template: '<todo-comp></todo-comp>'
+                .state('filter', {
+                    url: '/filter?search',
+                    template: todoTemplate,
+                    controller: 'AppController as ctrl',
+                    params: {
+                        search: {
+                            // value: '',
+                            // squash: true
+                        }
+                    },
+                    reloadOnSearch: false
                 })
-                .state('lists.filter', {
-                    url: '/filter/:search',
-                    template: '<todo-comp></todo-comp>'
+                .state('lists.todo', {
+                    url: '/todo/:todoid',
+                    template: '<todoside-comp></todoside-comp>',
+                    resolve: {
+                        subtaskData: function getData(subtaskService) {
+                            return subtaskService.register();
+                        }
+                    }
                 });
         }
     ]);

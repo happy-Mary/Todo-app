@@ -37,7 +37,7 @@ export default mainModule
         getMainTitle();
 
         // getting data for list and listgroups
-        todoService.register();
+        // todoService.register();
 
         angular.element(document).ready(() => {
             // open folder if list active on first load
@@ -60,14 +60,17 @@ export default mainModule
         });
 
         // change main title on route
+
         $transitions.onSuccess({ to: 'lists.**' }, () => {
             self.currListId = $state.params.listid;
             getMainTitle();
         });
      
         // redirect to search while typing
+        // self.searchItem = '';
+
         self.goToSearch = () => {
-            $state.go('lists.filter', { search: self.searchItem });
+            $state.go('filter', { search: self.searchItem }, { notify: false });
         };
 
         // focusing input for adding todo
@@ -206,12 +209,6 @@ export default mainModule
                     else if (valueA < valueB) return 1;
                     return 0;
                 });
-
-                // testing dates sorting (remove after tests)
-                // angular.forEach(tasks, (task) => {
-                // console.log(task.date);
-                // });
             }
         };
-
     });

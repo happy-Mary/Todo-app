@@ -16,6 +16,9 @@ require('./context-menu/context.menu.component');
 require('./context-menu/context.menu.controller');
 require('./context-menu/context.menu.service');
 require('./menu-item/menu-item.component');
+require('./todoside/todoside.controller');
+require('./todoside/todoside.component');
+require('./todoside/subtask.service');
 
 export default angular.module('mainModule', [
 	'menuItemModule',
@@ -27,6 +30,7 @@ export default angular.module('mainModule', [
     'modalModule',
     'dragDropModule',
     'menuItemModule',
-    'contextMenuModule'
+    'contextMenuModule',
+    'todosideModule'
     
 ]);

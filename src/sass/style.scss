@@ -43,7 +43,10 @@ a:visited {
 
 input,
 input:active,
-input:focus {
+input:focus,
+textarea,
+textarea:active,
+textarea:focus {
     outline: none;
     border: none;
 }
@@ -113,12 +116,16 @@ aside {
             min-height: 40px;
         }
         li {
+
             border-bottom: 1px solid #dfe2e2;
+
+            // border-bottom: 1px solid $lightgray;
+
             a {
                 display: block;
                 line-height: 40px;
                 padding-left: 45px;
-                color: #696969;
+                color: $gray;
                 text-transform: uppercase;
             }
         }

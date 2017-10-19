@@ -4,13 +4,14 @@ import '../../sass/listgroup.scss';
 export default listGroupModule
     .controller('listGroupController', function listGroupController($http, localStorageService, listGroupService, listService) {
         const self = this;
-       
+
         function removeSubmenu() {
             const allOpenedMenus = angular.element(document.querySelectorAll('.submenu-open'));
             allOpenedMenus.removeClass('submenu-open');
         }
 
         self.listGroups = listGroupService.get();
+
         self.openFolder = (event) => {
             const folderLink = angular.element(event.currentTarget);
             if (folderLink.hasClass('folder-item')) {
