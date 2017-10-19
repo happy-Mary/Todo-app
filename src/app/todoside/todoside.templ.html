@@ -9,10 +9,12 @@
             </label>
         </li>
         <li class='duedate'>
-            <input type='text' placeholder='Set due date'>
+            <!-- <input type='text' placeholder='Set due date'> -->
+            <input type="datetime-local" ng-model="$ctrl.example.value">
         </li>
         <li class='reminder'>
-            <input type='text' placeholder='Remind me'>
+            <!-- <input type='text' placeholder='Remind me'> -->
+            <input type="datetime-local"  placeholder='Remind me'>
         </li>
         <li class='subtask'>
             <input type="text" placeholder="Add subtask" ng-keypress='$ctrl.handleEnter($event)' ng-blur='$ctrl.addSubtask($event)' ng-model='$ctrl.subtaskTitle'>

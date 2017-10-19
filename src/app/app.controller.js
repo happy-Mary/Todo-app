@@ -59,18 +59,6 @@ export default mainModule
             });
         });
 
-        // change main title on route
-        $transitions.onSuccess({ to: 'filter' }, () => {
-            // self.currListId = $state.params.listid;
-            // getMainTitle();
-            // self.hideSpinner();
-        });
-        // $transitions.onStart({ to: 'lists.**'}, () => {
-        //     self.showSpinner();
-        // });
-        // redirect to search while typing
-        // self.searchItem = '';
-
         self.goToSearch = () => {
             $state.go('filter', { search: self.searchItem }, { notify: false });
         };
