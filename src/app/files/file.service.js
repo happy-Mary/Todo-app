@@ -1,10 +1,10 @@
-import todosideModule from './todoside.module';
-import Subtask from './subtask.constructor';
+import fileModule from './file.module';
+import File from './file.constructor';
 // import { URLS } from '../constants';
 import URLS from '../constants';
 
-export default todosideModule
-    .service('subtaskService', function subtaskService($http, localStorageService) {
+export default fileModule
+    .service('filesService', function Fileservice($http, localStorageService) {
         const self = this;
         self.data = [];
 
@@ -13,11 +13,11 @@ export default todosideModule
         }
 
         function save() {
-            localStorageService.set('subtask', self.data);
+            localStorageService.set('files', self.data);
         }
 
         function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.subtaskURL })
+            return $http({ method: 'GET', url: URLS.filesURL })
                 .then((response) => {
                     self.data = [];
                     self.data.push(...response.data);
@@ -29,8 +29,8 @@ export default todosideModule
                 });
         }
 
-        function registerSubtasks() {
-            return localStorageService.get('subtask').then((response) => {
+        function registerFiles() {
+            return localStorageService.get('files').then((response) => {
                     self.data = [];
                     self.data.push(...response);
                     save();
@@ -38,32 +38,32 @@ export default todosideModule
                 .catch(() => getDataFromSerever());
         }
 
-        function updateSubtask() {
+        function updateFile() {
             save();
         }
 
-        function setSubtasks(obj) {
+        function setFiles(obj) {
             self.data = obj;
         }
 
-        function deleteSubtask(id) {
+        function deleteFile(id) {
             const index = self.data.findIndex(x => x.id == id);
             self.data.splice(index, 1);
             save();
         }
 
-        function createSubtask(title, todoId) {
-            const subtask = new Subtask(title, todoId);
-            self.data.push(subtask);
+        function createFile(taskId, url, name, size) {
+            const file = new File(taskId, url, name, size);
+            self.data.push(file);
             save();
         }
 
         return {
-            register: registerSubtasks,
-            set: setSubtasks,
+            register: registerFiles,
+            set: setFiles,
             get: getData,
-            delete: deleteSubtask,
-            create: createSubtask,
-            update: updateSubtask,
+            delete: deleteFile,
+            create: createFile,
+            update: updateFile,
         };
     });

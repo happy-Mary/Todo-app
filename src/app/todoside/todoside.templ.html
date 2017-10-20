@@ -10,7 +10,7 @@
         </li>
         <li class='duedate'>
             <!-- <input type='text' placeholder='Set due date'> -->
-            <input type="datetime-local" ng-model="$ctrl.example.value">
+            <input type="datetime-local">
         </li>
         <li class='reminder'>
             <!-- <input type='text' placeholder='Remind me'> -->
@@ -37,7 +37,7 @@
 
     <!-- testing images loader -->
     <div class="task-files">
-        <img ng-repeat='file in $ctrl.task.files track by $index' ng-src="{{file}}" alt="">
+        <file-comp ng-repeat = 'file in $ctrl.files  track by $index' file = 'file'></file-comp>
     </div>       
 
     <div class="todoaside-footer">

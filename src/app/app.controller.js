@@ -5,7 +5,6 @@ require('./modal/modal.service');
 export default mainModule
     .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
-       // self.headerTitle = 'current list title';
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
@@ -35,9 +34,6 @@ export default mainModule
         }
 
         getMainTitle();
-
-        // getting data for list and listgroups
-        // todoService.register();
 
         angular.element(document).ready(() => {
             // open folder if list active on first load
