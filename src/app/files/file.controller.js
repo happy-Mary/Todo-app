@@ -11,5 +11,12 @@ export default fileModule.controller('fileController', [function fileController(
             // put on changing...
             self.loadedTime = getTimeAgo(date);
         }
+        self.extension = self.file.name.split('.');
+        self.extension = self.extension[self.extension.length - 1];
     };
+    function getExtension() {
+
+    };
+    self.extension = getExtension();
+
 }]);
