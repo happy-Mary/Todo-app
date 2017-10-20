@@ -10,7 +10,6 @@ export default mainModule
                 .state('lists', {
                     url: '/lists/:listid',
                     template: todoTemplate,
-                    // abstract: true,
                     controller: 'AppController as ctrl',
                     resolve: {
                         dataLists: function getData(listService) {
@@ -42,6 +41,9 @@ export default mainModule
                     resolve: {
                         subtaskData: function getData(subtaskService) {
                             return subtaskService.register();
+                        },
+                        filesData: function getData(filesService) {
+                            return filesService.register();
                         }
                     }
                 });

@@ -1,11 +1,12 @@
 import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
 
-export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', 'subtaskService', function todosideController($state, $timeout, todoService, subtaskService) {
+export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController($state, $timeout, todoService, subtaskService, filesService) {
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
     self.subtasks = subtaskService.get();
+    self.files = filesService.get();
     self.subtaskTitle = "";
 
     if (self.task.note) {
@@ -68,11 +69,12 @@ export default todosideModule.controller('todosideController', ['$state', '$time
             reader.readAsDataURL(file);
             reader.onload = (event) => {
                 const theUrl = event.target.result;
-                self.task.files.push(theUrl);
-                todoService.update();
+                filesService.create(self.currTaskId, theUrl, file.name, file.size);
+                // request to server
             }
         })
     }
+
 }]);
 
 // do we need it on form with files for server ???
