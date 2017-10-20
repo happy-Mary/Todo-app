@@ -9,7 +9,6 @@ export default class ToDo {
         this.completed = false;
         this.date = new Date();
         this.dueDate = "";
-        this.files = [];
         this.note = "";
     }
 }

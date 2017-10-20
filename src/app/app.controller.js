@@ -5,7 +5,6 @@ require('./modal/modal.service');
 export default mainModule
     .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
-       // self.headerTitle = 'current list title';
         self.marked = false;
         self.newTodoTitle = '';
         self.taskFocused = false;
@@ -36,9 +35,6 @@ export default mainModule
 
         getMainTitle();
 
-        // getting data for list and listgroups
-        // todoService.register();
-
         angular.element(document).ready(() => {
             // open folder if list active on first load
             const activeList = angular.element(document.getElementsByClassName('active-list')[0]);
@@ -58,18 +54,6 @@ export default mainModule
                 $timeout.cancel(timeoutSortID);
             });
         });
-
-        // change main title on route
-        $transitions.onSuccess({ to: 'filter' }, () => {
-            // self.currListId = $state.params.listid;
-            // getMainTitle();
-            // self.hideSpinner();
-        });
-        // $transitions.onStart({ to: 'lists.**'}, () => {
-        //     self.showSpinner();
-        // });
-        // redirect to search while typing
-        // self.searchItem = '';
 
         self.goToSearch = () => {
             $state.go('filter', { search: self.searchItem }, { notify: false });
