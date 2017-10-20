@@ -42,7 +42,7 @@ export default todosideModule
             save();
         }
 
-        function setTodo(obj) {
+        function setSubtasks(obj) {
             self.data = obj;
         }
 
@@ -60,7 +60,7 @@ export default todosideModule
 
         return {
             register: registerSubtasks,
-            set: setTodo,
+            set: setSubtasks,
             get: getData,
             delete: deleteSubtask,
             create: createSubtask,
