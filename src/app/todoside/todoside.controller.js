@@ -64,12 +64,17 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         const files = data;
 
         angular.forEach(files, (file) => {
-            // const name = file.name;
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = (event) => {
                 const theUrl = event.target.result;
-                filesService.create(self.currTaskId, theUrl, file.name, file.size);
+                // delete this loaded after server ready
+                
+                const currFile = filesService.create(self.currTaskId, theUrl, file.name, file.size);
+                $timeout(() => {
+                    const date = new Date();
+                    filesService.setLoaded(currFile.id, date);
+                }, 5000);
                 // request to server
             }
         })

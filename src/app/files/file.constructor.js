@@ -7,6 +7,7 @@ export default class File {
         this.name = name;
         this.size = size;
         this.url = url;
-        this.loaded = "";
+        // change after server ready
+        this.loaded = new Date();
     }
 }

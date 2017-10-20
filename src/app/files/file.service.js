@@ -56,6 +56,14 @@ export default fileModule
             const file = new File(taskId, url, name, size);
             self.data.push(file);
             save();
+            return file;
+        }
+
+        function setLoadedData(id, value) {
+            const index = self.data.findIndex(x => x.id == id);
+            self.data[index].loaded = value;
+            // self.data[index].name = value;
+            save();
         }
 
         return {
@@ -65,5 +73,6 @@ export default fileModule
             delete: deleteFile,
             create: createFile,
             update: updateFile,
+            setLoaded: setLoadedData
         };
     });

@@ -1,6 +1,6 @@
 export default function timeAgo(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
-    let result = `${seconds} 1 second ago`;
+    let result = `1 second ago`;
     if (Math.round(seconds / (60 * 60 * 24 * 365.25)) >= 2) {
         const param = Math.round(seconds / (60 * 60 * 24 * 365.25));
         result = `${param} years ago`;
