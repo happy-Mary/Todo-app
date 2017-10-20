@@ -10,8 +10,6 @@ export default fileModule.controller('fileController', [function fileController(
             const date = new Date(self.file.loaded);
             // put on changing...
             self.loadedTime = getTimeAgo(date);
-            console.log(date);
-            console.log(self.loadedTime);
         }
     };
 }]);

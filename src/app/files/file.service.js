@@ -61,7 +61,7 @@ export default fileModule
 
         function setLoadedData(id, value) {
             const index = self.data.findIndex(x => x.id == id);
-            self.data[index].loaded = value;
+            // self.data[index].loaded = value;
             // self.data[index].name = value;
             save();
         }
