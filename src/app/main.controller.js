@@ -1,7 +1,7 @@
 import mainModule from './app.module';
 
 export default mainModule
-    .controller('mainController', function mainController($transitions, $state, usSpinnerService) {
+    .controller('mainController', function mainController($transitions, $state, usSpinnerService, contextMenuService) {
         const self = this;
         self.hideSpinner = function hideSpinner() {
             usSpinnerService.stop();

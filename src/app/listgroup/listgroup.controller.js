@@ -29,6 +29,10 @@ export default listGroupModule
             self.onDelete({ item: itemCurr });
         };
 
+        self.handleContextMenu = (event, item) => {
+            self.onContextMenu({ event: event, item: item});
+        };
+
         self.toggleMenuEdit = (event) => {
             event.preventDefault();
             event.stopPropagation();
@@ -48,6 +52,7 @@ export default listGroupModule
         self.$onInit = () => {
             self.onEdit = self.onEdit;
             self.onDelete = self.onDelete;
+            self.onContextMenu = self.onContextMenu;
         };
 
         self.verifyFolderDrop = (dragObj, dropObj) => {
@@ -65,5 +70,11 @@ export default listGroupModule
         };
 
         self.getCountLists = listService.getCountLists;
+
+        self.openContextMenu = (event, item) => {
+           self.onContextMenu({event: event, item: item});
+        };
+    
+        
 
     });

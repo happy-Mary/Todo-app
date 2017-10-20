@@ -20,10 +20,10 @@
                     <a ui-sref="lists({listid: 'marked'})"><span>избранное</span></a>
                 </li>
             </ul>
-            <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)"></list-group-component>
+            <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)" on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-group-component>
             <div class="empty-folder"
                 dragdrop-dir drop-obj='null' verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
-                <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)'></list-comp>
+                <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)' on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-comp>
                 </list-comp>
             </div>           
         </div>
@@ -55,7 +55,7 @@
                 <label for="addTask"></label>
             </div>
         </form>
-        <todo-comp></todo-comp>
+        <todo-comp on-edit="ctrl.actions.onEdit()" on-context-menu="ctrl.actions.onContextMenu(event, item)"></todo-comp>
     </main>
     
     <!-- MODAL WINDOWS -->
@@ -78,5 +78,28 @@
         <modal modal-id='delete-folder' title="Delete folder">
             <folder-form state="delete" edit-data='ctrl.activeItem'></folder-form>
         </modal>
+        <modal modal-id='edit-todo' title="Edit todo">
+            <list-form state="edit" edit-data='ctrl.activeItem'></list-form>
+        </modal>
+         <modal modal-id='delete-todo' title="Delete todo">
+            <list-form state="delete" edit-data='ctrl.activeItem'></list-form>
+        </modal>
     </section>
 </div>
+<context menu-id="folder">
+    <menu-item text="Edit folder" ng-click="ctrl.actions.onEdit()"></menu-item>
+    <menu-item text="Ungroup folder" ng-click="ctrl.actions.onDelete()"></menu-item>
+</context>
+<context menu-id="list">
+   
+    <menu-item text="Edit list" ng-click="ctrl.actions.onEdit()"></menu-item>
+    <menu-item text="Delete list" ng-click="ctrl.actions.onDelete()"></menu-item>
+</context>
+<context menu-id="todo">
+    <menu-item text="Mark as Starred" ng-if="!ctrl.activeItem.marked" ng-click="ctrl.actions.changeTodoMarked(true)"></menu-item>
+    <menu-item text="Mark as Unstarred" ng-if="ctrl.activeItem.marked" ng-click="ctrl.actions.changeTodoMarked(false)"></menu-item>
+    <menu-item text="Mark as Completed" ng-if="!ctrl.activeItem.completed" ng-click="ctrl.actions.changeTodoCompleted(true)"></menu-item>
+    <menu-item text="Mark as Not Completed" ng-if="ctrl.activeItem.completed" ng-click="ctrl.actions.changeTodoCompleted(false)"></menu-item>
+    <menu-item text="Rename todo" ng-click="ctrl.actions.onEdit()"></menu-item>
+    <menu-item text="Delete todo" ng-click="ctrl.actions.onDelete()"></menu-item>
+</context>

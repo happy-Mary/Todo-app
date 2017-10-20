@@ -15,8 +15,19 @@ export default todoModule
         $transitions.onSuccess({ to: 'filter' }, () => {
             self.searchParam = $stateParams.search;
             self.hasListId = $state.includes("filter");
-            // console.log(self.hasListId);
         });
+
+        self.$onInit = () => {
+            self.onContextMenu = self.onContextMenu;
+        };
+
+        self.handleEdit = (todo) => {
+            self.onEdit({ item: todo });
+        };
+
+        self.handleDelete = (todo) => {
+            self.onDelete({ item: todo });
+        };
 
         self.changeTodo = () => {
             todoService.update();
@@ -32,5 +43,9 @@ export default todoModule
                 allow = false;
             }
             return allow;
+        };
+
+        self.openContextMenu = (event, item) => {
+            self.onContextMenu({event: event, item: item});
         };
     });

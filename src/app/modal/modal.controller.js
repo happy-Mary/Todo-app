@@ -19,4 +19,5 @@ export default modalModule
         self.hide = () => {
             self.open = false;
         };
+
     });

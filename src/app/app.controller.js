@@ -3,7 +3,7 @@ import mainModule from './app.module';
 require('./modal/modal.service');
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, localStorageService, modalService, $transitions, $state, $timeout) {
+    .controller('AppController', function AppController(todoService, listGroupService, listService, contextMenuService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
         self.marked = false;
         self.newTodoTitle = '';
@@ -55,6 +55,16 @@ export default mainModule
             });
         });
 
+
+        // change main title on route
+
+        $transitions.onSuccess({ to: 'lists.**' }, () => {
+            self.currListId = $state.params.listid;
+            getMainTitle();
+        });
+     
+        // redirect to search while typing
+
         self.goToSearch = () => {
             $state.go('filter', { search: self.searchItem }, { notify: false });
         };
@@ -89,21 +99,40 @@ export default mainModule
         self.actions = {
             // editting item
             onEdit(item) {
-                self.activeItem = item;
-                if (item.type === 'list') {
-                    modalService.open('edit-list');
-                } else if (item.type === 'folder') {
-                    modalService.open('edit-folder');
+                if(item){
+                    self.activeItem = item;
                 }
+                else{
+                    self.activeItem = contextMenuService.getItem();
+                }
+                switch(self.activeItem.type){
+                    case 'folder': 
+                        modalService.open('edit-folder');
+                        break;
+                    case 'list':
+                        modalService.open('edit-list');
+                        break;
+                    case 'todo':
+                        modalService.open('edit-todo');
+                        break;
+                } 
             },
             // deleting item
             onDelete(item) {
-                self.activeItem = item;
-                if (item.type === 'list') {
-                    modalService.open('delete-list');
-                } else if (item.type === 'folder') {
-                    modalService.open('delete-folder');
+                if(item){
+                    self.activeItem = item;
                 }
+                switch(self.activeItem.type){
+                    case 'folder': 
+                        modalService.open('delete-folder');
+                        break;
+                    case 'list':
+                        modalService.open('delete-list');
+                        break;
+                    case 'todo':
+                        modalService.open('delete-todo');
+                        break;
+                } 
             },
             // clicking on item
             onActivate() {
@@ -114,9 +143,31 @@ export default mainModule
 
             },
             // opening folder menu (on custom right click)
-            onContextMenu() {
-
+            onContextMenu(event, item) {
+                event.stopPropagation();
+                contextMenuService.set(event, item);
+                switch(item.type){
+                    case 'folder': 
+                        contextMenuService.setState('folder', true);
+                        break;
+                    case 'list':
+                        contextMenuService.setState('list', true);
+                        break;
+                    case 'todo':
+                        contextMenuService.setState('todo', true);
+                        break;
+                };
+                self.activeItem = contextMenuService.getItem();                              
             },
+
+            changeTodoMarked(value) {
+                todoService.changeMarked(self.activeItem, value);
+            },
+
+            changeTodoCompleted(value){
+                todoService.changeCompleted(self.activeItem, value);
+            },
+
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
                 if (dragObj.type === 'list' && dropObj === null) {
