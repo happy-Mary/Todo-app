@@ -6,7 +6,8 @@ export default listGroupModule
         bindings: {
             // state: '@'
             onEdit: '&',
-            onDelete: '&'
+            onDelete: '&',
+            onContextMenu: '&'
         },
         template: listGroupTemplate,
         controller: 'listGroupController'

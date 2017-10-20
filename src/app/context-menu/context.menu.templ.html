@@ -1,0 +1,10 @@
+<!-- <ul class="context-menu">
+	<li ng-repeat="item in $ctrl.data" ng-click ="item.click()">
+		{{item.text}}
+		<context ng-if="item.children" data = "item.children"></context>
+	</li>
+</ul>
+ -->
+<!--  <ul style="top: {{$ctrl.topCoordinate}}px; left: {{$ctrl.leftCoordinate}}px" class="context-menu"><li>1 {{$ctrl.topCoordinate}}</li></ul>
+ -->
+  <div ng-if="$ctrl.state.state" style="top: {{$ctrl.coordinate.y}}px; left: {{$ctrl.coordinate.x}}px" class="context-menu" ng-transclude></div>
