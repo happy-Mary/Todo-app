@@ -109,25 +109,34 @@ export default mainModule
                 else{
                     self.activeItem = contextMenuService.getItem();
                 }
-                if (self.activeItem.type === 'list') {
-                    modalService.open('edit-list');
-                } else if (self.activeItem.type === 'folder') {
-                    modalService.open('edit-folder');
-                }
+                switch(self.activeItem.type){
+                    case 'folder': 
+                        modalService.open('edit-folder');
+                        break;
+                    case 'list':
+                        modalService.open('edit-list');
+                        break;
+                    case 'todo':
+                        modalService.open('edit-todo');
+                        break;
+                } 
             },
             // deleting item
             onDelete(item) {
                 if(item){
                     self.activeItem = item;
                 }
-                else{
-                    self.activeItem = contextMenuService.getItem();
-                }
-                if (self.activeItem.type === 'list') {
-                    modalService.open('delete-list');
-                } else if (self.activeItem.type === 'folder') {
-                    modalService.open('delete-folder');
-                }
+                switch(self.activeItem.type){
+                    case 'folder': 
+                        modalService.open('delete-folder');
+                        break;
+                    case 'list':
+                        modalService.open('delete-list');
+                        break;
+                    case 'todo':
+                        modalService.open('delete-todo');
+                        break;
+                } 
             },
             // clicking on item
             onActivate() {
@@ -151,8 +160,18 @@ export default mainModule
                     case 'todo':
                         contextMenuService.setState('todo', true);
                         break;
-                }                           
+                };
+                self.activeItem = contextMenuService.getItem();                              
             },
+
+            changeTodoMarked(value) {
+                todoService.changeMarked(self.activeItem, value);
+            },
+
+            changeTodoCompleted(value){
+                todoService.changeCompleted(self.activeItem, value);
+            },
+
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
                 if (dragObj.type === 'list' && dropObj === null) {

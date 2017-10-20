@@ -35,7 +35,7 @@
     <div class='todo-completed' ng-if="$ctrl.completedShown && $ctrl.parentId !=='marked'">
         <h3>Completed tasks:</h3>
         <ul class='todo'>
-            <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId} track by $index' ng-if="task.completed"  ui-sref-active='active-todo'>
+            <li ng-repeat='task in $ctrl.todo | filter: {"listId": $ctrl.parentId} track by $index' ng-if="task.completed"  ui-sref-active='active-todo' ng-right-click="$ctrl.openContextMenu($event, task)">
                 <label class="completed">
                     <input type="checkbox" ng-model='task.completed'  ng-change='$ctrl.changeTodo()'>
                 </label>

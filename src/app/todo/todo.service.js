@@ -84,6 +84,16 @@ export default todoModule
             save();
         }
 
+        function changeMarked(item, value){
+            item.marked = value;
+            save();
+        }
+
+        function changeCompleted(item, value){
+            item.completed = value;
+            save();
+        }
+
         return {
             register: registerTodo,
             set: setTodo,
@@ -94,5 +104,7 @@ export default todoModule
             update: updateTodo,
             getCountTodo: getCountTodoInList,
             changeParentList: changeParent,
+            changeMarked: changeMarked,
+            changeCompleted: changeCompleted
         };
     });

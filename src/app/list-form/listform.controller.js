@@ -1,7 +1,7 @@
 import listFormModule from './listform.module';
 
 export default listFormModule
-    .controller('listFormController', function listFormController(modalService, listService) {
+    .controller('listFormController', function listFormController(modalService, todoService, listService) {
         const self = this;
 
         self.currData = { title: '' };
@@ -14,8 +14,15 @@ export default listFormModule
 
         self.editList = (title) => {
             self.editData.title = title;
-            listService.update();
+            if(self.editData.type == 'list'){
+                listService.update();
+            }
+            if(self.editData.type == 'todo'){
+                todoService.update();
+            }
+            // listService.update();
             modalService.close();
+
         };
 
         self.cancelChanges = () => {
@@ -24,7 +31,12 @@ export default listFormModule
         };
 
         self.deleteList = () => {
-            listService.delete(self.editData.id);
+            if(self.editData.type == 'list'){
+                 listService.delete(self.editData.id);
+            }
+            if(self.editData.type == 'todo'){
+                 todoService.delete(self.editData.id);
+            }
             modalService.close();
         };
 

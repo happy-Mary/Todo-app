@@ -21,6 +21,14 @@ export default todoModule
             self.onContextMenu = self.onContextMenu;
         };
 
+        self.handleEdit = (todo) => {
+            self.onEdit({ item: todo });
+        };
+
+        self.handleDelete = (todo) => {
+            self.onDelete({ item: todo });
+        };
+
         self.changeTodo = () => {
             todoService.update();
         };
@@ -38,7 +46,6 @@ export default todoModule
         };
 
         self.openContextMenu = (event, item) => {
-            console.log(item)
             self.onContextMenu({event: event, item: item});
         };
     });
