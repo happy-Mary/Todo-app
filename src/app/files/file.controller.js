@@ -1,10 +1,12 @@
 import fileModule from './file.module';
 import getTimeAgo from '../module/getTimeAgo';
 
-export default fileModule.controller('fileController', [function fileController() {
+export default fileModule.controller('fileController', ['filesService', function fileController(filesService) {
     const self = this;
     //ВРЕМЕННО
     self.loader = 40;
+
+    self.deleteFile = filesService.delete;
 
     self.$onInit = () => {
         self.file = self.file;
@@ -18,7 +20,8 @@ export default fileModule.controller('fileController', [function fileController(
     };
     function getExtension() {
 
-    };
+    }
+
     self.extension = getExtension();
 
     // self.$onChange = () => {
