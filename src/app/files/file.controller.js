@@ -3,7 +3,9 @@ import getTimeAgo from '../module/getTimeAgo';
 
 export default fileModule.controller('fileController', [function fileController() {
     const self = this;
-    
+    //ВРЕМЕННО
+    self.loader = 40;
+
     self.$onInit = () => {
         self.file = self.file;
         if (self.file.loaded) {
@@ -18,5 +20,13 @@ export default fileModule.controller('fileController', [function fileController(
 
     };
     self.extension = getExtension();
+
+    // self.$onChange = () => {
+    // 	self.loader = countLoader(self.file.loader);
+    // }
+    // function countLoader(loader) {
+    // 	return loader* 100 / self.file.size;
+    // }
+
 
 }]);
