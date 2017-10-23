@@ -10,14 +10,14 @@ aside.todo-aside {
     position: relative;
     li {
         min-height: 40px;
-        border-bottom: 1px solid $lightgray;
+        border-bottom: 1px solid #dfe2e2;
         color: $gray;
         line-height: 40px;
     }
     // li task
     li.task {
         background-color: #fff;
-        height: 40px;
+        // height: 40px;
         input[type=checkbox]+label {
             display: block;
             width: 40px;
@@ -35,9 +35,9 @@ aside.todo-aside {
             background-image: url('../img/icons/check-box.png');
         }
         span[contenteditable] {
-            color: #696969;
+            color: #696060;
             line-height: 40px;
-            text-transform: uppercase;
+            // text-transform: uppercase;
             font-weight: bold;
             height: 100%;
             display: inline-block;
@@ -135,3 +135,88 @@ aside.todo-aside {
 
 // 
 // 4F5F6B
+.file-component{
+    margin: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid $lightgray;
+    overflow: hidden;
+    height: 50px;
+    color: #696969;
+    position: relative;
+
+    .extension{
+        width: 50px;
+        height: 50px;
+        background-color: $blue;
+        float: left;   
+        text-align: center;
+
+        p{
+            color: white;
+            text-transform: uppercase;
+            font-weight: bolder;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        &:before{
+            content: '';
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+    .file-info{
+        padding: 5px 15px;
+        padding-left: 60px;
+
+        .name{
+            margin-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .date{
+            font-size: 12px;
+        }
+        .load-container{
+            position: relative;
+            height: 6px;
+            border-radius: 3px;
+            background-color: $lightgray;
+            overflow: hidden;
+            // border: 1px solid $lightgray;
+            margin: 5px 0;
+            margin-top: 10px;
+         
+            .loader{
+                position: absolute;
+                left: 0;
+                // width: 50%;
+                height: 100%;
+                background-color: $blue;
+            }
+        }
+    }
+    .close-button{
+        position: absolute;
+        top: 0;
+        right: 1px;
+        font-size: 22px;
+        color: white;
+        background: none;
+
+        &:focus{
+            color: $blue;
+        }
+    }
+
+    &:hover .close-button{
+        color: inherit;
+    }
+    &:after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+}
