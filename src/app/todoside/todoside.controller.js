@@ -19,8 +19,10 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     self.changeSubtask = subtaskService.update;
 
     self.addSubtask = () => {
-        subtaskService.create(self.subtaskTitle, self.currTaskId);
-        self.subtaskTitle = "";
+        if (self.subtaskTitle) {
+            subtaskService.create(self.subtaskTitle, self.currTaskId);
+            self.subtaskTitle = "";
+        }
     }
 
     self.deleteSubtask = (subtask) => {
@@ -29,8 +31,13 @@ export default todosideModule.controller('todosideController', ['$state', '$time
 
     self.changeTodoTitle = (event) => {
         const currEl = angular.element(event.target);
-        self.task.title = currEl.html();
-        todoService.update();
+        const newTitle = currEl.html();
+        if (newTitle) {
+            self.task.title = newTitle;
+            todoService.update();
+        } else {
+            currEl.html(self.task.title);
+        }
     }
 
     self.handleEnter = (event) => {
@@ -69,7 +76,6 @@ export default todosideModule.controller('todosideController', ['$state', '$time
             reader.onload = (event) => {
                 const theUrl = event.target.result;
                 // delete this loaded after server ready
-                
                 const currFile = filesService.create(self.currTaskId, theUrl, file.name, file.size);
                 // $timeout(() => {
                 //     const date = new Date();

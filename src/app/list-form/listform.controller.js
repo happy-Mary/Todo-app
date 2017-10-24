@@ -14,10 +14,10 @@ export default listFormModule
 
         self.editList = (title) => {
             self.editData.title = title;
-            if(self.editData.type == 'list'){
+            if (self.editData.type == 'list') {
                 listService.update();
             }
-            if(self.editData.type == 'todo'){
+            if (self.editData.type == 'todo') {
                 todoService.update();
             }
             // listService.update();
@@ -31,10 +31,10 @@ export default listFormModule
         };
 
         self.deleteList = () => {
-            if(self.editData.type == 'list'){
+            if (self.editData.type == 'list') {
                  listService.delete(self.editData.id);
             }
-            if(self.editData.type == 'todo'){
+            if (self.editData.type == 'todo') {
                  todoService.delete(self.editData.id);
             }
             modalService.close();

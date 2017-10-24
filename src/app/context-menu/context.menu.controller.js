@@ -4,9 +4,9 @@ import '../../sass/contextMenu.scss';
 export default contextMenuModule
     .controller('contextMenuController', function contextMenuController($scope, contextMenuService) {
         const self = this;
-       
-        document.body.addEventListener('click', (event) => {
-            $scope.$apply( () => {
+
+        document.body.addEventListener('click', () => {
+            $scope.$apply(() => {
                 contextMenuService.setState(self.menuId, false);
             });
         }, false);
@@ -18,4 +18,3 @@ export default contextMenuModule
             self.state = contextMenuService.getState(self.menuId);
         };
     });
-    
