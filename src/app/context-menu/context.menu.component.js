@@ -3,7 +3,7 @@ import contextMenuTemplate from './context.menu.templ.html';
 
 export default contextMenuModule
     .component('context', {
-    	transclude: true,
+        transclude: true,
         bindings: {
             data: '=',
             menuId: '@'

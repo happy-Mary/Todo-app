@@ -55,8 +55,8 @@ export default listModule
         };
 
         self.openContextMenu = (event, item) => {
-            self.onContextMenu({event: event, item: item});
+            const currEvent = event;
+            const currItem = item;
+            self.onContextMenu({ event: currEvent, item: currItem });
         };
-    
-
     });

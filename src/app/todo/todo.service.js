@@ -84,13 +84,15 @@ export default todoModule
             save();
         }
 
-        function changeMarked(item, value){
-            item.marked = value;
+        function changeMarkedTodo(item, value) {
+            const currItem = item;
+            currItem.marked = value;
             save();
         }
 
-        function changeCompleted(item, value){
-            item.completed = value;
+        function changeCompletedTodo(item, value) {
+            const currItem = item;
+            currItem.completed = value;
             save();
         }
 
@@ -104,7 +106,7 @@ export default todoModule
             update: updateTodo,
             getCountTodo: getCountTodoInList,
             changeParentList: changeParent,
-            changeMarked: changeMarked,
-            changeCompleted: changeCompleted
+            changeMarked: changeMarkedTodo,
+            changeCompleted: changeCompletedTodo
         };
     });
