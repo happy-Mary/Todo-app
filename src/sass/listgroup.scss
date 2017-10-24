@@ -48,13 +48,15 @@ ul.listgroup {
         }
         .menu-folder-icon {
             display: block;
-            height: 100%;
-            width: 20px;
+            height: 30px;
+            width: 15px;
+            margin: 5px 2px;
             position: absolute;
             right: 40px;
             top: 0;
             opacity: .7;
             background: url('../img/icons/button-squares.png') no-repeat center;
+            background-size: contain;
         }
     }
     .edit-folder-menu {

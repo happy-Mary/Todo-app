@@ -8,6 +8,42 @@ aside.todo-aside {
     height: calc(100% - #{$headerHeight});
     float: right;
     position: relative;
+
+    >ul>li{
+        &:before{
+            content: '';
+            display: block;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 10px 15px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        &:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        &.duedate:before {
+            background-image: url('../img/icons/calendar.png');
+        }
+        &.reminder:before {
+            background-image: url('../img/icons/set-alarm.png');
+        }
+        &.subtask:before {
+            background-image: url('../img/icons/plus-symbol.png');
+            // background-position-y: 10px;
+        }
+        &.note:before {
+            background-image: url('../img/icons/pencil.png');
+        }
+        &.file:before {
+            background-image: url('../img/icons/attachment.png');
+        }
+
+    }
     li {
         min-height: 40px;
         border-bottom: 1px solid #dfe2e2;
@@ -63,37 +99,16 @@ aside.todo-aside {
     }
     // for all li, except first
     li:not(.task) {
-        padding-left: 40px;
-        background-repeat: no-repeat;
-        background-position: 10px center;
-        background-size: 20px;
+        // padding-left: 40px;
+        // background-repeat: no-repeat;
+        // background-position: 10px center;
+        // background-size: 20px;
         // color: $gray;
         input:not([type="checkbox"]) {
             line-height: 40px;
             color: inherit;
         }
-        &.duedate {
-            background-image: url('../img/icons/calendar.png');
-        }
-        &.reminder {
-            background-image: url('../img/icons/set-alarm.png');
-        }
-        &.subtask {
-            background-image: url('../img/icons/plus-symbol.png');
-            background-position-y: 10px;
-
-           .input {
-                @include placeholder {
-                color: green;
-                }
-         }
-        }
-        &.note {
-            background-image: url('../img/icons/pencil.png');
-        }
-        &.file {
-            background-image: url('../img/icons/attachment.png');
-        }
+       
     }
     li.note.note-active {
         background-position-y: 10px;
@@ -102,6 +117,7 @@ aside.todo-aside {
             overflow: hidden;
             box-sizing: content-box;
             font-style: italic;
+            resize: none;
         }
     }
     .subtasks li {
@@ -123,10 +139,12 @@ aside.todo-aside {
         bottom: 0px;
         height: 40px;
         width: 100%;
-        border-top: 2px solid $lightgray;
+        border-top: 1px solid $lightgray;
+
         button {
             height: 30px;
             width: 30px;
+            margin: 5px 0;
             background: url('../img/icons/exit-to-app-button.png') no-repeat center;
             background-size: 20px;
         }
@@ -155,7 +173,7 @@ aside.todo-aside {
     .extension{
         width: 50px;
         height: 50px;
-        background-color: $blue;
+        background-color: $darkblue;
         float: left;   
         text-align: center;
 
@@ -165,6 +183,7 @@ aside.todo-aside {
             font-weight: bolder;
             display: inline-block;
             vertical-align: middle;
+            font-size: 14px;
         }
 
         &:before{
@@ -202,7 +221,7 @@ aside.todo-aside {
                 left: 0;
                 // width: 50%;
                 height: 100%;
-                background-color: $blue;
+                background-color: $darkblue;
             }
         }
     }
