@@ -145,6 +145,7 @@ export default mainModule
             // opening folder menu (on custom right click)
             onContextMenu(event, item) {
                 event.stopPropagation();
+                event.preventDefault();
                 contextMenuService.set(event, item);
                 switch(item.type){
                     case 'folder': 

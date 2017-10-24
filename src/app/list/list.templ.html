@@ -3,7 +3,10 @@
     dragdrop-dir drag-obj='list' verify-drag-allowed='$ctrl.verifyDragList(obj)' 
     drop-obj='list' verify-drop-allowed='$ctrl.verifyListDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)'
     draggable = 'true' ng-right-click="$ctrl.openContextMenu($event, list)">
-
+          <div class="buttons">
+            <a ng-click='$ctrl.handleEdit(list)'></a>
+            <a ng-click='$ctrl.handleDelete(list)'></a>
+        </div>
         <a ui-sref='lists({listid: list.id})' draggable = 'false'>
 
             {{list.title}}
@@ -11,10 +14,7 @@
                 {{$ctrl.getCountTodo(list.id)}}
             </span>
         </a>
-        <div class="buttons">
-            <a ng-click='$ctrl.handleEdit(list)'></a>
-            <a ng-click='$ctrl.handleDelete(list)'></a>
-        </div>
+      
     </li>
 </ul>
 

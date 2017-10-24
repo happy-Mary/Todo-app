@@ -67,8 +67,10 @@ aside.todo-aside {
         background-repeat: no-repeat;
         background-position: 10px center;
         background-size: 20px;
+        // color: $gray;
         input:not([type="checkbox"]) {
             line-height: 40px;
+            color: inherit;
         }
         &.duedate {
             background-image: url('../img/icons/calendar.png');
@@ -79,6 +81,12 @@ aside.todo-aside {
         &.subtask {
             background-image: url('../img/icons/plus-symbol.png');
             background-position-y: 10px;
+
+           .input {
+                @include placeholder {
+                color: green;
+                }
+         }
         }
         &.note {
             background-image: url('../img/icons/pencil.png');
@@ -174,6 +182,7 @@ aside.todo-aside {
             margin-bottom: 5px;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .date{
             font-size: 12px;
