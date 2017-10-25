@@ -8,6 +8,8 @@ $lightgray: #dfe2e2;
 // $gray: #696969;
 $gray: #3e3838;
 $headerHeight: 40px;
+$footerHeight: 40px;
+$todoHeight: 50px;
 @mixin placeholder {
   &::-webkit-input-placeholder { @content; }
   &:-moz-placeholder           { @content; }

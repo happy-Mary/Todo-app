@@ -26,7 +26,7 @@ export default mainModule
                         $state.go('lists.todo', { listid: 'marked' });
                     }
                 } else {
-                    self.headerTitle = 'избранное';
+                    self.headerTitle = 'Избранное';
                 }
             } else if ($state.params.search !== undefined) {
                 self.headerTitle = 'search';

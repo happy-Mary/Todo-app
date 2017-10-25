@@ -8,11 +8,10 @@
             <a ng-click='$ctrl.handleDelete(list)'></a>
         </div>
         <a ui-sref='lists({listid: list.id})' draggable = 'false'>
-
-            {{list.title}}
-             <span class='todocount' ng-if='$ctrl.getCountTodo(list.id)'>
-                {{$ctrl.getCountTodo(list.id)}}
-            </span>
+            <span class='todocount' ng-if='$ctrl.getCountTodo(list.id)'>
+                    {{$ctrl.getCountTodo(list.id)}}
+                </span>
+            <span class="todoname">{{list.title}}</span>
         </a>
       
     </li>

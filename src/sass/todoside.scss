@@ -10,7 +10,11 @@ aside.todo-aside {
     position: relative;
 
     >ul{
-
+        overflow-y: auto;
+        height: -o-calc(100% - #{$footerHeight} - #{$todoHeight});
+        height: -moz-calc(100% - #{$footerHeight} - #{$todoHeight});
+        height: -webkit-calc(100%  - #{$footerHeight} - #{$todoHeight});
+        height: calc(100% - #{$footerHeight} - #{$todoHeight});
     }
 
     >ul>li{
@@ -127,8 +131,8 @@ aside.todo-aside {
             padding: 10px 0;
             overflow: hidden;
             box-sizing: content-box;
-            font-style: italic;
             resize: none;
+            background-color: inherit;
         }
     }
     .subtasks li {
@@ -136,6 +140,23 @@ aside.todo-aside {
         border: none;
         font-size: .8rem;
         padding: 5px 15px;
+
+        .subtask-checkbox{
+            display: block;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 5px 10px;
+            // background-color: red;
+            background-image: url('../img/icons/tick-box-empty.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+
+            input{
+                display: none;
+            }
+        }
 
         .delSubtusk {
             cursor: pointer;
@@ -162,12 +183,15 @@ aside.todo-aside {
     input[type='file'] {
         display: none;
     }
+    input[type='datetime-local']{
+        width: 230px;
+    }
     // //////////////////////
     .task-files {
         padding-bottom: 5px;
-        
+
         li{
-            line-height: 20px;
+            line-height: 16px;
             border: none;
         }
     }
