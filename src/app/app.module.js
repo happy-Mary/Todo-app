@@ -32,5 +32,4 @@ export default angular.module('mainModule', [
     'menuItemModule',
     'contextMenuModule',
     'todosideModule'
-    
 ]);

@@ -1,25 +1,21 @@
 import contextMenuModule from './context.menu.module';
 
 export default contextMenuModule
-    .service('contextMenuService', function contextMenuService() {
+    .service('contextMenuService', [function contextMenuService() {
         const self = this;
-        self.selectedItem;
+        self.selectedItem = null;
         self.coordinate = {};
         self.states = [];
 
-        self.setItem = function(event, item){
+        self.setItem = (event, item) => {
             self.selectedItem = item;
             self.coordinate.x = event.pageX;
             self.coordinate.y = event.pageY;
         };
-       
-        self.getItem = function(){
-            return self.selectedItem;
-        };
 
-        self.getCoordinate = () => {
-           return self.coordinate;
-        };
+        self.getItem = () => self.selectedItem;
+
+        self.getCoordinate = () => self.coordinate;
 
         self.setMenu = (id) => {
             self.states.push({
@@ -30,21 +26,20 @@ export default contextMenuModule
 
         self.getState = (id) => {
             let state = null;
-            self.states.forEach( (item) => {
-                if(item.id == id){
+            self.states.forEach((item) => {
+                if (item.id == id) {
                    state = item;
-                   return 
+                   return
                 }
             })
         return state;
         };
 
         self.setState = (id, state) => {
-            self.states.forEach( (item) => {
-                if(item.id == id){
+            self.states.forEach((item) => {
+                if (item.id == id) {
                     item.state = state;
-                }
-                else{
+                } else {
                     item.state = false;
                 }
         })
@@ -58,5 +53,4 @@ export default contextMenuModule
             setState: self.setState,
             getState: self.getState
         }
-    });
-        
+    }]);

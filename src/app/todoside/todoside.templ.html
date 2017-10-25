@@ -11,7 +11,8 @@
         <!-- <li class='task'>
             <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
             <label for='task-completed'></label>
-            <span contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
+            <span contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' 
+            ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
             <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
                 <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
             </label>

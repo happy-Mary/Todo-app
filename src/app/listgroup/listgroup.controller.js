@@ -30,7 +30,9 @@ export default listGroupModule
         };
 
         self.handleContextMenu = (event, item) => {
-            self.onContextMenu({ event: event, item: item});
+            const currEvent = event;
+            const currItem = item;
+            self.onContextMenu({ event: currEvent, item: currItem });
         };
 
         self.toggleMenuEdit = (event) => {
@@ -72,9 +74,8 @@ export default listGroupModule
         self.getCountLists = listService.getCountLists;
 
         self.openContextMenu = (event, item) => {
-           self.onContextMenu({event: event, item: item});
+           const currEvent = event;
+           const currItem = item;
+           self.onContextMenu({ event: currEvent, item: currItem });
         };
-    
-        
-
     });

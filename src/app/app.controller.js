@@ -62,9 +62,8 @@ export default mainModule
             self.currListId = $state.params.listid;
             getMainTitle();
         });
-     
-        // redirect to search while typing
 
+        // redirect to search while typing
         self.goToSearch = () => {
             $state.go('filter', { search: self.searchItem }, { notify: false });
         };
@@ -99,14 +98,14 @@ export default mainModule
         self.actions = {
             // editting item
             onEdit(item) {
-                if(item){
+                if (item) {
                     self.activeItem = item;
-                }
-                else{
+                } else {
                     self.activeItem = contextMenuService.getItem();
                 }
-                switch(self.activeItem.type){
-                    case 'folder': 
+
+                switch (self.activeItem.type) {
+                    case 'folder':
                         modalService.open('edit-folder');
                         break;
                     case 'list':
@@ -115,15 +114,15 @@ export default mainModule
                     case 'todo':
                         modalService.open('edit-todo');
                         break;
-                } 
+                }
             },
             // deleting item
             onDelete(item) {
-                if(item){
+                if (item) {
                     self.activeItem = item;
                 }
-                switch(self.activeItem.type){
-                    case 'folder': 
+                switch (self.activeItem.type) {
+                    case 'folder':
                         modalService.open('delete-folder');
                         break;
                     case 'list':
@@ -132,7 +131,7 @@ export default mainModule
                     case 'todo':
                         modalService.open('delete-todo');
                         break;
-                } 
+                }
             },
             // clicking on item
             onActivate() {
@@ -147,8 +146,8 @@ export default mainModule
                 event.stopPropagation();
                 event.preventDefault();
                 contextMenuService.set(event, item);
-                switch(item.type){
-                    case 'folder': 
+                switch (item.type) {
+                    case 'folder':
                         contextMenuService.setState('folder', true);
                         break;
                     case 'list':
@@ -157,15 +156,15 @@ export default mainModule
                     case 'todo':
                         contextMenuService.setState('todo', true);
                         break;
-                };
-                self.activeItem = contextMenuService.getItem();                              
+                }
+                self.activeItem = contextMenuService.getItem();
             },
 
             changeTodoMarked(value) {
                 todoService.changeMarked(self.activeItem, value);
             },
 
-            changeTodoCompleted(value){
+            changeTodoCompleted(value) {
                 todoService.changeCompleted(self.activeItem, value);
             },
 
