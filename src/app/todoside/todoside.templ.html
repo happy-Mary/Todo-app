@@ -1,13 +1,21 @@
 <aside class='todo-aside'>
+    <div class='task'>
+        <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
+        <label for='task-completed'></label>
+        <span contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
+        <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
+            <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
+        </label>
+    </div>
     <ul>
-        <li class='task'>
+        <!-- <li class='task'>
             <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
             <label for='task-completed'></label>
             <span contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
             <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
                 <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
             </label>
-        </li>
+        </li> -->
         <li class='duedate'>
             <!-- <input type='text' placeholder='Set due date'> -->
             <input type="datetime-local">
@@ -21,7 +29,7 @@
             <ul class="subtasks">
                 <li ng-repeat='subtask in $ctrl.subtasks | filter: {"taskId" : $ctrl.currTaskId}'>
                     <input type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'> {{subtask.title}}
-                    <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask)"></span>
+                    <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask)">&times</span>
                 </li>
             </ul>
         </li>
@@ -32,12 +40,18 @@
         <li class='file'>
             <input type="file" id='add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>
             <label for="add-file">Add a file</label>
+            <ul class="task-files">
+                <li ng-repeat = 'file in $ctrl.files  track by $index' >
+                    <file-comp file = 'file'></file-comp>
+                </li>
+            </ul>
+
         </li>
     </ul>
 
-    <div class="task-files">
+    <!-- <div class="task-files">
         <file-comp ng-repeat = 'file in $ctrl.files  track by $index' file = 'file'></file-comp>
-    </div>       
+    </div>        -->
 
     <div class="todoaside-footer">
         <button ng-click='$ctrl.redirectToParent()'></button>
