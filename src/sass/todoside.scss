@@ -64,11 +64,19 @@ aside.todo-aside {
         padding: 5px;
         border-bottom:  1px solid $lightgray;
         // height: 40px;
+
         &:after{
             content: '';
             display: block;
             clear: both;
         }
+        .task-name{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+        }
+
         input[type=checkbox]+label {
             display: block;
             width: 40px;
@@ -90,7 +98,6 @@ aside.todo-aside {
             line-height: 40px;
             font-weight: bold;
             height: 100%;
-            display: inline-block;
             // width: 200px;
             outline: none;
         }
@@ -139,23 +146,33 @@ aside.todo-aside {
         height: 30px;
         border: none;
         font-size: .8rem;
-        padding: 5px 15px;
+        padding: 0 15px 0 0;
+
+        .subtask-name{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+        }
+        input{
+            display: none;
+        }
+        input:checked + label{
+            background-image: url('../img/icons/tick-box.png');
+        }
 
         .subtask-checkbox{
             display: block;
             float: left;
-            width: 20px;
-            height: 20px;
-            margin: 5px 10px;
+            width: 15px;
+            height: 15px;
+            margin: 12px 18px;
             // background-color: red;
             background-image: url('../img/icons/tick-box-empty.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
 
-            input{
-                display: none;
-            }
         }
 
         .delSubtusk {

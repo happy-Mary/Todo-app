@@ -2,21 +2,12 @@
     <div class='task'>
         <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
         <label for='task-completed'></label>
-        <span contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
-        <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
+         <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
             <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
         </label>
+        <span class="task-name" contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
     </div>
     <ul>
-        <!-- <li class='task'>
-            <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
-            <label for='task-completed'></label>
-            <span contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' 
-            ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
-            <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
-                <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
-            </label>
-        </li> -->
         <li class='duedate'>
             <!-- <input type='text' placeholder='Set due date'> -->
             <input type="datetime-local">
@@ -29,9 +20,8 @@
             <input type="text" placeholder="Add subtask" ng-keypress='$ctrl.handleEnter($event)' ng-blur='$ctrl.addSubtask($event)' ng-model='$ctrl.subtaskTitle'>
             <ul class="subtasks">
                 <li ng-repeat='subtask in $ctrl.subtasks | filter: {"taskId" : $ctrl.currTaskId}'>
-                    <label class="subtask-checkbox"> 
-                        <input type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'>
-                    </label>
+                    <input id="subtask-completed" type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'>
+                    <label for="subtask-completed" class="subtask-checkbox"></label>
                     <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask)">&times</span>
                     <span class="subtask-name">{{subtask.title}}</span>
                 </li>
