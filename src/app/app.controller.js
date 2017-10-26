@@ -26,7 +26,7 @@ export default mainModule
                         $state.go('lists.todo', { listid: 'marked' });
                     }
                 } else {
-                    self.headerTitle = 'избранное';
+                    self.headerTitle = 'Избранное';
                 }
             } else if ($state.params.search !== undefined) {
                 self.headerTitle = 'search';
@@ -144,6 +144,7 @@ export default mainModule
             // opening folder menu (on custom right click)
             onContextMenu(event, item) {
                 event.stopPropagation();
+                event.preventDefault();
                 contextMenuService.set(event, item);
                 switch (item.type) {
                     case 'folder':
