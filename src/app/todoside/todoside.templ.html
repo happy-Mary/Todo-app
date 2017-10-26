@@ -20,8 +20,9 @@
             <input type="text" placeholder="Add subtask" ng-keypress='$ctrl.handleEnter($event)' ng-blur='$ctrl.addSubtask($event)' ng-model='$ctrl.subtaskTitle'>
             <ul class="subtasks">
                 <li ng-repeat='subtask in $ctrl.subtasks | filter: {"taskId" : $ctrl.currTaskId}'>
-                    <input id="subtask-completed" type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'>
-                    <label for="subtask-completed" class="subtask-checkbox"></label>
+                    <label  ng-class="{true: 'active', false: ''}[subtask.completed]" class="subtask-checkbox">
+                        <input type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'>
+                    </label>
                     <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask)">&times</span>
                     <span class="subtask-name">{{subtask.title}}</span>
                 </li>

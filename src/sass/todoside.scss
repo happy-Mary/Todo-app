@@ -15,6 +15,12 @@ aside.todo-aside {
         height: -moz-calc(100% - #{$footerHeight} - #{$todoHeight});
         height: -webkit-calc(100%  - #{$footerHeight} - #{$todoHeight});
         height: calc(100% - #{$footerHeight} - #{$todoHeight});
+        
+        li:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
     }
 
     >ul>li{
@@ -29,11 +35,11 @@ aside.todo-aside {
             background-repeat: no-repeat;
             background-position: center;
         }
-        &:after{
-            content: '';
-            display: block;
-            clear: both;
-        }
+        // &:after{
+        //     content: '';
+        //     display: block;
+        //     clear: both;
+        // }
         &.duedate:before {
             background-image: url('../img/icons/calendar.png');
         }
@@ -157,9 +163,9 @@ aside.todo-aside {
         input{
             display: none;
         }
-        input:checked + label{
-            background-image: url('../img/icons/tick-box.png');
-        }
+        // input:checked + label{
+        //     background-image: url('../img/icons/tick-box.png');
+        // }
 
         .subtask-checkbox{
             display: block;
@@ -167,12 +173,17 @@ aside.todo-aside {
             width: 15px;
             height: 15px;
             margin: 12px 18px;
-            // background-color: red;
             background-image: url('../img/icons/tick-box-empty.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
 
+            input{
+                display: none;
+            }
+        }
+        .subtask-checkbox.active{
+            background-image: url('../img/icons/tick-box.png');
         }
 
         .delSubtusk {
