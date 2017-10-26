@@ -6,6 +6,16 @@ const URLS = {
     filesURL: 'https://api.myjson.com/bins/197am7'
 };
 
+// const URLS = {
+//     folderURL: '/api/folders',
+//     listURL: '/api/lists',
+//     subtaskURL: '/api/subtasks',
+//     tasksURL: '/api/tasks',
+//     filesURL: '/api/files',
+//     dbURL: ''
+//     // url with id: `${url}/${id}`
+// };
+
 export default URLS;
 
 // export { URLS };
