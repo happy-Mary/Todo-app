@@ -18,6 +18,9 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     self.changeTodo = todoService.update;
     self.changeSubtask = subtaskService.update;
 
+    self.$onInit = () => {
+        // self.handleNotePrint();
+    }
     self.addSubtask = () => {
         if (self.subtaskTitle) {
             subtaskService.create(self.subtaskTitle, self.currTaskId);
@@ -48,7 +51,8 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     }
 
     self.handleNotePrint = (event) => {
-        const currEl = event.target;
+        // const currEl = event.target;
+        const currEl = document.querySelector('.todo-aside .note textarea');
         $timeout(() => {
             currEl.style = 'height: auto;';
             currEl.style = `height: ${currEl.scrollHeight}px`;

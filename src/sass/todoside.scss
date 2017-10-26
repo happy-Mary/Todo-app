@@ -8,6 +8,7 @@ aside.todo-aside {
     height: calc(100% - #{$headerHeight});
     float: right;
     position: relative;
+    margin-left: 5px;
 
     >ul{
         overflow-y: auto;
@@ -15,7 +16,7 @@ aside.todo-aside {
         height: -moz-calc(100% - #{$footerHeight} - #{$todoHeight});
         height: -webkit-calc(100%  - #{$footerHeight} - #{$todoHeight});
         height: calc(100% - #{$footerHeight} - #{$todoHeight});
-        
+
         li:after{
             content: '';
             display: block;
@@ -81,6 +82,11 @@ aside.todo-aside {
             text-overflow: ellipsis;
             white-space: nowrap;
             display: block;
+            text-overflow: clip;
+
+            &:focus{
+                text-overflow: clip;
+            }
         }
 
         input[type=checkbox]+label {

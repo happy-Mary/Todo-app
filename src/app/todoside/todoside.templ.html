@@ -7,7 +7,7 @@
         </label>
         <span class="task-name" contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
     </div>
-    <ul>
+    <ul class="options">
         <li class='duedate'>
             <!-- <input type='text' placeholder='Set due date'> -->
             <input type="datetime-local">
