@@ -51,8 +51,7 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     }
 
     self.handleNotePrint = (event) => {
-        // const currEl = event.target;
-        const currEl = document.querySelector('.todo-aside .note textarea');
+        const currEl = event.target;
         $timeout(() => {
             currEl.style = 'height: auto;';
             currEl.style = `height: ${currEl.scrollHeight}px`;

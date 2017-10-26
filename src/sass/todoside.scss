@@ -57,6 +57,9 @@ aside.todo-aside {
         &.file:before {
             background-image: url('../img/icons/attachment.png');
         }
+        &.file ul{
+            padding: 0;
+        }
 
     }
     li {
@@ -144,14 +147,18 @@ aside.todo-aside {
         }
        
     }
+
     li.note.note-active {
-        background-position-y: 10px;
+        line-height: normal;
         textarea {
-            padding: 10px 0;
+            padding-top: 10px;
             overflow: hidden;
             box-sizing: content-box;
             resize: none;
             background-color: inherit;
+        }
+        span{
+            line-height: 40px;
         }
     }
     .subtasks li {
