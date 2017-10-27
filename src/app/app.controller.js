@@ -15,11 +15,12 @@ export default mainModule
         // service to open modal
         self.modal = modalService;
 
+        // TESTING SERVER API
         function getTest() {
             return $http.get('/api/folders')
                 .then(function(response) {
-                console.log('in CTRL');
-                console.log(response.data);
+                // console.log('in CTRL');
+                // console.log(response.data);
             })
         }
         getTest();
