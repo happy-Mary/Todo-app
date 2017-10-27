@@ -7,7 +7,7 @@
         </label>
         <span class="task-name" contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
     </div>
-    <ul>
+    <ul class="options">
         <li class='duedate'>
             <!-- <input type='text' placeholder='Set due date'> -->
             <input type="datetime-local">
@@ -30,7 +30,7 @@
         </li>
         <li class='note note-active'>
             <span ng-if='!$ctrl.addNoteActive' ng-click='$ctrl.addNoteActive = true'>Add a note</span>
-            <textarea ng-if='$ctrl.addNoteActive' placeholder="Add note..." id="" cols="25" rows="" autofocus ng-model="$ctrl.task.note" ng-keydown='$ctrl.handleNotePrint($event)' ng-blur='$ctrl.changeTodoNote()'></textarea>
+            <textarea autoheight ng-if='$ctrl.addNoteActive' placeholder="Add note..." id="" cols="25" rows="" autofocus ng-model="$ctrl.task.note" ng-keydown='$ctrl.handleNotePrint($event)' ng-blur='$ctrl.changeTodoNote()'></textarea>
         </li>
         <li class='file'>
             <input type="file" id='add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>

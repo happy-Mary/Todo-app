@@ -114,11 +114,12 @@ aside {
     }
     .tab-bar {
         // font-weight: bold;
+        margin-right: 5px;
         &>li {
             min-height: 40px;
         }
         li {
-            border-bottom: 1px solid #dfe2e2;
+            // border-bottom: 1px solid #dfe2e2;
 
             a {
                 display: block;
@@ -286,7 +287,7 @@ header {
 
 main {
     margin-left: 300px;
-    padding: 10px;
+    padding: 10px 5px;
     height: 100%;
     overflow-y: auto;
     form {
@@ -350,4 +351,20 @@ main {
             background-image: url('../img/icons/star-red.png');
         }
     }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    // background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+    width: 5px;
+    background-color: #e4e4e4;
+    border-radius: 5px;
+    -webkit-border-radius: 5px; 
+  
+}
+main::-webkit-scrollbar-thumb{
+    background-color: $darkblue;
+    opacity: 0.5;
 }

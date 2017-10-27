@@ -18,6 +18,9 @@ export default todosideModule.controller('todosideController', ['$state', '$time
     self.changeTodo = todoService.update;
     self.changeSubtask = subtaskService.update;
 
+    self.$onInit = () => {
+        // self.handleNotePrint();
+    }
     self.addSubtask = () => {
         if (self.subtaskTitle) {
             subtaskService.create(self.subtaskTitle, self.currTaskId);
