@@ -19,8 +19,8 @@ export default mainModule
         function getTest() {
             return $http.get('/api/folders')
                 .then(function(response) {
-                // console.log('in CTRL');
-                // console.log(response.data);
+                console.log('in CTRL');
+                console.log(response.data);
             })
         }
         getTest();

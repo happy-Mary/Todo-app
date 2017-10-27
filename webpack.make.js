@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const modRewrite = require('connect-modrewrite');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const proxy = require('http-proxy-middleware');
 
 module.exports = function makeWebpackConfig(options) {
     /**
@@ -253,16 +254,12 @@ module.exports = function makeWebpackConfig(options) {
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
         // Render index.html
         config.plugins.push(
-            // new HtmlWebpackPlugin({
-            //     template: './src/index.html',
-            //     inject: 'body'
-            //         //minify: BUILD
-            // }),
             new BrowserSyncPlugin({
                 host: 'localhost',
                 port: 3001,
                 server: { baseDir: ['dist'] },
                 middleware: [
+                    proxy('/api/**', { target: 'http://localhost:3000', changeOrigin: false }),
                     modRewrite(['^[^\\.]*$ /index.html [L]'])
                 ]
             })
@@ -291,15 +288,21 @@ module.exports = function makeWebpackConfig(options) {
      * Reference: http://webpack.github.io/docs/configuration.html#devserver
      * Reference: http://webpack.github.io/docs/webpack-dev-server.html
      */
-    config.devServer = {
-        contentBase: './dist',
-        stats: {
-            modules: false,
-            cached: false,
-            colors: true,
-            chunk: false
-        }
-    };
+    // config.devServer = {
+        // contentBase: './dist',
+        // stats: {
+        //     modules: false,
+        //     cached: false,
+        //     colors: true,
+        //     chunk: false
+        // },
+        // proxy: {
+        //     '/api/folders': {
+        //       target: "http://localhost:3000",
+        //       secure: false
+        //     }
+        // }
+    // };
 
     return config;
 };
