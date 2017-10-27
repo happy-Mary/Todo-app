@@ -3,7 +3,7 @@ import mainModule from './app.module';
 require('./modal/modal.service');
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, contextMenuService, localStorageService, modalService, $transitions, $state, $timeout) {
+    .controller('AppController', function AppController($http, todoService, listGroupService, listService, contextMenuService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
         self.marked = false;
         self.newTodoTitle = '';
@@ -14,6 +14,16 @@ export default mainModule
 
         // service to open modal
         self.modal = modalService;
+
+        function getTest() {
+            return $http.get('/api/folders')
+                .then(function(response) {
+                console.log('in CTRL');
+                console.log(response.data);
+            })
+        }
+        getTest();
+
 
         // method to get main list title
         function getMainTitle() {

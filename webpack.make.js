@@ -48,12 +48,12 @@ module.exports = function makeWebpackConfig(options) {
     } else {
         config.output = {
             // Absolute output directory
-            // path: path.join(__dirname, '/dist'),
             path: path.resolve(__dirname, 'dist'),
 
             // Output path from the view of the page
             // Uses webpack-dev-server in development
-            publicPath: BUILD ? '/' : 'http://localhost:8080/',
+            // publicPath: BUILD ? '/' : 'http://localhost:8080/',
+            publicPath: BUILD ? '/' : 'http://localhost:3001/',
 
             // Filename for entry points
             // Only adds hash in build mode
@@ -127,8 +127,7 @@ module.exports = function makeWebpackConfig(options) {
         }, {
             test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             loader: "file-loader"
-        },
-        { 
+        }, {
           test: /\.json$/,
          loader: 'json'
         }]
@@ -238,10 +237,30 @@ module.exports = function makeWebpackConfig(options) {
                 template: './src/index.html',
                 inject: 'body'
                     //minify: BUILD
-            }),
+            })
+            // new BrowserSyncPlugin({
+            //     host: 'localhost',
+            //     port: 3001,
+            //     server: { baseDir: ['dist'] },
+            //     middleware: [
+            //         modRewrite(['^[^\\.]*$ /index.html [L]'])
+            //     ]
+            // })
+        )
+    }
+
+    if (!BUILD) {
+        // Reference: https://github.com/ampedandwired/html-webpack-plugin
+        // Render index.html
+        config.plugins.push(
+            // new HtmlWebpackPlugin({
+            //     template: './src/index.html',
+            //     inject: 'body'
+            //         //minify: BUILD
+            // }),
             new BrowserSyncPlugin({
                 host: 'localhost',
-                port: 8080,
+                port: 3001,
                 server: { baseDir: ['dist'] },
                 middleware: [
                     modRewrite(['^[^\\.]*$ /index.html [L]'])
