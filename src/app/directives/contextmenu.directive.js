@@ -1,4 +1,4 @@
-import mainModule from './app.module';
+import mainModule from '../app.module';
 
 export default mainModule
 .directive('ngRightClick', function($parse) {

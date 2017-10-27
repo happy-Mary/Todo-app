@@ -124,6 +124,7 @@ export default mainModule
                     case 'todo':
                         modalService.open('edit-todo');
                         break;
+                    default: break;    
                 }
             },
             // deleting item
@@ -141,6 +142,7 @@ export default mainModule
                     case 'todo':
                         modalService.open('delete-todo');
                         break;
+                    default: break;
                 }
             },
             // clicking on item
@@ -166,6 +168,7 @@ export default mainModule
                     case 'todo':
                         contextMenuService.setState('todo', true);
                         break;
+                    default: break;
                 }
                 self.activeItem = contextMenuService.getItem();
             },
