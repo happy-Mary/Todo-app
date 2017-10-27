@@ -10,6 +10,7 @@ require('./app/app.service');
 require('./app/main.controller');
 require('./app/contextmenu.directive');
 require('./app/fileinput.directive');
+// require('./app/autoheight.directive');
 
 /* this module goes to html ng-app, it takes all main modules from app */
 angular.module('appModule', [mainModule.name]);
