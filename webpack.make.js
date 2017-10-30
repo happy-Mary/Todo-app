@@ -129,8 +129,8 @@ module.exports = function makeWebpackConfig(options) {
             test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             loader: "file-loader"
         }, {
-          test: /\.json$/,
-         loader: 'json'
+            test: /\.json$/,
+            loader: 'json'
         }]
     };
 
@@ -239,14 +239,6 @@ module.exports = function makeWebpackConfig(options) {
                 inject: 'body'
                     //minify: BUILD
             })
-            // new BrowserSyncPlugin({
-            //     host: 'localhost',
-            //     port: 3001,
-            //     server: { baseDir: ['dist'] },
-            //     middleware: [
-            //         modRewrite(['^[^\\.]*$ /index.html [L]'])
-            //     ]
-            // })
         )
     }
 
@@ -289,19 +281,13 @@ module.exports = function makeWebpackConfig(options) {
      * Reference: http://webpack.github.io/docs/webpack-dev-server.html
      */
     // config.devServer = {
-        // contentBase: './dist',
-        // stats: {
-        //     modules: false,
-        //     cached: false,
-        //     colors: true,
-        //     chunk: false
-        // },
-        // proxy: {
-        //     '/api/folders': {
-        //       target: "http://localhost:3000",
-        //       secure: false
-        //     }
-        // }
+    // contentBase: './dist',
+    // stats: {
+    //     modules: false,
+    //     cached: false,
+    //     colors: true,
+    //     chunk: false
+    // }
     // };
 
     return config;

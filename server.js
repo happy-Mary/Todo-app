@@ -1,21 +1,37 @@
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
+// const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
+// Models
+const ModelFolder = require('./db_models/ModelFolder');
+const ModelList = require('./db_models/ModelList');
+const ModelTask = require('./db_models/ModelTask');
+const ModelSubtask = require('./db_models/ModelSubtask');
+const ModelFile = require('./db_models/ModelFile');
 
 const app = express();
 const jsonParser = bodyParser.json();
 const Schema = mongoose.Schema;
 const port = 3000;
+const mLab = 'localhost'
 
+// express settings
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
 app.listen(port, () => {
     console.log(`Server started on ${port}`);
 });
 
+// mongoose settings
+mongoose.Promise = global.Promise;
+mongoose.connect(mLab);
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// API REQUSTS
 
 // get all folders
 app.get('/api/folders', (req, res) => {
@@ -49,13 +65,19 @@ app.post('/api/folders', jsonParser, function(req, res) {
     res.send();
 });
 
+// change folder
+app.update('/api/folders/:id');
 
-/* GET home page. */
-app.get('*', function(req, res, next) {
-    //Path to your main file
+// delete folder
+app.delete('/api/folders/:id');
+
+// ///////////////////////////////////////
+// IF CLIENT REQEST NOT API, SEND IT TO ANGULAR ROUTE
+// ///////////////////////////////////////
+
+app.get('*', (req, res) => {
     if (!req.url.startsWith("/api/")) {
-        console.log('not app');
-        res.status(200).sendFile(path.join(__dirname + '/dist/index.html'));
+        console.log('not API request');
+        res.status(200).sendFile(path.join(__dirname, '/dist/index.html'));
     }
 });
-
