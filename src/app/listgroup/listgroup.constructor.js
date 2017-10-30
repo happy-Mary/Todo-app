@@ -5,7 +5,8 @@ export default class ListGroup {
         // title after server ready
         this.name = title;
         // remove after server ready
-        this.id = generateId();
+        this.id = Number(generateId());
+        this.type = 'folder';
         this.type = 'folder';
     }
 }

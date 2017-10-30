@@ -5,7 +5,7 @@ export default class ToDo {
         // remove after server ready
         this.id = generateId();
         this.title = title;
-        this.listId = listId;
+        this.listId = Number(listId);
         this.marked = marked || false;
         this.completed = false;
         // change/delete after server ready

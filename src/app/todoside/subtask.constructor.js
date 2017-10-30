@@ -5,7 +5,7 @@ export default class Subtask {
         // remove after server ready
         this.id = generateId();
         this.title = title;
-        this.taskId = taskId;
+        this.taskId = Number(taskId);
         this.completed = false;
     }
 }
