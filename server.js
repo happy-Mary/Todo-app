@@ -81,3 +81,6 @@ app.get('*', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/dist/index.html'));
     }
 });
+
+
+// http://blog.devshark.ru/posts/nodejs-mongoose-mongodb/

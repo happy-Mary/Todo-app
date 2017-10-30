@@ -10,7 +10,7 @@ const schemaTask = new Schema({
     date: { type: Date, default: new Date() },
     dueDate: { type: Date, default: 0 },
     remindDate: { type: Date, default: 0 },
-    note: { type: String, default: '' }
+    note: { type: String, default: '', trim: true }
 });
 
 //  create model  //
