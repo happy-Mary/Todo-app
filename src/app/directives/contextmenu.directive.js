@@ -1,7 +1,7 @@
 import mainModule from '../app.module';
 
 export default mainModule
-.directive('ngRightClick', [function rightClickDirective($parse) {
+.directive('ngRightClick', ['$parse', function rightClickDirective($parse) {
  return function postLink(scope, element, attrs) {
      const fn = $parse(attrs.ngRightClick);
      element.bind('contextmenu', (event) => {

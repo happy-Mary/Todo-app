@@ -1,7 +1,7 @@
 import mainModule from '../app.module';
 
 export default mainModule
-.directive('autoheight', [function autoheightDirective($timeout) {
+.directive('autoheight', ['$timeout', function autoheightDirective($timeout) {
 	return {
 		restrict: 'A',
 		link: function postLink(scope, element) {

@@ -17,9 +17,9 @@ export default contextMenuModule
 
         self.getCoordinate = () => self.coordinate;
 
-        self.setMenu = (id) => {
+        self.setMenu = (curId) => {
             self.states.push({
-                id: id,
+                id: curId,
                 state: false
             });
         };
@@ -36,10 +36,11 @@ export default contextMenuModule
 
         self.setState = (id, state) => {
             self.states.forEach((item) => {
-                if (item.id == id) {
-                    item.state = state;
+                const menu = item;
+                if (menu.id == id) {
+                    menu.state = state;
                 } else {
-                    item.state = false;
+                    menu.state = false;
                 }
             })
         };
