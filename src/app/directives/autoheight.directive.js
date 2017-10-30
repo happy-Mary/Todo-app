@@ -1,22 +1,20 @@
 import mainModule from '../app.module';
 
 export default mainModule
-.directive('autoheight', ($timeout) => {
+.directive('autoheight', [function autoheightDirective($timeout) {
 	return {
-	 	// function(scope, element, attrs) {
-	 	restrict: 'A',
-		link: function(scope, element, attrs) {	
-			element.ready(function() {
-		    	element.css('height', `${element[0].scrollHeight}px`);
-		    });
-		    
-		    element.on('keydown', (event) => {
-	        	let target = event.target;		        
-		        $timeout(() => {
-		         	element.css('height', 'auto');
+		restrict: 'A',
+		link: function postLink(scope, element) {
+			element.ready(() => {
+				element.css('height', `${element[0].scrollHeight}px`);
+			});
+			element.on('keydown', (event) => {
+				const target = event.target;
+				$timeout(() => {
+				element.css('height', 'auto');
 					element.css('height', `${target.scrollHeight}px`);
 				}, 0);
-	        });	
-		} 	
+			});
+		}
 	};
-});
+}]);

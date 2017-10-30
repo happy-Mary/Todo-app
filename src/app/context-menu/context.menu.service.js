@@ -21,7 +21,7 @@ export default contextMenuModule
             self.states.push({
                 id: id,
                 state: false
-            })
+            });
         };
 
         self.getState = (id) => {
@@ -29,7 +29,6 @@ export default contextMenuModule
             self.states.forEach((item) => {
                 if (item.id == id) {
                    state = item;
-                   return
                 }
             })
         return state;
@@ -42,7 +41,7 @@ export default contextMenuModule
                 } else {
                     item.state = false;
                 }
-        })
+            })
         };
 
         return {

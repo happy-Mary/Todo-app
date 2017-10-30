@@ -114,7 +114,7 @@ export default mainModule
                     case 'todo':
                         modalService.open('edit-todo');
                         break;
-                    default: break;    
+                    default: break;
                 }
             },
             // deleting item
