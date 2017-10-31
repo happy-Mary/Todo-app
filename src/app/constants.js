@@ -15,7 +15,6 @@ const URLS = {
 //     tasksURL: '/api/tasks',
 //     filesURL: '/api/files',
 //     dbURL: ''
-//     // url with id: `${url}/${id}`
 // };
 
 export default URLS;
