@@ -12,40 +12,41 @@ export default mainModule
                     template: todoTemplate,
                     controller: 'AppController as ctrl',
                     resolve: {
-                        dataLists: function getData(listService) {
-                            return listService.register();
-                        },
                         dataFolders: function getData(listGroupService) {
                             return listGroupService.register();
-                        },
-                        dataTasks: function getData(todoService) {
-                            return todoService.register();
                         }
+                        // dataLists: function getData(listService) {
+                        //     return listService.register();
+                        // },
+                        // // separate by id, delete filter from todotemplate
+                        // dataTasks: function getData(todoService) {
+                        //     return todoService.register();
+                        // }
                     }
                 })
-                .state('filter', {
-                    url: '/filter?search',
-                    template: todoTemplate,
-                    controller: 'AppController as ctrl',
-                    params: {
-                        search: {
-                            // value: '',
-                            // squash: true
-                        }
-                    },
-                    reloadOnSearch: false
-                })
-                .state('lists.todo', {
-                    url: '/todo/:todoid',
-                    template: '<todoside-comp></todoside-comp>',
-                    resolve: {
-                        subtaskData: function getData(subtaskService) {
-                            return subtaskService.register();
-                        },
-                        filesData: function getData(filesService) {
-                            return filesService.register();
-                        }
-                    }
-                });
+                // .state('filter', {
+                //     url: '/filter?search',
+                //     template: todoTemplate,
+                //     controller: 'AppController as ctrl',
+                //     params: {
+                //         search: {
+                //             // value: '',
+                //             // squash: true
+                //         }
+                //     },
+                //     reloadOnSearch: false
+                // })
+                // .state('lists.todo', {
+                //     url: '/todo/:todoid',
+                //     template: '<todoside-comp></todoside-comp>',
+                //     resolve: {
+                //         // subtaskData: function getData(subtaskService) {
+                //         //     return subtaskService.register();
+                //         // },
+                //         // filesData: function getData(filesService) {
+                //         //     return filesService.register();
+                //         // }
+                //     }
+                // });
         }
     ]);

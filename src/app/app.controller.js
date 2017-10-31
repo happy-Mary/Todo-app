@@ -15,17 +15,6 @@ export default mainModule
         // service to open modal
         self.modal = modalService;
 
-        // TESTING SERVER API
-        function getTest() {
-            return $http.get('/api/folders')
-                .then(function(response) {
-                console.log('in CTRL');
-                console.log(response.data);
-            })
-        }
-        getTest();
-
-
         // method to get main list title
         function getMainTitle() {
             if ($state.params.listid) {
@@ -69,10 +58,10 @@ export default mainModule
 
         // change main title on route
 
-        $transitions.onSuccess({ to: 'lists.**' }, () => {
-            self.currListId = $state.params.listid;
-            getMainTitle();
-        });
+        // $transitions.onSuccess({ to: 'lists.**' }, () => {
+        //     self.currListId = $state.params.listid;
+        //     getMainTitle();
+        // });
 
         // redirect to search while typing
         self.goToSearch = () => {

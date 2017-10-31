@@ -6,17 +6,16 @@ export default folderFormModule
         self.modal = modalService;
         self.lists = listGroupService;
 
-        self.currData = { title: '' };
+        self.currData = {};
 
         self.addFolder = (title) => {
             listGroupService.create(title);
             modalService.close();
-            self.currData.title = "";
+            self.currData = {};
         };
 
-        self.editFolder = (title) => {
-            self.editData.name = title;
-            listGroupService.update();
+        self.editFolder = (currData) => {
+            listGroupService.update(self.editData, currData);
             modalService.close();
         };
 
@@ -26,8 +25,9 @@ export default folderFormModule
         };
 
         self.deleteFolder = () => {
-            listGroupService.delete(self.editData.id);
-            listService.changeParentFolder(self.editData.id, null);
+            listGroupService.delete(self.editData._id);
+            // it works on server ??? in deleting folder
+            listService.changeParentFolder(self.editData._id, null);
             modalService.close();
         };
 
@@ -35,8 +35,10 @@ export default folderFormModule
             const currListVal = changesObj.editData.currentValue;
             if (currListVal !== undefined && currListVal !== null) {
                 self.editData = currListVal;
-                // for changing title
-                self.currData.title = currListVal.name;
+
+                angular.forEach(Object.keys(currListVal), (key) => {
+                    self.currData[key] = currListVal[key];
+                });
             }
         };
     });

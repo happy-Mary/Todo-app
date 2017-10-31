@@ -5,7 +5,8 @@ const schemaSubtask = new Schema({
     title: String,
     taskId: Number,
     completed: { type: Boolean, default: false }
-});
+},
+{ versionKey: false });
 
 //  create model  //
 const ModelSubtask = mongoose.model('Subtask', schemaSubtask);

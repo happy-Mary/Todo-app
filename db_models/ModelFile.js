@@ -7,7 +7,8 @@ const schemaFile = new Schema({
     taskId: Number,
     url: String,
     loaded: { type: Date, default: new Date() }
-});
+},
+{ versionKey: false });
 
 //  create model  //
 const ModelFile = mongoose.model('File', schemaFile);

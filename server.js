@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const fs = require('fs');
 // Models
 const ModelFolder = require('./db_models/ModelFolder');
 const ModelList = require('./db_models/ModelList');
@@ -15,7 +14,7 @@ const app = express();
 const jsonParser = bodyParser.json();
 const Schema = mongoose.Schema;
 const port = 3000;
-const mLab = 'localhost'
+const mLab = 'mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todolist_db'
 
 // express settings
 app.use(express.static(path.resolve(__dirname, 'dist')));
@@ -26,29 +25,48 @@ app.listen(port, () => {
 
 // mongoose settings
 mongoose.Promise = global.Promise;
-mongoose.connect(mLab);
+mongoose.connect(mLab, {
+    useMongoClient: true
+  });
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// TESTING CREATING
+// let newFolder = new ModelFolder({ title: 'first folder' });
+// newFolder.save(function(err) {
+//     if (err) throw err;
+//     console.log('User created!');
+// });
+
+// ModelFolder.findById('59f84a123dd79c2e0c72512a', function(err, user) {
+//     if (err) throw err;
+//     console.log(user);
+//     user.remove();
+// })
+
+// ModelFolder.find({}, function(err, users) {
+//     if (err) throw err;
+//     console.log(users);
+// })
+
+// //////////////////////
 
 // API REQUSTS
 
 // get all folders
 app.get('/api/folders', (req, res) => {
-    // ///////////////////////////////////////
-    console.log('WE NEED FOLDERS');
-    const folders = fs.readFileSync('folders.json', 'utf8', (err, data) => {
-        if (err) return res.sendStatus(404);
+    ModelFolder.find({}, function(err, folders) {
+        if (err) throw err;
 
-        return data;
-    });
-    res.send(folders);
+        res.send(folders);
+        // mongoose.disconnect();
+    })
 });
 
 // get one folder by id
 app.get('/api/folders/:id', (req, res) => {
     const id = req.params.id;
-
     // getting folders from DB
     const folder = null;
     if (folder) {
@@ -62,19 +80,45 @@ app.get('/api/folders/:id', (req, res) => {
 app.post('/api/folders', jsonParser, function(req, res) {
     if (!req.body) return res.sendStatus(400);
 
-    res.send();
+    const newFolder = new ModelFolder(req.body);
+    newFolder.save(function(err) {
+        if (err) throw err;
+
+        res.send(newFolder);
+    });
 });
 
-// change folder
-app.update('/api/folders/:id');
-
 // delete folder
-app.delete('/api/folders/:id');
+app.delete('/api/folders/:id', function(req, res) {
+    if (!req.params.id) return res.sendStatus(400);
+
+    const id = req.params.id;
+    // изменить тут folderId у листов на null
+    ModelFolder.findById(id, function(err, folder) {
+        if (err) throw err;
+        folder.remove();
+        res.send(folder);
+    })
+});
+
+// change one folder
+app.put('/api/folders/:id', jsonParser, function(req, res) {
+    if (!req.body && !req.params.id) return res.sendStatus(400);
+
+    ModelFolder.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true },
+        function(err, folder) {
+            if (err) throw err;
+            res.send(folder);
+    });
+});
+
 
 // ///////////////////////////////////////
 // IF CLIENT REQEST NOT API, SEND IT TO ANGULAR ROUTE
 // ///////////////////////////////////////
-
 app.get('*', (req, res) => {
     if (!req.url.startsWith("/api/")) {
         console.log('not API request');
@@ -84,3 +128,4 @@ app.get('*', (req, res) => {
 
 
 // http://blog.devshark.ru/posts/nodejs-mongoose-mongodb/
+// mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todolist_db

@@ -1,13 +1,8 @@
 <ul class="listgroup tab-bar">
-
- <!--     <li ng-repeat="folder in $ctrl.listGroups track by $index" class='folder-close' ng-class="[$ctrl.getCountLists(folder.id) ? '' : 'folder-close']"
-      dragdrop-dir drop-obj='folder' verify-drop-allowed='$ctrl.verifyFolderDrop(dragObj, dropObj)' execute-drop='$ctrl.handleDrop(dragObj, dropObj)' ng-model='folder' ng-right-click="$ctrl.openContextMenu($event, folder)"> -->
-
-        <!-- ng-class="[$ctrl.getCountLists(folder.id) ? '' : 'folder-close']" -->
      <li ng-repeat="folder in $ctrl.listGroups track by $index"
       dragdrop-dir drop-obj='folder' verify-drop-allowed='$ctrl.verifyFolderDrop(dragObj, dropObj)' class='folder-close' execute-drop='$ctrl.handleDrop(dragObj, dropObj)' ng-model='folder' ng-right-click="$ctrl.openContextMenu($event, folder)">
 
-        <a href="" class='folder-item' ng-click='$ctrl.getCountLists(folder.id) && $ctrl.openFolder($event)'>{{folder.name}}
+        <a href="" class='folder-item' ng-click='$ctrl.getCountLists(folder._id) && $ctrl.openFolder($event)'>{{folder.title}}
             <span class='menu-folder-icon' ng-click="$ctrl.toggleMenuEdit($event)"></span>
             <span class='listgroup-icon'></span>     
         </a>
@@ -15,7 +10,7 @@
             <li ng-click='$ctrl.handleEdit(folder)'>Edit</li>
             <li ng-click='$ctrl.handleDelete(folder)'>Ungroup folder</li>
         </ul>
-        <list-comp filter-id='folder.id' on-edit="$ctrl.handleEdit(item)" on-delete="$ctrl.handleDelete(item)" on-context-menu="$ctrl.handleContextMenu(event, item)" ></list-comp>
+        <!-- <list-comp filter-id='folder.id' on-edit="$ctrl.handleEdit(item)" on-delete="$ctrl.handleDelete(item)" on-context-menu="$ctrl.handleContextMenu(event, item)" ></list-comp> -->
     </li>
 </ul>
 

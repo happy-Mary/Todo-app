@@ -8,37 +8,42 @@ export default listGroupModule
         const self = this;
         self.data = [];
 
-        function save() {
-            localStorageService.set('listGroups', self.data);
-        }
-
-        function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.listGroupURL })
-            .then((response) => {
-                self.data.push(...response.data);
-                save();
-            })
-            .catch(() => {
-                self.data = [];
-                save();
-            });
-        }
-
-        function registerListGroups() {
-            return localStorageService.get('listGroups').then((response) => {
-                    self.data = [];
-                    self.data.push(...response);
-                    save();
-                })
-                .catch(() => getDataFromSerever());
-        }
-
         function getListGroups() {
             return self.data;
         }
 
-        function updateListGroup() {
-            save();
+        function registerListGroups() {
+            return localStorageService.get(URLS.folderURL).then((response) => {
+                self.data = response.data;
+            })
+        }
+
+        function createListGroup(title) {
+            const data = new ListGroup(title);
+            localStorageService.set(URLS.folderURL, data).then((response) => {
+                self.data.push(response.data);
+            })
+        }
+
+        function deleteListGroup(id) {
+            localStorageService.delete(URLS.folderURL, id).then((response) => {
+                const index = self.data.findIndex(folder => folder._id == response.data._id);
+                self.data.splice(index, 1);
+            })
+        }
+
+        function updateListGroup(folder, editedFolder) {
+            const currFolder = folder;
+            localStorageService.update(URLS.folderURL, currFolder._id, editedFolder)
+            .then((response) => {
+
+                angular.forEach(Object.keys(currFolder), (key) => {
+                    if (currFolder[key] !== response.data[key]) {
+                        currFolder[key] = response.data[key];
+                    }
+                });
+
+            })
         }
 
         function getListGroup(id) {
@@ -49,25 +54,14 @@ export default listGroupModule
             });
         }
 
-        function deleteListGroup(id) {
-            const index = self.data.findIndex(group => group.id == id);
-            self.data.splice(index, 1);
-            save();
-        }
-
-        function createListGroup(name) {
-            const data = new ListGroup(name);
-            self.data.push(data);
-            save();
-        }
-
         return {
+            data: self.data,
             register: registerListGroups,
             get: getListGroups,
-            data: self.data,
             create: createListGroup,
             update: updateListGroup,
             delete: deleteListGroup,
+            // ???
             getGroup: getListGroup,
         }
     });

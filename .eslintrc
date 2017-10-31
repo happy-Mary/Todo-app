@@ -5,6 +5,7 @@
     "extends": ["airbnb/base"],
     "parser": "babel-eslint",
     "rules": {
+        "no-underscore-dangle": [2, { "allow": ["_id"] }],
         "linebreak-style": 0,
         "comma-dangle": [0, "never"],
         "no-tabs": 0,

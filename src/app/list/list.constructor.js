@@ -6,7 +6,7 @@ export default class List {
         this.id = Number(generateId());
         this.title = title;
         // change to folderId after server ready
-        this.listGroupId = Number(listGroupId) || null;
+        this.listGroupId = String(listGroupId) || null;
         this.type = 'list';
     }
 }

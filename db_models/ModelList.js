@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 const schemaList = new Schema({
     title: String,
     // ???
-    folderId: { type: Number, default: null },
+    folderId: { type: String, default: null },
     type: { type: String, default: 'list' }
-});
+},
+{ versionKey: false });
 
 //  create model  //
 const ModelList = mongoose.model('List', schemaList);
