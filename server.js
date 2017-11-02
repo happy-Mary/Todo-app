@@ -1,5 +1,4 @@
 const express = require('express');
-// const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -12,7 +11,7 @@ const ModelFile = require('./db_models/ModelFile');
 
 const app = express();
 const jsonParser = bodyParser.json();
-const Schema = mongoose.Schema;
+// const Schema = mongoose.Schema;
 const port = 3000;
 const mLab = 'mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todolist_db'
 
@@ -33,26 +32,13 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // TESTING CREATING
-// let newFolder = new ModelFolder({ title: 'first folder' });
-// newFolder.save(function(err) {
+// let newList = new ModelList({ title: 'list 1' });
+// newList.save(function(err) {
 //     if (err) throw err;
-//     console.log('User created!');
+//     console.log('List created!');
 // });
 
-// ModelFolder.findById('59f84a123dd79c2e0c72512a', function(err, user) {
-//     if (err) throw err;
-//     console.log(user);
-//     user.remove();
-// })
-
-// ModelFolder.find({}, function(err, users) {
-//     if (err) throw err;
-//     console.log(users);
-// })
-
-// //////////////////////
-
-// API REQUSTS
+// API REQUSTS //////////////////////////////////////////////////////////
 
 // get all folders
 app.get('/api/folders', (req, res) => {
@@ -60,20 +46,12 @@ app.get('/api/folders', (req, res) => {
         if (err) throw err;
 
         res.send(folders);
-        // mongoose.disconnect();
     })
 });
 
 // get one folder by id
 app.get('/api/folders/:id', (req, res) => {
     const id = req.params.id;
-    // getting folders from DB
-    const folder = null;
-    if (folder) {
-        res.send(folder);
-    } else {
-        res.status(400).send();
-    }
 });
 
 // post new folder
@@ -115,6 +93,109 @@ app.put('/api/folders/:id', jsonParser, function(req, res) {
     });
 });
 
+// get all lists
+app.get('/api/lists', (req, res) => {
+    ModelList.find({}, function(err, lists) {
+        if (err) throw err;
+
+        res.send(lists);
+    })
+});
+
+// post new list
+app.post('/api/lists', jsonParser, function(req, res) {
+    if (!req.body) return res.sendStatus(400);
+
+    const newList = new ModelList(req.body);
+    newList.save(function(err) {
+        if (err) throw err;
+
+        res.send(newList);
+    });
+});
+
+// delete list
+app.delete('/api/lists/:id', function(req, res) {
+    if (!req.params.id) return res.sendStatus(400);
+
+    const id = req.params.id;
+    ModelList.findById(id, function(err, list) {
+        if (err) throw err;
+        list.remove();
+        res.send(list);
+    })
+});
+
+// change one list
+app.put('/api/lists/:id', jsonParser, function(req, res) {
+    if (!req.body && !req.params.id) return res.sendStatus(400);
+
+    ModelList.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true },
+        function(err, list) {
+            if (err) throw err;
+            res.send(list);
+    });
+});
+
+// get tasks by id
+app.get('/api/tasks/:id', (req, res) => {
+    const id = req.params.id;
+
+    let findObj;
+    if (id === 'marked') {
+        findObj = { marked: true }
+    } else {
+        findObj = { listId: id }
+    }
+
+    ModelTask.find(findObj, function(err, tasks) {
+        if (err) throw err;
+
+        res.send(tasks);
+    })
+});
+
+// create task
+app.post('/api/tasks', jsonParser, function(req, res) {
+    if (!req.body) return res.sendStatus(400);
+
+    const newTask = new ModelTask(req.body);
+    newTask.save(function(err) {
+        if (err) throw err;
+
+        res.send(newTask);
+    });
+});
+
+// delete task
+app.delete('/api/tasks/:id', function(req, res) {
+    if (!req.params.id) return res.sendStatus(400);
+
+    const id = req.params.id;
+    ModelTask.findById(id, function(err, task) {
+        if (err) throw err;
+        task.remove();
+        res.send(task);
+    })
+});
+
+// change task
+app.put('/api/tasks/:id', jsonParser, function(req, res) {
+    if (!req.body && !req.params.id) return res.sendStatus(400);
+
+    ModelTask.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true },
+        function(err, task) {
+            if (err) throw err;
+            res.send(task);
+    });
+});
+
 
 // ///////////////////////////////////////
 // IF CLIENT REQEST NOT API, SEND IT TO ANGULAR ROUTE
@@ -128,4 +209,3 @@ app.get('*', (req, res) => {
 
 
 // http://blog.devshark.ru/posts/nodejs-mongoose-mongodb/
-// mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todolist_db

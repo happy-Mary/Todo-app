@@ -1,6 +1,6 @@
 <section class = 'form-list'>
     <form class="modal-content editing"
-         ng-submit='($ctrl.state==="create") ? $ctrl.addList($ctrl.currData.title) : $ctrl.editList($ctrl.currData.title)'
+         ng-submit='($ctrl.state==="create") ? $ctrl.addList($ctrl.currData) : $ctrl.editList($ctrl.currData)'
          ng-show='$ctrl.state !== "delete"'>
         <input type="text" name="name" placeholder="List name" required ng-model='$ctrl.currData.title'>
         <button class="save" type ="submit">Save</button>

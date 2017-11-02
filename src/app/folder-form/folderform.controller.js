@@ -8,8 +8,8 @@ export default folderFormModule
 
         self.currData = {};
 
-        self.addFolder = (title) => {
-            listGroupService.create(title);
+        self.addFolder = (currData) => {
+            listGroupService.create(currData.title);
             modalService.close();
             self.currData = {};
         };
@@ -20,14 +20,12 @@ export default folderFormModule
         };
 
         self.cancelChanges = () => {
-            self.currData.title = (self.editData == undefined) ? '' : self.editData.name;
+            self.currData = (self.editData == undefined) ? {} : self.editData;
             modalService.close();
         };
 
         self.deleteFolder = () => {
             listGroupService.delete(self.editData._id);
-            // it works on server ??? in deleting folder
-            listService.changeParentFolder(self.editData._id, null);
             modalService.close();
         };
 

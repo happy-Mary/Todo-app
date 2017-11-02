@@ -19,8 +19,8 @@ export default listGroupModule
         }
 
         function createListGroup(title) {
-            const data = new ListGroup(title);
-            localStorageService.set(URLS.folderURL, data).then((response) => {
+            const folder = new ListGroup(title);
+            localStorageService.set(URLS.folderURL, folder).then((response) => {
                 self.data.push(response.data);
             })
         }
@@ -42,7 +42,6 @@ export default listGroupModule
                         currFolder[key] = response.data[key];
                     }
                 });
-
             })
         }
 

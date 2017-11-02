@@ -1,12 +1,8 @@
-import generateId from '../module/generateId';
-
 export default class List {
-    constructor(title, listGroupId) {
-        // remove after server ready
-        this.id = Number(generateId());
+    constructor(title, folderId) {
         this.title = title;
-        // change to folderId after server ready
-        this.listGroupId = String(listGroupId) || null;
+        this.folderId = folderId || null;
+        this.taskCount = 0;
         this.type = 'list';
     }
 }

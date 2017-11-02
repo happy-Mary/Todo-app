@@ -6,6 +6,7 @@ export default mainModule
         function config($locationProvider, $stateProvider, $urlRouterProvider) {
             $locationProvider.html5Mode(true);
             $urlRouterProvider.otherwise("/lists/marked");
+
             $stateProvider
                 .state('lists', {
                     url: '/lists/:listid',
@@ -14,14 +15,14 @@ export default mainModule
                     resolve: {
                         dataFolders: function getData(listGroupService) {
                             return listGroupService.register();
+                        },
+                        dataLists: function getData(listService) {
+                            return listService.register();
+                        },
+                        // separate by id, delete filter from todotemplate
+                        dataTasks: function getData(todoService, $stateParams) {
+                            return todoService.register($stateParams.listid);
                         }
-                        // dataLists: function getData(listService) {
-                        //     return listService.register();
-                        // },
-                        // // separate by id, delete filter from todotemplate
-                        // dataTasks: function getData(todoService) {
-                        //     return todoService.register();
-                        // }
                     }
                 })
                 // .state('filter', {

@@ -55,13 +55,11 @@ export default mainModule
             });
         });
 
-
         // change main title on route
-
-        // $transitions.onSuccess({ to: 'lists.**' }, () => {
-        //     self.currListId = $state.params.listid;
-        //     getMainTitle();
-        // });
+        $transitions.onSuccess({ to: 'lists.**' }, () => {
+            self.currListId = $state.params.listid;
+            getMainTitle();
+        });
 
         // redirect to search while typing
         self.goToSearch = () => {
@@ -94,9 +92,9 @@ export default mainModule
 
         // functions for manipulating list, folders, ?todo? data
         self.activeItem = null;
+        self.emptyFolder = { folderId: null };
 
         self.actions = {
-            // editting item
             onEdit(item) {
                 if (item) {
                     self.activeItem = item;
@@ -117,7 +115,6 @@ export default mainModule
                     default: break;
                 }
             },
-            // deleting item
             onDelete(item) {
                 if (item) {
                     self.activeItem = item;
@@ -135,15 +132,6 @@ export default mainModule
                     default: break;
                 }
             },
-            // clicking on item
-            onActivate() {
-
-            },
-            // opening folder
-            onToggleExpand() {
-
-            },
-            // opening folder menu (on custom right click)
             onContextMenu(event, item) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -162,18 +150,17 @@ export default mainModule
                 }
                 self.activeItem = contextMenuService.getItem();
             },
-
             changeTodoMarked(value) {
-                todoService.changeMarked(self.activeItem, value);
+                self.activeItem.marked = value;
+                todoService.update(self.activeItem);
             },
-
             changeTodoCompleted(value) {
-                todoService.changeCompleted(self.activeItem, value);
+                self.activeItem.completed = value;
+                todoService.update(self.activeItem);
             },
-
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
-                if (dragObj.type === 'list' && dropObj === null) {
+                if (dragObj.type === 'list' && dropObj.folderId === null) {
                     allow = true;
                 } else {
                     allow = false;
@@ -181,7 +168,7 @@ export default mainModule
                 return allow;
             },
             handleEmptyFolderDrop(dragObj, dropObj) {
-                listService.changeParentFolder(dragObj.listGroupId, dropObj, dragObj.id);
+                listService.update(dragObj, dropObj);
             }
         };
 

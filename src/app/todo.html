@@ -15,9 +15,10 @@
             </ul>
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)" on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-group-component>
             <div class="empty-folder"
-                dragdrop-dir drop-obj='null' verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
-                <!-- <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)' on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-comp>
-                </list-comp> -->
+                dragdrop-dir drop-obj='ctrl.emptyFolder'
+                verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
+                <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)' on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-comp>
+                </list-comp>
             </div>           
         </div>
         <div class="create">

@@ -68,7 +68,8 @@ export default listGroupModule
         };
 
         self.handleDrop = (dragObj, dropObj) => {
-            listService.changeParentFolder(dragObj.listGroupId, dropObj.id, dragObj.id);
+            const listDataEdit = { folderId: dropObj._id };
+            listService.update(dragObj, listDataEdit);
         };
 
         self.getCountLists = listService.getCountLists;

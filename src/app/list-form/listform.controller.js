@@ -4,39 +4,36 @@ export default listFormModule
     .controller('listFormController', function listFormController(modalService, todoService, listService) {
         const self = this;
 
-        self.currData = { title: '' };
+        self.currData = {};
 
-        self.addList = (title) => {
-            listService.create(title);
+        self.addList = (currData) => {
+            listService.create(currData.title);
             modalService.close();
-            self.currData.title = "";
-        };
-
-        self.editList = (title) => {
-            self.editData.title = title;
-            if (self.editData.type == 'list') {
-                listService.update();
-            }
-            if (self.editData.type == 'todo') {
-                todoService.update();
-            }
-            // listService.update();
-            modalService.close();
-
-        };
-
-        self.cancelChanges = () => {
-            self.currData.title = (self.editData == undefined) ? '' : self.editData.title;
-            modalService.close();
+            self.currData = {};
         };
 
         self.deleteList = () => {
             if (self.editData.type == 'list') {
-                 listService.delete(self.editData.id);
+                 listService.delete(self.editData._id);
             }
             if (self.editData.type == 'todo') {
-                 todoService.delete(self.editData.id);
+                 todoService.delete(self.editData._id);
             }
+            modalService.close();
+        };
+
+        self.editList = (currData) => {
+            if (self.editData.type == 'list') {
+                listService.update(self.editData, currData);
+            }
+            if (self.editData.type == 'todo') {
+                todoService.update(self.editData, currData);
+            }
+            modalService.close();
+        };
+
+        self.cancelChanges = () => {
+            self.currData = (self.editData == undefined) ? {} : self.editData;
             modalService.close();
         };
 
@@ -45,8 +42,9 @@ export default listFormModule
             if (currListVal !== undefined && currListVal !== null) {
                 self.editData = currListVal;
                 // for changing title
-                self.currData.title = currListVal.title;
+                angular.forEach(Object.keys(currListVal), (key) => {
+                    self.currData[key] = currListVal[key];
+                });
             }
         };
-
     });

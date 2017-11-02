@@ -1,6 +1,6 @@
 <section class = 'form-folder'>
 		<form class="modal-content editing"
-			 ng-submit='($ctrl.state==="create") ? $ctrl.addFolder($ctrl.currData.title) : $ctrl.editFolder($ctrl.currData)'
+			 ng-submit='($ctrl.state==="create") ? $ctrl.addFolder($ctrl.currData) : $ctrl.editFolder($ctrl.currData)'
 			 ng-show='$ctrl.state !== "delete"'>
 			<input type="text" name="name" placeholder="Folder name" required ng-model='$ctrl.currData.title'>
 			<button class="save" type ="submit">Save</button>

@@ -7,10 +7,11 @@ const schemaTask = new Schema({
     marked: Boolean,
     // при post не передаем, при update - да
     completed: { type: Boolean, default: false },
-    date: { type: Date, default: new Date() },
-    dueDate: { type: Date, default: 0 },
-    remindDate: { type: Date, default: 0 },
-    note: { type: String, default: '', trim: true }
+    date: { type: Date, default: Date.now },
+    dueDate: { type: Date, default: '' },
+    remindDate: { type: Date, default: '' },
+    note: { type: String, default: '', trim: true },
+    type: { type: String, default: '', trim: "todo" }
 },
 { versionKey: false });
 

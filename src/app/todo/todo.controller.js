@@ -10,16 +10,11 @@ export default todoModule
         // from router
         self.searchParam = $stateParams.search;
         self.hasListId = $state.includes("filter");
-        self.parentId = $stateParams.listid;
 
         $transitions.onSuccess({ to: 'filter' }, () => {
             self.searchParam = $stateParams.search;
             self.hasListId = $state.includes("filter");
         });
-
-        self.$onInit = () => {
-            self.onContextMenu = self.onContextMenu;
-        };
 
         self.handleEdit = (todo) => {
             self.onEdit({ item: todo });
@@ -29,8 +24,8 @@ export default todoModule
             self.onDelete({ item: todo });
         };
 
-        self.changeTodo = () => {
-            todoService.update();
+        self.changeTodo = (task) => {
+            todoService.update(task);
         };
 
         self.lists = listService.get();
@@ -49,5 +44,9 @@ export default todoModule
             const currEvent = event;
             const currItem = item;
             self.onContextMenu({ event: currEvent, item: currItem });
+        };
+
+        self.$onInit = () => {
+            self.onContextMenu = self.onContextMenu;
         };
     });

@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const schemaList = new Schema({
     title: String,
-    // ???
     folderId: { type: String, default: null },
+    taskCount: Number,
     type: { type: String, default: 'list' }
 },
 { versionKey: false });

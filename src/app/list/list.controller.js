@@ -51,7 +51,8 @@ export default listModule
         };
 
         self.handleDrop = (dragObj, dropObj) => {
-            todoService.changeParentList(dropObj.id, dragObj.id);
+            const taskDataEdit = { listId: dropObj._id };
+            todoService.update(dragObj, taskDataEdit);
         };
 
         self.openContextMenu = (event, item) => {
