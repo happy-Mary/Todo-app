@@ -23,7 +23,7 @@ export default mainModule
                     if (list) {
                         self.headerTitle = list.title
                     } else {
-                        $state.go('lists.todo', { listid: 'marked' });
+                        $state.go('lists', { listid: 'marked' });
                     }
                 } else {
                     self.headerTitle = 'Избранное';

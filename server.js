@@ -11,16 +11,27 @@ const ModelFile = require('./db_models/ModelFile');
 
 const app = express();
 const jsonParser = bodyParser.json();
-// const Schema = mongoose.Schema;
 const port = 3000;
 const mLab = 'mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todolist_db'
+
 
 // express settings
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server started on ${port}`);
 });
+
+const io = require('socket.io')(server);
+
+// /////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////
+io.on('connection', function(client) {
+        // client.emit('from_server', { message: 'Ping' });
+});
+
+// ////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////
 
 // mongoose settings
 mongoose.Promise = global.Promise;
@@ -76,6 +87,17 @@ app.delete('/api/folders/:id', function(req, res) {
         if (err) throw err;
         folder.remove();
         res.send(folder);
+    });
+    ModelList.updateMany(
+        { folderId: id },
+        { $set: { folderId: null } },
+        { multi: true },
+        function(err, lists) {
+            if (err) throw err;
+    })
+    ModelList.find({ folderId: null }, function(err, lists) {
+        if (err) throw err;
+        io.emit('ungroup_lists', lists);
     })
 });
 
@@ -123,6 +145,11 @@ app.delete('/api/lists/:id', function(req, res) {
         if (err) throw err;
         list.remove();
         res.send(list);
+    })
+    ModelTask.remove({ listId: id }, function(err, tasks) {
+        if (err) throw err;
+
+        io.emit('removed_tasks');
     })
 });
 

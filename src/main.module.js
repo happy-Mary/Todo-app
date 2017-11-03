@@ -11,6 +11,7 @@ require('./app/main.controller');
 require('./app/directives/contextmenu.directive');
 require('./app/directives/fileinput.directive');
 require('./app/directives/autoheight.directive');
+require('./app/app.socket');
 
 /* this module goes to html ng-app, it takes all main modules from app */
 angular.module('appModule', [mainModule.name]);

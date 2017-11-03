@@ -4,9 +4,14 @@ import ToDo from './todo.constructor';
 import URLS from '../constants';
 
 export default todoModule
-    .service('todoService', function todoService($filter, $http, localStorageService) {
+    .service('todoService', function todoService($filter, $http, localStorageService, socket) {
         const self = this;
         self.data = [];
+
+        socket.on('removed_tasks', () => {
+            // console.log(data.message);
+            self.data.length = 0;
+        });
 
         function deleteByIndex(serverData) {
             const index = self.data.findIndex(item => item._id == serverData._id);
@@ -58,27 +63,27 @@ export default todoModule
         }
 
         //  where do we use it ?????
-        function getOneTodo(id) {
-            let currItem;
-            angular.forEach(self.data, (item) => {
-                if (item.id == id) {
-                    currItem = item;
-                }
-            });
-            return currItem;
-        }
+        // function getOneTodo(id) {
+        //     let currItem;
+        //     angular.forEach(self.data, (item) => {
+        //         if (item.id == id) {
+        //             currItem = item;
+        //         }
+        //     });
+        //     return currItem;
+        // }
 
-        function setTodo(obj) {
-            self.data = obj;
-        }
+        // function setTodo(obj) {
+        //     self.data = obj;
+        // }
 
-        function changeParent(newListId, taskId) {
-            angular.forEach(self.data, (item) => {
-                const task = item;
-                if (task.id === taskId) task.listId = newListId;
-            });
-            save();
-        }
+        // function changeParent(newListId, taskId) {
+        //     angular.forEach(self.data, (item) => {
+        //         const task = item;
+        //         if (task.id === taskId) task.listId = newListId;
+        //     });
+        //     save();
+        // }
 
 
         return {
@@ -87,10 +92,10 @@ export default todoModule
             delete: deleteTodo,
             create: createTodo,
             update: updateTodo,
-            set: setTodo,
             // //////////////////////////////////
-            getTodo: getOneTodo,
+            // set: setTodo,
+            // getTodo: getOneTodo,
             // ///////////////////////////////////
-            changeParentList: changeParent,
+            // changeParentList: changeParent,
         };
     });
