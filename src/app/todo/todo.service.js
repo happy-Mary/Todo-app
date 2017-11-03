@@ -9,7 +9,6 @@ export default todoModule
         self.data = [];
 
         socket.on('removed_tasks', () => {
-            // console.log(data.message);
             self.data.length = 0;
         });
 

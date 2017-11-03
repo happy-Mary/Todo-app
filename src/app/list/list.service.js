@@ -9,11 +9,15 @@ export default listModule
         self.data = [];
 
         socket.on('ungroup_lists', (data) => {
-            angular.forEach(Object.keys(data), (key) => {
-                if (self.data[key] !== data[key]) {
-                    self.data[key] = data[key];
-                }
-            });
+            console.log(data);
+            // WRONG !!!!
+            for (let i = 0; i < self.data.length; i += 1) {
+                angular.forEach(Object.keys(data), (key) => {
+                    if (self.data[i][key] !== data[key]) {
+                        self.data[i][key] = data[key];
+                    }
+                });
+            }
         });
 
         function getLists() {
@@ -69,13 +73,13 @@ export default listModule
             return list;
         }
 
-        // function getCountListsInFolder(folderId) {
-        //     function getListsInFolder(item) {
-        //         return (item.folderId == folderId);
-        //     }
-        //     const lists = self.data.filter(getListsInFolder);
-        //     return lists.length;
-        // }
+        function getCountListsInFolder(folderId) {
+            function getListsInFolder(item) {
+                return (item.folderId == folderId);
+            }
+            const lists = self.data.filter(getListsInFolder);
+            return lists.length;
+        }
 
         return {
             register: registerLists,
@@ -83,8 +87,7 @@ export default listModule
             create: createList,
             update: updateList,
             delete: deleteList,
-            // //////////////////////////////
             getList: getOnlyList,
-            // getCountLists: getCountListsInFolder
+            getCountLists: getCountListsInFolder
         };
     });

@@ -18,20 +18,9 @@ const mLab = 'mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todol
 // express settings
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
-const server = app.listen(port, () => {
-    console.log(`Server started on ${port}`);
-});
+const server = app.listen(port);
 
 const io = require('socket.io')(server);
-
-// /////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////
-io.on('connection', function(client) {
-        // client.emit('from_server', { message: 'Ping' });
-});
-
-// ////////////////////////////////////////////////////////
-// ///////////////////////////////////////////////////////
 
 // mongoose settings
 mongoose.Promise = global.Promise;
@@ -82,13 +71,13 @@ app.delete('/api/folders/:id', function(req, res) {
     if (!req.params.id) return res.sendStatus(400);
 
     const id = req.params.id;
-    // изменить тут folderId у листов на null
     ModelFolder.findById(id, function(err, folder) {
         if (err) throw err;
         folder.remove();
         res.send(folder);
     });
-    ModelList.updateMany(
+    // changing lists folderId to null
+    ModelList.update(
         { folderId: id },
         { $set: { folderId: null } },
         { multi: true },
@@ -195,6 +184,10 @@ app.post('/api/tasks', jsonParser, function(req, res) {
 
         res.send(newTask);
     });
+    // ModelList.findByIdAndUpdate(req.body.listId, { $inc: { taskCount: 1 } }, { new: true }, function(err, list) {
+    //     if (err) throw err;
+    //     io.emit('ungroup_lists', list);
+    // })
 });
 
 // delete task
