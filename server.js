@@ -26,7 +26,7 @@ const io = require('socket.io')(server);
 mongoose.Promise = global.Promise;
 mongoose.connect(mLab, {
     useMongoClient: true
-  });
+});
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -71,23 +71,24 @@ app.delete('/api/folders/:id', function(req, res) {
     if (!req.params.id) return res.sendStatus(400);
 
     const id = req.params.id;
+    let arrayID = [];
     ModelFolder.findById(id, function(err, folder) {
         if (err) throw err;
         folder.remove();
         res.send(folder);
     });
     // changing lists folderId to null
-    ModelList.update(
-        { folderId: id },
-        { $set: { folderId: null } },
-        { multi: true },
-        function(err, lists) {
-            if (err) throw err;
-    })
-    ModelList.find({ folderId: null }, function(err, lists) {
-        if (err) throw err;
-        io.emit('ungroup_lists', lists);
-    })
+    ModelList.find({ folderId: id }).exec((err, lists) => {
+            lists.forEach((list) => { arrayID.push(list._id) })
+        })
+        .then(() => {
+            ModelList.update({ folderId: id }, { $set: { folderId: null } }, { multi: true }).exec()
+        })
+        .then(() => {
+            ModelList.find({ _id: { $in: arrayID } }).exec((err, data) => {
+                io.emit('lists_changed', { obj: data, key: 'folderId' });
+            })
+        })
 });
 
 // change one folder
@@ -95,18 +96,16 @@ app.put('/api/folders/:id', jsonParser, function(req, res) {
     if (!req.body && !req.params.id) return res.sendStatus(400);
 
     ModelFolder.findByIdAndUpdate(
-        req.params.id,
-        { $set: req.body },
-        { new: true },
+        req.params.id, { $set: req.body }, { new: true },
         function(err, folder) {
             if (err) throw err;
             res.send(folder);
-    });
+        });
 });
 
 // get all lists
 app.get('/api/lists', (req, res) => {
-    ModelList.find({}, function(err, lists) {
+    ModelList.find({}, (err, lists) => {
         if (err) throw err;
 
         res.send(lists);
@@ -118,7 +117,7 @@ app.post('/api/lists', jsonParser, function(req, res) {
     if (!req.body) return res.sendStatus(400);
 
     const newList = new ModelList(req.body);
-    newList.save(function(err) {
+    newList.save((err) => {
         if (err) throw err;
 
         res.send(newList);
@@ -147,13 +146,11 @@ app.put('/api/lists/:id', jsonParser, function(req, res) {
     if (!req.body && !req.params.id) return res.sendStatus(400);
 
     ModelList.findByIdAndUpdate(
-        req.params.id,
-        { $set: req.body },
-        { new: true },
-        function(err, list) {
+        req.params.id, { $set: req.body }, { new: true },
+        (err, list) => {
             if (err) throw err;
             res.send(list);
-    });
+        });
 });
 
 // get tasks by id
@@ -207,13 +204,11 @@ app.put('/api/tasks/:id', jsonParser, function(req, res) {
     if (!req.body && !req.params.id) return res.sendStatus(400);
 
     ModelTask.findByIdAndUpdate(
-        req.params.id,
-        { $set: req.body },
-        { new: true },
+        req.params.id, { $set: req.body }, { new: true },
         function(err, task) {
             if (err) throw err;
             res.send(task);
-    });
+        });
 });
 
 

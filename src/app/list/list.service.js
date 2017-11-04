@@ -8,16 +8,12 @@ export default listModule
         const self = this;
         self.data = [];
 
-        socket.on('ungroup_lists', (data) => {
-            console.log(data);
-            // WRONG !!!!
-            for (let i = 0; i < self.data.length; i += 1) {
-                angular.forEach(Object.keys(data), (key) => {
-                    if (self.data[i][key] !== data[key]) {
-                        self.data[i][key] = data[key];
-                    }
-                });
-            }
+        socket.on('lists_changed', (data) => {
+            angular.forEach(data.obj, (list) => {
+                const i = self.data.findIndex(item => item._id == list._id);
+                const listForChange = self.data[i];
+                listForChange[data.key] = list[data.key];
+            });
         });
 
         function getLists() {
@@ -54,13 +50,13 @@ export default listModule
         function updateList(list, editedlist) {
             const currList = list;
             localStorageService.update(URLS.listURL, currList._id, editedlist)
-            .then((response) => {
-                angular.forEach(Object.keys(currList), (key) => {
-                    if (currList[key] !== response.data[key]) {
-                        currList[key] = response.data[key];
-                    }
-                });
-            })
+                .then((response) => {
+                    angular.forEach(Object.keys(currList), (key) => {
+                        if (currList[key] !== response.data[key]) {
+                            currList[key] = response.data[key];
+                        }
+                    });
+                })
         }
 
         function getOnlyList(id) {
@@ -73,13 +69,13 @@ export default listModule
             return list;
         }
 
-        function getCountListsInFolder(folderId) {
-            function getListsInFolder(item) {
-                return (item.folderId == folderId);
-            }
-            const lists = self.data.filter(getListsInFolder);
-            return lists.length;
-        }
+        // function getCountListsInFolder(folderId) {
+        //     function getListsInFolder(item) {
+        //         return (item.folderId == folderId);
+        //     }
+        //     const lists = self.data.filter(getListsInFolder);
+        //     return lists.length;
+        // }
 
         return {
             register: registerLists,
@@ -88,6 +84,6 @@ export default listModule
             update: updateList,
             delete: deleteList,
             getList: getOnlyList,
-            getCountLists: getCountListsInFolder
+            // getCountLists: getCountListsInFolder
         };
     });
