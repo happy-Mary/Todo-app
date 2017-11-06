@@ -295,6 +295,54 @@ app.put('/api/subtasks/:id', jsonParser, function(req, res) {
         })
 });
 
+// get files
+app.get('/api/files/:id', (req, res) => {
+    const id = req.params.id;
+
+    const findObj = { taskId: id };
+
+    ModelFile.find(findObj, function(err, files) {
+        if (err) throw err;
+        res.send(files);
+    })
+});
+
+// add file
+app.post('/api/files', jsonParser, function(req, res) {
+    if (!req.body) return res.sendStatus(400);
+
+    const newFile = new ModelFile(req.body);
+    newFile.save(function(err) {
+        if (err) throw err;
+        // set date after adding to DB ???
+        res.send(newFile);
+    });
+});
+
+// delete file
+app.delete('/api/files/:id', function(req, res) {
+    if (!req.params.id) return res.sendStatus(400);
+
+    const id = req.params.id;
+    ModelFile.findById(id, function(err, file) {
+        if (err) throw err;
+        file.remove();
+        res.send(file);
+    });
+});
+
+// change file ????????
+// app.put('/api/files/:id', jsonParser, function(req, res) {
+//     if (!req.body && !req.params.id) return res.sendStatus(400);
+//     ModelFile.findByIdAndUpdate(req.params.id,
+//             { $set: req.body },
+//             { new: true })
+//         .exec((err, task) => {
+//             if (err) throw err;
+//             res.send(task);
+//         })
+// });
+
 // ///////////////////////////////////////
 // IF CLIENT REQEST NOT API, SEND IT TO ANGULAR ROUTE
 // ///////////////////////////////////////

@@ -1,14 +1,12 @@
-import generateId from '../module/generateId';
-
 export default class File {
-    constructor(taskId, url, name, size) {
+    constructor(name, size, taskId, url) {
         // remove after server ready
-        this.id = Number(generateId());
-        this.taskId = Number(taskId);
+        // this.id = Number(generateId());
         this.name = name;
         this.size = Number(size);
+        this.taskId = String(taskId);
         this.url = url;
         // change after server ready
-        this.loaded = new Date();
+        // this.loaded = new Date();
     }
 }

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const schemaFile = new Schema({
     name: String,
     size: Number,
-    taskId: Number,
+    taskId: String,
     url: String,
     loaded: { type: Date, default: Date.now }
 },

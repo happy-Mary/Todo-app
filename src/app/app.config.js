@@ -30,10 +30,10 @@ export default mainModule
                     resolve: {
                         subtaskData: function getData(subtaskService, $stateParams) {
                             return subtaskService.register($stateParams.todoid);
+                        },
+                        filesData: function getData(filesService, $stateParams) {
+                            return filesService.register($stateParams.todoid);
                         }
-                        // filesData: function getData(filesService) {
-                        //     return filesService.register();
-                        // }
                     }
                 });
 

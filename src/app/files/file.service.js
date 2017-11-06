@@ -16,28 +16,23 @@ export default fileModule
             localStorageService.set('files', self.data);
         }
 
-        function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.filesURL })
-                .then((response) => {
-                    self.data = [];
-                    self.data.push(...response.data);
-                    save();
-                })
-                .catch(() => {
-                    self.data = [];
-                    save();
-                });
+        function registerFiles(id) {
+            const taskId = id;
+            return localStorageService.getFiltered(URLS.filesURL, taskId).then((response) => {
+                self.data = response.data;
+            })
         }
 
-        function registerFiles() {
-            return localStorageService.get('files').then((response) => {
-                    self.data = [];
-                    self.data.push(...response);
-                    save();
-                })
-                .catch(() => getDataFromSerever());
+        function createFile(name, size, taskId, url) {
+            const file = new File(name, size, taskId, url);
+            // ???? GET LOADING HERE ????
+            // onprogress
+            localStorageService.set(URLS.subtaskURL, file).then((response) => {
+                self.data.push(response.data);
+            })
         }
 
+// ///////////////////////////////////////////////////////////////////////////////////
         function updateFile() {
             save();
         }
@@ -52,13 +47,6 @@ export default fileModule
             save();
         }
 
-        function createFile(taskId, url, name, size) {
-            const file = new File(taskId, url, name, size);
-            self.data.push(file);
-            save();
-            return file;
-        }
-
         function setLoadedData(id, value) {
             const index = self.data.findIndex(x => x.id == id);
             // self.data[index].loaded = value;
@@ -68,11 +56,13 @@ export default fileModule
 
         return {
             register: registerFiles,
-            set: setFiles,
             get: getData,
-            delete: deleteFile,
+            // ///////////////////////////
             create: createFile,
+            delete: deleteFile,
+            setLoaded: setLoadedData,
+            // ///////////////////////////
             update: updateFile,
-            setLoaded: setLoadedData
+            set: setFiles
         };
     });
