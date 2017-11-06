@@ -36,7 +36,7 @@
         </ul>
     </header>
     <!-- nested view for sidebar -->
-    <!-- <ui-view></ui-view> -->
+    <ui-view></ui-view>
     <main>
         <form action="" ng-submit="ctrl.addToDo($event)" ng-click='ctrl.focusAddTask($event)' ng-hide='ctrl.currListId == "marked"'>
             <span class='newTask' ng-click='ctrl.toggleFocus($event)'>

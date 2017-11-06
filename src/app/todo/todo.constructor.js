@@ -4,7 +4,6 @@ export default class ToDo {
         this.listId = String(listId);
         this.marked = marked || false;
         this.completed = false;
-        // this.date = new Date();
         this.dueDate = '';
         this.remindDate = '';
         this.note = "";

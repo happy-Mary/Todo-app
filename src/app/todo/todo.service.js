@@ -4,7 +4,7 @@ import ToDo from './todo.constructor';
 import URLS from '../constants';
 
 export default todoModule
-    .service('todoService', function todoService($filter, $http, localStorageService, socket) {
+    .service('todoService', function todoService($filter, $http, localStorageService, socket, $stateParams) {
         const self = this;
         self.data = [];
 
@@ -12,17 +12,13 @@ export default todoModule
             self.data.length = 0;
         });
 
-        function deleteByIndex(serverData) {
-            const index = self.data.findIndex(item => item._id == serverData._id);
+        function deleteByIndex(obj) {
+            const index = self.data.findIndex(item => item._id == obj._id);
             self.data.splice(index, 1);
         }
 
         function getData() {
             return self.data;
-        }
-
-        function save() {
-            localStorageService.set('todo', self.data);
         }
 
         function registerTodo(id) {
@@ -58,19 +54,22 @@ export default todoModule
                         }
                     }
                 });
+                if ($stateParams.listid === 'marked' && currTask.marked === false) {
+                    deleteByIndex(currTask);
+                }
             })
         }
 
-        //  where do we use it ?????
-        // function getOneTodo(id) {
-        //     let currItem;
-        //     angular.forEach(self.data, (item) => {
-        //         if (item.id == id) {
-        //             currItem = item;
-        //         }
-        //     });
-        //     return currItem;
-        // }
+        //  we use it in todoside
+        function getOneTodo(id) {
+            let currItem;
+            angular.forEach(self.data, (item) => {
+                if (item._id == id) {
+                    currItem = item;
+                }
+            });
+            return currItem;
+        }
 
         // function setTodo(obj) {
         //     self.data = obj;
@@ -91,9 +90,9 @@ export default todoModule
             delete: deleteTodo,
             create: createTodo,
             update: updateTodo,
+             getTodo: getOneTodo
             // //////////////////////////////////
             // set: setTodo,
-            // getTodo: getOneTodo,
             // ///////////////////////////////////
             // changeParentList: changeParent,
         };

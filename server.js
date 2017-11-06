@@ -32,10 +32,10 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // TESTING CREATING
-// let newList = new ModelList({ title: 'list 1' });
-// newList.save(function(err) {
+// let newSub = new ModelSubtask({ title: 'subtask 1', taskId: '5a006ef4c18b4819c8c2d71f' });
+// newSub.save(function(err) {
 //     if (err) throw err;
-//     console.log('List created!');
+//     console.log('Subtask created!');
 // });
 
 // API REQUSTS //////////////////////////////////////////////////////////
@@ -153,6 +153,26 @@ app.put('/api/lists/:id', jsonParser, function(req, res) {
         });
 });
 
+// change countTodo in list on drag&drop
+function changeTaskCountInList(task, newTask) {
+    if (task.listId !== newTask.listId) {
+        // change first list
+        ModelList.findByIdAndUpdate(task.listId, {
+            $inc: { taskCount: -1 } },
+            { new: true },
+            (error, list) => {
+            io.emit('lists_changed', { obj: list, key: 'taskCount' });
+        });
+        // change second list
+        ModelList.findByIdAndUpdate(newTask.listId, {
+            $inc: { taskCount: 1 } },
+            { new: true },
+            (error, list) => {
+            io.emit('lists_changed', { obj: list, key: 'taskCount' });
+        });
+    }
+}
+
 // get tasks by id
 app.get('/api/tasks/:id', (req, res) => {
     const id = req.params.id;
@@ -215,30 +235,65 @@ app.put('/api/tasks/:id', jsonParser, function(req, res) {
     if (!req.body && !req.params.id) return res.sendStatus(400);
 
     ModelTask.findById(req.params.id).exec((err, task) => {
-        if (task.listId !== req.body.listId) {
-            // change first list
-            ModelList.findByIdAndUpdate(task.listId, {
-                $inc: { taskCount: -1 } },
-                { new: true },
-                (error, list) => {
-                io.emit('lists_changed', { obj: list, key: 'taskCount' });
-            });
-            // change second list
-            ModelList.findByIdAndUpdate(req.body.listId, {
-                $inc: { taskCount: 1 } },
-                { new: true },
-                (error, list) => {
-                io.emit('lists_changed', { obj: list, key: 'taskCount' });
-            });
+        if (req.body.listId) {
+            changeTaskCountInList(task, req.body);
         }
     })
     .then(() => {
         ModelTask.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
-        .exec((task) => { res.send(task); })
+        .exec((err, task) => { res.send(task); })
     })
     .catch((err) => { throw err; });
 });
 
+// get subtasks
+app.get('/api/subtasks/:id', (req, res) => {
+    const id = req.params.id;
+
+    const findObj = { taskId: id };
+
+    ModelSubtask.find(findObj, function(err, subtasks) {
+        if (err) throw err;
+
+        res.send(subtasks);
+    })
+});
+
+// create subtask
+app.post('/api/subtasks', jsonParser, function(req, res) {
+    if (!req.body) return res.sendStatus(400);
+
+    const newSubtask = new ModelSubtask(req.body);
+    newSubtask.save(function(err) {
+        if (err) throw err;
+
+        res.send(newSubtask);
+    });
+});
+
+// delete subtask
+app.delete('/api/subtasks/:id', function(req, res) {
+    if (!req.params.id) return res.sendStatus(400);
+
+    const id = req.params.id;
+    ModelSubtask.findById(id, function(err, subtask) {
+        if (err) throw err;
+        subtask.remove();
+        res.send(subtask);
+    });
+});
+
+// change task
+app.put('/api/subtasks/:id', jsonParser, function(req, res) {
+    if (!req.body && !req.params.id) return res.sendStatus(400);
+        ModelSubtask.findByIdAndUpdate(req.params.id,
+            { $set: req.body },
+            { new: true })
+        .exec((err, task) => {
+            if (err) throw err;
+            res.send(task);
+        })
+});
 
 // ///////////////////////////////////////
 // IF CLIENT REQEST NOT API, SEND IT TO ANGULAR ROUTE

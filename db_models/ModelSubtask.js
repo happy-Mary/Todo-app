@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const schemaSubtask = new Schema({
     title: String,
-    taskId: Number,
+    taskId: String,
     completed: { type: Boolean, default: false }
 },
 { versionKey: false });

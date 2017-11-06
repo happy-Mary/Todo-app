@@ -9,8 +9,6 @@ export default listModule
         self.data = [];
 
         socket.on('lists_changed', (data) => {
-            console.log(data.obj);
-            console.log(data.key);
             if (Array.isArray(data.obj)) {
                 angular.forEach(data.obj, (list) => {
                     const i = self.data.findIndex(item => item._id == list._id);
@@ -77,13 +75,13 @@ export default listModule
             return list;
         }
 
-        // function getCountListsInFolder(folderId) {
-        //     function getListsInFolder(item) {
-        //         return (item.folderId == folderId);
-        //     }
-        //     const lists = self.data.filter(getListsInFolder);
-        //     return lists.length;
-        // }
+        function getCountListsInFolder(folderId) {
+            function getListsInFolder(item) {
+                return (item.folderId == folderId);
+            }
+            const lists = self.data.filter(getListsInFolder);
+            return lists.length;
+        }
 
         return {
             register: registerLists,
@@ -92,6 +90,6 @@ export default listModule
             update: updateList,
             delete: deleteList,
             getList: getOnlyList,
-            // getCountLists: getCountListsInFolder
+            getCountLists: getCountListsInFolder
         };
     });

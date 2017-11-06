@@ -17,10 +17,8 @@ export default todosideModule.controller('todosideController', ['$state', '$time
 
     self.changeTodo = todoService.update;
     self.changeSubtask = subtaskService.update;
+    self.deleteSubtask = subtaskService.delete;
 
-    self.$onInit = () => {
-        // self.handleNotePrint();
-    }
     self.addSubtask = () => {
         if (self.subtaskTitle) {
             subtaskService.create(self.subtaskTitle, self.currTaskId);
@@ -28,16 +26,12 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         }
     }
 
-    self.deleteSubtask = (subtask) => {
-        subtaskService.delete(subtask.id)
-    }
-
     self.changeTodoTitle = (event) => {
         const currEl = angular.element(event.target);
         const newTitle = currEl.html();
         if (newTitle) {
-            self.task.title = newTitle;
-            todoService.update();
+            const currObj = { title: newTitle };
+            todoService.update(self.task, currObj);
         } else {
             currEl.html(self.task.title);
         }
@@ -60,7 +54,7 @@ export default todosideModule.controller('todosideController', ['$state', '$time
 
     self.changeTodoNote = () => {
         if (self.task.note) {
-            todoService.update();
+            todoService.update(self.task);
         } else {
             self.addNoteActive = false;
         }
@@ -87,6 +81,10 @@ export default todosideModule.controller('todosideController', ['$state', '$time
                 // request to server
             }
         })
+    }
+
+    self.$onInit = () => {
+        // self.handleNotePrint();
     }
 
 }]);

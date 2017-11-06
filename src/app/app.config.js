@@ -19,12 +19,24 @@ export default mainModule
                         dataLists: function getData(listService) {
                             return listService.register();
                         },
-                        // separate by id, delete filter from todotemplate
                         dataTasks: function getData(todoService, $stateParams) {
                             return todoService.register($stateParams.listid);
                         }
                     }
                 })
+                .state('lists.todo', {
+                    url: '/todo/:todoid',
+                    template: '<todoside-comp></todoside-comp>',
+                    resolve: {
+                        subtaskData: function getData(subtaskService, $stateParams) {
+                            return subtaskService.register($stateParams.todoid);
+                        }
+                        // filesData: function getData(filesService) {
+                        //     return filesService.register();
+                        // }
+                    }
+                });
+
                 // .state('filter', {
                 //     url: '/filter?search',
                 //     template: todoTemplate,
@@ -37,17 +49,5 @@ export default mainModule
                 //     },
                 //     reloadOnSearch: false
                 // })
-                // .state('lists.todo', {
-                //     url: '/todo/:todoid',
-                //     template: '<todoside-comp></todoside-comp>',
-                //     resolve: {
-                //         // subtaskData: function getData(subtaskService) {
-                //         //     return subtaskService.register();
-                //         // },
-                //         // filesData: function getData(filesService) {
-                //         //     return filesService.register();
-                //         // }
-                //     }
-                // });
         }
     ]);

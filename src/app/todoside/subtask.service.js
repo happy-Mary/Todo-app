@@ -12,58 +12,45 @@ export default todosideModule
             return self.data;
         }
 
-        function save() {
-            localStorageService.set('subtask', self.data);
+        function registerSubtasks(id) {
+            const taskId = id;
+            return localStorageService.getFiltered(URLS.subtaskURL, taskId).then((response) => {
+                self.data = response.data;
+            })
         }
 
-        function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.subtaskURL })
-                .then((response) => {
-                    self.data = [];
-                    self.data.push(...response.data);
-                    save();
-                })
-                .catch(() => {
-                    self.data = [];
-                    save();
-                });
-        }
-
-        function registerSubtasks() {
-            return localStorageService.get('subtask').then((response) => {
-                    self.data = [];
-                    self.data.push(...response);
-                    save();
-                })
-                .catch(() => getDataFromSerever());
-        }
-
-        function updateSubtask() {
-            save();
-        }
-
-        function setSubtasks(obj) {
-            self.data = obj;
+        function createSubtask(title, taskId) {
+            const subtask = new Subtask(title, taskId);
+            localStorageService.set(URLS.subtaskURL, subtask).then((response) => {
+                self.data.push(response.data);
+            })
         }
 
         function deleteSubtask(id) {
-            const index = self.data.findIndex(x => x.id == id);
-            self.data.splice(index, 1);
-            save();
+            localStorageService.delete(URLS.subtaskURL, id).then((response) => {
+                const index = self.data.findIndex(x => x._id == response.data._id);
+                self.data.splice(index, 1);
+            })
         }
 
-        function createSubtask(title, todoId) {
-            const subtask = new Subtask(title, todoId);
-            self.data.push(subtask);
-            save();
+        function updateSubtask(subtask, editedData) {
+            const currTask = subtask;
+            const editedTask = editedData || subtask;
+            localStorageService.update(URLS.subtaskURL, currTask._id, editedTask)
+            .then((response) => {
+                angular.forEach(Object.keys(currTask), (key) => {
+                    if (currTask[key] !== response.data[key]) {
+                        currTask[key] = response.data[key];
+                    }
+                });
+            })
         }
 
         return {
             register: registerSubtasks,
-            set: setSubtasks,
             get: getData,
             delete: deleteSubtask,
             create: createSubtask,
-            update: updateSubtask,
+            update: updateSubtask
         };
     });

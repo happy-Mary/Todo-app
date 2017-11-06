@@ -8,9 +8,9 @@
                 <input type="checkbox" ng-model='task.marked' ng-change='$ctrl.changeTodo(task)'>
             </label>
             <!-- UI_SREF FOR SIDEBAR -->
-            <a ui-sref='lists.todo({todoid: task.id})'>{{task.title}}</a>
+            <a ui-sref='lists.todo({todoid: task._id})'>{{task.title}}</a>
         </li>
-        <button class="completed-btn" ng-click="$ctrl.completedShown = !$ctrl.completedShown" ng-if="$ctrl.parentId !== 'marked'">
+        <button class="completed-btn" ng-click="$ctrl.completedShown = !$ctrl.completedShown">
             show copmleted tasks
         </button>
     </ul>
@@ -25,7 +25,7 @@
                  <label ng-class="{true: 'active', false: ''}[task.marked]" class="marked">
                     <input type="checkbox" ng-model='task.marked'  ng-change='$ctrl.changeTodo(task)'>
                 </label>
-                <a ui-sref='lists.todo({todoid: task.id})'>{{task.title}}</a>
+                <a ui-sref='lists.todo({todoid: task._id})'>{{task.title}}</a>
             </li>
         </ul>
     </div>
