@@ -4,7 +4,7 @@ import File from './file.constructor';
 import URLS from '../constants';
 
 export default fileModule
-    .service('filesService', function Fileservice($http, localStorageService) {
+    .service('filesService', function Fileservice($http, localStorageService, $q) {
         const self = this;
         self.data = [];
 
@@ -27,7 +27,7 @@ export default fileModule
             const file = new File(name, size, taskId, url);
             // ???? GET LOADING HERE ????
             // onprogress
-            localStorageService.set(URLS.subtaskURL, file).then((response) => {
+            localStorageService.set(URLS.filesURL, file).then((response) => {
                 self.data.push(response.data);
             })
         }

@@ -73,7 +73,12 @@ export default todosideModule.controller('todosideController', ['$state', '$time
             reader.onload = (event) => {
                 const theUrl = event.target.result;
                 // delete this loaded after server ready
-                const currFile = filesService.create(file.name, file.size, self.currTaskId, theUrl);
+                // const currFile = filesService.create(file.name, file.size, self.currTaskId, theUrl);
+                // ///////////////////////////////////////
+                filesService.create(file.name, file.size, self.currTaskId, theUrl);
+                // ///////////////////////////////////////
+
+
                 // $timeout(() => {
                 //     const date = new Date();
                 //     filesService.setLoaded(currFile.id, date);
