@@ -181,10 +181,13 @@ app.post('/api/tasks', jsonParser, function(req, res) {
 
         res.send(newTask);
     });
-    // ModelList.findByIdAndUpdate(req.body.listId, { $inc: { taskCount: 1 } }, { new: true }, function(err, list) {
-    //     if (err) throw err;
-    //     io.emit('ungroup_lists', list);
-    // })
+    ModelList.findByIdAndUpdate(req.body.listId, {
+        $inc: { taskCount: 1 } },
+        { new: true },
+        function(err, list) {
+        if (err) throw err;
+        io.emit('lists_changed', { obj: list, key: 'taskCount' });
+    })
 });
 
 // delete task
@@ -196,19 +199,44 @@ app.delete('/api/tasks/:id', function(req, res) {
         if (err) throw err;
         task.remove();
         res.send(task);
-    })
+    }).then((task) => {
+        ModelList.findByIdAndUpdate(task.listId, {
+            $inc: { taskCount: -1 } },
+            { new: true },
+            (err, list) => {
+            if (err) throw err;
+            io.emit('lists_changed', { obj: list, key: 'taskCount' });
+        })
+    });
 });
 
 // change task
 app.put('/api/tasks/:id', jsonParser, function(req, res) {
     if (!req.body && !req.params.id) return res.sendStatus(400);
 
-    ModelTask.findByIdAndUpdate(
-        req.params.id, { $set: req.body }, { new: true },
-        function(err, task) {
-            if (err) throw err;
-            res.send(task);
-        });
+    ModelTask.findById(req.params.id).exec((err, task) => {
+        if (task.listId !== req.body.listId) {
+            // change first list
+            ModelList.findByIdAndUpdate(task.listId, {
+                $inc: { taskCount: -1 } },
+                { new: true },
+                (error, list) => {
+                io.emit('lists_changed', { obj: list, key: 'taskCount' });
+            });
+            // change second list
+            ModelList.findByIdAndUpdate(req.body.listId, {
+                $inc: { taskCount: 1 } },
+                { new: true },
+                (error, list) => {
+                io.emit('lists_changed', { obj: list, key: 'taskCount' });
+            });
+        }
+    })
+    .then(() => {
+        ModelTask.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+        .exec((task) => { res.send(task); })
+    })
+    .catch((err) => { throw err; });
 });
 
 

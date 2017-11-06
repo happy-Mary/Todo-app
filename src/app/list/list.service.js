@@ -9,11 +9,19 @@ export default listModule
         self.data = [];
 
         socket.on('lists_changed', (data) => {
-            angular.forEach(data.obj, (list) => {
-                const i = self.data.findIndex(item => item._id == list._id);
+            console.log(data.obj);
+            console.log(data.key);
+            if (Array.isArray(data.obj)) {
+                angular.forEach(data.obj, (list) => {
+                    const i = self.data.findIndex(item => item._id == list._id);
+                    const listForChange = self.data[i];
+                    listForChange[data.key] = list[data.key];
+                });
+            } else {
+                const i = self.data.findIndex(item => item._id == data.obj._id);
                 const listForChange = self.data[i];
-                listForChange[data.key] = list[data.key];
-            });
+                listForChange[data.key] = data.obj[data.key];
+            }
         });
 
         function getLists() {
