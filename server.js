@@ -2,6 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+///////////////////////////////
+const multer = require('multer');
+
+const upload = multer();
+// ///////////////////////////////
+
 // Models
 const ModelFolder = require('./db_models/ModelFolder');
 const ModelList = require('./db_models/ModelList');
@@ -324,11 +330,11 @@ app.post('/api/files', jsonParser, function(req, res) {
     });
 });
 
-app.post('/api/filestest', function(req, res) {
-    if (!req.body) return res.sendStatus(400);
+app.post('/api/filestest', upload.fields([]), (req, res) => {
     console.log(req.body);
-    console.log(req.file);
-});
+    console.log(req.files);
+    res.send('worked');
+  });
 
 // delete file
 app.delete('/api/files/:id', function(req, res) {

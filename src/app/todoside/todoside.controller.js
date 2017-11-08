@@ -2,7 +2,7 @@ import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
 import File from '../files/file.constructor';
 
-export default todosideModule.controller('todosideController', ['localStorageService', '$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController(localStorageService, $state, $timeout, todoService, subtaskService, filesService) {
+export default todosideModule.controller('todosideController', ['$http', 'localStorageService', '$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController($http, localStorageService, $state, $timeout, todoService, subtaskService, filesService) {
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
@@ -67,24 +67,37 @@ export default todosideModule.controller('todosideController', ['localStorageSer
 
     self.handleFiles = (data) => {
         const files = data;
+        // /////////////////////////////////////////
+        let fd = new FormData();
+        fd.append('file', files);
+        
+        return $http({
+            method: 'POST',
+            url: '/api/filestest',
+            transformRequest: angular.identity,
+            data: fd,
+            headers: { 'Content-Type': undefined }
+        }).then((response) => { console.log(response.data) });
 
-        angular.forEach(files, (file) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (event) => {
-                const theUrl = event.target.result;
-                // delete this loaded after server ready
-                // const currFile = filesService.create(file.name, file.size, self.currTaskId, theUrl);
-                filesService.create(file.name, file.size, self.currTaskId, theUrl);
-                // /////////////////////////////////////////////////
+        // //////////////////////////////////////////
+        // angular.forEach(files, (file) => {
+        //     const reader = new FileReader();
+        //     reader.readAsDataURL(file);
+        //     reader.onload = (event) => {
+        //         const theUrl = event.target.result;
+        //         // delete this loaded after server ready
+        //         // const currFile = filesService.create(file.name, file.size, self.currTaskId, theUrl);
+        //         filesService.create(file.name, file.size, self.currTaskId, theUrl);       
+        //     }
+        // })
+    }
+
+     // /// call for changing loader field
                 // $timeout(() => {
                 //     const date = new Date();
                 //     filesService.setLoaded(currFile.id, date);
                 // }, 5000);
                 // request to server
-            }
-        })
-    }
 
     self.$onInit = () => {
         // self.handleNotePrint();
