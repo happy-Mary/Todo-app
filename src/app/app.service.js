@@ -44,6 +44,6 @@ export default mainModule
             getFiltered: getDataFiltered,
             set: setData,
             delete: deleteData,
-            update: updateData,
+            update: updateData
         };
     }]);

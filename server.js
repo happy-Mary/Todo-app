@@ -324,6 +324,12 @@ app.post('/api/files', jsonParser, function(req, res) {
     });
 });
 
+app.post('/api/filestest', function(req, res) {
+    if (!req.body) return res.sendStatus(400);
+    console.log(req.body);
+    console.log(req.file);
+});
+
 // delete file
 app.delete('/api/files/:id', function(req, res) {
     if (!req.params.id) return res.sendStatus(400);

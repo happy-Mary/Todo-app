@@ -2,7 +2,7 @@ import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
 import File from '../files/file.constructor';
 
-export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController($state, $timeout, todoService, subtaskService, filesService) {
+export default todosideModule.controller('todosideController', ['localStorageService', '$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController(localStorageService, $state, $timeout, todoService, subtaskService, filesService) {
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
@@ -76,15 +76,6 @@ export default todosideModule.controller('todosideController', ['$state', '$time
                 // delete this loaded after server ready
                 // const currFile = filesService.create(file.name, file.size, self.currTaskId, theUrl);
                 filesService.create(file.name, file.size, self.currTaskId, theUrl);
-                // ///////////////////////////////////////
-                // uploadEventHandlers: {
-                //     progress: function (e) {
-                //             if (e.lengthComputable) {
-                //                 self.progressBar = (e.loaded / e.total) * 100;
-                //                 self.progressCounter = self.progressBar;
-                //             }
-                //     }
-                // }
                 // /////////////////////////////////////////////////
                 // $timeout(() => {
                 //     const date = new Date();
