@@ -18,11 +18,6 @@ export default fileModule.controller('fileController', ['filesService', function
         self.extension = self.file.name.split('.');
         self.extension = self.extension[self.extension.length - 1];
     };
-    function getExtension() {
-
-    }
-
-    self.extension = getExtension();
 
     // self.$onChange = () => {
     // 	self.loader = countLoader(self.file.loader);
@@ -30,6 +25,4 @@ export default fileModule.controller('fileController', ['filesService', function
     // function countLoader(loader) {
     // 	return loader* 100 / self.file.size;
     // }
-
-
 }]);

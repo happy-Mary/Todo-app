@@ -1,7 +1,7 @@
 import mainModule from './app.module';
 
 export default mainModule
-    .service('localStorageService', ['$timeout', '$http', function localStorageService($timeout, $http) {
+    .service('localStorageService', ['$timeout', '$http', '$q', function localStorageService($timeout, $http, $q) {
 
         function getData(url) {
             const currUrl = url;
@@ -10,7 +10,18 @@ export default mainModule
 
         function setData(url, data) {
             const currUrl = url;
-            return $http({ method: 'POST', url: currUrl, data: angular.toJson(data) });
+            return $http({ method: 'POST',
+            url: currUrl,
+            uploadEventHandlers: {
+                    // progress: function (e) {
+                    //         if (e.lengthComputable) {
+                    //             // let progressBar = (e.loaded / e.total) * 100;
+                    //             console.log(e.loaded);
+                    //         }
+                    // }
+                },
+            data: angular.toJson(data)
+        });
         }
 
         function deleteData(url, id) {
@@ -28,12 +39,11 @@ export default mainModule
             return $http({ method: 'GET', url: currUrl });
         }
 
-        // ? как получать сабтаски и файлы, они будут возвращаться по parentId
         return {
             get: getData,
             getFiltered: getDataFiltered,
             set: setData,
             delete: deleteData,
-            update: updateData
+            update: updateData,
         };
     }]);

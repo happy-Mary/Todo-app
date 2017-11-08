@@ -295,6 +295,11 @@ app.put('/api/subtasks/:id', jsonParser, function(req, res) {
         })
 });
 
+// //////////////////////////////////////////////////////////////////
+// loading files on server
+app.use(bodyParser.json({ limit: '5000mb' }));
+// ////////////////////////////////////////////////////////////////
+
 // get files
 app.get('/api/files/:id', (req, res) => {
     const id = req.params.id;
@@ -331,27 +336,11 @@ app.delete('/api/files/:id', function(req, res) {
     });
 });
 
-// change file ????????
-// app.put('/api/files/:id', jsonParser, function(req, res) {
-//     if (!req.body && !req.params.id) return res.sendStatus(400);
-//     ModelFile.findByIdAndUpdate(req.params.id,
-//             { $set: req.body },
-//             { new: true })
-//         .exec((err, task) => {
-//             if (err) throw err;
-//             res.send(task);
-//         })
-// });
-
 // ///////////////////////////////////////
 // IF CLIENT REQEST NOT API, SEND IT TO ANGULAR ROUTE
 // ///////////////////////////////////////
 app.get('*', (req, res) => {
     if (!req.url.startsWith("/api/")) {
-        console.log('not API request');
         res.status(200).sendFile(path.join(__dirname, '/dist/index.html'));
     }
 });
-
-
-// http://blog.devshark.ru/posts/nodejs-mongoose-mongodb/

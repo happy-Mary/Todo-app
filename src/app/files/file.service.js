@@ -32,6 +32,13 @@ export default fileModule
             })
         }
 
+        function deleteFile(id) {
+            localStorageService.delete(URLS.filesURL, id).then((response) => {
+                const index = self.data.findIndex(x => x._id == response.data._id);
+                self.data.splice(index, 1);
+            })
+        }
+
 // ///////////////////////////////////////////////////////////////////////////////////
         function updateFile() {
             save();
@@ -39,12 +46,6 @@ export default fileModule
 
         function setFiles(obj) {
             self.data = obj;
-        }
-
-        function deleteFile(id) {
-            const index = self.data.findIndex(x => x.id == id);
-            self.data.splice(index, 1);
-            save();
         }
 
         function setLoadedData(id, value) {
