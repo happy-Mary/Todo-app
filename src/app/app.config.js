@@ -30,10 +30,9 @@ export default mainModule
                     resolve: {
                         subtaskData: function getData($state, $q, subtaskService, $stateParams) {
                             // return subtaskService.register($stateParams.todoid);
-
+                            // IF ERROR ON REGISTER
                             const deferred = $q.defer();
                             subtaskService.register($stateParams.todoid).then(function (gotData) {
-                                console.log(gotData);
                                 if (gotData) {
                                     deferred.resolve();
                                 } else {
