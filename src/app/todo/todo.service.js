@@ -25,6 +25,10 @@ export default todoModule
             const listId = id;
             return localStorageService.getFiltered(URLS.taskURL, listId).then((response) => {
                 self.data = response.data;
+                return true;
+            }).catch((response) => {
+                console.log(response.status);
+                return false;
             })
         }
 
@@ -71,29 +75,12 @@ export default todoModule
             return currItem;
         }
 
-        // function setTodo(obj) {
-        //     self.data = obj;
-        // }
-
-        // function changeParent(newListId, taskId) {
-        //     angular.forEach(self.data, (item) => {
-        //         const task = item;
-        //         if (task.id === taskId) task.listId = newListId;
-        //     });
-        //     save();
-        // }
-
-
         return {
             get: getData,
             register: registerTodo,
             delete: deleteTodo,
             create: createTodo,
             update: updateTodo,
-             getTodo: getOneTodo
-            // //////////////////////////////////
-            // set: setTodo,
-            // ///////////////////////////////////
-            // changeParentList: changeParent,
+            getTodo: getOneTodo
         };
     });

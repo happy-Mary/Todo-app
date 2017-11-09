@@ -2,10 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-///////////////////////////////
+const fs = require('fs');
 const multer = require('multer');
 
-const upload = multer();
+const upload = multer({ dest: path.resolve(__dirname, 'uploads') });
 // ///////////////////////////////
 
 // Models
@@ -36,15 +36,6 @@ mongoose.connect(mLab, {
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// TESTING CREATING
-// let newSub = new ModelSubtask({ title: 'subtask 1', taskId: '5a006ef4c18b4819c8c2d71f' });
-// newSub.save(function(err) {
-//     if (err) throw err;
-//     console.log('Subtask created!');
-// });
-
-// API REQUSTS //////////////////////////////////////////////////////////
 
 // get all folders
 app.get('/api/folders', (req, res) => {
@@ -191,8 +182,8 @@ app.get('/api/tasks/:id', (req, res) => {
     }
 
     ModelTask.find(findObj, function(err, tasks) {
-        if (err) throw err;
-
+        if (err) res.send(err);
+        
         res.send(tasks);
     })
 });
@@ -259,7 +250,7 @@ app.get('/api/subtasks/:id', (req, res) => {
     const findObj = { taskId: id };
 
     ModelSubtask.find(findObj, function(err, subtasks) {
-        if (err) throw err;
+        if (err) res.send(err);
 
         res.send(subtasks);
     })
@@ -319,21 +310,19 @@ app.get('/api/files/:id', (req, res) => {
 });
 
 // add file
-app.post('/api/files', jsonParser, function(req, res) {
-    if (!req.body) return res.sendStatus(400);
-
-    const newFile = new ModelFile(req.body);
+app.post('/api/files', upload.single('file'), (req, res) => {
+    const fileData = {
+        name: req.file.originalname,
+        size: req.file.size,
+        taskId: req.body.taskId,
+        path: req.file.path
+    };
+    const newFile = new ModelFile(fileData);
     newFile.save(function(err) {
         if (err) throw err;
-        // set date after adding to DB ???
-        res.send(newFile);
-    });
-});
-
-app.post('/api/filestest', upload.fields([]), (req, res) => {
-    console.log(req.body);
-    console.log(req.files);
-    res.send('worked');
+            // set date after adding to DB ???
+            res.send(newFile);
+        });
   });
 
 // delete file
@@ -341,11 +330,15 @@ app.delete('/api/files/:id', function(req, res) {
     if (!req.params.id) return res.sendStatus(400);
 
     const id = req.params.id;
-    ModelFile.findById(id, function(err, file) {
-        if (err) throw err;
+    ModelFile.findById({ _id: id }, (err, file) => {
+        fs.unlinkSync(file.path);
         file.remove();
         res.send(file);
-    });
+    })
+    .catch((err) => {
+        res.sendStatus(400);
+        throw err;
+    })
 });
 
 // ///////////////////////////////////////

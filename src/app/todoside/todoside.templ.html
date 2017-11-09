@@ -33,14 +33,13 @@
             <textarea autoheight ng-if='$ctrl.addNoteActive' placeholder="Add note..." id="" cols="25" rows="" autofocus ng-model="$ctrl.task.note"  ng-blur='$ctrl.changeTodoNote()'></textarea>
         </li>
         <li class='file'>
-            <input type="file" id='add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>
+            <input type="file" id='add-file' name = 'add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>
             <label for="add-file">Add a file</label>
             <ul class="task-files">
                 <li ng-repeat = 'file in $ctrl.files  track by $index' >
                     <file-comp file = 'file'></file-comp>
                 </li>
             </ul>
-
         </li>
 
     <div class="todoaside-footer">

@@ -20,4 +20,5 @@ export default mainModule
             // show user error message, remove console message
             console.error('transition has been rejected');
         });
+
     });

@@ -39,11 +39,22 @@ export default mainModule
             return $http({ method: 'GET', url: currUrl });
         }
 
+        function setFiles(url, fileData) {
+            const currUrl = url;
+            return $http({
+                method: 'POST',
+                url: currUrl,
+                data: fileData,
+                headers: { 'Content-Type': undefined }
+            });
+        }
+
         return {
             get: getData,
             getFiltered: getDataFiltered,
             set: setData,
             delete: deleteData,
-            update: updateData
+            update: updateData,
+            postFiles: setFiles
         };
     }]);

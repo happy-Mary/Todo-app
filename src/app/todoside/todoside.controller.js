@@ -6,6 +6,16 @@ export default todosideModule.controller('todosideController', ['$http', 'localS
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
+
+    self.redirectToParent = () => {
+        $state.go('^');
+    }
+
+    if (!self.task) {
+        self.redirectToParent();
+        return;
+    }
+
     self.subtasks = subtaskService.get();
     self.files = filesService.get();
     self.subtaskTitle = "";
@@ -61,38 +71,15 @@ export default todosideModule.controller('todosideController', ['$http', 'localS
         }
     }
 
-    self.redirectToParent = () => {
-        $state.go('^');
-    }
-
     self.handleFiles = (data) => {
         const files = data;
-        // /////////////////////////////////////////
-        let fd = new FormData();
-        fd.append('file', files);
-        
-        return $http({
-            method: 'POST',
-            url: '/api/filestest',
-            transformRequest: angular.identity,
-            data: fd,
-            headers: { 'Content-Type': undefined }
-        }).then((response) => { console.log(response.data) });
 
-        // //////////////////////////////////////////
-        // angular.forEach(files, (file) => {
-        //     const reader = new FileReader();
-        //     reader.readAsDataURL(file);
-        //     reader.onload = (event) => {
-        //         const theUrl = event.target.result;
-        //         // delete this loaded after server ready
-        //         // const currFile = filesService.create(file.name, file.size, self.currTaskId, theUrl);
-        //         filesService.create(file.name, file.size, self.currTaskId, theUrl);       
-        //     }
-        // })
+        angular.forEach(files, (file) => {
+            filesService.create(file, self.currTaskId);
+        });
     }
 
-     // /// call for changing loader field
+     // call for changing loader field
                 // $timeout(() => {
                 //     const date = new Date();
                 //     filesService.setLoaded(currFile.id, date);
@@ -104,6 +91,3 @@ export default todosideModule.controller('todosideController', ['$http', 'localS
     }
 
 }]);
-
-// do we need it on form with files for server ???
-// action="upload-page.php" enctype="multipart/form-data"

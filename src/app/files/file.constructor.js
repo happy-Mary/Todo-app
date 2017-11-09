@@ -1,11 +1,9 @@
 export default class File {
-    constructor(name, size, taskId, url) {
-        // remove after server ready
-        // this.id = Number(generateId());
+    constructor(name, size, taskId) {
         this.name = name;
         this.size = Number(size);
         this.taskId = String(taskId);
-        this.url = url;
+        this.path = '';
         // change after server ready
         // this.loaded = new Date();
     }

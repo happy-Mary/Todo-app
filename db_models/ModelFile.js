@@ -5,7 +5,7 @@ const schemaFile = new Schema({
     name: String,
     size: Number,
     taskId: String,
-    url: String,
+    path: String,
     loaded: { type: Date, default: Date.now }
 },
 { versionKey: false });

@@ -19,7 +19,7 @@ export default mainModule
                         dataLists: function getData(listService) {
                             return listService.register();
                         },
-                        dataTasks: function getData(todoService, $stateParams) {
+                        dataTasks: function getData($q, todoService, $stateParams) {
                             return todoService.register($stateParams.listid);
                         }
                     }
@@ -28,8 +28,20 @@ export default mainModule
                     url: '/todo/:todoid',
                     template: '<todoside-comp></todoside-comp>',
                     resolve: {
-                        subtaskData: function getData(subtaskService, $stateParams) {
-                            return subtaskService.register($stateParams.todoid);
+                        subtaskData: function getData($state, $q, subtaskService, $stateParams) {
+                            // return subtaskService.register($stateParams.todoid);
+
+                            const deferred = $q.defer();
+                            subtaskService.register($stateParams.todoid).then(function (gotData) {
+                                console.log(gotData);
+                                if (gotData) {
+                                    deferred.resolve();
+                                } else {
+                                    // deferred.reject('Not logged in');
+                                    $state.go('lists', { listid: 'marked' });
+                                }
+                            });
+                            return deferred.promise;
                         },
                         filesData: function getData(filesService, $stateParams) {
                             return filesService.register($stateParams.todoid);

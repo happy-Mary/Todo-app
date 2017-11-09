@@ -16,7 +16,11 @@ export default todosideModule
             const taskId = id;
             return localStorageService.getFiltered(URLS.subtaskURL, taskId).then((response) => {
                 self.data = response.data;
-            })
+                return true;
+            }).catch((response) => {
+                console.log(response.status);
+                return false;
+            });
         }
 
         function createSubtask(title, taskId) {
