@@ -4,4 +4,6 @@ bower_components/
 build/
 .vscode/
 package-lock.json
+node-modules/
+src/
 
