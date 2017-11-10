@@ -1,0 +1,95 @@
+ul.listgroup {
+    >li {
+        // border-bottom: 1px solid #778899;
+        min-height: 40px;
+        background-color: rgb(243, 243, 243);
+        position: relative;
+
+        >a{
+            padding-left: 5px;
+            &::first-letter {text-transform: uppercase;}
+            &:before{
+                content: '';
+                display: block;
+                height: 25px;
+                width: 25px;
+                margin: 7px;
+                float: left;
+                clear: both;
+                background: url('../img/icons/folder.png') no-repeat center;
+                // background-size: contain;
+            }
+        }    
+    }
+    li.folder-close {
+        // border-bottom: 1px solid #778899;
+        background-color: #fff;
+        .listgroup-icon {
+            transform: rotate(90deg);
+        }
+        ul {
+            display: none;
+        }
+        .menu-folder-icon {display: none;}
+    }
+
+    a {
+        // background: url('../img/icons/folder.png') no-repeat 10px center;
+        position: relative;
+        // height: 40px;
+
+        .listgroup-icon {
+            display: block;
+            height: 100%;
+            width: 40px;
+            position: absolute;
+            right: 5px;
+            top: 0;
+            background: url('../img/icons/down-arrow.png') no-repeat center;
+        }
+        .menu-folder-icon {
+            display: block;
+            height: 30px;
+            width: 15px;
+            margin: 5px 2px;
+            position: absolute;
+            right: 40px;
+            top: 0;
+            opacity: .7;
+            background: url('../img/icons/button-squares.png') no-repeat center;
+            background-size: contain;
+        }
+    }
+    .edit-folder-menu {
+        position: absolute;
+        top: 35px;
+        right: 5px;
+        width: 100px;
+        z-index: 1000;
+        text-align: center;
+        font-size: .8rem;
+        // background-color: #fff;
+        // border-top: 1px solid grey;
+        // border-right: 1px solid grey;
+        // border-left: 1px solid grey;
+        background: white;
+        padding: 5px 0;
+        -webkit-box-shadow: 1px 1px 13px -1px rgba(33,33,33,1);
+        -moz-box-shadow: 1px 1px 13px -1px rgba(33,33,33,1);
+        box-shadow: 1px 1px 13px -1px rgba(33,33,33,1);
+        display: none;
+        
+        &.submenu-open{
+            display: block;
+        }
+        li {
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+            border: none;
+            &:hover {
+                background-color: lightgrey;
+            }
+        }
+    }
+}

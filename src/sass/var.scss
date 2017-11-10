@@ -1,0 +1,18 @@
+$darkblue: #206676;
+$blue: #2F8AA3;
+$blue-main: #38B2CE;
+// $blue-main: #0B61A4;
+$blue-header: #04819E; 
+// $lightgray: #778899;
+$lightgray: #dfe2e2;
+// $gray: #696969;
+$gray: #3e3838;
+$headerHeight: 40px;
+$footerHeight: 40px;
+$todoHeight: 50px;
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content; }
+  &:-moz-placeholder           { @content; }
+  &::-moz-placeholder          { @content; }
+  &:-ms-input-placeholder      { @content; }  
+}

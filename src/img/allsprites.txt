@@ -1,0 +1,67 @@
+.sprite { background: url('sprite.png') no-repeat top left; width: 24px; height: 24px;  } 
+.sprite.add-nav { background-position: 0 0; } 
+.sprite.add { background-position: 0 -34px; } 
+.sprite.cancel-music { background-position: 0 -68px; } 
+.sprite.button-squares { background-position: 0 -102px; } 
+.sprite.down-arrow { background-position: 0 -136px; } 
+.sprite.magnifier-tool { background-position: 0 -170px; } 
+.sprite.star { background-position: 0 -204px; width: 32px; height: 32px; } 
+.sprite.alphabetical-order { background-position: 0 -246px; } 
+.sprite.edit { background-position: 0 -280px; } 
+.sprite.folder { background-position: 0 -314px; } 
+.sprite.menu-button { background-position: 0 -348px; width: 32px; height: 32px; } 
+.sprite.star-red { background-position: 0 -390px; width: 32px; height: 32px; } 
+.sprite.bookmark-button { background-position: 0 -432px; } 
+.sprite.list { background-position: 0 -466px; } 
+.sprite.rubbish { background-position: 0 -500px; } 
+
+<div class='sprite add-nav'></div>
+<div class='sprite add'></div>
+<div class='sprite cancel-music'></div>
+<div class='sprite button-squares'></div>
+<div class='sprite down-arrow'></div>
+<div class='sprite magnifier-tool'></div>
+<div class='sprite star'></div>
+<div class='sprite alphabetical-order'></div>
+<div class='sprite edit'></div>
+<div class='sprite folder'></div>
+<div class='sprite menu-button'></div>
+<div class='sprite star-red'></div>
+<div class='sprite bookmark-button'></div>
+<div class='sprite list'></div>
+<div class='sprite rubbish'></div>
+
+SASS EXTEND
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @extend .message;
+  border-color: green;
+}
+
+.error {
+  @extend .message;
+  border-color: red;
+}
+
+.warning {
+  @extend .message;
+  border-color: yellow;
+}
+
+SASS SYNTAX
+
+$icon-width: 24px;
+$icon-height: 24px;
+$icons: image-url('toolbar.png');
+
+.media-icon {
+  background-image: $icons;
+  background-position: -($icon-width * 5) -($icon-height * 1);
+  width: $icon-width;
+  height: $icon-height;
+}
