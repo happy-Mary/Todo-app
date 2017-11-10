@@ -4,7 +4,7 @@ import File from './file.constructor';
 import URLS from '../constants';
 
 export default fileModule
-    .service('filesService', function Fileservice($http, localStorageService, $q) {
+    .service('filesService', function Fileservice($http, localStorageService) {
         const self = this;
         self.data = [];
 
@@ -22,15 +22,6 @@ export default fileModule
                 self.data = response.data;
             })
         }
-
-        // function createFile(name, size, taskId, url) {
-        //     const file = new File(name, size, taskId, url);
-        //     // ???? GET LOADING HERE ????
-        //     // onprogress
-        //     localStorageService.set(URLS.filesURL, file).then((response) => {
-        //         self.data.push(response.data);
-        //     })
-        // }
 
         function createFile(file, taskId) {
             const currTaskId = taskId;
@@ -51,7 +42,6 @@ export default fileModule
 
             return localStorageService.postFiles(URLS.filesURL, filedata)
             .then((response) => {
-                console.log('GOT file');
                 self.data[currIndex] = response.data;
             })
             .catch(() => {
@@ -61,38 +51,22 @@ export default fileModule
 
         function deleteFile(id) {
             return localStorageService.delete(URLS.filesURL, id).then((response) => {
-                console.log('deleted');
-                console.log(response.data);
                 const index = self.data.findIndex(x => x._id == response.data._id);
                 self.data.splice(index, 1);
             })
         }
 
-// ///////////////////////////////////////////////////////////////////////////////////
-        function updateFile() {
-            save();
-        }
-
-        function setFiles(obj) {
-            self.data = obj;
-        }
-
         function setLoadedData(id, value) {
             const index = self.data.findIndex(x => x.id == id);
-            // self.data[index].loaded = value;
-            // self.data[index].name = value;
+            self.data[index].loaded = value;
             save();
         }
 
         return {
             register: registerFiles,
             get: getData,
-            // ///////////////////////////
             create: createFile,
             delete: deleteFile,
             setLoaded: setLoadedData,
-            // ///////////////////////////
-            update: updateFile,
-            set: setFiles
         };
     });

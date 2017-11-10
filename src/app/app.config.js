@@ -32,7 +32,7 @@ export default mainModule
                             // return subtaskService.register($stateParams.todoid);
                             // IF ERROR ON REGISTER
                             const deferred = $q.defer();
-                            subtaskService.register($stateParams.todoid).then(function (gotData) {
+                            subtaskService.register($stateParams.todoid).then((gotData) => {
                                 if (gotData) {
                                     deferred.resolve();
                                 } else {

@@ -5,9 +5,6 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 
-const upload = multer({ dest: path.resolve(__dirname, 'uploads') });
-// ///////////////////////////////
-
 // Models
 const ModelFolder = require('./db_models/ModelFolder');
 const ModelList = require('./db_models/ModelList');
@@ -215,6 +212,15 @@ app.delete('/api/tasks/:id', function(req, res) {
     ModelTask.findById(id, function(err, task) {
         if (err) throw err;
         task.remove();
+        // delete its subtasks and files
+        ModelSubtask.remove({ taskId: id }).exec();
+        ModelFile.find({ taskId: id }, (error, files) => {
+            files.forEach((file) => {
+                fs.unlinkSync(file.path);
+                file.remove();
+            });
+        })
+        io.emit('task_removed', task);
         res.send(task);
     }).then((task) => {
         ModelList.findByIdAndUpdate(task.listId, {
@@ -310,7 +316,10 @@ app.get('/api/files/:id', (req, res) => {
 });
 
 // add file
+const upload = multer({ dest: path.resolve(__dirname, 'uploads') });
+// ///////////////////////////////
 app.post('/api/files', upload.single('file'), (req, res) => {
+    console.log(req.file);
     const fileData = {
         name: req.file.originalname,
         size: req.file.size,

@@ -1,7 +1,7 @@
 import mainModule from './app.module';
 
 export default mainModule
-    .service('localStorageService', ['$timeout', '$http', '$q', function localStorageService($timeout, $http, $q) {
+    .service('localStorageService', ['$timeout', '$http', function localStorageService($timeout, $http) {
 
         function getData(url) {
             const currUrl = url;

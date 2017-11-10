@@ -1,5 +1,6 @@
 require('@uirouter/angularjs');
 require('angular-spinner');
+require('angular-socket-io');
 require('./listgroup/listgroup.controller');
 require('./listgroup/listgroup.service');
 require('./listgroup/listgroup.component');
@@ -20,6 +21,7 @@ require('./todoside/todoside.controller');
 require('./todoside/todoside.component');
 require('./todoside/subtask.service');
 
+
 export default angular.module('mainModule', [
 	'menuItemModule',
     'ui.router',
@@ -31,5 +33,6 @@ export default angular.module('mainModule', [
     'dragDropModule',
     'menuItemModule',
     'contextMenuModule',
-    'todosideModule'
+    'todosideModule',
+    'btford.socket-io'
 ]);

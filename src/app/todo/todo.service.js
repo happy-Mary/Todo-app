@@ -27,7 +27,7 @@ export default todoModule
                 self.data = response.data;
                 return true;
             }).catch((response) => {
-                console.log(response.status);
+                const error = response.status;
                 return false;
             })
         }

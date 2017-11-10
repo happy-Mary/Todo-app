@@ -5,6 +5,6 @@ export default class File {
         this.taskId = String(taskId);
         this.path = '';
         // change after server ready
-        // this.loaded = new Date();
+        this.loaded = 0;
     }
 }

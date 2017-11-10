@@ -1,8 +1,7 @@
 import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
-import File from '../files/file.constructor';
 
-export default todosideModule.controller('todosideController', ['$http', 'localStorageService', '$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController($http, localStorageService, $state, $timeout, todoService, subtaskService, filesService) {
+export default todosideModule.controller('todosideController', ['$http', 'localStorageService', '$state', '$timeout', 'todoService', 'subtaskService', 'filesService', 'socket', function todosideController($http, localStorageService, $state, $timeout, todoService, subtaskService, filesService, socket) {
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
@@ -15,6 +14,13 @@ export default todosideModule.controller('todosideController', ['$http', 'localS
         self.redirectToParent();
         return;
     }
+
+    socket.on('task_removed', (data) => {
+        // console.log('emit');
+        if (self.currTaskId === data._id) {
+            self.redirectToParent();
+        }
+    });
 
     self.subtasks = subtaskService.get();
     self.files = filesService.get();

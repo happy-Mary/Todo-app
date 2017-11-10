@@ -1,7 +1,7 @@
 import folderFormModule from './folderform.module';
 
 export default folderFormModule
-    .controller('folderFormController', function folderFormController(modalService, listGroupService, listService) {
+    .controller('folderFormController', function folderFormController(modalService, listGroupService) {
         const self = this;
         self.modal = modalService;
         self.lists = listGroupService;
