@@ -4,7 +4,7 @@ Development:
 
 - npm run build-dev
 
-- npm run build-dev 
+- npm run server 
 
 - npm test
 
@@ -16,7 +16,7 @@ Production:
 [branchname]/feature: changes
 
 ### Tasks:
-1. branch MariaChernyak (Masha Chernyak) 
+1. style-task (Masha Chernyak)  -ready
    
 2. contextmenu-task (Masha Chernyak) -in progress
 
@@ -24,7 +24,7 @@ Production:
 
 4. search-task (Masha Chernyak)
    
-5. filtertodo-task (Masha Chernyak) -in progress
+5. filtertodo-task (Masha Shklovskaya) -ready
 
 6. karma-task (Masha Shklovskaya) -in progress
 
