@@ -1,0 +1,18 @@
+<!Doctype html>
+<html ng-app="appModule" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>To do app</title>
+    <!-- <link rel='shortcut icon' type='image/x-icon' href='../src/img/icons/favicon.png'/>  -->
+    <!-- <link rel="shortcut icon" type="image/png" href="../src/img/icons/favicon.png"/>  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <base href="" />
+</head>
+<body ng-controller="mainController as ctrl">
+    <ui-view></ui-view>
+    <span us-spinner="{radius:10, width:3, length: 7}"></span>
+</body>
+</html>
