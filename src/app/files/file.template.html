@@ -1,15 +1,16 @@
 <div class="file-component">
-	<div class ="extension">
+	<a href="{{$ctrl.file.path}}">
+		<div class ="extension">
 			<p>{{$ctrl.extension}}</p>
-	</div>
-	<div class="file-info">
-		<p class="name">{{$ctrl.file.name}}</p>
-		<p class="date">{{$ctrl.loadedTime}}</p>
-		<div class="load-container">
-			<!-- ng-style -->
-			<div style="width:{{$ctrl.loader}}%" class="loader"></div>
 		</div>
-	</div>
-	<button role="button" class="close-button" area-label="close" ng-click='$ctrl.deleteFile($ctrl.file.id)'>&times</button>
-	
+		<div class="file-info">
+			<p class="name">{{$ctrl.file.name}}</p>
+			<p class="date">{{$ctrl.loadedTime}}</p>
+			<div class="load-container">
+				<div ng-style="{'width': $ctrl.loader + '%'}" class="loader"></div>
+			</div>
+		</div>
+		<button role="button" class="close-button" area-label="close" ng-click='$ctrl.deleteFile($ctrl.file._id)'>&times</button>
+	</a>
 </div>
+

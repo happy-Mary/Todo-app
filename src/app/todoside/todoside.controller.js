@@ -1,10 +1,27 @@
 import todosideModule from './todoside.module';
 import '../../sass/todoside.scss';
 
-export default todosideModule.controller('todosideController', ['$state', '$timeout', 'todoService', 'subtaskService', 'filesService', function todosideController($state, $timeout, todoService, subtaskService, filesService) {
+export default todosideModule.controller('todosideController', ['$http', 'localStorageService', '$state', '$timeout', 'todoService', 'subtaskService', 'filesService', 'socket', function todosideController($http, localStorageService, $state, $timeout, todoService, subtaskService, filesService, socket) {
     const self = this;
     self.currTaskId = $state.params.todoid;
     self.task = todoService.getTodo(self.currTaskId);
+
+    self.redirectToParent = () => {
+        $state.go('^');
+    }
+
+    if (!self.task) {
+        self.redirectToParent();
+        return;
+    }
+
+    socket.on('task_removed', (data) => {
+        // console.log('emit');
+        if (self.currTaskId === data._id) {
+            self.redirectToParent();
+        }
+    });
+
     self.subtasks = subtaskService.get();
     self.files = filesService.get();
     self.subtaskTitle = "";
@@ -17,10 +34,8 @@ export default todosideModule.controller('todosideController', ['$state', '$time
 
     self.changeTodo = todoService.update;
     self.changeSubtask = subtaskService.update;
+    self.deleteSubtask = subtaskService.delete;
 
-    self.$onInit = () => {
-        // self.handleNotePrint();
-    }
     self.addSubtask = () => {
         if (self.subtaskTitle) {
             subtaskService.create(self.subtaskTitle, self.currTaskId);
@@ -28,16 +43,12 @@ export default todosideModule.controller('todosideController', ['$state', '$time
         }
     }
 
-    self.deleteSubtask = (subtask) => {
-        subtaskService.delete(subtask.id)
-    }
-
     self.changeTodoTitle = (event) => {
         const currEl = angular.element(event.target);
         const newTitle = currEl.html();
         if (newTitle) {
-            self.task.title = newTitle;
-            todoService.update();
+            const currObj = { title: newTitle };
+            todoService.update(self.task, currObj);
         } else {
             currEl.html(self.task.title);
         }
@@ -60,36 +71,29 @@ export default todosideModule.controller('todosideController', ['$state', '$time
 
     self.changeTodoNote = () => {
         if (self.task.note) {
-            todoService.update();
+            todoService.update(self.task);
         } else {
             self.addNoteActive = false;
         }
-    }
-
-    self.redirectToParent = () => {
-        $state.go('^');
     }
 
     self.handleFiles = (data) => {
         const files = data;
 
         angular.forEach(files, (file) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (event) => {
-                const theUrl = event.target.result;
-                // delete this loaded after server ready
-                const currFile = filesService.create(self.currTaskId, theUrl, file.name, file.size);
+            filesService.create(file, self.currTaskId);
+        });
+    }
+
+     // call for changing loader field
                 // $timeout(() => {
                 //     const date = new Date();
                 //     filesService.setLoaded(currFile.id, date);
                 // }, 5000);
                 // request to server
-            }
-        })
+
+    self.$onInit = () => {
+        // self.handleNotePrint();
     }
 
 }]);
-
-// do we need it on form with files for server ???
-// action="upload-page.php" enctype="multipart/form-data"

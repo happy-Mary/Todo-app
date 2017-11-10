@@ -1,14 +1,7 @@
 <div class='container'>
     <aside ng-class='{"sidebar-close" : !ctrl.sidebarOpen, "": ctrl.sidebarOpen}'>
         <div class="nav">
-            <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>
-            <!-- Filter todo in view -->
-            <!-- <input type="text" 
-                ui-sref='filter({search: ctrl.searchItem})'
-                ui-sref-opt='{events: ["focus"]}' 
-                ng-change='ctrl.goToSearch(event)' 
-                ng-model='ctrl.searchItem'> -->
-                
+            <button class='toggle-button' ng-click='ctrl.sidebarOpen = !ctrl.sidebarOpen'></button>   
                 <input type="text" 
                 ng-change='ctrl.goToSearch()' 
                 ng-model='ctrl.searchItem'>
@@ -22,7 +15,8 @@
             </ul>
             <list-group-component on-edit="ctrl.actions.onEdit(item)" on-delete="ctrl.actions.onDelete(item)" on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-group-component>
             <div class="empty-folder"
-                dragdrop-dir drop-obj='null' verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
+                dragdrop-dir drop-obj='ctrl.emptyFolder'
+                verify-drop-allowed='ctrl.actions.verifyEmptyFolderDrop(dragObj, dropObj)' execute-drop='ctrl.actions.handleEmptyFolderDrop(dragObj, dropObj)'>
                 <list-comp filter-id='null' on-edit='ctrl.actions.onEdit(item)' on-delete='ctrl.actions.onDelete(item)' on-context-menu="ctrl.actions.onContextMenu(event, item)"></list-comp>
                 </list-comp>
             </div>           

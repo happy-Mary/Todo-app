@@ -6,46 +6,59 @@ export default mainModule
         function config($locationProvider, $stateProvider, $urlRouterProvider) {
             $locationProvider.html5Mode(true);
             $urlRouterProvider.otherwise("/lists/marked");
+
             $stateProvider
                 .state('lists', {
                     url: '/lists/:listid',
                     template: todoTemplate,
                     controller: 'AppController as ctrl',
                     resolve: {
-                        dataLists: function getData(listService) {
-                            return listService.register();
-                        },
                         dataFolders: function getData(listGroupService) {
                             return listGroupService.register();
                         },
-                        dataTasks: function getData(todoService) {
-                            return todoService.register();
+                        dataLists: function getData(listService) {
+                            return listService.register();
+                        },
+                        dataTasks: function getData($q, todoService, $stateParams) {
+                            return todoService.register($stateParams.listid);
                         }
                     }
-                })
-                .state('filter', {
-                    url: '/filter?search',
-                    template: todoTemplate,
-                    controller: 'AppController as ctrl',
-                    params: {
-                        search: {
-                            // value: '',
-                            // squash: true
-                        }
-                    },
-                    reloadOnSearch: false
                 })
                 .state('lists.todo', {
                     url: '/todo/:todoid',
                     template: '<todoside-comp></todoside-comp>',
                     resolve: {
-                        subtaskData: function getData(subtaskService) {
-                            return subtaskService.register();
+                        subtaskData: function getData($state, $q, subtaskService, $stateParams) {
+                            // return subtaskService.register($stateParams.todoid);
+                            // IF ERROR ON REGISTER
+                            const deferred = $q.defer();
+                            subtaskService.register($stateParams.todoid).then((gotData) => {
+                                if (gotData) {
+                                    deferred.resolve();
+                                } else {
+                                    // deferred.reject('Not logged in');
+                                    $state.go('lists', { listid: 'marked' });
+                                }
+                            });
+                            return deferred.promise;
                         },
-                        filesData: function getData(filesService) {
-                            return filesService.register();
+                        filesData: function getData(filesService, $stateParams) {
+                            return filesService.register($stateParams.todoid);
                         }
                     }
                 });
+
+                // .state('filter', {
+                //     url: '/filter?search',
+                //     template: todoTemplate,
+                //     controller: 'AppController as ctrl',
+                //     params: {
+                //         search: {
+                //             // value: '',
+                //             // squash: true
+                //         }
+                //     },
+                //     reloadOnSearch: false
+                // })
         }
     ]);

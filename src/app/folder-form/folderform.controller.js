@@ -1,33 +1,31 @@
 import folderFormModule from './folderform.module';
 
 export default folderFormModule
-    .controller('folderFormController', function folderFormController(modalService, listGroupService, listService) {
+    .controller('folderFormController', function folderFormController(modalService, listGroupService) {
         const self = this;
         self.modal = modalService;
         self.lists = listGroupService;
 
-        self.currData = { title: '' };
+        self.currData = {};
 
-        self.addFolder = (title) => {
-            listGroupService.create(title);
+        self.addFolder = (currData) => {
+            listGroupService.create(currData.title);
             modalService.close();
-            self.currData.title = "";
+            self.currData = {};
         };
 
-        self.editFolder = (title) => {
-            self.editData.name = title;
-            listGroupService.update();
+        self.editFolder = (currData) => {
+            listGroupService.update(self.editData, currData);
             modalService.close();
         };
 
         self.cancelChanges = () => {
-            self.currData.title = (self.editData == undefined) ? '' : self.editData.name;
+            self.currData = (self.editData == undefined) ? {} : self.editData;
             modalService.close();
         };
 
         self.deleteFolder = () => {
-            listGroupService.delete(self.editData.id);
-            listService.changeParentFolder(self.editData.id, null);
+            listGroupService.delete(self.editData._id);
             modalService.close();
         };
 
@@ -35,8 +33,10 @@ export default folderFormModule
             const currListVal = changesObj.editData.currentValue;
             if (currListVal !== undefined && currListVal !== null) {
                 self.editData = currListVal;
-                // for changing title
-                self.currData.title = currListVal.name;
+
+                angular.forEach(Object.keys(currListVal), (key) => {
+                    self.currData[key] = currListVal[key];
+                });
             }
         };
     });

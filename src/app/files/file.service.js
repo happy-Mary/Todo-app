@@ -16,63 +16,57 @@ export default fileModule
             localStorageService.set('files', self.data);
         }
 
-        function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.filesURL })
-                .then((response) => {
-                    self.data = [];
-                    self.data.push(...response.data);
-                    save();
-                })
-                .catch(() => {
-                    self.data = [];
-                    save();
-                });
+        function registerFiles(id) {
+            const taskId = id;
+            return localStorageService.getFiltered(URLS.filesURL, taskId).then((response) => {
+                self.data = response.data;
+            })
         }
 
-        function registerFiles() {
-            return localStorageService.get('files').then((response) => {
-                    self.data = [];
-                    self.data.push(...response);
-                    save();
-                })
-                .catch(() => getDataFromSerever());
-        }
+        function createFile(file, taskId) {
+            const currTaskId = taskId;
+            // save file on client
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            let currFile = null;
+            let currIndex = null;
+            reader.onload = () => {
+                currFile = new File(file.name, file.size, currTaskId);
+                self.data.push(currFile);
+                currIndex = self.data.indexOf(currFile);
+            }
+            // saend file to server
+            const filedata = new FormData();
+            filedata.append('file', file);
+            filedata.append('taskId', currTaskId);
 
-        function updateFile() {
-            save();
-        }
-
-        function setFiles(obj) {
-            self.data = obj;
+            return localStorageService.postFiles(URLS.filesURL, filedata)
+            .then((response) => {
+                self.data[currIndex] = response.data;
+            })
+            .catch(() => {
+                self.data.splice(currIndex, 1);
+            })
         }
 
         function deleteFile(id) {
-            const index = self.data.findIndex(x => x.id == id);
-            self.data.splice(index, 1);
-            save();
-        }
-
-        function createFile(taskId, url, name, size) {
-            const file = new File(taskId, url, name, size);
-            self.data.push(file);
-            save();
-            return file;
+            return localStorageService.delete(URLS.filesURL, id).then((response) => {
+                const index = self.data.findIndex(x => x._id == response.data._id);
+                self.data.splice(index, 1);
+            })
         }
 
         function setLoadedData(id, value) {
             const index = self.data.findIndex(x => x.id == id);
-            // self.data[index].loaded = value;
-            // self.data[index].name = value;
+            self.data[index].loaded = value;
             save();
         }
 
         return {
             register: registerFiles,
-            set: setFiles,
             get: getData,
-            delete: deleteFile,
             create: createFile,
-            update: updateFile,
-            setLoaded: setLoadedData
+            delete: deleteFile,
+            setLoaded: setLoadedData,
         };
     });

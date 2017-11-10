@@ -10,6 +10,7 @@ export default mainModule.directive('fileInput', [function fileDir() {
             elem.on("change", () => {
                 const files = elem[0].files;
                 scope.handleFile({ data: files });
+                elem.val(null);
             })
         }
     }

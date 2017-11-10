@@ -1,29 +1,29 @@
 <aside class='todo-aside'>
     <div class='task'>
-        <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo()' ng-model='$ctrl.task.completed'>
+        <input type="checkbox" id='task-completed' ng-change='$ctrl.changeTodo($ctrl.task)' ng-model='$ctrl.task.completed'>
         <label for='task-completed'></label>
          <label ng-class="{true: 'active', false: ''}[$ctrl.task.marked]" class="marked">
-            <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo()'>
+            <input type="checkbox" ng-model='$ctrl.task.marked'  ng-change='$ctrl.changeTodo($ctrl.task)'>
         </label>
         <span class="task-name" contenteditable="true" ng-blur='$ctrl.changeTodoTitle($event)' ng-keypress='$ctrl.handleEnter($event)'>{{$ctrl.task.title}}</span>
     </div>
     <ul class="options">
         <li class='duedate'>
-            <!-- <input type='text' placeholder='Set due date'> -->
+            <!-- Set dueDate -->
             <input type="datetime-local">
         </li>
         <li class='reminder'>
-            <!-- <input type='text' placeholder='Remind me'> -->
+            <!-- Set remindDate -->
             <input type="datetime-local"  placeholder='Remind me'>
         </li>
         <li class='subtask'>
             <input type="text" placeholder="Add subtask" ng-keypress='$ctrl.handleEnter($event)' ng-blur='$ctrl.addSubtask($event)' ng-model='$ctrl.subtaskTitle'>
             <ul class="subtasks">
-                <li ng-repeat='subtask in $ctrl.subtasks | filter: {"taskId" : $ctrl.currTaskId}'>
+                <li ng-repeat='subtask in $ctrl.subtasks'>
                     <label  ng-class="{true: 'active', false: ''}[subtask.completed]" class="subtask-checkbox">
-                        <input type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask()'>
+                        <input type="checkbox" ng-model='subtask.completed' ng-change='$ctrl.changeSubtask(subtask)'>
                     </label>
-                    <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask)">&times</span>
+                    <span class='delSubtusk' ng-click="$ctrl.deleteSubtask(subtask._id)">&times</span>
                     <span class="subtask-name">{{subtask.title}}</span>
                 </li>
             </ul>
@@ -33,20 +33,14 @@
             <textarea autoheight ng-if='$ctrl.addNoteActive' placeholder="Add note..." id="" cols="25" rows="" autofocus ng-model="$ctrl.task.note"  ng-blur='$ctrl.changeTodoNote()'></textarea>
         </li>
         <li class='file'>
-            <input type="file" id='add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>
+            <input type="file" id='add-file' name = 'add-file' multiple file-input handle-file='$ctrl.handleFiles(data)'>
             <label for="add-file">Add a file</label>
             <ul class="task-files">
                 <li ng-repeat = 'file in $ctrl.files  track by $index' >
                     <file-comp file = 'file'></file-comp>
                 </li>
             </ul>
-
         </li>
-    </ul>
-
-    <!-- <div class="task-files">
-        <file-comp ng-repeat = 'file in $ctrl.files  track by $index' file = 'file'></file-comp>
-    </div>        -->
 
     <div class="todoaside-footer">
         <button ng-click='$ctrl.redirectToParent()'></button>

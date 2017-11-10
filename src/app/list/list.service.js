@@ -4,83 +4,80 @@ import List from './list.constructor';
 import URLS from '../constants';
 
 export default listModule
-    .service('listService', function listService($http, localStorageService) {
+    .service('listService', function listService($http, localStorageService, socket, $state) {
         const self = this;
         self.data = [];
 
-        function save() {
-            localStorageService.set('lists', self.data);
-        }
-
-        function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.listURL })
-            .then((response) => {
-                self.data.push(...response.data);
-                save();
-            })
-            .catch(() => {
-                self.data = [];
-                save();
-            });
-        }
-
-        function registerLists() {
-            self.data = [];
-            return localStorageService.get('lists').then((response) => {
-                    self.data.push(...response);
-                    save();
-                })
-                .catch(() => getDataFromSerever());
-        }
+        socket.on('lists_changed', (data) => {
+            if (Array.isArray(data.obj)) {
+                angular.forEach(data.obj, (list) => {
+                    const i = self.data.findIndex(item => item._id == list._id);
+                    const listForChange = self.data[i];
+                    listForChange[data.key] = list[data.key];
+                });
+            } else {
+                const i = self.data.findIndex(item => item._id == data.obj._id);
+                const listForChange = self.data[i];
+                listForChange[data.key] = data.obj[data.key];
+            }
+        });
 
         function getLists() {
             return self.data;
         }
 
+        function registerLists() {
+            return localStorageService.get(URLS.listURL).then((response) => {
+                self.data = response.data;
+            })
+        }
+
+        function createList(title, id) {
+            const list = new List(title, id);
+            localStorageService.set(URLS.listURL, list).then((response) => {
+                self.data.push(response.data);
+            })
+        }
+
+        function deleteList(id) {
+            localStorageService.delete(URLS.listURL, id).then((response) => {
+                const index = self.data.findIndex(list => list._id == response.data._id);
+                self.data.splice(index, 1);
+                // changing state
+                const nextList = self.data[index];
+                if (nextList) {
+                    $state.go('lists', { listid: nextList._id });
+                } else {
+                    $state.go('lists', { listid: 'marked' });
+                }
+            })
+        }
+
+        function updateList(list, editedlist) {
+            const currList = list;
+            localStorageService.update(URLS.listURL, currList._id, editedlist)
+                .then((response) => {
+                    angular.forEach(Object.keys(currList), (key) => {
+                        if (currList[key] !== response.data[key]) {
+                            currList[key] = response.data[key];
+                        }
+                    });
+                })
+        }
+
         function getOnlyList(id) {
             let list;
             angular.forEach(self.data, (item) => {
-                if (item.id == id) {
+                if (item._id == id) {
                     list = item;
                 }
             });
             return list;
         }
 
-        function createList(title, id) {
-            const list = new List(title, id);
-            self.data.push(list);
-            save();
-        }
-
-        function updateList() {
-            save();
-        }
-
-        function deleteList(id) {
-            const index = self.data.findIndex(x => x.id == id);
-            self.data.splice(index, 1);
-            save();
-        }
-
-        function changeParent(currFolderId, newFolderId, listId) {
-            if (listId === undefined) {
-                angular.forEach(self.data, (item) => {
-                    const list = item;
-                    if (list.listGroupId === currFolderId) list.listGroupId = newFolderId;
-                });
-            } else {
-                angular.forEach(self.data, (item) => {
-                    const list = item;
-                    if (list.id === listId) list.listGroupId = newFolderId;
-                });
-            }
-            save();
-        }
-
         function getCountListsInFolder(folderId) {
             function getListsInFolder(item) {
-                return (item.listGroupId == folderId);
+                return (item.folderId == folderId);
             }
             const lists = self.data.filter(getListsInFolder);
             return lists.length;
@@ -88,11 +85,10 @@ export default listModule
 
         return {
             register: registerLists,
-            update: updateList,
-            create: createList,
-            delete: deleteList,
             get: getLists,
-            changeParentFolder: changeParent,
+            create: createList,
+            update: updateList,
+            delete: deleteList,
             getList: getOnlyList,
             getCountLists: getCountListsInFolder
         };

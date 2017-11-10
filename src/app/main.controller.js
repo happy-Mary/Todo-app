@@ -1,7 +1,7 @@
 import mainModule from './app.module';
 
 export default mainModule
-    .controller('mainController', function mainController($transitions, $state, usSpinnerService, contextMenuService) {
+    .controller('mainController', function mainController($transitions, $state, usSpinnerService) {
         const self = this;
         self.hideSpinner = function hideSpinner() {
             usSpinnerService.stop();
@@ -20,4 +20,5 @@ export default mainModule
             // show user error message, remove console message
             console.error('transition has been rejected');
         });
+
     });

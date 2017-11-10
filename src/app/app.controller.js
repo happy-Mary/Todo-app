@@ -3,7 +3,7 @@ import mainModule from './app.module';
 require('./modal/modal.service');
 
 export default mainModule
-    .controller('AppController', function AppController(todoService, listGroupService, listService, contextMenuService, localStorageService, modalService, $transitions, $state, $timeout) {
+    .controller('AppController', function AppController($http, todoService, listGroupService, listService, contextMenuService, localStorageService, modalService, $transitions, $state, $timeout) {
         const self = this;
         self.marked = false;
         self.newTodoTitle = '';
@@ -23,7 +23,7 @@ export default mainModule
                     if (list) {
                         self.headerTitle = list.title
                     } else {
-                        $state.go('lists.todo', { listid: 'marked' });
+                        $state.go('lists', { listid: 'marked' });
                     }
                 } else {
                     self.headerTitle = 'Избранное';
@@ -55,9 +55,7 @@ export default mainModule
             });
         });
 
-
         // change main title on route
-
         $transitions.onSuccess({ to: 'lists.**' }, () => {
             self.currListId = $state.params.listid;
             getMainTitle();
@@ -94,9 +92,9 @@ export default mainModule
 
         // functions for manipulating list, folders, ?todo? data
         self.activeItem = null;
+        self.emptyFolder = { folderId: null };
 
         self.actions = {
-            // editting item
             onEdit(item) {
                 if (item) {
                     self.activeItem = item;
@@ -117,7 +115,6 @@ export default mainModule
                     default: break;
                 }
             },
-            // deleting item
             onDelete(item) {
                 if (item) {
                     self.activeItem = item;
@@ -135,15 +132,6 @@ export default mainModule
                     default: break;
                 }
             },
-            // clicking on item
-            onActivate() {
-
-            },
-            // opening folder
-            onToggleExpand() {
-
-            },
-            // opening folder menu (on custom right click)
             onContextMenu(event, item) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -162,18 +150,17 @@ export default mainModule
                 }
                 self.activeItem = contextMenuService.getItem();
             },
-
             changeTodoMarked(value) {
-                todoService.changeMarked(self.activeItem, value);
+                self.activeItem.marked = value;
+                todoService.update(self.activeItem);
             },
-
             changeTodoCompleted(value) {
-                todoService.changeCompleted(self.activeItem, value);
+                self.activeItem.completed = value;
+                todoService.update(self.activeItem);
             },
-
             verifyEmptyFolderDrop(dragObj, dropObj) {
                 let allow;
-                if (dragObj.type === 'list' && dropObj === null) {
+                if (dragObj.type === 'list' && dropObj.folderId === null) {
                     allow = true;
                 } else {
                     allow = false;
@@ -181,7 +168,7 @@ export default mainModule
                 return allow;
             },
             handleEmptyFolderDrop(dragObj, dropObj) {
-                listService.changeParentFolder(dragObj.listGroupId, dropObj, dragObj.id);
+                listService.update(dragObj, dropObj);
             }
         };
 

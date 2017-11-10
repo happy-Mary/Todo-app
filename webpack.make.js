@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const modRewrite = require('connect-modrewrite');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const proxy = require('http-proxy-middleware');
 
 module.exports = function makeWebpackConfig(options) {
     /**
@@ -48,12 +49,12 @@ module.exports = function makeWebpackConfig(options) {
     } else {
         config.output = {
             // Absolute output directory
-            // path: path.join(__dirname, '/dist'),
             path: path.resolve(__dirname, 'dist'),
 
             // Output path from the view of the page
             // Uses webpack-dev-server in development
-            publicPath: BUILD ? '/' : 'http://localhost:8080/',
+            // publicPath: BUILD ? '/' : 'http://localhost:8080/',
+            publicPath: BUILD ? '/' : 'http://localhost:3001/',
 
             // Filename for entry points
             // Only adds hash in build mode
@@ -127,10 +128,9 @@ module.exports = function makeWebpackConfig(options) {
         }, {
             test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             loader: "file-loader"
-        },
-        { 
-          test: /\.json$/,
-         loader: 'json'
+        }, {
+            test: /\.json$/,
+            loader: 'json'
         }]
     };
 
@@ -238,12 +238,20 @@ module.exports = function makeWebpackConfig(options) {
                 template: './src/index.html',
                 inject: 'body'
                     //minify: BUILD
-            }),
+            })
+        )
+    }
+
+    if (!BUILD) {
+        // Reference: https://github.com/ampedandwired/html-webpack-plugin
+        // Render index.html
+        config.plugins.push(
             new BrowserSyncPlugin({
                 host: 'localhost',
-                port: 8080,
+                port: 3001,
                 server: { baseDir: ['dist'] },
                 middleware: [
+                    proxy('/api/**', { target: 'http://localhost:3000', changeOrigin: false }),
                     modRewrite(['^[^\\.]*$ /index.html [L]'])
                 ]
             })
@@ -272,15 +280,15 @@ module.exports = function makeWebpackConfig(options) {
      * Reference: http://webpack.github.io/docs/configuration.html#devserver
      * Reference: http://webpack.github.io/docs/webpack-dev-server.html
      */
-    config.devServer = {
-        contentBase: './dist',
-        stats: {
-            modules: false,
-            cached: false,
-            colors: true,
-            chunk: false
-        }
-    };
+    // config.devServer = {
+    // contentBase: './dist',
+    // stats: {
+    //     modules: false,
+    //     cached: false,
+    //     colors: true,
+    //     chunk: false
+    // }
+    // };
 
     return config;
 };

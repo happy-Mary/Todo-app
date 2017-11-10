@@ -1,9 +1,16 @@
 # ToDo App #
 ## Starting and testing app ##
-npm start
+Development:
 
+- npm run build-dev
 
-npm test
+- npm run build-dev 
+
+- npm test
+
+Production:
+
+- npm start
 
 ### Commits ###
 [branchname]/feature: changes
@@ -21,8 +28,10 @@ npm test
 
 6. karma-task (Masha Shklovskaya) -in progress
 
-7. webpack-task 
+7. webpack-task (Masha Shklovskaya, Masha Chernyak)
     - eslint-config
     - prettier  
+    
+8. server-task (Masha Shklovskaya) -in progress
 
 

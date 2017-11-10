@@ -4,109 +4,83 @@ import ToDo from './todo.constructor';
 import URLS from '../constants';
 
 export default todoModule
-    .service('todoService', function todoService($filter, $http, localStorageService) {
+    .service('todoService', function todoService($filter, $http, localStorageService, socket, $stateParams) {
         const self = this;
         self.data = [];
+
+        socket.on('removed_tasks', () => {
+            self.data.length = 0;
+        });
+
+        function deleteByIndex(obj) {
+            const index = self.data.findIndex(item => item._id == obj._id);
+            self.data.splice(index, 1);
+        }
 
         function getData() {
             return self.data;
         }
 
-        function save() {
-            localStorageService.set('todo', self.data);
-        }
-
-        function getDataFromSerever() {
-            return $http({ method: 'GET', url: URLS.todoURL })
-            .then((response) => {
-                self.data = [];
-                self.data.push(...response.data);
-                save();
+        function registerTodo(id) {
+            const listId = id;
+            return localStorageService.getFiltered(URLS.taskURL, listId).then((response) => {
+                self.data = response.data;
+                return true;
+            }).catch((response) => {
+                const error = response.status;
+                return false;
             })
-            .catch(() => {
-                self.data = [];
-                save();
-            });
         }
 
-        function registerTodo() {
-            return localStorageService.get('todo').then((response) => {
-                    self.data = [];
-                    self.data.push(...response);
-                    save();
-                })
-                .catch(() => getDataFromSerever());
+        function createTodo(title, listId, marked) {
+            const task = new ToDo(title, listId, marked);
+            localStorageService.set(URLS.taskURL, task).then((response) => {
+                self.data.push(response.data);
+            })
         }
 
+        function deleteTodo(id) {
+            localStorageService.delete(URLS.taskURL, id).then((response) => {
+                deleteByIndex(response.data);
+            })
+        }
+
+        function updateTodo(task, editedData) {
+            const currTask = task;
+            const editedTask = editedData || task;
+            localStorageService.update(URLS.taskURL, currTask._id, editedTask)
+            .then((response) => {
+                angular.forEach(Object.keys(currTask), (key) => {
+                    if (currTask[key] !== response.data[key]) {
+                        currTask[key] = response.data[key];
+                        if (key === 'listId') {
+                            deleteByIndex(response.data);
+                        }
+                    }
+                });
+                if ($stateParams.listid === 'marked' && currTask.marked === false) {
+                    deleteByIndex(currTask);
+                }
+            })
+        }
+
+        //  we use it in todoside
         function getOneTodo(id) {
             let currItem;
             angular.forEach(self.data, (item) => {
-                if (item.id == id) {
+                if (item._id == id) {
                     currItem = item;
                 }
             });
             return currItem;
         }
 
-        function updateTodo() {
-            save();
-        }
-
-        function setTodo(obj) {
-            self.data = obj;
-        }
-
-        function deleteTodo(id) {
-            const index = self.data.findIndex(x => x.id == id);
-            self.data.splice(index, 1);
-            save();
-        }
-
-        function createTodo(title, listId, marked) {
-            const todo = new ToDo(title, listId, marked);
-            self.data.push(todo);
-            save();
-        }
-
-        function getCountTodoInList(listId) {
-            function getTodoInList(item) {
-                return (item.listId == listId && !item.completed);
-            }
-            const todo = self.data.filter(getTodoInList);
-            return todo.length;
-        }
-
-        function changeParent(newListId, taskId) {
-            angular.forEach(self.data, (item) => {
-                const task = item;
-                if (task.id === taskId) task.listId = newListId;
-            });
-            save();
-        }
-
-        function changeMarkedTodo(item, value) {
-            const currItem = item;
-            currItem.marked = value;
-            save();
-        }
-
-        function changeCompletedTodo(item, value) {
-            const currItem = item;
-            currItem.completed = value;
-            save();
-        }
-
         return {
-            register: registerTodo,
-            set: setTodo,
             get: getData,
-            getTodo: getOneTodo,
+            register: registerTodo,
             delete: deleteTodo,
             create: createTodo,
             update: updateTodo,
-            getCountTodo: getCountTodoInList,
-            changeParentList: changeParent,
-            changeMarked: changeMarkedTodo,
-            changeCompleted: changeCompletedTodo
+            getTodo: getOneTodo
         };
     });
