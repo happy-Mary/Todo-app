@@ -18,11 +18,11 @@ Production:
 ### Tasks:
 1. style-task (Masha Chernyak)  -ready
    
-2. contextmenu-task (Masha Chernyak) -in progress
+2. contextmenu-task (Masha Chernyak) -ready
 
-3. todoside-task (Masha Shklovskaya) -in progress
+3. todoside-task (Masha Shklovskaya) -ready
 
-4. search-task (Masha Chernyak)
+4. search-task (Masha Chernyak) -planned
    
 5. filtertodo-task (Masha Shklovskaya) -ready
 
@@ -33,5 +33,9 @@ Production:
     - prettier  
     
 8. server-task (Masha Shklovskaya) -in progress
+
+9. heroku-task (Masha Shklovskaya) -in progress
+
+10. showing images from server (Masha Shklovskaya) -planned
 
 
