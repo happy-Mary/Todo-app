@@ -2,7 +2,7 @@
     "name": "todo-app",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
         "test": "karma start karma.conf.js",
         "build-dev": "webpack --progress --config webpack.config.js --colors --watch",
