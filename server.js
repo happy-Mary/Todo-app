@@ -21,7 +21,7 @@ const mLab = 'mongodb://happy-Mary:harrypotter1991@ds241055.mlab.com:41055/todol
 // express settings
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
-const server = app.listen(port);
+const server = app.listen(process.env.PORT || port);
 
 const io = require('socket.io')(server);
 
