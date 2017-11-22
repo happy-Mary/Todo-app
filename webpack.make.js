@@ -254,6 +254,12 @@ module.exports = function makeWebpackConfig(options) {
                     proxy('/api/**', { target: 'http://localhost:3000', changeOrigin: false }),
                     modRewrite(['^[^\\.]*$ /index.html [L]'])
                 ]
+            }),
+            // /////////////////////////////////////////////
+            // TEST VERSION
+            // ?/////////////////////////////////////////
+            new webpack.EnvironmentPlugin({
+                NODE_ENV: 'development'
             })
         )
     }
@@ -271,7 +277,14 @@ module.exports = function makeWebpackConfig(options) {
 
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
-            new webpack.optimize.UglifyJsPlugin()
+            new webpack.optimize.UglifyJsPlugin(),
+
+            // /////////////////////////////////////////////
+            // TEST VERSION
+            // ?/////////////////////////////////////////
+            new webpack.EnvironmentPlugin({
+                NODE_ENV: 'production'
+            })
         )
     }
 

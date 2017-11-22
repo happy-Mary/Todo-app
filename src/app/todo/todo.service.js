@@ -1,6 +1,5 @@
 import todoModule from './todo.module';
 import ToDo from './todo.constructor';
-// import { URLS } from '../constants';
 import URLS from '../constants';
 
 export default todoModule
@@ -10,7 +9,6 @@ export default todoModule
 
         socket.on('removed_tasks', () => {
             self.data.length = 0;
-            console.log('socket works');
         });
 
         function deleteByIndex(obj) {
