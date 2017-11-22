@@ -6,10 +6,10 @@
     "scripts": {
         "test": "karma start karma.conf.js",
         "build-dev": "webpack --progress --config webpack.config.js --colors --watch",
-        "dev": "npm i && npm run build-dev",
+        "dev": "npm i --ignore-scripts && npm run build-dev",
         "server": "nodemon server.js",
         "build-prod": "webpack --progress --config webpack.build.js --colors",
-        "prod": "npm i --production && npm run build-prod && node server.js",
+        "prod": "npm i --production && node server.js",
         "postinstall": "npm run build-prod",
         "start": "node server.js"
     },

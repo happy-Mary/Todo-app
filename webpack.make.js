@@ -255,11 +255,8 @@ module.exports = function makeWebpackConfig(options) {
                     modRewrite(['^[^\\.]*$ /index.html [L]'])
                 ]
             }),
-            // /////////////////////////////////////////////
-            // TEST VERSION
-            // ?/////////////////////////////////////////
-            new webpack.EnvironmentPlugin({
-                NODE_ENV: 'development'
+            new webpack.DefinePlugin({
+                'process.env.ENV': JSON.stringify('development')
             })
         )
     }
@@ -282,8 +279,8 @@ module.exports = function makeWebpackConfig(options) {
             // /////////////////////////////////////////////
             // TEST VERSION
             // ?/////////////////////////////////////////
-            new webpack.EnvironmentPlugin({
-                NODE_ENV: 'production'
+            new webpack.DefinePlugin({
+                'process.env.ENV': JSON.stringify('production')
             })
         )
     }

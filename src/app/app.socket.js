@@ -11,11 +11,9 @@ export default mainModule
         url = 'https://wondrer-todoapp.herokuapp.com';
     }
     // ////////////////////////////////////////////////
-    if (process.env.NODE_ENV === 'production') {
-        console.log('Welcome to production');
-      } else {
-        console.log('Welcome to development');
-      }
+    const applicationENV = process.env.ENV;
+    console.log(applicationENV);
+    // production, development
     //   ////////////////////////////////////////////
 
     return socketFactory({
