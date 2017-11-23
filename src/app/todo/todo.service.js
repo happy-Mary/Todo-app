@@ -1,6 +1,5 @@
 import todoModule from './todo.module';
 import ToDo from './todo.constructor';
-// import { URLS } from '../constants';
 import URLS from '../constants';
 
 export default todoModule
