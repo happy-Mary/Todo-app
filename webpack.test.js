@@ -1,4 +1,4 @@
-module.exports = require('./webpack.make')({
+module.exports = require('./webpack.config')({
     BUILD: false,
     TEST: true
 });

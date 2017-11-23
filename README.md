@@ -5,7 +5,7 @@ https://wondrer-todoapp.herokuapp.com
 ## Starting and testing app ##
 Development:
 
-- npm run build-dev
+- npm run dev
 
 - npm run server 
 
@@ -13,7 +13,7 @@ Development:
 
 Production:
 
-- npm start
+- npm run prod
 
 ### Commits ###
 [branchname]/feature: changes

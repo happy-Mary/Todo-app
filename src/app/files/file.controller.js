@@ -19,9 +19,9 @@ export default fileModule.controller('fileController', ['filesService', function
         self.extension = self.extension[self.extension.length - 1];
     };
 
-    self.$onChanges = (changesObj) => {
+    // self.$onChanges = (changesObj) => {
         // self.loader = countLoader(self.file.loader);
-    }
+    // }
 
     // function countLoader(loader) {
     // 	return loader* 100 / self.file.size;

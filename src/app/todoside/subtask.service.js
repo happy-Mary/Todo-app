@@ -1,6 +1,5 @@
 import todosideModule from './todoside.module';
 import Subtask from './subtask.constructor';
-// import { URLS } from '../constants';
 import URLS from '../constants';
 
 export default todosideModule
@@ -17,10 +16,7 @@ export default todosideModule
             return localStorageService.getFiltered(URLS.subtaskURL, taskId).then((response) => {
                 self.data = response.data;
                 return true;
-            }).catch((response) => {
-                console.log(response.status);
-                return false;
-            });
+            })
         }
 
         function createSubtask(title, taskId) {
