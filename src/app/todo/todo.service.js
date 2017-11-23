@@ -9,6 +9,7 @@ export default todoModule
 
         socket.on('removed_tasks', () => {
             self.data.length = 0;
+            console.log('socket: tasks removed');
         });
 
         function deleteByIndex(obj) {
